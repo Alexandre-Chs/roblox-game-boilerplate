@@ -32,19 +32,21 @@ Dans T3, ouvrir **ce dossier**. Activer le MCP intégré à Studio dans Assistan
 - `pnpm run doctor` : outils disponibles ; ne prouve pas l'accès MCP.
 - `pnpm run publish test` : publie sur l'expérience de test (voir docs/release.md). La prod exige `--confirm-prod`.
 
-Le starter contient des fonctionnalités d'exemple à copier, adapter ou supprimer (détail dans docs/architecture.md, Example features) :
+Le starter contient des fonctionnalités d'exemple à copier, adapter ou supprimer (catalogue complet dans [docs/features.md](docs/features.md), suppression dans docs/architecture.md, Example features) :
 
-- pièces à ramasser, compteur, classement dans la liste des joueurs ;
-- boutique factice (objets dans `src/shared/Config/ShopCatalog.luau`) et offres Robux inertes tant que leurs ids valent 0 (`src/shared/Config/Monetization.luau`) ;
-- récompense quotidienne avec série de jours, notifications, menu Réglages (volumes sauvegardés), sons à renseigner dans `src/shared/Config/Sounds.luau`, écran de chargement ;
-- statistiques personnalisées (funnel des premières minutes, funnel de la boutique, économie des pièces) visibles dans le Creator Dashboard une fois le jeu publié ;
+- pièces à ramasser (bonus x2 avec pass, +10 % par ami présent), compteur, colonne Coins de la liste des joueurs, classement global sur un panneau près du spawn ;
+- boutique illustrée (offre du jour, rareté, packs POPULAR / BEST VALUE), offres Robux inertes tant que leurs ids valent 0, inventaire avec objets équipables (effets) ;
+- récompense quotidienne sur 7 jours, quêtes de démarrage récompensées en haut à gauche, écran Récompenses (codes promo côté serveur, récompense de groupe, invitations, favori), badges inertes à 0 ;
+- notifications, Réglages (volumes sauvegardés), sons et musique vérifiés, écran de chargement illustré, interface adaptée du téléphone au grand écran, traduction en/fr/es/pt-br ;
+- masquage automatique des offres aléatoires payantes là où la loi les interdit (PolicyService) ;
+- statistiques (funnels, économie des pièces) dans le Creator Dashboard une fois le jeu publié ;
 - commandes de test dans le chat, uniquement dans Studio : `/cash 100`, `/reset`, `/unlock`, `/daily`, `/pass DoubleCoins`, `/notify texte`.
 
 ## Architecture
 
 `src/server/Services` détient les règles et données ; `src/client/Controllers` l'interface et les interactions ; `src/shared` les contrats Packet et la configuration publique. Les registries et Lifecycle démarrent les modules. ProfileStore sauvegarde et Replica transmet les données au joueur propriétaire. Trove gère le nettoyage.
 
-Les modèles/UI locaux sont dans `assets`, les étapes de travail dans `work` (ignoré). Consulter [architecture](docs/architecture.md), [assets](docs/assets.md), [skills](docs/skills.md) et [tests](docs/testing.md) pour les conventions.
+Les modèles/UI locaux sont dans `assets`, les étapes de travail dans `work` (ignoré). Consulter le [catalogue des fonctionnalités](docs/features.md), [architecture](docs/architecture.md), [assets](docs/assets.md), [skills](docs/skills.md) et [tests](docs/testing.md) pour les conventions.
 
 ## Outils artistiques locaux
 

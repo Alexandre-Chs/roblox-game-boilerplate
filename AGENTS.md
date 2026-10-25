@@ -10,5 +10,6 @@
 - Never edit generated Packages, ServerPackages, sourcemap or vendored dependencies casually. Update their pinned source intentionally, preserve licences and rerun checks.
 - Save progress with Git. Keep secrets, LOCAL.md, generated work and machine paths out of commits. One agent writes to a Studio instance at a time; parallel agents produce files in disjoint areas.
 - Use a separate test universe for persistent-data and purchase validation (docs/release.md). Run `pnpm run publish` or paid asset generation only on explicit user authorization for that target.
+- `docs/features.md` lists every shipped feature: files, config, Studio tests and live-only parts. Read it before touching or reusing one.
 - Copy the example features (docs/architecture.md, Example features) when adding a feature; delete the ones a game does not need, with every file listed. Use the Studio chat commands (`/cash`, `/reset`, `/unlock`, `/daily`, `/pass`) to set up test states instead of editing data or code.
 - PR titles/descriptions are English. User-facing replies are concise and follow the user's language.

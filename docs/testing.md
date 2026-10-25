@@ -23,11 +23,15 @@ Local tests cover pure modules. Engine-dependent behavior requires Studio; Lune 
    - The loading screen fades out, then the daily reward window opens by itself. Claim it: a notification shows the coins and the counter rises.
    - Walk into a gold coin with `character_navigation`: the counter rises by one and the coin reappears after ten seconds.
    - Open the player list: `Coins` matches the counter.
-   - The Hud Shop button pulses with a SALE badge; opening the shop stops it. Deals shows today's discounted item with a live countdown, the two biggest coin packs and the pass.
+   - The Hud Shop button shows a SALE badge until the shop is opened once. Deals shows today's discounted item with a live countdown, the two biggest coin packs and the pass.
    - Items: an item you cannot afford shows `Need 💰 N` in red; clicking it notifies and switches to the Coins tab. Type `/cash 20`, buy the Red Hat: `Owned ✓`, counter minus three, a notification. Buying again says `You already own this.` The deal item is charged at the discounted price.
    - Robux buttons show `Soon` while ids are 0 and clicking them notifies; with real ids they show the Roblox price.
    - `/pass DoubleCoins`, then pick up a coin: plus two.
    - Settings: press minus on Music; the value drops by 10%. Stop and replay: with mock data it resets, which is expected.
+   - Starter quests (top-left): claiming the daily reward and opening the shop tick their rows, notify `Quest complete` and pay; the counter reads 2/5.
+   - `/unlock`, Inventory: equip Speed Boots; the button reads Equipped and `Humanoid.WalkSpeed` is 24.
+   - Rewards: redeem `welcome` (+50), then again (`You already used that code.`).
+   - The board beside the spawn lists you with a gold medal (refreshes every minute).
    - `/daily`, reopen Daily: day 2 is claimable.
    - The console shows `[Analytics]` lines in this order over the pass: `onboarding 1 Joined`, the daily `economy Source ... TimedReward`, `economy Source 1 Gameplay Coin`, `onboarding 2 FirstCoin`, `shop 1 Opened`, `onboarding 3 OpenedShop`, `economy Sink 3 Shop RedHat`, `shop 2 Purchased RedHat`, `onboarding 4 FirstPurchase`.
    Take a `screen_capture` of the Hud, Shop and Settings, including a narrow (mobile) viewport.
