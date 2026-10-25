@@ -17,32 +17,45 @@
 - Put pure logic in plain modules (such as `src/server/Data`) with no service dependencies.
 - Keep `src/shared` tidy: its root holds only the framework (`Lifecycle`, `Packet`, `Packets`) and folders. Reusable, game-agnostic helpers used by more than one system go in `src/shared/Utils` (such as `Utils/RateLimit`), one module per helper. Server-only helpers go in `src/server/Utils`. Helpers used by a single system stay inside that system's folder.
 
-## Example feature
+## Example features
 
-The starter ships one small feature that crosses every layer, as the pattern to copy:
+The starter ships small, working features that cross every layer. Copy them as patterns; replace their content per game; delete what a game does not need. Each line lists every file to touch.
 
-| Layer | File |
+| Feature | Server | Client | Data / config | Assets |
+| --- | --- | --- | --- | --- |
+| Coins (authoritative pickup) | `Components/Coin.luau` in `ComponentService` | `Screens/Hud.luau` | `Cash`, `GameConfig.Coin` | `world/Coins.model.json` |
+| Shop (client request) | `Services/ShopService/` (`Purchasing.luau` pure) | `Screens/Shop.luau` | `Inventory`, `Config/ShopCatalog.luau`, `BuyItem` packet | `ui/Shop.model.json` |
+| Robux offers | `GamePassService`, `PurchaseService/Products.luau` | Shop Robux row | `Config/Monetization.luau` (ids, 0 = inert) | none |
+| Leaderboard | `LeaderstatsService` | Roblox player list | `Cash` via `DataService.Changed` | none |
+| Daily reward | `DailyRewardService` | `Screens/DailyReward.luau` | `Daily`, `Utils/DailyReward.luau` (shared pure), `GameConfig.DailyRewards`, `ClaimDaily` | `ui/DailyReward.model.json` |
+| Settings and sound | `SettingsService` | `Screens/Settings.luau`, `SoundController` | `Settings`, `PlayerData.CleanSetting`, `Config/Sounds.luau`, `SetSetting` | `ui/Settings.model.json` |
+| Notifications | `NotificationService:Send(player, text)` | `Screens/Notifications.luau`, `UIController:Notify` / `context.Notify` | `Notify` packet | `ui/Notifications.model.json` |
+| Loading screen | none | `src/first/Loading.client.luau` (ReplicatedFirst) | `ClientReady` attribute set by `AppController` | built in code |
+| Studio test commands | `Services/DebugService/` | chat | none | none |
+
+Rules these examples follow, and new features must too:
+
+- The server decides every outcome. Coins come from `Touched` on the server, purchases from `ShopService`, the daily day from the server clock. Screens only display and request.
+- Pure rules (`Purchasing`, `DailyReward`, `CleanSetting`, `Commands`) have no services or instances and are tested in `tests/run.luau`.
+- Give feedback with notifications instead of per-screen message labels.
+- Robux: create the pass or product on the Creator Dashboard, paste its id in `Config/Monetization.luau`. An id of 0 keeps the offer inert and the shop says so. Developer products only change profile data (see Purchases). Game pass ownership is cached as the `Pass_<Name>` player attribute; read it with `GamePassService:Owns(player, name)`.
+- Sounds: ids in `Config/Sounds.luau` stay empty until found and verified with the roblox-sfx skill. Call `SoundController:PlaySfx(name)`; empty ids are silent.
+- The loading screen is the one UI built in code: ReplicatedFirst runs before StarterGui replicates. It hides when data is loaded, or after 20 seconds.
+
+### Studio test commands
+
+`DebugService` creates chat commands only when `RunService:IsStudio()` is true; live servers never have them. Type them in the Studio chat during Play (agents use `user_keyboard_input`). Each answers with a notification.
+
+| Command | Effect |
 | --- | --- |
-| Tunables | `GameConfig.Coin` in `src/shared/Config/GameConfig.luau` |
-| Server rule (component) | `src/server/Components/Coin.luau`, registered in `ComponentService` |
-| Data change | `DataService:AdjustCash`, replicated by Replica |
-| Screen | `src/client/Controllers/UIController/Screens/Hud.luau` + `assets/ui/Hud.model.json` |
-| World | `assets/world/Coins.model.json` (parts tagged `Coin` and `Spinner`) |
+| `/cash <n>` | Add (or remove, if negative) coins |
+| `/reset` | Reset coins, inventory and daily streak |
+| `/unlock` | Own every shop item |
+| `/daily` | Make the daily reward claimable again, continuing the streak |
+| `/pass <Name>` | Toggle a game pass from `Monetization.GamePasses`, for this session only |
+| `/notify <text>` | Show a notification |
 
-The server decides the reward from `Touched`; the client only displays `Cash`. To start a game without it, delete those files and their two registry lines. Keep the Hud pattern if the game shows any player data.
-
-A placeholder **shop** builds on it, as the pattern for any client request:
-
-| Layer | File |
-| --- | --- |
-| Catalog (shared, client-visible) | `src/shared/Config/ShopCatalog.luau` |
-| Request | `BuyItem` in `src/shared/Packets.luau`, rate limited, returns `(ok, reason)` |
-| Pure rules, tested | `src/server/Services/ShopService/Purchasing.luau` |
-| Authoritative service | `src/server/Services/ShopService/init.luau`: validates, then `AdjustCash` and `Set({ "Inventory", id })` without yielding |
-| Saved data | `Inventory: { [string]: true }` in `PlayerData` |
-| Modal screen | `Screens/Shop.luau` + `assets/ui/Shop.model.json`, opened by the Hud `ShopButton` |
-
-Replace the items in `ShopCatalog` with the game's own; the screen builds one row per item from `ItemTemplate`. What owning an item does (equip, boost) belongs in the system that uses it, reading `Inventory`. To sell coins for Robux, add a developer product grant in `PurchaseService/Products.luau` that calls `AdjustCash`; never sell Robux items through `BuyItem`.
+Add a command by adding a handler in `DebugService/init.luau`. Keep them Studio-only; never add a command path that a live client can reach.
 
 ## Systems
 
@@ -145,7 +158,7 @@ return ShopService
 
 ### UI
 
-`UIController` (`src/client/Controllers/UIController`) owns every screen. It ships with the example `Hud` screen only.
+`UIController` (`src/client/Controllers/UIController`) owns every screen. It ships with the example screens listed under Example features. Screens find elements with `UIController/Find.luau`.
 
 Author ScreenGuis as local `.model.json` or `.rbxmx` files under `assets/ui`, synced into StarterGui. UIController owns behavior. Use MCP for inspection and screenshots; export any Studio-authored GUI back to disk before calling it complete.
 
@@ -171,7 +184,7 @@ src/client/Controllers/UIController/
   - The screen object has `Modal`, `StartsOpen`, `Open`, `Close` and `Destroy`.
   - Non-modal screens (HUD, notifications) can be open together. Opening a modal screen (shop, settings) closes other modals.
   - Screens may hold state because they are created objects. They own their connections through a Trove and clean them up in `Destroy`.
-- **What screens receive:** `context.Controllers` (the controller registry), `context.Open` and `context.Close`. Screens never require each other; open another screen through `context.Open`.
+- **What screens receive:** `context.Controllers` (the controller registry), `context.Open`, `context.Close` and `context.Notify(text)`. Screens never require each other; open another screen through `context.Open`.
 - **What screens may do:** send requests through `Packets` and display player data through `context.Controllers.DataController` (see Player data). They never decide outcomes.
 - **Finding elements:** look up authored elements by name inside `gui` and check their class (`IsA`) before use, so a renamed element fails visibly rather than erroring.
 - **Complex client logic** such as a placement preview goes in its own controller, which the screen calls through `context.Controllers`.
@@ -251,6 +264,7 @@ The matching packet in `Packets.luau` would be `GetCash = Packet("GetCash"):Resp
 
 ### Lifecycle rules
 
+- Every system declares `Init`, `Start` and `Destroy`, empty when unused, or the registry fails type checking.
 - Order: every system's `Init` runs in registry order, then every `Start` in registry order. Startup happens once per session; there is no hot reload.
 - `Init(self, registry)` receives the complete name-to-system table. Store it and set up local state only. Do not call other systems here: they may not be initialised yet.
 - `Start(self)` connects events, binds packets and begins work. Other systems are safe to call from here on.
@@ -335,6 +349,7 @@ Replica ([MadStudioRoblox/Replica](https://github.com/MadStudioRoblox/Replica)) 
 - On the client, read data through `DataController`: `Get(path?)` returns the current value (nil until loaded), `Observe(path, callback)` calls `callback(value)` once the data loads and after every change at, above or below `path`, and returns a connection to add to a Trove. `Loaded` fires once with the data table and `IsLoaded()` checks it. Treat values from `Get` as read-only.
 - Data that other players should see (leaderboards, public stats) needs its own replica with `:Replicate()`, or an attribute; never replicate another player's `PlayerData`.
 - For per-player setup, connect to `DataService.PlayerLoaded(player, data)` in `Start`, not `Players.PlayerAdded` (which fires before data exists). Loading always yields, so every service that connects in `Start` sees every player, including those already in the server.
+- To react on the server when a value changes (leaderstats, achievements), connect to `DataService.Changed(player, path, value)`. It fires for `Set` and `AdjustCash`, not for direct `GetReplica` edits.
 - For per-player cleanup, connect to `DataService.PlayerReleasing(player, data)`. It fires just before the session is saved and released, on leave and on shutdown. Write final state into `data` there, without yielding. `DataService` is registered first, so it is destroyed last; do not disconnect `PlayerLoaded`/`PlayerReleasing` connections in your own `Destroy`, or the shutdown release will miss you.
 - Check `GetData` for nil in every handler, and never keep the data table across a yield. On the client, show data through `DataController:Observe` so nothing is shown before it loads.
 - When adding a field, update `Data`, `Template` and `Validate` in `src/server/Data/PlayerData.luau` together. Add an explicit migration before changing `SchemaVersion`. Never reset progress for invalid data.

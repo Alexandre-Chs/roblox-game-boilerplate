@@ -1,5 +1,6 @@
 --!strict
 
+local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local GameConfig = require(ReplicatedStorage.Config.GameConfig)
 local Packets = require(ReplicatedStorage.Packets)
@@ -28,6 +29,8 @@ function AppController.Start(self: State)
 	local dataController = registry.DataController
 	local function loaded()
 		print(`[{GameConfig.Name}] Player data loaded`)
+		-- The ReplicatedFirst loading screen waits for this attribute.
+		Players.LocalPlayer:SetAttribute("ClientReady", true)
 	end
 	if dataController:IsLoaded() then
 		loaded()

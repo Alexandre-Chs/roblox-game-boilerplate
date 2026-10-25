@@ -1,0 +1,946 @@
+{
+  "ClassName": "ScreenGui",
+  "Properties": {
+    "ResetOnSpawn": false,
+    "Enabled": false,
+    "ZIndexBehavior": "Sibling"
+  },
+  "Children": [
+    {
+      "Name": "Panel",
+      "ClassName": "Frame",
+      "Properties": {
+        "AnchorPoint": [
+          0.5,
+          0.5
+        ],
+        "Position": {
+          "UDim2": [
+            [
+              0.5,
+              0
+            ],
+            [
+              0.5,
+              0
+            ]
+          ]
+        },
+        "Size": {
+          "UDim2": [
+            [
+              0.9,
+              0
+            ],
+            [
+              0.5,
+              0
+            ]
+          ]
+        },
+        "BackgroundColor3": [
+          0.1,
+          0.1,
+          0.12
+        ]
+      },
+      "Children": [
+        {
+          "Name": "Corner",
+          "ClassName": "UICorner",
+          "Properties": {
+            "CornerRadius": {
+              "UDim": [
+                0,
+                14
+              ]
+            }
+          }
+        },
+        {
+          "Name": "MaxSize",
+          "ClassName": "UISizeConstraint",
+          "Properties": {
+            "MaxSize": [
+              420,
+              210
+            ]
+          }
+        },
+        {
+          "Name": "Title",
+          "ClassName": "TextLabel",
+          "Properties": {
+            "AnchorPoint": [
+              0,
+              0
+            ],
+            "Position": {
+              "UDim2": [
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  10
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  1,
+                  -80
+                ],
+                [
+                  0,
+                  36
+                ]
+              ]
+            },
+            "BackgroundTransparency": 1,
+            "TextColor3": [
+              1,
+              0.85,
+              0.2
+            ],
+            "TextScaled": true,
+            "Text": "Settings",
+            "FontFace": {
+              "Font": {
+                "family": "rbxasset://fonts/families/GothamSSm.json",
+                "weight": "Bold",
+                "style": "Normal"
+              }
+            },
+            "TextXAlignment": "Left"
+          },
+          "Children": [
+            {
+              "Name": "Padding",
+              "ClassName": "UIPadding",
+              "Properties": {
+                "PaddingTop": {
+                  "UDim": [
+                    0,
+                    4
+                  ]
+                },
+                "PaddingBottom": {
+                  "UDim": [
+                    0,
+                    4
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Close",
+          "ClassName": "TextButton",
+          "Properties": {
+            "AnchorPoint": [
+              1,
+              0
+            ],
+            "Position": {
+              "UDim2": [
+                [
+                  1,
+                  -10
+                ],
+                [
+                  0,
+                  8
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  0,
+                  44
+                ],
+                [
+                  0,
+                  44
+                ]
+              ]
+            },
+            "BackgroundColor3": [
+              0.75,
+              0.25,
+              0.25
+            ],
+            "TextColor3": [
+              1,
+              1,
+              1
+            ],
+            "Text": "X",
+            "TextScaled": true,
+            "FontFace": {
+              "Font": {
+                "family": "rbxasset://fonts/families/GothamSSm.json",
+                "weight": "Bold",
+                "style": "Normal"
+              }
+            }
+          },
+          "Children": [
+            {
+              "Name": "Corner",
+              "ClassName": "UICorner",
+              "Properties": {
+                "CornerRadius": {
+                  "UDim": [
+                    0,
+                    8
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Padding",
+              "ClassName": "UIPadding",
+              "Properties": {
+                "PaddingTop": {
+                  "UDim": [
+                    0,
+                    6
+                  ]
+                },
+                "PaddingBottom": {
+                  "UDim": [
+                    0,
+                    6
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Music",
+          "ClassName": "Frame",
+          "Properties": {
+            "Position": {
+              "UDim2": [
+                [
+                  0,
+                  12
+                ],
+                [
+                  0,
+                  64
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  1,
+                  -24
+                ],
+                [
+                  0,
+                  52
+                ]
+              ]
+            },
+            "BackgroundColor3": [
+              0.18,
+              0.18,
+              0.22
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Corner",
+              "ClassName": "UICorner",
+              "Properties": {
+                "CornerRadius": {
+                  "UDim": [
+                    0,
+                    8
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Label",
+              "ClassName": "TextLabel",
+              "Properties": {
+                "AnchorPoint": [
+                  0,
+                  0
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0,
+                      12
+                    ],
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.4,
+                      -12
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "TextColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "TextScaled": true,
+                "Text": "Music",
+                "FontFace": {
+                  "Font": {
+                    "family": "rbxasset://fonts/families/GothamSSm.json",
+                    "weight": "Bold",
+                    "style": "Normal"
+                  }
+                },
+                "TextXAlignment": "Left"
+              },
+              "Children": [
+                {
+                  "Name": "Padding",
+                  "ClassName": "UIPadding",
+                  "Properties": {
+                    "PaddingTop": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    },
+                    "PaddingBottom": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Minus",
+              "ClassName": "TextButton",
+              "Properties": {
+                "AnchorPoint": [
+                  0,
+                  0.5
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.45,
+                      0
+                    ],
+                    [
+                      0.5,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0,
+                      44
+                    ],
+                    [
+                      0,
+                      44
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.35,
+                  0.35,
+                  0.4
+                ],
+                "TextColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "Text": "-",
+                "TextScaled": true,
+                "FontFace": {
+                  "Font": {
+                    "family": "rbxasset://fonts/families/GothamSSm.json",
+                    "weight": "Bold",
+                    "style": "Normal"
+                  }
+                }
+              },
+              "Children": [
+                {
+                  "Name": "Corner",
+                  "ClassName": "UICorner",
+                  "Properties": {
+                    "CornerRadius": {
+                      "UDim": [
+                        0,
+                        8
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Padding",
+                  "ClassName": "UIPadding",
+                  "Properties": {
+                    "PaddingTop": {
+                      "UDim": [
+                        0,
+                        6
+                      ]
+                    },
+                    "PaddingBottom": {
+                      "UDim": [
+                        0,
+                        6
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Value",
+              "ClassName": "TextLabel",
+              "Properties": {
+                "AnchorPoint": [
+                  0,
+                  0
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.45,
+                      52
+                    ],
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.25,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "TextColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "TextScaled": true,
+                "Text": "...",
+                "FontFace": {
+                  "Font": {
+                    "family": "rbxasset://fonts/families/GothamSSm.json",
+                    "weight": "Bold",
+                    "style": "Normal"
+                  }
+                },
+                "TextXAlignment": "Center"
+              },
+              "Children": [
+                {
+                  "Name": "Padding",
+                  "ClassName": "UIPadding",
+                  "Properties": {
+                    "PaddingTop": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    },
+                    "PaddingBottom": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Plus",
+              "ClassName": "TextButton",
+              "Properties": {
+                "AnchorPoint": [
+                  1,
+                  0.5
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      1,
+                      -8
+                    ],
+                    [
+                      0.5,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0,
+                      44
+                    ],
+                    [
+                      0,
+                      44
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.35,
+                  0.35,
+                  0.4
+                ],
+                "TextColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "Text": "+",
+                "TextScaled": true,
+                "FontFace": {
+                  "Font": {
+                    "family": "rbxasset://fonts/families/GothamSSm.json",
+                    "weight": "Bold",
+                    "style": "Normal"
+                  }
+                }
+              },
+              "Children": [
+                {
+                  "Name": "Corner",
+                  "ClassName": "UICorner",
+                  "Properties": {
+                    "CornerRadius": {
+                      "UDim": [
+                        0,
+                        8
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Padding",
+                  "ClassName": "UIPadding",
+                  "Properties": {
+                    "PaddingTop": {
+                      "UDim": [
+                        0,
+                        6
+                      ]
+                    },
+                    "PaddingBottom": {
+                      "UDim": [
+                        0,
+                        6
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "Effects",
+          "ClassName": "Frame",
+          "Properties": {
+            "Position": {
+              "UDim2": [
+                [
+                  0,
+                  12
+                ],
+                [
+                  0,
+                  126
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  1,
+                  -24
+                ],
+                [
+                  0,
+                  52
+                ]
+              ]
+            },
+            "BackgroundColor3": [
+              0.18,
+              0.18,
+              0.22
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Corner",
+              "ClassName": "UICorner",
+              "Properties": {
+                "CornerRadius": {
+                  "UDim": [
+                    0,
+                    8
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Label",
+              "ClassName": "TextLabel",
+              "Properties": {
+                "AnchorPoint": [
+                  0,
+                  0
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0,
+                      12
+                    ],
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.4,
+                      -12
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "TextColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "TextScaled": true,
+                "Text": "Effects",
+                "FontFace": {
+                  "Font": {
+                    "family": "rbxasset://fonts/families/GothamSSm.json",
+                    "weight": "Bold",
+                    "style": "Normal"
+                  }
+                },
+                "TextXAlignment": "Left"
+              },
+              "Children": [
+                {
+                  "Name": "Padding",
+                  "ClassName": "UIPadding",
+                  "Properties": {
+                    "PaddingTop": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    },
+                    "PaddingBottom": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Minus",
+              "ClassName": "TextButton",
+              "Properties": {
+                "AnchorPoint": [
+                  0,
+                  0.5
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.45,
+                      0
+                    ],
+                    [
+                      0.5,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0,
+                      44
+                    ],
+                    [
+                      0,
+                      44
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.35,
+                  0.35,
+                  0.4
+                ],
+                "TextColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "Text": "-",
+                "TextScaled": true,
+                "FontFace": {
+                  "Font": {
+                    "family": "rbxasset://fonts/families/GothamSSm.json",
+                    "weight": "Bold",
+                    "style": "Normal"
+                  }
+                }
+              },
+              "Children": [
+                {
+                  "Name": "Corner",
+                  "ClassName": "UICorner",
+                  "Properties": {
+                    "CornerRadius": {
+                      "UDim": [
+                        0,
+                        8
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Padding",
+                  "ClassName": "UIPadding",
+                  "Properties": {
+                    "PaddingTop": {
+                      "UDim": [
+                        0,
+                        6
+                      ]
+                    },
+                    "PaddingBottom": {
+                      "UDim": [
+                        0,
+                        6
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Value",
+              "ClassName": "TextLabel",
+              "Properties": {
+                "AnchorPoint": [
+                  0,
+                  0
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.45,
+                      52
+                    ],
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.25,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "TextColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "TextScaled": true,
+                "Text": "...",
+                "FontFace": {
+                  "Font": {
+                    "family": "rbxasset://fonts/families/GothamSSm.json",
+                    "weight": "Bold",
+                    "style": "Normal"
+                  }
+                },
+                "TextXAlignment": "Center"
+              },
+              "Children": [
+                {
+                  "Name": "Padding",
+                  "ClassName": "UIPadding",
+                  "Properties": {
+                    "PaddingTop": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    },
+                    "PaddingBottom": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Plus",
+              "ClassName": "TextButton",
+              "Properties": {
+                "AnchorPoint": [
+                  1,
+                  0.5
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      1,
+                      -8
+                    ],
+                    [
+                      0.5,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0,
+                      44
+                    ],
+                    [
+                      0,
+                      44
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.35,
+                  0.35,
+                  0.4
+                ],
+                "TextColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "Text": "+",
+                "TextScaled": true,
+                "FontFace": {
+                  "Font": {
+                    "family": "rbxasset://fonts/families/GothamSSm.json",
+                    "weight": "Bold",
+                    "style": "Normal"
+                  }
+                }
+              },
+              "Children": [
+                {
+                  "Name": "Corner",
+                  "ClassName": "UICorner",
+                  "Properties": {
+                    "CornerRadius": {
+                      "UDim": [
+                        0,
+                        8
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Padding",
+                  "ClassName": "UIPadding",
+                  "Properties": {
+                    "PaddingTop": {
+                      "UDim": [
+                        0,
+                        6
+                      ]
+                    },
+                    "PaddingBottom": {
+                      "UDim": [
+                        0,
+                        6
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

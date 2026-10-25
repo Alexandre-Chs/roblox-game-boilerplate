@@ -44,7 +44,8 @@ return function(services: { [string]: any })
 			if not player or not humanoid or humanoid.Health <= 0 then
 				return
 			end
-			if not services.DataService:AdjustCash(player, GameConfig.Coin.Value) then
+			local multiplier = if services.GamePassService:Owns(player, "DoubleCoins") then 2 else 1
+			if not services.DataService:AdjustCash(player, GameConfig.Coin.Value * multiplier) then
 				return
 			end
 			self._collected = true

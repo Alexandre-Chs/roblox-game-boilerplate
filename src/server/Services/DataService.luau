@@ -16,6 +16,8 @@ local DataService = {
 	Name = "DataService",
 	PlayerLoaded = Signal.new() :: Signal.Signal<(Player, PlayerData.Data)>,
 	PlayerReleasing = Signal.new() :: Signal.Signal<(Player, PlayerData.Data)>,
+	-- Fires after every change made through Set or AdjustCash (not through GetReplica).
+	Changed = Signal.new() :: Signal.Signal<(Player, Path, any)>,
 }
 local sessions: DataSessions.DataSessions? = nil
 local token: any = nil
@@ -99,6 +101,7 @@ function DataService.Set(_self: any, player: Player, path: Path, value: any): bo
 		end
 	end
 	replica:Set(path :: any, value)
+	DataService.Changed:Fire(player, path, value)
 	return true
 end
 

@@ -14,11 +14,20 @@ Local tests cover pure modules. Engine-dependent behavior requires Studio; Lune 
    [Roblox House Starter] Client controllers ready
    [Roblox House Starter] Player data loaded
    [Roblox House Starter] Packet round trip <n> ms
+   [DebugService] Studio commands ready: ...
    ```
 
    Any `[System.Init]`/`[System.Start]` error, `[UIController] ... screen disabled` or missing line is a failure. `DataStores unavailable ... using mock data` is expected in an unpublished place.
-3. Walk the character into a gold coin with `character_navigation`. The Hud should go from `Coins: 0` to `Coins: 1` (`screen_capture`), and the coin reappears after ten seconds. This proves component, DataService, Replica and UI end to end.
-   With three coins, click `Shop` and buy the Red Hat: its button shows `Owned` and the counter drops by three. Buying it again shows `You already own this.`
+3. Feature pass, using the Studio test commands (docs/architecture.md):
+   - The loading screen fades out, then the daily reward window opens by itself. Claim it: a notification shows the coins and the counter rises.
+   - Walk into a gold coin with `character_navigation`: the counter rises by one and the coin reappears after ten seconds.
+   - Open the player list: `Coins` matches the counter.
+   - Type `/cash 20` in chat, open Shop and buy the Red Hat: `Owned`, counter minus three, a notification. Buying again says `You already own this.`
+   - Click the Robux buttons: with ids at 0, a notification says the offer is not on sale yet.
+   - `/pass DoubleCoins`, then pick up a coin: plus two.
+   - Settings: press minus on Music; the value drops by 10%. Stop and replay: with mock data it resets, which is expected.
+   - `/daily`, reopen Daily: day 2 is claimable.
+   Take a `screen_capture` of the Hud, Shop and Settings, including a narrow (mobile) viewport.
 4. Verify spawn, camera, reset and server/client startup. Stop Play afterwards.
 5. Use Studio's multi-client server test for replication, independent player data and disconnect cleanup. A solo test cannot certify multiplayer behavior.
 6. Test reconnect/persistence in a separate test universe with the intended DataStore permissions. Studio mock fallback is not persistence verification.

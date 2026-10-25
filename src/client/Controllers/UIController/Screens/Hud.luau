@@ -1,35 +1,52 @@
 --!strict
 
--- Example screen showing replicated player data. Pairs with assets/ui/Hud.model.json.
+-- Always-visible overlay: coin counter and the buttons that open the modal screens.
+-- Pairs with assets/ui/Hud.model.json.
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Trove = require(ReplicatedStorage.Packages.Trove)
+local Find = require(script.Parent.Parent.Find)
 local Types = require(script.Parent.Parent.Types)
+
+-- Button name in the Hud model -> modal screen it toggles.
+local BUTTONS: { [string]: string } =
+	{ ShopButton = "Shop", DailyButton = "DailyReward", SettingsButton = "Settings" }
 
 local Hud = {}
 
 function Hud.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	local trove = Trove.new()
-	local found = gui:FindFirstChild("Cash", true)
-	local label: TextLabel? = if found and found:IsA("TextLabel") then found else nil
-	if not label then
-		warn(`[Hud] {gui:GetFullName()} needs a TextLabel named Cash`)
-	end
+	local controllers = context.Controllers
+	local label: TextLabel? = Find(gui, "Cash", "TextLabel")
 
-	local shopButton = gui:FindFirstChild("ShopButton", true)
-	if shopButton and shopButton:IsA("TextButton") then
-		trove:Connect(shopButton.Activated, function()
-			if context.Controllers.UIController:IsOpen("Shop") then
-				context.Close("Shop")
-			else
-				context.Open("Shop")
-			end
-		end)
-	end
-
-	trove:Add(context.Controllers.DataController:Observe({ "Cash" }, function(cash: any)
-		if label then
-			label.Text = if type(cash) == "number" then `Coins: {cash}` else "Coins: ..."
+	for buttonName, screenName in BUTTONS do
+		local button: TextButton? = Find(gui, buttonName, "TextButton")
+		if button then
+			trove:Connect(button.Activated, function()
+				controllers.SoundController:PlaySfx("Click")
+				if controllers.UIController:IsOpen(screenName) then
+					context.Close(screenName)
+				else
+					context.Open(screenName)
+				end
+			end)
 		end
+	end
+
+	local previous: number? = nil
+	trove:Add(controllers.DataController:Observe({ "Cash" }, function(cash: any)
+		if type(cash) ~= "number" then
+			if label then
+				label.Text = "Coins: ..."
+			end
+			return
+		end
+		if label then
+			label.Text = `Coins: {cash}`
+		end
+		if previous and cash > previous then
+			controllers.SoundController:PlaySfx("Coin")
+		end
+		previous = cash
 	end))
 
 	return {

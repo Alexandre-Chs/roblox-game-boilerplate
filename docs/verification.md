@@ -17,6 +17,8 @@ Third pass (2026-10-25, Claude Opus 5.5): added DataSessions tests with a fake P
 
 Placeholder shop (2026-10-25): catalog, `BuyItem` packet, ShopService, `Inventory` data field and Shop screen added. Purchase rules and inventory validation are covered by Lune tests; the screen and server round trip have not been played in Studio.
 
+Retention, monetization and tooling pass (2026-10-25): Studio-only chat commands, notifications, leaderstats, game pass and coin pack examples, Settings with SoundController, daily reward and ReplicatedFirst loading screen. `pnpm run check` green, with new Lune tests for settings cleaning, settings/daily validation, streak rules and command parsing. Not played in Studio: every screen, the chat commands, the loading screen and Marketplace prompts. Sound ids are empty, so nothing is audible yet.
+
 Not verified: live Studio/MCP in this agent session, multiplayer, real persistence, real purchases, Blender animation/mesh exports, external image/3D generation or Open Cloud uploads. The shipped providers need their own optional setup. CI is configured but its remote result is separate from local verification.
 
 Receipt pruning inherited from upstream was removed because it forgot old purchase IDs and could allow replay grants. Receipt history now grows with purchases; move to a durable receipt ledger before profile size becomes a constraint. These changes are not an exhaustive security audit of upstream packages or imported scripts.

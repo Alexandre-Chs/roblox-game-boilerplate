@@ -1,0 +1,144 @@
+{
+  "ClassName": "ScreenGui",
+  "Properties": {
+    "ResetOnSpawn": false,
+    "Enabled": true,
+    "ZIndexBehavior": "Sibling",
+    "DisplayOrder": 50
+  },
+  "Children": [
+    {
+      "Name": "Stack",
+      "ClassName": "Frame",
+      "Properties": {
+        "AnchorPoint": [
+          0.5,
+          1
+        ],
+        "Position": {
+          "UDim2": [
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              -24
+            ]
+          ]
+        },
+        "Size": {
+          "UDim2": [
+            [
+              0.8,
+              0
+            ],
+            [
+              0,
+              200
+            ]
+          ]
+        },
+        "BackgroundTransparency": 1
+      },
+      "Children": [
+        {
+          "Name": "MaxWidth",
+          "ClassName": "UISizeConstraint",
+          "Properties": {
+            "MaxSize": [
+              420,
+              200
+            ]
+          }
+        },
+        {
+          "Name": "Layout",
+          "ClassName": "UIListLayout",
+          "Properties": {
+            "Padding": {
+              "UDim": [
+                0,
+                6
+              ]
+            },
+            "SortOrder": "LayoutOrder",
+            "VerticalAlignment": "Bottom",
+            "HorizontalAlignment": "Center"
+          }
+        },
+        {
+          "Name": "Toast",
+          "ClassName": "TextLabel",
+          "Properties": {
+            "Size": {
+              "UDim2": [
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  40
+                ]
+              ]
+            },
+            "BackgroundColor3": [
+              0.1,
+              0.1,
+              0.12
+            ],
+            "BackgroundTransparency": 0.15,
+            "TextColor3": [
+              1,
+              1,
+              1
+            ],
+            "TextScaled": true,
+            "Text": "",
+            "FontFace": {
+              "Font": {
+                "family": "rbxasset://fonts/families/GothamSSm.json",
+                "weight": "Bold",
+                "style": "Normal"
+              }
+            },
+            "Visible": false
+          },
+          "Children": [
+            {
+              "Name": "Corner",
+              "ClassName": "UICorner",
+              "Properties": {
+                "CornerRadius": {
+                  "UDim": [
+                    0,
+                    10
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Padding",
+              "ClassName": "UIPadding",
+              "Properties": {
+                "PaddingTop": {
+                  "UDim": [
+                    0,
+                    8
+                  ]
+                },
+                "PaddingBottom": {
+                  "UDim": [
+                    0,
+                    8
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

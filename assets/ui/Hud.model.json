@@ -2,7 +2,7 @@
   "ClassName": "ScreenGui",
   "Properties": {
     "ResetOnSpawn": false,
-    "IgnoreGuiInset": false,
+    "Enabled": true,
     "ZIndexBehavior": "Sibling"
   },
   "Children": [
@@ -103,12 +103,12 @@
       ]
     },
     {
-      "Name": "ShopButton",
-      "ClassName": "TextButton",
+      "Name": "Buttons",
+      "ClassName": "Frame",
       "Properties": {
         "AnchorPoint": [
           1,
-          0
+          0.5
         ],
         "Position": {
           "UDim2": [
@@ -117,8 +117,8 @@
               -12
             ],
             [
-              0,
-              12
+              0.5,
+              0
             ]
           ]
         },
@@ -126,64 +126,287 @@
           "UDim2": [
             [
               0,
-              110
+              120
             ],
             [
               0,
-              44
+              164
             ]
           ]
         },
-        "BackgroundColor3": [
-          0.2,
-          0.55,
-          0.95
-        ],
-        "TextColor3": [
-          1,
-          1,
-          1
-        ],
-        "Text": "Shop",
-        "TextScaled": true,
-        "FontFace": {
-          "Font": {
-            "family": "rbxasset://fonts/families/GothamSSm.json",
-            "weight": "Bold",
-            "style": "Normal"
-          }
-        }
+        "BackgroundTransparency": 1
       },
       "Children": [
         {
-          "Name": "Corner",
-          "ClassName": "UICorner",
+          "Name": "Layout",
+          "ClassName": "UIListLayout",
           "Properties": {
-            "CornerRadius": {
+            "Padding": {
               "UDim": [
                 0,
-                8
+                10
               ]
-            }
+            },
+            "SortOrder": "LayoutOrder"
           }
         },
         {
-          "Name": "Padding",
-          "ClassName": "UIPadding",
+          "Name": "ShopButton",
+          "ClassName": "TextButton",
           "Properties": {
-            "PaddingTop": {
-              "UDim": [
-                0,
-                6
+            "AnchorPoint": [
+              0,
+              0
+            ],
+            "Position": {
+              "UDim2": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
               ]
             },
-            "PaddingBottom": {
-              "UDim": [
-                0,
-                6
+            "Size": {
+              "UDim2": [
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  48
+                ]
               ]
+            },
+            "BackgroundColor3": [
+              0.2,
+              0.55,
+              0.95
+            ],
+            "TextColor3": [
+              1,
+              1,
+              1
+            ],
+            "Text": "Shop",
+            "TextScaled": true,
+            "FontFace": {
+              "Font": {
+                "family": "rbxasset://fonts/families/GothamSSm.json",
+                "weight": "Bold",
+                "style": "Normal"
+              }
+            },
+            "LayoutOrder": 1
+          },
+          "Children": [
+            {
+              "Name": "Corner",
+              "ClassName": "UICorner",
+              "Properties": {
+                "CornerRadius": {
+                  "UDim": [
+                    0,
+                    8
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Padding",
+              "ClassName": "UIPadding",
+              "Properties": {
+                "PaddingTop": {
+                  "UDim": [
+                    0,
+                    6
+                  ]
+                },
+                "PaddingBottom": {
+                  "UDim": [
+                    0,
+                    6
+                  ]
+                }
+              }
             }
-          }
+          ]
+        },
+        {
+          "Name": "DailyButton",
+          "ClassName": "TextButton",
+          "Properties": {
+            "AnchorPoint": [
+              0,
+              0
+            ],
+            "Position": {
+              "UDim2": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  48
+                ]
+              ]
+            },
+            "BackgroundColor3": [
+              0.2,
+              0.7,
+              0.35
+            ],
+            "TextColor3": [
+              1,
+              1,
+              1
+            ],
+            "Text": "Daily",
+            "TextScaled": true,
+            "FontFace": {
+              "Font": {
+                "family": "rbxasset://fonts/families/GothamSSm.json",
+                "weight": "Bold",
+                "style": "Normal"
+              }
+            },
+            "LayoutOrder": 2
+          },
+          "Children": [
+            {
+              "Name": "Corner",
+              "ClassName": "UICorner",
+              "Properties": {
+                "CornerRadius": {
+                  "UDim": [
+                    0,
+                    8
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Padding",
+              "ClassName": "UIPadding",
+              "Properties": {
+                "PaddingTop": {
+                  "UDim": [
+                    0,
+                    6
+                  ]
+                },
+                "PaddingBottom": {
+                  "UDim": [
+                    0,
+                    6
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "SettingsButton",
+          "ClassName": "TextButton",
+          "Properties": {
+            "AnchorPoint": [
+              0,
+              0
+            ],
+            "Position": {
+              "UDim2": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  48
+                ]
+              ]
+            },
+            "BackgroundColor3": [
+              0.35,
+              0.35,
+              0.4
+            ],
+            "TextColor3": [
+              1,
+              1,
+              1
+            ],
+            "Text": "Settings",
+            "TextScaled": true,
+            "FontFace": {
+              "Font": {
+                "family": "rbxasset://fonts/families/GothamSSm.json",
+                "weight": "Bold",
+                "style": "Normal"
+              }
+            },
+            "LayoutOrder": 3
+          },
+          "Children": [
+            {
+              "Name": "Corner",
+              "ClassName": "UICorner",
+              "Properties": {
+                "CornerRadius": {
+                  "UDim": [
+                    0,
+                    8
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Padding",
+              "ClassName": "UIPadding",
+              "Properties": {
+                "PaddingTop": {
+                  "UDim": [
+                    0,
+                    6
+                  ]
+                },
+                "PaddingBottom": {
+                  "UDim": [
+                    0,
+                    6
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     }

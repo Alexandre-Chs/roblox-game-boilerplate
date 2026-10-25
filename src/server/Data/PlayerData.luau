@@ -6,6 +6,8 @@ export type Data = {
 	LastSeenAt: number,
 	Receipts: { [string]: number },
 	Inventory: { [string]: boolean },
+	Settings: { [string]: number },
+	Daily: { LastClaimDay: number, Streak: number },
 }
 
 local PlayerData = {}
@@ -16,6 +18,8 @@ PlayerData.Template = {
 	LastSeenAt = 0,
 	Receipts = {},
 	Inventory = {},
+	Settings = { MusicVolume = 0.5, SfxVolume = 0.8 },
+	Daily = { LastClaimDay = 0, Streak = 0 },
 } :: Data
 
 local function natural(value: any): boolean
@@ -24,6 +28,21 @@ local function natural(value: any): boolean
 		and math.abs(value) < math.huge
 		and value >= 0
 		and value % 1 == 0
+end
+
+local function volume(value: any): boolean
+	return type(value) == "number" and value >= 0 and value <= 1
+end
+
+-- Server-side check for a setting sent by a client. Returns the value to store, or nil to reject.
+function PlayerData.CleanSetting(name: any, value: any): number?
+	if type(name) ~= "string" or PlayerData.Template.Settings[name] == nil or type(value) ~= "number" then
+		return nil
+	end
+	if value ~= value then
+		return nil
+	end
+	return math.clamp(math.round(value * 100) / 100, 0, 1)
 end
 
 function PlayerData.Validate(data: any): boolean
@@ -51,6 +70,27 @@ function PlayerData.Validate(data: any): boolean
 		end
 		for itemId, owned in data.Inventory do
 			if type(itemId) ~= "string" or owned ~= true then
+				return false
+			end
+		end
+	end
+	if data.Settings ~= nil then
+		if type(data.Settings) ~= "table" then
+			return false
+		end
+		-- Unknown keys are tolerated so removing a setting never locks players out.
+		for _, value in data.Settings do
+			if not volume(value) then
+				return false
+			end
+		end
+	end
+	if data.Daily ~= nil then
+		if type(data.Daily) ~= "table" then
+			return false
+		end
+		for _, key in { "LastClaimDay", "Streak" } do
+			if data.Daily[key] ~= nil and not natural(data.Daily[key]) then
 				return false
 			end
 		end

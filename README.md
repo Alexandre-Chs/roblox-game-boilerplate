@@ -32,7 +32,12 @@ Dans T3, ouvrir **ce dossier**. Activer le MCP intégré à Studio dans Assistan
 - `pnpm run doctor` : outils disponibles ; ne prouve pas l'accès MCP.
 - `pnpm run publish test` : publie sur l'expérience de test (voir docs/release.md). La prod exige `--confirm-prod`.
 
-Le starter contient un exemple complet à copier ou supprimer : des pièces à ramasser, un compteur à l'écran et une boutique factice qui dépense ces pièces (voir docs/architecture.md, Example feature). Remplacer les objets dans `src/shared/Config/ShopCatalog.luau`.
+Le starter contient des fonctionnalités d'exemple à copier, adapter ou supprimer (détail dans docs/architecture.md, Example features) :
+
+- pièces à ramasser, compteur, classement dans la liste des joueurs ;
+- boutique factice (objets dans `src/shared/Config/ShopCatalog.luau`) et offres Robux inertes tant que leurs ids valent 0 (`src/shared/Config/Monetization.luau`) ;
+- récompense quotidienne avec série de jours, notifications, menu Réglages (volumes sauvegardés), sons à renseigner dans `src/shared/Config/Sounds.luau`, écran de chargement ;
+- commandes de test dans le chat, uniquement dans Studio : `/cash 100`, `/reset`, `/unlock`, `/daily`, `/pass DoubleCoins`, `/notify texte`.
 
 ## Architecture
 

@@ -17,6 +17,10 @@
         "$path": "vendor/Replica/src/ReplicatedStorage/ReplicaShared"
       }
     },
+    "ReplicatedFirst": {
+      "$ignoreUnknownInstances": true,
+      "$path": "src/first"
+    },
     "ServerScriptService": {
       "$ignoreUnknownInstances": true,
       "$path": "src/server",

@@ -2,15 +2,25 @@
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Packets = require(ReplicatedStorage.Packets)
+local Signal = require(ReplicatedStorage.Packages.Signal)
 local WaitFor = require(ReplicatedStorage.Packages.WaitFor)
 local Types = require(script.Types)
 
 local modules: { [string]: Types.ScreenModule } = {
 	Hud = require(script.Screens.Hud),
 	Shop = require(script.Screens.Shop),
+	Notifications = require(script.Screens.Notifications),
+	Settings = require(script.Screens.Settings),
+	DailyReward = require(script.Screens.DailyReward),
 }
 
-local UIController = { Name = "UIController" }
+local UIController = {
+	Name = "UIController",
+	-- Fired with the text of each toast; the Notifications screen displays them.
+	Notified = Signal.new() :: Signal.Signal<string>,
+}
+local notifyConnection: { Disconnect: (self: any) -> () }? = nil
 local registry: { [string]: any } = {}
 local screens: { [string]: Types.Screen } = {}
 local opened: { [string]: boolean } = {}
@@ -46,6 +56,10 @@ function UIController.Close(_self: any, name: string)
 	screen:Close()
 end
 
+function UIController.Notify(_self: any, text: string)
+	UIController.Notified:Fire(text)
+end
+
 function UIController.IsOpen(_self: any, name: string): boolean
 	return opened[name] == true
 end
@@ -59,7 +73,13 @@ function UIController.Start(_self: any)
 		Close = function(name: string)
 			UIController:Close(name)
 		end,
+		Notify = function(text: string)
+			UIController:Notify(text)
+		end,
 	}
+	notifyConnection = Packets.Notify.OnClientEvent:Connect(function(text: string)
+		UIController:Notify(text)
+	end) :: any
 	for name, module in modules do
 		local promise = WaitFor.Child(Players.LocalPlayer, "PlayerGui", 15)
 			:andThen(function(playerGui: Instance)
@@ -94,6 +114,10 @@ end
 
 function UIController.Destroy(_self: any)
 	destroyed = true
+	if notifyConnection then
+		notifyConnection:Disconnect()
+		notifyConnection = nil
+	end
 	for _, promise in pending do
 		promise:cancel()
 	end

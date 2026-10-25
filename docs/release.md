@@ -18,7 +18,7 @@ pnpm run publish prod --confirm-prod
 
 The command builds, then uploads `build/game.rbxlx` as a new published version through Open Cloud. It refuses to run without ids, a key or, for prod, `--confirm-prod`. Agents run it only when the user explicitly asks for that environment in the current conversation. A build contains only file-backed content; see docs/assets.md before publishing.
 
-Enable Studio access to API services on the test experience to test saving from Studio. Products and game passes have different ids per experience; map them in `Products.luau` deliberately.
+Enable Studio access to API services on the test experience to test saving from Studio. Products and game passes have different ids per experience; set the ids for the experience you publish to in `src/shared/Config/Monetization.luau` before each publish.
 
 ## After release
 

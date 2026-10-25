@@ -4,6 +4,7 @@ export type Context = {
 	Controllers: { [string]: any },
 	Open: (name: string) -> (),
 	Close: (name: string) -> (),
+	Notify: (text: string) -> (),
 }
 
 export type Screen = {
