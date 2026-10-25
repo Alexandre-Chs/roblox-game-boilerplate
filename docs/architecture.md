@@ -37,14 +37,15 @@ The starter ships small, working features that cross every layer. Copy them as p
 
 | Removing | Also edit |
 | --- | --- |
-| Robux offers | `Coin.luau` (DoubleCoins multiplier), `DebugService` (`/pass`), Shop Robux row (`Shop.luau`, `Shop.model.json`), `GamePassService` in `ComponentService`/`DebugService` Dependencies |
-| Shop | `DebugService` (`/unlock`), Hud `ShopButton` |
-| Daily reward | `DebugService` (`/daily`, `/reset`), Hud `DailyButton` |
-| Settings and sound | Hud `SettingsButton`; every `SoundController:PlaySfx` call (Hud, Shop, Settings, DailyReward) and the `SoundController` dependency of `UIController` |
+| Robux offers | Delete `GamePassService` and `Config/Monetization.luau`. Keep `PurchaseService/Products.luau` but empty its loop (PurchaseService requires it). Edit `Coin.luau` (DoubleCoins multiplier), `DebugService` (`/pass`), the Shop Robux row (`Shop.luau` requires `Monetization`, `Shop.model.json` `Robux` frame) and the `GamePassService` entry in `ComponentService`/`DebugService` Dependencies |
+| Shop | `DebugService` (`/unlock`), Hud `ShopButton`, `Inventory` in `PlayerData` if unused, and the `Purchasing` require and asserts in `tests/run.luau` |
+| Daily reward | `DebugService` (`/daily`, `/reset`), Hud `DailyButton`, `Daily` in `PlayerData` if unused, and the `DailyReward` require and asserts in `tests/run.luau` |
+| Settings and sound | Hud `SettingsButton`; every `SoundController:PlaySfx` call (Hud, Shop, Settings, DailyReward) and the `SoundController` dependency of `UIController`; `Settings`/`CleanSetting` in `PlayerData` and their asserts in `tests/run.luau` |
 | Notifications | `NotificationService` users (`DailyRewardService`, `DebugService`) and every `context.Notify` call |
+| Studio test commands | The `Commands` require and asserts in `tests/run.luau` |
 | Coins | `Cash` stays: Shop, Daily reward, Leaderboard and Robux packs use it |
 
-After deleting, run `pnpm run check`: a leftover reference fails the strict type check or the boot-time dependency check.
+After deleting, run `pnpm run check`: a leftover reference fails the strict type check, the Lune tests or the boot-time dependency check. When removing a `PlayerData` field, never reject old saves that still contain it: `Validate` only checks known keys.
 
 Rules these examples follow, and new features must too:
 
@@ -114,7 +115,7 @@ src/client/Controllers/CameraController/
 
 | File | Role |
 | --- | --- |
-| `init.luau` | The only file with `Name`, `Init`, `Start` and `Destroy`, and the only one in `Registry.luau`. Owns the system's state, connections and packet handlers, and routes each request to a child module. |
+| `init.luau` | The only file with `Name`, `Dependencies`, `Init`, `Start` and `Destroy`, and the only one in `Registry.luau`. Owns the system's state, connections and packet handlers, and routes each request to a child module. |
 | Child modules (`Catalog`, `Purchasing`, `Modes`, ...) | One concern each. Plain modules: no lifecycle, no connections or state at module level, never registered. They receive what they need (the registry, the player, state) as arguments. |
 | `Types.luau` | Types shared between the system's files. |
 
@@ -355,17 +356,17 @@ Replica ([MadStudioRoblox/Replica](https://github.com/MadStudioRoblox/Replica)) 
 
 - Only `DataService` touches ProfileStore. Other services call `GetData`, `Set`, `AdjustCash`, `RequestSave` and `WaitForSave`.
 - Saving is automatic: ProfileStore autosaves every session periodically and on release. Do not call `RequestSave` after ordinary changes (cash, inventory, progress); DataStore budgets are per key and frequent forced saves get throttled. `RequestSave` is for rare moments that must hit disk soon (end of a round, a trade), and `WaitForSave` is reserved for purchases.
-- Each loaded player's profile data is wrapped in a `PlayerData` replica that replicates to that player only. The replica's `Data` is the profile's data table, so a change made through the replica is saved as well as replicated.
-- Change player data only with `DataService:Set(player, path, value)` or `DataService:AdjustCash(player, amount)`. They update the profile (saved) and the replica (sent to the client) together. Assigning to the data table from `GetData` saves but never reaches the client.
+- Each loaded player gets a `PlayerData` replica that replicates to that player only. Its `Data` is `PlayerData.PublicView(data)`: a separate table holding every non-private key, whose nested tables are shared with the profile. The replica is internal to `DataService`; never write to it from elsewhere, because a top-level change made on it would not be saved.
+- Change player data only with `DataService:Set(player, path, value)` or `DataService:AdjustCash(player, amount)`. They update the profile (saved) and the replica (sent to the client) together. Assigning to the data table from `GetData` saves but never reaches the client. Two exceptions write the data table directly: private keys (below) and final writes in `PlayerReleasing`, where the player is leaving and nothing needs to reach the client.
 - Private keys are listed in `PlayerData.Private` (`SchemaVersion`, `LastSeenAt`, `Receipts`). They are saved but never replicated: the replica holds `PlayerData.PublicView(data)`. `Set` refuses them; server code writes them directly on the data table. Put any new server-only field there.
 - Arrays: set the whole (small) table with `Set`. If a game needs large replicated lists, add a `DataService` method wrapping the replica's `TableInsert`/`TableRemove` that also updates the profile, rather than exposing the replica.
 - Replicated data cannot contain arrays with gaps or keys that are not strings or numbers.
-- The whole data table is sent once when the player loads; after that each change sends only its path and value to the owner. `DataService:Set` skips unchanged non-table values. Keep traffic small: change the deepest path that changed rather than setting a whole table, group related changes with `SetValues`, and never change player data every frame (per-frame values belong in Packet events or client-side state).
+- The whole data table is sent once when the player loads; after that each change sends only its path and value to the owner. `DataService:Set` skips unchanged non-table values. Keep traffic small: change the deepest path that changed rather than setting a whole table, and never change player data every frame (per-frame values belong in Packet events or client-side state).
 - On the client, read data through `DataController`: `Get(path?)` returns the current value (nil until loaded), `Observe(path, callback)` calls `callback(value)` once the data loads and after every change at, above or below `path`, and returns a connection to add to a Trove. `Loaded` fires once with the data table and `IsLoaded()` checks it. Treat values from `Get` as read-only.
 - Data that other players should see (leaderboards, public stats) needs its own replica with `:Replicate()`, or an attribute; never replicate another player's `PlayerData`.
 - For per-player setup, connect to `DataService.PlayerLoaded(player, data)` in `Start`, not `Players.PlayerAdded` (which fires before data exists). Loading always yields, so every service that connects in `Start` sees every player, including those already in the server.
 - To react on the server when a value changes (leaderstats, achievements), connect to `DataService.Changed(player, path, value)`. It fires for every `Set` and `AdjustCash`.
-- For per-player cleanup, connect to `DataService.PlayerReleasing(player, data)`. It fires just before the session is saved and released, on leave and on shutdown. Write final state into `data` there, without yielding. `DataService` is registered first, so it is destroyed last; do not disconnect `PlayerLoaded`/`PlayerReleasing` connections in your own `Destroy`, or the shutdown release will miss you.
+- For per-player cleanup, connect to `DataService.PlayerReleasing(player, data)`. It fires just before the session is saved and released, on leave and on shutdown. Write final state directly into `data` there (the one place outside private keys where that is allowed), without yielding. `DataService` is registered first, so it is destroyed last; do not disconnect `PlayerLoaded`/`PlayerReleasing` connections in your own `Destroy`, or the shutdown release will miss you.
 - Check `GetData` for nil in every handler, and never keep the data table across a yield. On the client, show data through `DataController:Observe` so nothing is shown before it loads.
 - When adding a field, update `Data`, `Template` and `Validate` in `src/server/Data/PlayerData.luau` together. Add an explicit migration before changing `SchemaVersion`. Never reset progress for invalid data.
 
