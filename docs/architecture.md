@@ -32,6 +32,7 @@ The starter ships small, working features that cross every layer. Copy them as p
 | Notifications | `NotificationService:Send(player, text)` | `Screens/Notifications.luau`, `UIController:Notify` / `context.Notify` | `Notify` packet | `ui/Notifications.model.json` |
 | Loading screen | none | `src/first/Loading.client.luau` (ReplicatedFirst) | `ClientReady` attribute set by `AppController` | built in code |
 | Studio test commands | `Services/DebugService/` | chat | none | none |
+| Analytics | `TelemetryService` (onboarding funnel, Shop funnel, coin economy, custom events) | Shop sends `ShopOpened` | none | none |
 
 **Dependencies between examples.** Delete in this order, or fix the listed references first:
 
@@ -43,6 +44,7 @@ The starter ships small, working features that cross every layer. Copy them as p
 | Settings and sound | Hud `SettingsButton`; every `SoundController:PlaySfx` call (Hud, Shop, Settings, DailyReward) and the `SoundController` dependency of `UIController`; `Settings`/`CleanSetting` in `PlayerData` and their asserts in `tests/run.luau` |
 | Notifications | `NotificationService` users (`DailyRewardService`, `DebugService`) and every `context.Notify` call |
 | Studio test commands | The `Commands` require and asserts in `tests/run.luau` |
+| Analytics | Every `services.TelemetryService` call (Coin, ShopService, DailyRewardService, Products) and its Dependencies entries, the `ShopOpened` packet and its call in `Shop.luau`, `tests/telemetry.luau` |
 | Coins | `Cash` stays: Shop, Daily reward, Leaderboard and Robux packs use it |
 
 After deleting, run `pnpm run check`: a leftover reference fails the strict type check, the Lune tests or the boot-time dependency check. When removing a `PlayerData` field, never reject old saves that still contain it: `Validate` only checks known keys.
@@ -55,6 +57,19 @@ Rules these examples follow, and new features must too:
 - Robux: create the pass or product on the Creator Dashboard, paste its id in `Config/Monetization.luau`. An id of 0 keeps the offer inert and the shop says so. Developer products only change profile data (see Purchases). Game pass ownership is cached as the `Pass_<Name>` player attribute; read it with `GamePassService:Owns(player, name)`.
 - Sounds: ids in `Config/Sounds.luau` stay empty until found and verified with the roblox-sfx skill. Call `SoundController:PlaySfx(name)`; empty ids are silent.
 - The loading screen is the one UI built in code: ReplicatedFirst runs before StarterGui replicates. It hides when data is loaded, or after 20 seconds.
+
+### Analytics
+
+`TelemetryService` wraps Roblox `AnalyticsService`. Results appear in the Creator Dashboard (Analytics) for published experiences only; Roblox ignores events sent from Studio, so in Studio each event is printed as `[Analytics] ...` instead.
+
+| Call | Dashboard view | Logged by the examples |
+| --- | --- | --- |
+| `:Onboarding(player, step)` | Funnels, onboarding | `Joined`, `FirstCoin`, `OpenedShop`, `FirstPurchase`, each once per player per server |
+| `:ShopStep(player, step, itemId?)` | Funnels, `Shop` | `Opened` (new session per opening), `Purchased` with the item |
+| `:Economy(player, "Source"/"Sink", amount, transactionType, sku)` | Economy, currency `Coins` | coin pickup (Gameplay), daily reward (TimedReward), shop purchase (Shop), coin pack (IAP) |
+| `:Custom(player, name, value?)` | Custom events | `DailyStreak` with the streak day |
+
+Log every change of the currency through `:Economy`, or the economy charts drift from reality. Steps are fixed lists at the top of `TelemetryService.luau`; append new steps at the end, never renumber. Calls are server-only, never yield and never throw. Do not send personal data in custom fields.
 
 ### Studio test commands
 

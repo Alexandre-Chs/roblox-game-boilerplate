@@ -23,4 +23,5 @@ Enable Studio access to API services on the test experience to test saving from 
 ## After release
 
 - Script errors from live servers and clients appear automatically in the Creator Dashboard error report. Do not add a custom error pipeline.
-- Use `AnalyticsService` (funnels, economy, custom events) from services when a game needs retention or economy data. Add it per game, server side.
+- Built-in analytics (players, sessions, retention, Robux revenue, devices) need no code: Creator Dashboard > your experience > Analytics.
+- Custom analytics come from `TelemetryService` (docs/architecture.md, Analytics): the onboarding funnel, the Shop funnel, the coin economy and custom events, under Analytics > Funnels, Economy and Custom events. They need real players on the published experience; there is a processing delay, so check the next day rather than live.

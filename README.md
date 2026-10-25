@@ -37,6 +37,7 @@ Le starter contient des fonctionnalités d'exemple à copier, adapter ou supprim
 - pièces à ramasser, compteur, classement dans la liste des joueurs ;
 - boutique factice (objets dans `src/shared/Config/ShopCatalog.luau`) et offres Robux inertes tant que leurs ids valent 0 (`src/shared/Config/Monetization.luau`) ;
 - récompense quotidienne avec série de jours, notifications, menu Réglages (volumes sauvegardés), sons à renseigner dans `src/shared/Config/Sounds.luau`, écran de chargement ;
+- statistiques personnalisées (funnel des premières minutes, funnel de la boutique, économie des pièces) visibles dans le Creator Dashboard une fois le jeu publié ;
 - commandes de test dans le chat, uniquement dans Studio : `/cash 100`, `/reset`, `/unlock`, `/daily`, `/pass DoubleCoins`, `/notify texte`.
 
 ## Architecture

@@ -27,6 +27,7 @@ Local tests cover pure modules. Engine-dependent behavior requires Studio; Lune 
    - `/pass DoubleCoins`, then pick up a coin: plus two.
    - Settings: press minus on Music; the value drops by 10%. Stop and replay: with mock data it resets, which is expected.
    - `/daily`, reopen Daily: day 2 is claimable.
+   - The console shows `[Analytics]` lines in this order over the pass: `onboarding 1 Joined`, the daily `economy Source ... TimedReward`, `economy Source 1 Gameplay Coin`, `onboarding 2 FirstCoin`, `shop 1 Opened`, `onboarding 3 OpenedShop`, `economy Sink 3 Shop RedHat`, `shop 2 Purchased RedHat`, `onboarding 4 FirstPurchase`.
    Take a `screen_capture` of the Hud, Shop and Settings, including a narrow (mobile) viewport.
 4. Verify spawn, camera, reset and server/client startup. Stop Play afterwards.
 5. Use Studio's multi-client server test for replication, independent player data and disconnect cleanup. A solo test cannot certify multiplayer behavior.

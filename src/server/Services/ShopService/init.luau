@@ -5,7 +5,7 @@ local Packets = require(ReplicatedStorage.Packets)
 local ShopCatalog = require(ReplicatedStorage.Config.ShopCatalog)
 local Purchasing = require(script.Purchasing)
 
-local ShopService = { Name = "ShopService", Dependencies = { "DataService" } }
+local ShopService = { Name = "ShopService", Dependencies = { "DataService", "TelemetryService" } }
 local services: { [string]: any } = {}
 
 local function buy(player: Player, itemId: any): (boolean, string)
@@ -23,6 +23,16 @@ local function buy(player: Player, itemId: any): (boolean, string)
 		return false, "NotEnoughCash"
 	end
 	dataService:Set(player, { "Inventory", itemId }, true)
+	local telemetry = services.TelemetryService
+	telemetry:Economy(
+		player,
+		"Sink",
+		ShopCatalog.ById[itemId].Price,
+		Enum.AnalyticsEconomyTransactionType.Shop,
+		itemId
+	)
+	telemetry:ShopStep(player, "Purchased", itemId)
+	telemetry:Onboarding(player, "FirstPurchase")
 	return true, "Ok"
 end
 

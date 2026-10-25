@@ -5,8 +5,10 @@ local DailyReward = require(ReplicatedStorage.Utils.DailyReward)
 local GameConfig = require(ReplicatedStorage.Config.GameConfig)
 local Packets = require(ReplicatedStorage.Packets)
 
-local DailyRewardService =
-	{ Name = "DailyRewardService", Dependencies = { "DataService", "NotificationService" } }
+local DailyRewardService = {
+	Name = "DailyRewardService",
+	Dependencies = { "DataService", "NotificationService", "TelemetryService" },
+}
 local services: { [string]: any } = {}
 
 function DailyRewardService.Init(_self: any, registry: { [string]: any })
@@ -27,6 +29,14 @@ function DailyRewardService.Claim(_self: any, player: Player): (boolean, number)
 	end
 	dataService:Set(player, { "Daily" }, { LastClaimDay = DailyReward.Today(os.time()), Streak = streak })
 	services.NotificationService:Send(player, `Day {streak} reward: +{reward} coins`)
+	services.TelemetryService:Economy(
+		player,
+		"Source",
+		reward,
+		Enum.AnalyticsEconomyTransactionType.TimedReward,
+		`DailyDay{streak}`
+	)
+	services.TelemetryService:Custom(player, "DailyStreak", streak)
 	return true, reward
 end
 

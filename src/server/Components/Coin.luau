@@ -46,9 +46,18 @@ return function(services: { [string]: any })
 				return
 			end
 			local multiplier = if services.GamePassService:Owns(player, "DoubleCoins") then 2 else 1
-			if not services.DataService:AdjustCash(player, GameConfig.Coin.Value * multiplier) then
+			local amount = GameConfig.Coin.Value * multiplier
+			if not services.DataService:AdjustCash(player, amount) then
 				return
 			end
+			services.TelemetryService:Economy(
+				player,
+				"Source",
+				amount,
+				Enum.AnalyticsEconomyTransactionType.Gameplay,
+				"Coin"
+			)
+			services.TelemetryService:Onboarding(player, "FirstCoin")
 			self._collected = true
 			setVisible(part, false)
 			-- A plain field, not trove:Add: adding a thread per pickup would grow the Trove forever.

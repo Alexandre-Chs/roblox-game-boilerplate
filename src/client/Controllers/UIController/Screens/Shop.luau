@@ -119,6 +119,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		StartsOpen = false,
 		Open = function(_self: Types.Screen)
 			gui.Enabled = true
+			Packets.ShopOpened:Fire()
 		end,
 		Close = function(_self: Types.Screen)
 			gui.Enabled = false

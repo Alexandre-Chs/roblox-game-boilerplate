@@ -7,6 +7,8 @@ local Packets = {
 	BuyItem = Packet("BuyItem", Packet.String):Response(Packet.Boolean8, Packet.String):RateLimit(5, 1),
 	ClaimDaily = Packet("ClaimDaily"):Response(Packet.Boolean8, Packet.NumberU16):RateLimit(2, 1),
 	SetSetting = Packet("SetSetting", Packet.String, Packet.NumberF32):RateLimit(10, 1),
+	-- Analytics only: tells the server the shop screen opened.
+	ShopOpened = Packet("ShopOpened"):RateLimit(2, 1),
 	-- Server to client only; the limit only bounds clients that fire it anyway.
 	Notify = Packet("Notify", Packet.String):RateLimit(1, 1),
 }

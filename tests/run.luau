@@ -77,3 +77,4 @@ print("PASS player data validation, settings, daily streak, debug commands, shop
 assert(require("./purchases"))
 assert(require("./sessions"))
 assert(require("./lifecycle"))
+assert(require("./telemetry"))
