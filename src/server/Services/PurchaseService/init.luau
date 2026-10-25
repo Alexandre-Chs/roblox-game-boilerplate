@@ -4,7 +4,7 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local Players = game:GetService("Players")
 local Products = require(script.Products)
 
-local PurchaseService = { Name = "PurchaseService" }
+local PurchaseService = { Name = "PurchaseService", Dependencies = { "DataService" } }
 local registry: { [string]: any } = {}
 local function processReceipt(receipt: { [string]: any }): Enum.ProductPurchaseDecision
 	local purchaseId = tostring(receipt.PurchaseId)

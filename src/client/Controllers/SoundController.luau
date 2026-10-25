@@ -7,7 +7,7 @@ local SoundService = game:GetService("SoundService")
 local Sounds = require(ReplicatedStorage.Config.Sounds)
 local Trove = require(ReplicatedStorage.Packages.Trove)
 
-local SoundController = { Name = "SoundController" }
+local SoundController = { Name = "SoundController", Dependencies = { "DataController" } }
 local registry: { [string]: any } = {}
 local trove = Trove.new()
 local sfxGroup: SoundGroup? = nil

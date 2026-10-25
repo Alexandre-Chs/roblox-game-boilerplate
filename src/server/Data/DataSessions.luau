@@ -126,7 +126,7 @@ function DataSessions.WaitForSave(self: DataSessions, player: Player, saved: (an
 		end
 		if os.clock() >= nextSave then
 			profile:Save()
-			nextSave = os.clock() + 5
+			nextSave = os.clock() + 7 -- above the 6 s per-key DataStore write interval
 		end
 		if saved(profile.LastSavedData) then
 			return true

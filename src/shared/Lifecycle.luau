@@ -2,9 +2,12 @@
 
 export type System = {
 	Name: string,
-	Init: ((self: any, systems: { [string]: any }) -> ())?,
-	Start: ((self: any) -> ())?,
-	Destroy: ((self: any) -> ())?,
+	-- Names of systems this one calls ({} if none). Each must be registered earlier in the registry.
+	Dependencies: { string },
+	-- All three hooks are required, empty when unused, so cleanup is never forgotten by omission.
+	Init: (self: any, systems: { [string]: any }) -> (),
+	Start: (self: any) -> (),
+	Destroy: (self: any) -> (),
 }
 
 local Lifecycle = {}
@@ -15,6 +18,23 @@ function Lifecycle.new(systems: { System })
 	for _, system in systems do
 		assert(type(system.Name) == "string" and #system.Name > 0, "System needs a Name")
 		assert(byName[system.Name] == nil, `Duplicate system: {system.Name}`)
+		for _, hook in { "Init", "Start", "Destroy" } do
+			-- Required even when empty, so cleanup is never forgotten by omission.
+			assert(
+				type((system :: any)[hook]) == "function",
+				`{system.Name} must declare {hook} (empty if unused)`
+			)
+		end
+		assert(
+			type(system.Dependencies) == "table",
+			`{system.Name} must declare Dependencies (an empty table if none)`
+		)
+		for _, dependency in system.Dependencies do
+			assert(
+				byName[dependency] ~= nil,
+				`{system.Name} depends on {dependency}, which must be registered before it`
+			)
+		end
 		byName[system.Name] = system
 	end
 

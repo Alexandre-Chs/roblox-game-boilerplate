@@ -17,6 +17,7 @@ local modules: { [string]: Types.ScreenModule } = {
 
 local UIController = {
 	Name = "UIController",
+	Dependencies = { "DataController", "SoundController" },
 	-- Fired with the text of each toast; the Notifications screen displays them.
 	Notified = Signal.new() :: Signal.Signal<string>,
 }

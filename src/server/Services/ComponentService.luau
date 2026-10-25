@@ -1,6 +1,6 @@
 --!strict
 
-local ComponentService = { Name = "ComponentService" }
+local ComponentService = { Name = "ComponentService", Dependencies = { "DataService", "GamePassService" } }
 local factories: { (services: { [string]: any }) -> any } = {
 	require(script.Parent.Parent.Components.Coin),
 }

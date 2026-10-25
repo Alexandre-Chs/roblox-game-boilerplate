@@ -30,6 +30,22 @@ local function natural(value: any): boolean
 		and value % 1 == 0
 end
 
+-- Server bookkeeping: saved, never replicated to the client, never changed through DataService:Set.
+PlayerData.Private = table.freeze({ SchemaVersion = true, LastSeenAt = true, Receipts = true })
+
+-- The table given to the player's replica: every non-private key. Nested tables are shared
+-- with the profile, so nested changes made through the replica are saved too. DataService:Set
+-- copies top-level values back to the profile.
+function PlayerData.PublicView(data: { [string]: any }): { [string]: any }
+	local view = {}
+	for key, value in data do
+		if not PlayerData.Private[key] then
+			view[key] = value
+		end
+	end
+	return view
+end
+
 local function volume(value: any): boolean
 	return type(value) == "number" and value >= 0 and value <= 1
 end

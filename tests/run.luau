@@ -34,6 +34,13 @@ assert(Purchasing.Check({ Cash = 9, Inventory = { Hat = true } }, catalog, "Hat"
 assert(Purchasing.Check({ Cash = 9, Inventory = {} }, catalog, "Nope") == "UnknownItem")
 assert(Purchasing.Check({ Cash = 9, Inventory = {} }, catalog, 42) == "UnknownItem")
 assert(Purchasing.Check({ Cash = 9, Inventory = {} }, catalog, "__index") == "UnknownItem")
+-- Private bookkeeping never reaches the replica; nested tables stay shared with the profile.
+local profileData = table.clone(PlayerData.Template)
+profileData.Inventory = {}
+local view = PlayerData.PublicView(profileData)
+assert(view.Receipts == nil and view.SchemaVersion == nil and view.LastSeenAt == nil)
+assert(view.Cash == 0 and view.Inventory == profileData.Inventory)
+
 -- Settings and daily data
 assert(PlayerData.Validate({ Settings = { MusicVolume = 0, SfxVolume = 1, Removed = 0.3 } }))
 assert(not PlayerData.Validate({ Settings = { MusicVolume = 2 } }))
@@ -69,3 +76,4 @@ assert(Commands.Amount(nil) == nil and Commands.Amount("abc") == nil)
 print("PASS player data validation, settings, daily streak, debug commands, shop rules and rate limiting")
 assert(require("./purchases"))
 assert(require("./sessions"))
+assert(require("./lifecycle"))

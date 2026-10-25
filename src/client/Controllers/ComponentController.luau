@@ -1,6 +1,6 @@
 --!strict
 
-local ComponentController = { Name = "ComponentController" }
+local ComponentController = { Name = "ComponentController", Dependencies = {} }
 local factories: { (controllers: { [string]: any }) -> any } = {
 	require(script.Parent.Parent.Components.Spinner),
 }

@@ -11,7 +11,8 @@ local ShopCatalog = require(ReplicatedStorage.Config.ShopCatalog)
 local Trove = require(ReplicatedStorage.Packages.Trove)
 local Commands = require(script.Commands)
 
-local DebugService = { Name = "DebugService" }
+local DebugService =
+	{ Name = "DebugService", Dependencies = { "DataService", "NotificationService", "GamePassService" } }
 local services: { [string]: any } = {}
 local trove = Trove.new()
 

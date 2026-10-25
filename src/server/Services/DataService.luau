@@ -14,9 +14,10 @@ type Path = { string | number }
 
 local DataService = {
 	Name = "DataService",
+	Dependencies = {},
 	PlayerLoaded = Signal.new() :: Signal.Signal<(Player, PlayerData.Data)>,
 	PlayerReleasing = Signal.new() :: Signal.Signal<(Player, PlayerData.Data)>,
-	-- Fires after every change made through Set or AdjustCash (not through GetReplica).
+	-- Fires after every change made through Set or AdjustCash.
 	Changed = Signal.new() :: Signal.Signal<(Player, Path, any)>,
 }
 local sessions: DataSessions.DataSessions? = nil
@@ -68,7 +69,7 @@ local function load(player: Player)
 	local replica = ReplicaServer.New({
 		Token = token,
 		Tags = { Player = player },
-		Data = data :: any,
+		Data = PlayerData.PublicView(data) :: any,
 	})
 	replicas[player] = replica
 	if ReplicaServer.ReadyPlayers[player] then
@@ -82,13 +83,12 @@ function DataService.GetData(_self: any, player: Player): PlayerData.Data?
 	return if activeSessions then activeSessions:GetData(player) else nil
 end
 
-function DataService.GetReplica(_self: any, player: Player): ReplicaServer.Replica?
-	return if DataService:GetData(player) then replicas[player] else nil
-end
-
+-- The only way to change replicated data. Refuses private keys (PlayerData.Private).
 function DataService.Set(_self: any, player: Player, path: Path, value: any): boolean
-	local replica = DataService:GetReplica(player)
-	if not replica then
+	local data = DataService:GetData(player)
+	local replica = replicas[player]
+	local key = path[1]
+	if not data or not replica or type(key) ~= "string" or PlayerData.Private[key] then
 		return false
 	end
 	if type(value) ~= "table" then
@@ -101,6 +101,9 @@ function DataService.Set(_self: any, player: Player, path: Path, value: any): bo
 		end
 	end
 	replica:Set(path :: any, value)
+	-- Keep the profile pointing at the same top-level value as the replica, so it is saved.
+	local profileData: any = data
+	profileData[key] = (replica.Data :: any)[key]
 	DataService.Changed:Fire(player, path, value)
 	return true
 end

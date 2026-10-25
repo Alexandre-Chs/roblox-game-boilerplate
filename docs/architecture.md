@@ -2,7 +2,7 @@
 
 | Files | Studio destination | Contents |
 | --- | --- | --- |
-| `src/server` | `ServerScriptService` | `Bootstrap.server.luau`, `Registry.luau`, `Services/`, `Data/`, `Components/` (create when needed) |
+| `src/server` | `ServerScriptService` | `Bootstrap.server.luau`, `Registry.luau`, `Services/`, `Data/`, `Components/` |
 | `src/client` | `StarterPlayer.StarterPlayerScripts` | `Bootstrap.client.luau`, `Registry.luau`, `Controllers/`, `Components/` |
 | `src/shared` | `ReplicatedStorage` | `Lifecycle`, `Packet/`, `Packets`, `Config/`, `Utils/` |
 | `Packages` | `ReplicatedStorage.Packages` | Generated Wally dependencies |
@@ -32,6 +32,19 @@ The starter ships small, working features that cross every layer. Copy them as p
 | Notifications | `NotificationService:Send(player, text)` | `Screens/Notifications.luau`, `UIController:Notify` / `context.Notify` | `Notify` packet | `ui/Notifications.model.json` |
 | Loading screen | none | `src/first/Loading.client.luau` (ReplicatedFirst) | `ClientReady` attribute set by `AppController` | built in code |
 | Studio test commands | `Services/DebugService/` | chat | none | none |
+
+**Dependencies between examples.** Delete in this order, or fix the listed references first:
+
+| Removing | Also edit |
+| --- | --- |
+| Robux offers | `Coin.luau` (DoubleCoins multiplier), `DebugService` (`/pass`), Shop Robux row (`Shop.luau`, `Shop.model.json`), `GamePassService` in `ComponentService`/`DebugService` Dependencies |
+| Shop | `DebugService` (`/unlock`), Hud `ShopButton` |
+| Daily reward | `DebugService` (`/daily`, `/reset`), Hud `DailyButton` |
+| Settings and sound | Hud `SettingsButton`; every `SoundController:PlaySfx` call (Hud, Shop, Settings, DailyReward) and the `SoundController` dependency of `UIController` |
+| Notifications | `NotificationService` users (`DailyRewardService`, `DebugService`) and every `context.Notify` call |
+| Coins | `Cash` stays: Shop, Daily reward, Leaderboard and Robux packs use it |
+
+After deleting, run `pnpm run check`: a leftover reference fails the strict type check or the boot-time dependency check.
 
 Rules these examples follow, and new features must too:
 
@@ -136,7 +149,7 @@ local Packets = require(ReplicatedStorage.Packets)
 local Purchasing = require(script.Purchasing)
 local Types = require(script.Types)
 
-local ShopService = { Name = "ShopService" }
+local ShopService = { Name = "ShopService", Dependencies = { "DataService" } }
 local context: Types.Context = { Services = {} }
 
 function ShopService.Init(_self: any, registry: { [string]: any })
@@ -229,31 +242,30 @@ return Hud
 ### Adding a system
 
 1. Create `src/server/Services/NameService.luau` or `src/client/Controllers/NameController.luau`.
-2. Return a table with a unique `Name` matching the file name, and optional `Init`, `Start` and `Destroy`.
+2. Return a table with a unique `Name` matching the file name, `Dependencies` (names of the systems it calls, `{}` if none) and all three hooks `Init`, `Start` and `Destroy` (empty when unused). `Lifecycle.new` refuses to boot otherwise, naming the system, and the registry type check fails.
 3. Add a `require` to that side's `Registry.luau`, after every system it depends on.
 
 ```lua
 --!strict
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Lifecycle = require(ReplicatedStorage.Lifecycle)
 local Packets = require(ReplicatedStorage.Packets)
 
-local ExampleService: Lifecycle.System = { Name = "ExampleService" }
+local ExampleService = { Name = "ExampleService", Dependencies = { "DataService" } }
 local services: { [string]: any } = {}
 
-function ExampleService.Init(_self: Lifecycle.System, registry: { [string]: any })
+function ExampleService.Init(_self: any, registry: { [string]: any })
 	services = registry
 end
 
-function ExampleService.Start(_self: Lifecycle.System)
+function ExampleService.Start(_self: any)
 	Packets.GetCash.OnServerInvoke = function(player: Player)
 		local data = services.DataService:GetData(player)
 		return if data then data.Cash else 0
 	end
 end
 
-function ExampleService.Destroy(_self: Lifecycle.System)
+function ExampleService.Destroy(_self: any)
 	Packets.GetCash.OnServerInvoke = nil
 end
 
@@ -264,7 +276,7 @@ The matching packet in `Packets.luau` would be `GetCash = Packet("GetCash"):Resp
 
 ### Lifecycle rules
 
-- Every system declares `Init`, `Start` and `Destroy`, empty when unused, or the registry fails type checking.
+- Every system declares `Dependencies`, `Init`, `Start` and `Destroy`. `Lifecycle.new` asserts it at boot and checks that every dependency is registered earlier, so a wrong registry order fails immediately with the system's name (tested in `tests/lifecycle.luau`).
 - Order: every system's `Init` runs in registry order, then every `Start` in registry order. Startup happens once per session; there is no hot reload.
 - `Init(self, registry)` receives the complete name-to-system table. Store it and set up local state only. Do not call other systems here: they may not be initialised yet.
 - `Start(self)` connects events, binds packets and begins work. Other systems are safe to call from here on.
@@ -279,6 +291,7 @@ The matching packet in `Packets.luau` would be `GetCash = Packet("GetCash"):Resp
 - Access other systems through the registry captured in `Init` (`services.DataService:GetData(player)`), not by requiring their modules directly. Direct requires break when the registry order changes and hide dependencies.
 - Dependencies must point one way. If two systems need each other, give one a `Signal` (`ReplicatedStorage.Packages.Signal`) that the other connects to in `Start`, as `DataService.PlayerLoaded` does.
 - Clean up with Trove (`ReplicatedStorage.Packages.Trove`), as `AppController` does, or with plain connection lists.
+- Add only long-lived objects to a Trove. A thread or instance created per event (a respawn timer, a toast) must not be `trove:Add`ed, or the Trove grows for the whole server lifetime: keep it in a field or set, remove it when it finishes and cancel what is left in `Destroy`/`Stop`, as `Coin` and `Notifications` do.
 
 ### Components
 
@@ -326,7 +339,7 @@ Shared packages are in `ReplicatedStorage.Packages`; server-only ones in `Server
 
 Promise, Symbol and Signal also arrive as dependencies of Component and WaitFor. Do not add packages that duplicate these, Packet or Replica (no Comm, Net, TypedRemote, ReplicaService, Janitor or Knit) without the user's agreement.
 
-Replica ([MadStudioRoblox/Replica](https://github.com/MadStudioRoblox/Replica)) is not on Wally, so it is vendored unmodified in `vendor/Replica` at commit `9cae236`, with its Apache-2.0 `LICENSE`. It requires itself from fixed paths, so `default.project.json` maps it to `ReplicatedStorage.ReplicaClient`, `ReplicatedStorage.ReplicaShared` and `ServerScriptService.ReplicaServer`; do not move it. `vendor/.luaurc` turns off type checking for it. To update, replace `src/`, `LICENSE` and `README.md` with a newer upstream commit, update the commit above, and run `pnpm check` and a Play test. Do not use Wally forks of Replica without checking them.
+Replica ([MadStudioRoblox/Replica](https://github.com/MadStudioRoblox/Replica)) is not on Wally, so it is vendored unmodified in `vendor/Replica` at commit `9cae236`, with its Apache-2.0 `LICENSE`. It requires itself from fixed paths, so `default.project.json` maps it to `ReplicatedStorage.ReplicaClient`, `ReplicatedStorage.ReplicaShared` and `ServerScriptService.ReplicaServer`; do not move it. `vendor/.luaurc` turns off type checking for it. To update, replace `src/`, `LICENSE` and `README.md` with a newer upstream commit, update the commit above, and run `pnpm run check` and a Play test. Do not use Wally forks of Replica without checking them.
 
 ### Networking
 
@@ -340,16 +353,18 @@ Replica ([MadStudioRoblox/Replica](https://github.com/MadStudioRoblox/Replica)) 
 
 ### Player data
 
-- Only `DataService` touches ProfileStore. Other services call `GetData`, `Set`, `AdjustCash`, `GetReplica`, `RequestSave` and `WaitForSave`.
+- Only `DataService` touches ProfileStore. Other services call `GetData`, `Set`, `AdjustCash`, `RequestSave` and `WaitForSave`.
 - Saving is automatic: ProfileStore autosaves every session periodically and on release. Do not call `RequestSave` after ordinary changes (cash, inventory, progress); DataStore budgets are per key and frequent forced saves get throttled. `RequestSave` is for rare moments that must hit disk soon (end of a round, a trade), and `WaitForSave` is reserved for purchases.
 - Each loaded player's profile data is wrapped in a `PlayerData` replica that replicates to that player only. The replica's `Data` is the profile's data table, so a change made through the replica is saved as well as replicated.
-- Change data that clients show only through the replica: `DataService:Set(player, { "Cash" }, 10)`, `DataService:AdjustCash(player, 10)`, or `DataService:GetReplica(player)` for `SetValues`, `TableInsert` and `TableRemove`. Assigning to the data table directly saves but never reaches the client. Only server bookkeeping (`SchemaVersion`, `LastSeenAt`, `Receipts`) and final writes in `PlayerReleasing` are written directly; clients must not read those fields.
+- Change player data only with `DataService:Set(player, path, value)` or `DataService:AdjustCash(player, amount)`. They update the profile (saved) and the replica (sent to the client) together. Assigning to the data table from `GetData` saves but never reaches the client.
+- Private keys are listed in `PlayerData.Private` (`SchemaVersion`, `LastSeenAt`, `Receipts`). They are saved but never replicated: the replica holds `PlayerData.PublicView(data)`. `Set` refuses them; server code writes them directly on the data table. Put any new server-only field there.
+- Arrays: set the whole (small) table with `Set`. If a game needs large replicated lists, add a `DataService` method wrapping the replica's `TableInsert`/`TableRemove` that also updates the profile, rather than exposing the replica.
 - Replicated data cannot contain arrays with gaps or keys that are not strings or numbers.
 - The whole data table is sent once when the player loads; after that each change sends only its path and value to the owner. `DataService:Set` skips unchanged non-table values. Keep traffic small: change the deepest path that changed rather than setting a whole table, group related changes with `SetValues`, and never change player data every frame (per-frame values belong in Packet events or client-side state).
 - On the client, read data through `DataController`: `Get(path?)` returns the current value (nil until loaded), `Observe(path, callback)` calls `callback(value)` once the data loads and after every change at, above or below `path`, and returns a connection to add to a Trove. `Loaded` fires once with the data table and `IsLoaded()` checks it. Treat values from `Get` as read-only.
 - Data that other players should see (leaderboards, public stats) needs its own replica with `:Replicate()`, or an attribute; never replicate another player's `PlayerData`.
 - For per-player setup, connect to `DataService.PlayerLoaded(player, data)` in `Start`, not `Players.PlayerAdded` (which fires before data exists). Loading always yields, so every service that connects in `Start` sees every player, including those already in the server.
-- To react on the server when a value changes (leaderstats, achievements), connect to `DataService.Changed(player, path, value)`. It fires for `Set` and `AdjustCash`, not for direct `GetReplica` edits.
+- To react on the server when a value changes (leaderstats, achievements), connect to `DataService.Changed(player, path, value)`. It fires for every `Set` and `AdjustCash`.
 - For per-player cleanup, connect to `DataService.PlayerReleasing(player, data)`. It fires just before the session is saved and released, on leave and on shutdown. Write final state into `data` there, without yielding. `DataService` is registered first, so it is destroyed last; do not disconnect `PlayerLoaded`/`PlayerReleasing` connections in your own `Destroy`, or the shutdown release will miss you.
 - Check `GetData` for nil in every handler, and never keep the data table across a yield. On the client, show data through `DataController:Observe` so nothing is shown before it loads.
 - When adding a field, update `Data`, `Template` and `Validate` in `src/server/Data/PlayerData.luau` together. Add an explicit migration before changing `SchemaVersion`. Never reset progress for invalid data.

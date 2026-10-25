@@ -6,7 +6,7 @@ local Packets = require(ReplicatedStorage.Packets)
 local PlayerData = require(ServerScriptService.Data.PlayerData)
 
 -- Stores per-player preferences sent by the Settings screen.
-local SettingsService = { Name = "SettingsService" }
+local SettingsService = { Name = "SettingsService", Dependencies = { "DataService" } }
 local services: { [string]: any } = {}
 local connection: { Disconnect: (self: any) -> () }? = nil
 

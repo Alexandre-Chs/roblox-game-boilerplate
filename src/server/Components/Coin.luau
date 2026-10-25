@@ -12,6 +12,7 @@ type Coin = {
 	Instance: Instance,
 	_trove: typeof(Trove.new()),
 	_collected: boolean,
+	_respawn: thread?,
 }
 
 return function(services: { [string]: any })
@@ -50,14 +51,20 @@ return function(services: { [string]: any })
 			end
 			self._collected = true
 			setVisible(part, false)
-			self._trove:Add(task.delay(GameConfig.Coin.RespawnSeconds, function()
+			-- A plain field, not trove:Add: adding a thread per pickup would grow the Trove forever.
+			self._respawn = task.delay(GameConfig.Coin.RespawnSeconds, function()
+				self._respawn = nil
 				self._collected = false
 				setVisible(part, true)
-			end))
+			end)
 		end)
 	end
 
 	function Coin.Stop(self: Coin)
+		if self._respawn then
+			task.cancel(self._respawn)
+			self._respawn = nil
+		end
 		self._trove:Destroy()
 	end
 

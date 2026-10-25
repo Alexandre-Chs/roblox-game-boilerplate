@@ -7,7 +7,7 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Monetization = require(ReplicatedStorage.Config.Monetization)
 
-local GamePassService = { Name = "GamePassService" }
+local GamePassService = { Name = "GamePassService", Dependencies = {} }
 local connections: { RBXScriptConnection } = {}
 
 local function attribute(name: string): string
@@ -17,12 +17,21 @@ end
 local function refresh(player: Player)
 	for name, id in Monetization.GamePasses do
 		if id ~= 0 then
-			local ok, owns =
-				pcall(MarketplaceService.UserOwnsGamePassAsync, MarketplaceService, player.UserId, id)
-			if ok and owns and player.Parent == Players then
-				player:SetAttribute(attribute(name), true)
-			elseif not ok then
-				warn(`[GamePassService] Ownership check failed for {name}: {owns}`)
+			-- Retry with backoff: a throttled check must not cost a paying player their pass.
+			for attempt = 1, 4 do
+				local ok, owns =
+					pcall(MarketplaceService.UserOwnsGamePassAsync, MarketplaceService, player.UserId, id)
+				if ok then
+					if owns and player.Parent == Players then
+						player:SetAttribute(attribute(name), true)
+					end
+					break
+				end
+				if attempt == 4 or player.Parent ~= Players then
+					warn(`[GamePassService] Ownership check failed for {name}: {owns}`)
+					break
+				end
+				task.wait(2 ^ attempt)
 			end
 		end
 	end

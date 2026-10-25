@@ -5,7 +5,8 @@ local DailyReward = require(ReplicatedStorage.Utils.DailyReward)
 local GameConfig = require(ReplicatedStorage.Config.GameConfig)
 local Packets = require(ReplicatedStorage.Packets)
 
-local DailyRewardService = { Name = "DailyRewardService" }
+local DailyRewardService =
+	{ Name = "DailyRewardService", Dependencies = { "DataService", "NotificationService" } }
 local services: { [string]: any } = {}
 
 function DailyRewardService.Init(_self: any, registry: { [string]: any })

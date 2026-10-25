@@ -10,6 +10,7 @@ type Connection = { Disconnect: (self: any) -> () }
 
 local DataController = {
 	Name = "DataController",
+	Dependencies = {},
 	Loaded = Signal.new() :: Signal.Signal<{ [any]: any }>,
 }
 local replica: ReplicaClient.Replica? = nil

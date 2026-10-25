@@ -1,7 +1,7 @@
 --!strict
 
 -- Shows each player's coins in the Roblox player list (the "leaderstats" convention).
-local LeaderstatsService = { Name = "LeaderstatsService" }
+local LeaderstatsService = { Name = "LeaderstatsService", Dependencies = { "DataService" } }
 local services: { [string]: any } = {}
 local values: { [Player]: IntValue } = {}
 

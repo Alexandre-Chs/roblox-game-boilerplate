@@ -5,7 +5,7 @@ local Packets = require(ReplicatedStorage.Packets)
 local ShopCatalog = require(ReplicatedStorage.Config.ShopCatalog)
 local Purchasing = require(script.Purchasing)
 
-local ShopService = { Name = "ShopService" }
+local ShopService = { Name = "ShopService", Dependencies = { "DataService" } }
 local services: { [string]: any } = {}
 
 local function buy(player: Player, itemId: any): (boolean, string)

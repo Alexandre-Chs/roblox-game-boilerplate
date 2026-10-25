@@ -14,6 +14,7 @@ type State = {
 
 local AppController = {
 	Name = "AppController",
+	Dependencies = { "DataController" },
 	_trove = nil :: TroveInstance?,
 }
 local registry: { [string]: any } = {}

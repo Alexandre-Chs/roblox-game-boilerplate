@@ -4,7 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Packets = require(ReplicatedStorage.Packets)
 
 -- Sends short toast messages to one player. Shown by the client Notifications screen.
-local NotificationService = { Name = "NotificationService" }
+local NotificationService = { Name = "NotificationService", Dependencies = {} }
 
 function NotificationService.Send(_self: any, player: Player, text: string)
 	-- Packet.String carries at most 255 bytes.

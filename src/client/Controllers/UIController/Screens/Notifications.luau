@@ -17,6 +17,8 @@ function Notifications.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	local stack: Frame? = Find(gui, "Stack", "Frame")
 	local template: TextLabel? = Find(gui, "Toast", "TextLabel")
 	local shown: { TextLabel } = {}
+	-- Live timers only; each removes itself, so nothing accumulates (unlike trove:Add per toast).
+	local timers: { [thread]: true } = {}
 	local order = 0
 
 	if stack and template then
@@ -37,13 +39,16 @@ function Notifications.new(context: Types.Context, gui: ScreenGui): Types.Screen
 			toast.Visible = true
 			toast.Parent = stack
 			table.insert(shown, toast)
-			trove:Add(task.delay(DURATION, function()
+			local timer: thread
+			timer = task.delay(DURATION, function()
+				timers[timer] = nil
 				local index = table.find(shown, toast)
 				if index then
 					table.remove(shown, index)
 				end
 				toast:Destroy()
-			end))
+			end)
+			timers[timer] = true
 		end)
 	end
 
@@ -58,6 +63,10 @@ function Notifications.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		end,
 		Destroy = function(_self: Types.Screen)
 			trove:Destroy()
+			for timer in timers do
+				task.cancel(timer)
+			end
+			table.clear(timers)
 			for _, toast in shown do
 				toast:Destroy()
 			end
