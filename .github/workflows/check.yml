@@ -1,0 +1,23 @@
+name: Check starter
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned Rokit
+        run: |
+          curl --fail --location --silent --show-error https://github.com/rojo-rbx/rokit/releases/download/v1.2.0/rokit-1.2.0-linux-x86_64.zip -o /tmp/rokit.zip
+          echo '951a7f3ec3d2a5e021fd1867d32f69f010ee4c2927f644b759578afc59c65fc0  /tmp/rokit.zip' | sha256sum --check
+          unzip /tmp/rokit.zip -d /tmp/rokit-bin
+          /tmp/rokit-bin/rokit self-install
+          "$HOME/.rokit/bin/rokit" trust rojo-rbx/rojo UpliftGames/wally JohnnyMorganz/StyLua JohnnyMorganz/wally-package-types JohnnyMorganz/luau-lsp lune-org/lune
+      - run: node scripts/project.mjs setup
+      - run: node scripts/project.mjs check

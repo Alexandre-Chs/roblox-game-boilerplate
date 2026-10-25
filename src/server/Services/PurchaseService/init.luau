@@ -6,24 +6,6 @@ local Products = require(script.Products)
 
 local PurchaseService = { Name = "PurchaseService" }
 local registry: { [string]: any } = {}
-local maxReceipts = 100
-
-local function prune(receipts: { [string]: number })
-	local ids = {}
-	for purchaseId in receipts do
-		table.insert(ids, purchaseId)
-	end
-	if #ids <= maxReceipts then
-		return
-	end
-	table.sort(ids, function(a, b)
-		return receipts[a] < receipts[b]
-	end)
-	for index = 1, #ids - maxReceipts do
-		receipts[ids[index]] = nil
-	end
-end
-
 local function processReceipt(receipt: { [string]: any }): Enum.ProductPurchaseDecision
 	local purchaseId = tostring(receipt.PurchaseId)
 	local player = Players:GetPlayerByUserId(receipt.PlayerId)
@@ -46,8 +28,8 @@ local function processReceipt(receipt: { [string]: any }): Enum.ProductPurchaseD
 		if granted ~= true or dataService:GetData(player) ~= data then
 			return Enum.ProductPurchaseDecision.NotProcessedYet
 		end
+		-- shortcut: receipts stay in the profile; move to a durable ledger before reaching profile size limits.
 		data.Receipts[purchaseId] = os.time()
-		prune(data.Receipts)
 	end
 	local saved = dataService:WaitForSave(player, function(snapshot: any)
 		return type(snapshot.Receipts) == "table" and snapshot.Receipts[purchaseId] ~= nil

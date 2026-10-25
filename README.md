@@ -1,16 +1,56 @@
-# Frazer's Game Boilerplate
+# Roblox House Starter
 
-I made this boilerplate/template because I'm tired of people not using AI correctly to make Roblox games.
+Starter local pour T3 + Claude/Codex, dérivé de [frrazer](https://github.com/frrazer/roblox-game-boilerplate), avec les skills de [SyphoDev](https://www.youtube.com/@SyphoDev). Code, UI et scène versionnés dans les fichiers ; Studio sert à visualiser et tester.
 
-Ask your agent to set up the boilerplate by running the install scripts, and the rest is easy!
+## Prérequis
 
-<details>
-<summary>For AI agents:</summary>
+- Roblox Studio et son plugin Rojo 7, Git, Node.js 22+ et pnpm.
+- [Rokit](https://github.com/rojo-rbx/rokit/releases/tag/v1.2.0) : télécharger le binaire adapté, puis exécuter `rokit self-install`. Les commandes du projet retrouvent automatiquement `~/.rokit/bin`.
+- Python 3.11+ pour les outils artistiques ; Blender et comptes de génération seulement quand nécessaires.
 
-If you're an agent, please refer to [AGENTS.md](/AGENTS.md) before making any code changes or install scripts.
+## Démarrer
 
-</details>
+```sh
+pnpm run setup
+pnpm run check
+pnpm run build
+pnpm run dev
+```
 
-## License
+Utiliser **`pnpm run setup`**, pas `pnpm setup` (commande interne de pnpm). Au premier setup, Rokit peut demander de faire confiance aux outils épinglés dans rokit.toml. Accepter uniquement ceux de cette liste.
 
-Public domain under [the Unlicense](/LICENSE): do whatever you want with it. Vendored and package dependencies (`vendor/Replica`, `Packages`, `ServerPackages`) keep their own licenses.
+Ouvrir `build/game.rbxlx` dans Studio. Plugins → Rojo → connecter **localhost:34873**, puis accepter la synchronisation. Ce port diffère de l'obby initial (34872). Garder `pnpm run dev` actif.
+
+Dans T3, ouvrir **ce dossier**. Activer le MCP intégré à Studio pour Claude Code et Codex dans Assistant → paramètres MCP → Quick connect, puis commencer de nouvelles sessions. Vérifier que chaque agent retrouve la bonne fenêtre. Les skills sont locaux au dépôt ; aucune installation globale n'est nécessaire. Pour Claude, `.claude/skills` pointe vers `.agents/skills`. Sous Windows, Git doit préserver les liens symboliques (mode développeur).
+
+## Commandes
+
+- `pnpm run dev` : synchronisation Rojo locale.
+- `pnpm run check` : format, types/lint Luau, tests et build.
+- `pnpm run format` : formater volontairement le code.
+- `pnpm run test` : assertions locales.
+- `pnpm run doctor` : outils disponibles ; ne prouve pas l'accès MCP.
+
+## Architecture
+
+`src/server/Services` détient les règles et données ; `src/client/Controllers` l'interface et les interactions ; `src/shared` les contrats Packet et la configuration publique. Les registries et Lifecycle démarrent les modules. ProfileStore sauvegarde et Replica transmet les données au joueur propriétaire. Trove gère le nettoyage.
+
+Les modèles/UI locaux sont dans `assets`, les étapes de travail dans `work` (ignoré). Consulter [architecture](docs/architecture.md), [assets](docs/assets.md), [skills](docs/skills.md) et [tests](docs/testing.md) pour les conventions.
+
+## Outils artistiques locaux
+
+`pnpm run setup:art` crée `.venv` et installe les versions testées de Pillow, NumPy, SciPy, Requests et PyYAML (Python 3.14 utilisé ici). Cela permet les aperçus UI et les plans de maps. Utiliser `.venv/bin/python` pour ces scripts sur Mac. Blender, génération 3D distante et uploads restent des étapes optionnelles à configurer par skill.
+
+## Nouveau jeu
+
+Créer un dépôt depuis ce modèle (ou copier les fichiers sans `.git`, les dépendances générées, `.venv`, `work`, `build` et les LOCAL.md). Renommer `default.project.json`, `package.json`, `wally.toml` et `src/shared/Config/GameConfig.luau`. Installer, vérifier, puis utiliser un nouveau projet/univers Roblox. Ajuster le port si plusieurs jeux tournent simultanément. Conserver manifestes et versions d'outils dans Git.
+
+Prompt de départ : « Lis AGENTS.md et utilise create-roblox-game pour construire [concept]. Les fichiers sont la référence. Fais un premier niveau jouable, teste via MCP et indique les vérifications réellement effectuées. »
+
+## Limites
+
+Aucune publication automatique, aucun secret inclus, aucun appel payant de génération au setup. Le catalogue d'assets commence vide ; les skills fournissent des workflows, pas des abonnements ni des assets déjà licenciés. Les API artistiques se configurent à la demande dans un environnement local.
+
+La persistance, les achats et le multijoueur doivent être testés dans Studio avant publication. Un build ne capture pas les objets créés seulement dans Studio. Les imports IA ne sont pas tous audités.
+
+Voir [THIRD_PARTY.md](THIRD_PARTY.md) : le code de base est Unlicense, mais les skills SyphoDev **ne peuvent pas être revendus**.

@@ -9,3 +9,13 @@
 *.rbxl.lock
 *.rbxlx.lock
 .DS_Store
+
+node_modules/
+.venv/
+work/
+.env
+.env.*
+!.env.example
+**/LOCAL.md
+**/__pycache__/
+*.pyc

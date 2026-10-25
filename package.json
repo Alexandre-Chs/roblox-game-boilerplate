@@ -1,0 +1,16 @@
+{
+  "name": "roblox-house-starter",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "setup": "node scripts/project.mjs setup",
+    "dev": "node scripts/project.mjs dev",
+    "build": "node scripts/project.mjs build",
+    "typecheck": "node scripts/project.mjs typecheck",
+    "format": "node scripts/project.mjs format",
+    "test": "node scripts/project.mjs test",
+    "check": "node scripts/project.mjs check",
+    "doctor": "node scripts/project.mjs doctor",
+    "setup:art": "node scripts/project.mjs setup:art"
+  }
+}
