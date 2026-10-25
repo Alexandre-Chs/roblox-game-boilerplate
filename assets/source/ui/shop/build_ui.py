@@ -369,12 +369,13 @@ rewards = modal("REWARDS", 560, 440, [
 # Tutorial hint: banner under the cash pill and an arrow the screen moves next to its target.
 tutorial = {"ClassName": "ScreenGui", "Properties": {"ResetOnSpawn": False, "IgnoreGuiInset": False, "DisplayOrder": 5,
                                                      "ZIndexBehavior": "Sibling"}, "Children": [
-    image("Hint", "hint_banner.png", u(0.5, 0, 0, 74), u(0, 420, 0, 76), anchor=(0.5, 0), z=2, slice_scale=0.5,
+    image("Hint", "hint_banner.png", u(0.5, 0, 0, 100), u(0, 440, 0, 84), anchor=(0.5, 0), z=2, slice_scale=0.5,
           extra={"Visible": False}, children=[
         scaled(),
-        image("Icon", "icon_speech.png", u(0, 14, 0.5, 0), u(0, 46, 0, 46), anchor=(0, 0.5), z=3),
-        text("Label", "Collect a coin!", u(0, 70, 0, 14), u(1, -90, 1, -28), color=INK, stroke=False, align="Left",
-             max_size=28, z=3),
+        # The banner is already a speech bubble; the icon shows what the step is about.
+        image("Icon", "icon_coin.png", u(0, -6, 0.5, -4), u(0, 70, 0, 70), anchor=(0, 0.5), z=3),
+        text("Label", "Collect a coin!", u(0, 74, 0, 16), u(1, -98, 1, -36), color=INK, stroke=False, align="Left",
+             max_size=34, z=3),
     ]),
     image("Arrow", "arrow_pointer.png", u(0, 0, 0, 0), u(0, 64, 0, 64), anchor=(1, 0.5), z=3,
           extra={"Visible": False, "Rotation": -90}),

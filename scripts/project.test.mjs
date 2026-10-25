@@ -68,7 +68,7 @@ test('every image id used by UI models and config comes from an art kit id map',
   }
   const files = [
     ...readdirSync('assets/ui').filter((f) => f.endsWith('.json')).map((f) => `assets/ui/${f}`),
-    'src/shared/Config/UiImages.luau', 'src/first/LoadingImages.luau', 'src/shared/Config/ShopCatalog.luau', 'src/shared/Config/Monetization.luau',
+    'src/shared/Config/UiImages.luau', 'src/first/LoadingImages.luau', 'src/shared/Config/Tutorial.luau', 'src/shared/Config/ShopCatalog.luau', 'src/shared/Config/Monetization.luau',
   ];
   for (const file of files) {
     for (const id of readFileSync(file, 'utf8').match(/rbxassetid:\/\/\d+/g) ?? []) {

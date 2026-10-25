@@ -34,6 +34,7 @@ function Screen.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	local player = Players.LocalPlayer
 	local hint: GuiObject? = Find(gui, "Hint", "GuiObject")
 	local label: TextLabel? = if hint then Find(hint, "Label", "TextLabel") else nil
+	local icon: ImageLabel? = if hint then Find(hint, "Icon", "ImageLabel") else nil
 	local arrow: GuiObject? = Find(gui, "Arrow", "GuiObject")
 	local step = trove:Extend()
 
@@ -99,6 +100,9 @@ function Screen.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		end
 		if label then
 			label.Text = current.Text
+		end
+		if icon then
+			icon.Image = current.Icon
 		end
 		if current.Target then
 			pointArrow(current.Target)
