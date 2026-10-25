@@ -15,13 +15,25 @@ local AppController = {
 	Name = "AppController",
 	_trove = nil :: TroveInstance?,
 }
+local registry: { [string]: any } = {}
 
-function AppController.Init(self: State, _controllers: { [string]: any })
+function AppController.Init(self: State, controllers: { [string]: any })
+	registry = controllers
 	self._trove = Trove.new()
 end
 
-function AppController.Start(_self: State)
+-- The printed lines are the Studio smoke test markers listed in docs/testing.md.
+function AppController.Start(self: State)
 	print(`[{GameConfig.Name}] Client controllers ready`)
+	local dataController = registry.DataController
+	local function loaded()
+		print(`[{GameConfig.Name}] Player data loaded`)
+	end
+	if dataController:IsLoaded() then
+		loaded()
+	elseif self._trove then
+		self._trove:Add(dataController.Loaded:Once(loaded))
+	end
 	task.spawn(function()
 		local sentAt = os.clock()
 		local serverTime = Packets.Ping:Fire()

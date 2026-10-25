@@ -1,7 +1,9 @@
 --!strict
 
 local ComponentService = { Name = "ComponentService" }
-local factories: { (services: { [string]: any }) -> any } = {}
+local factories: { (services: { [string]: any }) -> any } = {
+	require(script.Parent.Parent.Components.Coin),
+}
 local registry: { [string]: any } = {}
 local components: { any } = {}
 

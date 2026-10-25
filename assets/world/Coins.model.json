@@ -1,0 +1,92 @@
+{
+  "ClassName": "Folder",
+  "Children": [
+    {
+      "Name": "Coin1",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CanCollide": false,
+        "Shape": "Cylinder",
+        "Size": [
+          0.4,
+          3,
+          3
+        ],
+        "Position": [
+          -8,
+          2.5,
+          -14
+        ],
+        "Color": [
+          1,
+          0.8,
+          0.15
+        ],
+        "Material": "Neon",
+        "Tags": [
+          "Coin",
+          "Spinner"
+        ]
+      }
+    },
+    {
+      "Name": "Coin2",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CanCollide": false,
+        "Shape": "Cylinder",
+        "Size": [
+          0.4,
+          3,
+          3
+        ],
+        "Position": [
+          0,
+          2.5,
+          -14
+        ],
+        "Color": [
+          1,
+          0.8,
+          0.15
+        ],
+        "Material": "Neon",
+        "Tags": [
+          "Coin",
+          "Spinner"
+        ]
+      }
+    },
+    {
+      "Name": "Coin3",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CanCollide": false,
+        "Shape": "Cylinder",
+        "Size": [
+          0.4,
+          3,
+          3
+        ],
+        "Position": [
+          8,
+          2.5,
+          -14
+        ],
+        "Color": [
+          1,
+          0.8,
+          0.15
+        ],
+        "Material": "Neon",
+        "Tags": [
+          "Coin",
+          "Spinner"
+        ]
+      }
+    }
+  ]
+}

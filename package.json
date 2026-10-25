@@ -6,6 +6,7 @@
     "setup": "node scripts/project.mjs setup",
     "dev": "node scripts/project.mjs dev",
     "build": "node scripts/project.mjs build",
+    "publish": "node scripts/project.mjs publish",
     "typecheck": "node scripts/project.mjs typecheck",
     "format": "node scripts/project.mjs format",
     "test": "node scripts/project.mjs test",

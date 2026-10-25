@@ -17,6 +17,20 @@
 - Put pure logic in plain modules (such as `src/server/Data`) with no service dependencies.
 - Keep `src/shared` tidy: its root holds only the framework (`Lifecycle`, `Packet`, `Packets`) and folders. Reusable, game-agnostic helpers used by more than one system go in `src/shared/Utils` (such as `Utils/RateLimit`), one module per helper. Server-only helpers go in `src/server/Utils`. Helpers used by a single system stay inside that system's folder.
 
+## Example feature
+
+The starter ships one small feature that crosses every layer, as the pattern to copy:
+
+| Layer | File |
+| --- | --- |
+| Tunables | `GameConfig.Coin` in `src/shared/Config/GameConfig.luau` |
+| Server rule (component) | `src/server/Components/Coin.luau`, registered in `ComponentService` |
+| Data change | `DataService:AdjustCash`, replicated by Replica |
+| Screen | `src/client/Controllers/UIController/Screens/Hud.luau` + `assets/ui/Hud.model.json` |
+| World | `assets/world/Coins.model.json` (parts tagged `Coin` and `Spinner`) |
+
+The server decides the reward from `Touched`; the client only displays `Cash`. To start a game without it, delete those files and their two registry lines. Keep the Hud pattern if the game shows any player data.
+
 ## Systems
 
 A system is a service (server) or controller (client): a ModuleScript table run by `src/shared/Lifecycle.luau`.
@@ -118,7 +132,7 @@ return ShopService
 
 ### UI
 
-`UIController` (`src/client/Controllers/UIController`) owns every screen. It ships with no screens; its `modules` table is empty.
+`UIController` (`src/client/Controllers/UIController`) owns every screen. It ships with the example `Hud` screen only.
 
 Author ScreenGuis as local `.model.json` or `.rbxmx` files under `assets/ui`, synced into StarterGui. UIController owns behavior. Use MCP for inspection and screenshots; export any Studio-authored GUI back to disk before calling it complete.
 
@@ -245,7 +259,7 @@ Use a component for behaviour attached to many tagged instances (doors, pickups,
 
 - Put client components in `src/client/Components` and server components in `src/server/Components`. Add the module's `require` to the `factories` list in `ComponentController` or `ComponentService`.
 - A component module returns a factory `function(registry)` that creates and returns the class. The loader calls it in `Start`, so requiring the module has no side effects, and the component can reach systems through the registry.
-- Cast the class to `any` and type `self` explicitly, because the package's inferred types do not work in strict mode. `src/client/Components/Spinner.luau` is the example: tag a part `Spinner` and optionally set a `SpinSpeed` attribute (degrees per second).
+- Cast the class to `any` and type `self` explicitly, because the package's inferred types do not work in strict mode. Examples: `src/client/Components/Spinner.luau` (presentation: tag a part `Spinner`, optional `SpinSpeed` attribute in degrees per second) and `src/server/Components/Coin.luau` (authoritative reward with Trove cleanup).
 - Use `Construct` for setup, `Start` for connections, `Stop` for cleanup, and `HeartbeatUpdate`/`RenderSteppedUpdate` for per-frame work. Components start only under `workspace` and `Players` unless `Ancestors` is given.
 - Server components own authoritative behaviour; client components are presentation only. Destroying the class stops tag tracking but does not stop already running instances, so it is suitable only at shutdown.
 

@@ -30,6 +30,9 @@ Dans T3, ouvrir **ce dossier**. Activer le MCP intégré à Studio dans Assistan
 - `pnpm run format` : formater volontairement le code.
 - `pnpm run test` : assertions locales.
 - `pnpm run doctor` : outils disponibles ; ne prouve pas l'accès MCP.
+- `pnpm run publish test` : publie sur l'expérience de test (voir docs/release.md). La prod exige `--confirm-prod`.
+
+Le starter contient un exemple complet à copier ou supprimer : des pièces à ramasser et un compteur à l'écran (voir docs/architecture.md, Example feature).
 
 ## Architecture
 

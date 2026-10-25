@@ -5,7 +5,9 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local WaitFor = require(ReplicatedStorage.Packages.WaitFor)
 local Types = require(script.Types)
 
-local modules: { [string]: Types.ScreenModule } = {}
+local modules: { [string]: Types.ScreenModule } = {
+	Hud = require(script.Screens.Hud),
+}
 
 local UIController = { Name = "UIController" }
 local registry: { [string]: any } = {}

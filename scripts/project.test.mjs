@@ -26,3 +26,15 @@ test('every Rojo source path exists', () => {
   }
   walk(project.tree);
 });
+test('publish refuses before any network call when misconfigured', () => {
+  const run = (...args) => spawnSync(process.execPath, ['scripts/project.mjs', 'publish', ...args], { encoding: 'utf8', env: { ...process.env, ROBLOX_API_KEY: '' } });
+  assert.match(run().stderr, /Usage/);
+  assert.match(run('staging').stderr, /Usage/);
+  const places = JSON.parse(readFileSync('places.json', 'utf8'));
+  for (const target of Object.keys(places)) {
+    const ready = places[target].universeId && places[target].placeId;
+    const result = run(target);
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, ready ? (target === 'prod' ? /confirm-prod/ : /ROBLOX_API_KEY/) : /places\.json/);
+  }
+});

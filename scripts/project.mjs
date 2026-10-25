@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { delimiter, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -27,6 +27,26 @@ function test() {
   run(process.execPath, ['--test', 'scripts/project.test.mjs']);
   run('lune', ['run', 'tests/run.luau']);
 }
+async function publish(target, flags) {
+  const places = JSON.parse(readFileSync('places.json', 'utf8'));
+  const place = places[target];
+  if (!place) throw new Error(`Usage: pnpm run publish <${Object.keys(places).join('|')}>`);
+  if (!place.universeId || !place.placeId) throw new Error(`Set universeId and placeId for "${target}" in places.json first.`);
+  if (target === 'prod' && !flags.includes('--confirm-prod')) throw new Error('Publishing to prod requires --confirm-prod.');
+  const key = process.env.ROBLOX_API_KEY;
+  if (!key) throw new Error('Set ROBLOX_API_KEY (Open Cloud key with universe-places write) in your shell.');
+  build();
+  const url = `https://apis.roblox.com/universes/v1/${place.universeId}/places/${place.placeId}/versions?versionType=Published`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'x-api-key': key, 'Content-Type': 'application/xml' },
+    body: readFileSync('build/game.rbxlx'),
+    signal: AbortSignal.timeout(120000),
+  });
+  const text = await response.text();
+  if (!response.ok) throw new Error(`Publish failed: HTTP ${response.status} ${text.slice(0, 300)}`);
+  console.log(`Published ${target} place ${place.placeId}, version ${JSON.parse(text).versionNumber}.`);
+}
 const command = process.argv[2];
 try {
   switch (command) {
@@ -46,6 +66,7 @@ try {
       break;
     case 'dev': run('rojo', ['serve', 'default.project.json', '--address', '127.0.0.1']); break;
     case 'build': build(); break;
+    case 'publish': await publish(process.argv[3], process.argv.slice(4)); break;
     case 'typecheck': typecheck(); break;
     case 'format': run('stylua', ['src', 'tests']); break;
     case 'test': test(); break;

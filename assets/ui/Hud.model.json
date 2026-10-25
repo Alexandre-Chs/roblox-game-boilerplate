@@ -1,0 +1,30 @@
+{
+  "ClassName": "ScreenGui",
+  "Properties": {
+    "ResetOnSpawn": false,
+    "IgnoreGuiInset": false,
+    "ZIndexBehavior": "Sibling"
+  },
+  "Children": [
+    {
+      "Name": "Cash",
+      "ClassName": "TextLabel",
+      "Properties": {
+        "AnchorPoint": [0.5, 0],
+        "Position": { "UDim2": [[0.5, 0], [0, 12]] },
+        "Size": { "UDim2": [[0.4, 0], [0, 44]] },
+        "BackgroundColor3": [0.1, 0.1, 0.12],
+        "BackgroundTransparency": 0.3,
+        "TextColor3": [1, 0.85, 0.2],
+        "Text": "Coins: ...",
+        "TextScaled": true,
+        "FontFace": { "Font": { "family": "rbxasset://fonts/families/GothamSSm.json", "weight": "Bold", "style": "Normal" } }
+      },
+      "Children": [
+        { "Name": "Corner", "ClassName": "UICorner", "Properties": { "CornerRadius": { "UDim": [0, 10] } } },
+        { "Name": "MaxWidth", "ClassName": "UISizeConstraint", "Properties": { "MaxSize": [260, 44] } },
+        { "Name": "Padding", "ClassName": "UIPadding", "Properties": { "PaddingTop": { "UDim": [0, 6] }, "PaddingBottom": { "UDim": [0, 6] } } }
+      ]
+    }
+  ]
+}
