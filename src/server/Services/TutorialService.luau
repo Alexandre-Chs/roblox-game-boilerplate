@@ -39,6 +39,8 @@ function TutorialService.Reached(_self: any, player: Player, milestone: string)
 end
 
 function TutorialService.Start(_self: any)
+	-- Trusts a client event: fine for a 10-coin starter quest (once per account, rate limited),
+	-- never use a client-reported milestone for a larger reward.
 	trove:Add(Packets.ShopOpened.OnServerEvent:Connect(function(player: Player)
 		TutorialService:Reached(player, "OpenedShop")
 	end) :: any)

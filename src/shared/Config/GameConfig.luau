@@ -26,9 +26,15 @@ return table.freeze({
 		-- Extra coin share per friend in the same server, capped at MaxFriends.
 		FriendBonus = 0.1,
 		MaxFriends = 3,
-		-- Seconds of play before the client asks once per session to favorite the game.
-		FavoritePromptAfter = 300,
 	}),
 	-- Default character speed; equipped items may raise it (ShopCatalog Effect.WalkSpeed).
 	WalkSpeed = 16,
+	-- Extra coin share for Roblox Premium members (also raises Premium engagement payouts).
+	PremiumBonus = 0.1,
+	-- Gifts for staying in one session; each claimable once per session after Minutes of play.
+	PlaytimeGifts = table.freeze({
+		table.freeze({ Minutes = 5, Coins = 25 }),
+		table.freeze({ Minutes = 15, Coins = 50 }),
+		table.freeze({ Minutes = 30, Coins = 100 }),
+	}),
 })

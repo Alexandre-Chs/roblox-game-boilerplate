@@ -11,7 +11,6 @@ local services: { [string]: any } = {}
 
 local MESSAGES: { [string]: string } = {
 	Invalid = "That code does not exist.",
-	Expired = "That code has expired.",
 	AlreadyRedeemed = "You already used that code.",
 }
 

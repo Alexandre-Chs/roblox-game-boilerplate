@@ -2,9 +2,10 @@
 
 -- Reusable UI motion for screens: press feedback, pops and shines.
 -- Every looping tween is added to the caller's Trove so it stops with the screen.
+-- With Reduced (the Reduce motion setting, set by SettingsController) every change is instant.
 local TweenService = game:GetService("TweenService")
 
-local Effects = {}
+local Effects = { Reduced = false }
 
 local function scaleOf(object: GuiObject, name: string): UIScale
 	local existing = object:FindFirstChild(name)
@@ -18,6 +19,12 @@ local function scaleOf(object: GuiObject, name: string): UIScale
 end
 
 local function tween(object: Instance, seconds: number, goal: { [string]: any }, style: Enum.EasingStyle?)
+	if Effects.Reduced then
+		for property, value in goal do
+			(object :: any)[property] = value
+		end
+		return
+	end
 	local info = TweenInfo.new(seconds, style or Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 	TweenService:Create(object, info, goal):Play()
 end
@@ -45,6 +52,9 @@ end
 -- Sweeps a light band across a UIGradient forever (Offset -1 -> 1, then a pause).
 function Effects.Shine(trove: any, gradient: UIGradient)
 	gradient.Offset = Vector2.new(-1, 0)
+	if Effects.Reduced then
+		return
+	end
 	local info = TweenInfo.new(1.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, false, 1.8)
 	local shine = trove:Add(TweenService:Create(gradient, info, { Offset = Vector2.new(1, 0) }))
 	shine:Play()

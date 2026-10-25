@@ -1,9 +1,14 @@
 --!strict
 
--- Always-visible overlay: coin counter and the buttons that open the modal screens.
+-- Always-visible overlay: coin counter, playtime gift and the buttons that open the modal screens.
 -- Pairs with assets/ui/Hud.model.json.
+local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local GameConfig = require(ReplicatedStorage.Config.GameConfig)
+local Packets = require(ReplicatedStorage.Packets)
+local PlaytimeGifts = require(ReplicatedStorage.Utils.PlaytimeGifts)
 local Trove = require(ReplicatedStorage.Packages.Trove)
+local UiImages = require(ReplicatedStorage.Config.UiImages)
 local Effects = require(script.Parent.Parent.Effects)
 local Find = require(script.Parent.Parent.Find)
 local Types = require(script.Parent.Parent.Types)
@@ -48,6 +53,60 @@ function Hud.new(context: Types.Context, gui: ScreenGui): Types.Screen
 				end
 			end)
 		end
+	end
+
+	-- Playtime gift: counts down from the server-set SessionStart, turns gold when ready.
+	local gift: ImageButton? = Find(gui, "GiftButton", "ImageButton")
+	if gift then
+		local button: ImageButton = gift
+		local player = Players.LocalPlayer
+		local busy = false
+		local giftLabel = button:FindFirstChild("Label")
+		local function refresh()
+			local started = player:GetAttribute("SessionStart")
+			local count = player:GetAttribute("GiftsClaimed")
+			if type(started) ~= "number" or type(count) ~= "number" then
+				button.Visible = false
+				return
+			end
+			local claimed = {}
+			for index = 1, count do
+				claimed[index] = true
+			end
+			local index, wait =
+				PlaytimeGifts.Next(workspace:GetServerTimeNow() - started, GameConfig.PlaytimeGifts, claimed)
+			button.Visible = index ~= nil
+			button.Image = if wait == 0 then UiImages.ButtonYellow else UiImages.ButtonGreen
+			if giftLabel and giftLabel:IsA("TextLabel") then
+				giftLabel.Text = if wait == 0
+					then "Claim!"
+					else string.format("%d:%02d", math.ceil(wait) // 60, math.ceil(wait) % 60)
+			end
+		end
+		trove:Connect(button.Activated, function()
+			if busy then
+				return
+			end
+			busy = true
+			controllers.SoundController:PlaySfx("Click")
+			task.spawn(function()
+				local ok = Packets.ClaimPlaytimeGift:Fire()
+				busy = false
+				if ok == true then
+					controllers.SoundController:PlaySfx("Reward")
+				end
+				refresh()
+			end)
+		end)
+		local loop = task.spawn(function()
+			while true do
+				refresh()
+				task.wait(1)
+			end
+		end)
+		trove:Add(function()
+			task.cancel(loop)
+		end)
 	end
 
 	local previous: number? = nil

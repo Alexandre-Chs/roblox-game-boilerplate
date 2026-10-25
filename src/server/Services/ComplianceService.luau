@@ -13,6 +13,11 @@ local trove = Trove.new()
 
 local function refresh(player: Player)
 	local ok, policy = pcall(PolicyService.GetPolicyInfoForPlayerAsync, PolicyService, player)
+	if not ok and player.Parent == Players then
+		-- One retry: a transient failure would otherwise restrict the player all session.
+		task.wait(5)
+		ok, policy = pcall(PolicyService.GetPolicyInfoForPlayerAsync, PolicyService, player)
+	end
 	if player.Parent ~= Players then
 		return
 	end

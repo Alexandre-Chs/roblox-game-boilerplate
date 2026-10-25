@@ -229,6 +229,165 @@
           }
         },
         {
+          "Name": "GiftButton",
+          "ClassName": "ImageButton",
+          "Properties": {
+            "AnchorPoint": [
+              0.5,
+              1
+            ],
+            "Position": {
+              "UDim2": [
+                [
+                  0.5,
+                  0
+                ],
+                [
+                  0,
+                  -10
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  0,
+                  186
+                ],
+                [
+                  0,
+                  58
+                ]
+              ]
+            },
+            "BackgroundTransparency": 1,
+            "Image": "rbxassetid://90985651769729",
+            "ZIndex": 3,
+            "ScaleType": "Slice",
+            "SliceCenter": {
+              "Rect": [
+                [
+                  40,
+                  40
+                ],
+                [
+                  216,
+                  56
+                ]
+              ]
+            },
+            "SliceScale": 0.5,
+            "AutoButtonColor": false
+          },
+          "Children": [
+            {
+              "Name": "Icon",
+              "ClassName": "ImageLabel",
+              "Properties": {
+                "AnchorPoint": [
+                  0,
+                  0.5
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0,
+                      10
+                    ],
+                    [
+                      0.5,
+                      -2
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.72,
+                      0
+                    ],
+                    [
+                      0.72,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "Image": "rbxassetid://93885493960847",
+                "ZIndex": 4,
+                "ScaleType": "Fit",
+                "SizeConstraint": "RelativeYY"
+              }
+            },
+            {
+              "Name": "Label",
+              "ClassName": "TextLabel",
+              "Properties": {
+                "AnchorPoint": [
+                  0,
+                  0
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0,
+                      60
+                    ],
+                    [
+                      0,
+                      8
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      -70
+                    ],
+                    [
+                      1,
+                      -18
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "Text": "05:00",
+                "TextColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "TextScaled": true,
+                "FontFace": {
+                  "Font": {
+                    "family": "rbxasset://fonts/families/FredokaOne.json",
+                    "weight": "Regular",
+                    "style": "Normal"
+                  }
+                },
+                "TextXAlignment": "Left",
+                "ZIndex": 4,
+                "TextStrokeTransparency": 0,
+                "TextStrokeColor3": [
+                  0.29,
+                  0.13,
+                  0.05
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "MaxText",
+                  "ClassName": "UITextSizeConstraint",
+                  "Properties": {
+                    "MaxTextSize": 24
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
           "Name": "Buttons",
           "ClassName": "Frame",
           "Properties": {
@@ -432,114 +591,6 @@
                       "Properties": {
                         "MaxTextSize": 22
                       }
-                    }
-                  ]
-                },
-                {
-                  "Name": "Badge",
-                  "ClassName": "ImageLabel",
-                  "Properties": {
-                    "AnchorPoint": [
-                      1,
-                      0
-                    ],
-                    "Position": {
-                      "UDim2": [
-                        [
-                          1,
-                          14
-                        ],
-                        [
-                          0,
-                          -18
-                        ]
-                      ]
-                    },
-                    "Size": {
-                      "UDim2": [
-                        [
-                          0,
-                          50
-                        ],
-                        [
-                          0,
-                          50
-                        ]
-                      ]
-                    },
-                    "BackgroundTransparency": 1,
-                    "Image": "rbxassetid://77751661612393",
-                    "ZIndex": 6,
-                    "ScaleType": "Fit",
-                    "Visible": true,
-                    "Rotation": 10
-                  },
-                  "Children": [
-                    {
-                      "Name": "Label",
-                      "ClassName": "TextLabel",
-                      "Properties": {
-                        "AnchorPoint": [
-                          0,
-                          0
-                        ],
-                        "Position": {
-                          "UDim2": [
-                            [
-                              0.15,
-                              0
-                            ],
-                            [
-                              0.25,
-                              0
-                            ]
-                          ]
-                        },
-                        "Size": {
-                          "UDim2": [
-                            [
-                              0.7,
-                              0
-                            ],
-                            [
-                              0.5,
-                              0
-                            ]
-                          ]
-                        },
-                        "BackgroundTransparency": 1,
-                        "Text": "SALE",
-                        "TextColor3": [
-                          1,
-                          1,
-                          1
-                        ],
-                        "TextScaled": true,
-                        "FontFace": {
-                          "Font": {
-                            "family": "rbxasset://fonts/families/FredokaOne.json",
-                            "weight": "Regular",
-                            "style": "Normal"
-                          }
-                        },
-                        "TextXAlignment": "Center",
-                        "ZIndex": 7,
-                        "TextStrokeTransparency": 0,
-                        "TextStrokeColor3": [
-                          0.29,
-                          0.13,
-                          0.05
-                        ]
-                      },
-                      "Children": [
-                        {
-                          "Name": "MaxText",
-                          "ClassName": "UITextSizeConstraint",
-                          "Properties": {
-                            "MaxTextSize": 20
-                          }
-                        }
-                      ]
                     }
                   ]
                 }

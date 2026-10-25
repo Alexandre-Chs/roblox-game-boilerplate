@@ -2,6 +2,7 @@
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ScriptContext = game:GetService("ScriptContext")
 local TextChatService = game:GetService("TextChatService")
 local GameConfig = require(ReplicatedStorage.Config.GameConfig)
 local Locale = require(ReplicatedStorage.Utils.Locale)
@@ -32,6 +33,18 @@ function AppController.Start(self: State)
 	Locale.Prepare(Players.LocalPlayer)
 	-- The starter quests sit top-left, so the chat window moves to the bottom-left.
 	TextChatService.ChatWindowConfiguration.VerticalAlignment = Enum.VerticalAlignment.Bottom
+	-- Forward client script errors to ErrorReportService, each distinct message once a minute.
+	local reported: { [string]: number } = {}
+	if self._trove then
+		self._trove:Connect(ScriptContext.Error, function(message: string)
+			local last = reported[message]
+			if last and os.clock() - last < 60 then
+				return
+			end
+			reported[message] = os.clock()
+			Packets.ReportError:Fire(string.sub(message, 1, 200))
+		end)
+	end
 	local dataController = registry.DataController
 	local function loaded()
 		print(`[{GameConfig.Name}] Player data loaded`)

@@ -3,7 +3,8 @@
 -- Pure promo code rules for CodesService, tested in tests/run.luau.
 local Redeeming = {}
 
-export type Result = "Ok" | "Invalid" | "Expired" | "AlreadyRedeemed"
+-- Expired codes answer Invalid, so guessing cannot reveal that a code once existed.
+export type Result = "Ok" | "Invalid" | "AlreadyRedeemed"
 
 -- Trims, upper-cases and rejects anything but 1 to 32 letters, digits, - or _.
 function Redeeming.Normalize(text: any): string?
@@ -28,7 +29,7 @@ function Redeeming.Check(
 	if not code or not entry then
 		return "Invalid"
 	elseif entry.Expires ~= 0 and now >= entry.Expires then
-		return "Expired"
+		return "Invalid"
 	elseif redeemed[Redeeming.Key(code)] then
 		return "AlreadyRedeemed"
 	end

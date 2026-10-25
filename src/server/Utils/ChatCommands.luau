@@ -1,6 +1,6 @@
 --!strict
 
--- Pure chat command parsing for DebugService, tested in tests/run.luau.
+-- Pure chat command parsing shared by DebugService and AdminService, tested in tests/run.luau.
 local Commands = {}
 
 -- "/cash 100" -> "cash", { "100" }. Returns nil for text that is not a command.

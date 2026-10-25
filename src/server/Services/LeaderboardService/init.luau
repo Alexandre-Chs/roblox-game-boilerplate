@@ -18,6 +18,8 @@ local services: { [string]: any } = {}
 local trove = Trove.new()
 local store: OrderedDataStore? = nil
 local stored: { Ranking.Entry } = {}
+-- Last value written per user, so a leave right after a refresh does not write the same value twice.
+local saved: { [number]: number } = {}
 local names: { [number]: string } = {}
 
 local function statOf(player: Player): number?
@@ -51,7 +53,8 @@ end
 local function save(player: Player)
 	local value = statOf(player)
 	local activeStore = store
-	if activeStore and value then
+	if activeStore and value and saved[player.UserId] ~= value then
+		saved[player.UserId] = value
 		local ok, problem = pcall(activeStore.SetAsync, activeStore, tostring(player.UserId), value)
 		if not ok then
 			failed("Save", problem)
@@ -84,8 +87,9 @@ local function publish()
 	for _, player in Players:GetPlayers() do
 		local value = statOf(player)
 		if value then
-			names[player.UserId] = player.DisplayName
-			table.insert(live, { UserId = player.UserId, Name = player.DisplayName, Value = value })
+			-- Usernames everywhere: stored rows can only resolve usernames, so a player's name does not change when they leave.
+			names[player.UserId] = player.Name
+			table.insert(live, { UserId = player.UserId, Name = player.Name, Value = value })
 		end
 	end
 	local top = Ranking.Merge(stored, live, GameConfig.Leaderboard.Size)
@@ -101,7 +105,9 @@ end
 
 function LeaderboardService.Start(_self: any)
 	trove:Connect(services.DataService.PlayerLoaded, publish)
-	trove:Connect(services.DataService.PlayerReleasing, function(player: Player)
+	-- Not in the trove: DataService fires PlayerReleasing for everyone during shutdown, after our
+	-- Destroy, and that final save must still happen (docs/architecture.md, Player data).
+	services.DataService.PlayerReleasing:Connect(function(player: Player)
 		task.spawn(save, player)
 	end)
 	local loop = task.spawn(function()

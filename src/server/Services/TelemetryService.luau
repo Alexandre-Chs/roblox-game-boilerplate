@@ -79,6 +79,17 @@ function TelemetryService.Custom(_self: any, player: Player, eventName: string, 
 	end)
 end
 
+-- One grouped script error (ErrorReportService). side is "Server" or "Client"; key is short and
+-- free of numbers so the dashboard groups occurrences of the same bug.
+function TelemetryService.Error(_self: any, player: Player, side: string, key: string)
+	send(`error {side} {key}`, function()
+		AnalyticsService:LogCustomEvent(player, "ScriptError", 1, {
+			[Enum.AnalyticsCustomFieldKeys.CustomField01.Name] = side,
+			[Enum.AnalyticsCustomFieldKeys.CustomField02.Name] = key,
+		})
+	end)
+end
+
 -- Shop funnel step; "Opened" starts a new funnel session.
 function TelemetryService.ShopStep(_self: any, player: Player, stepName: string, itemId: string?)
 	local step = table.find(SHOP_STEPS, stepName)

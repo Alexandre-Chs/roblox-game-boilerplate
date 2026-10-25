@@ -47,14 +47,13 @@ return function(services: { [string]: any })
 				return
 			end
 			local multiplier = if services.GamePassService:Owns(player, "DoubleCoins") then 2 else 1
-			local friends = services.CommunityService:FriendsInServer(player)
-			local amount = CoinReward.Amount(
-				GameConfig.Coin.Value,
-				multiplier,
-				friends,
+			local bonus = CoinReward.Bonus(
+				services.CommunityService:FriendsInServer(player),
 				GameConfig.Community,
-				math.random()
+				player.MembershipType == Enum.MembershipType.Premium,
+				GameConfig.PremiumBonus
 			)
+			local amount = CoinReward.Amount(GameConfig.Coin.Value, multiplier, bonus, math.random())
 			if not services.DataService:AdjustCash(player, amount) then
 				return
 			end

@@ -13,6 +13,8 @@ local Equipping = require(script.Equipping)
 local InventoryService = { Name = "InventoryService", Dependencies = { "DataService", "TutorialService" } }
 local services: { [string]: any } = {}
 local trove = Trove.new()
+-- One trove per loaded player, so CharacterAdded connections leave with the player.
+local playerTroves: { [Player]: any } = {}
 
 local function apply(player: Player)
 	local data = services.DataService:GetData(player)
@@ -50,12 +52,27 @@ end
 function InventoryService.Start(_self: any)
 	Packets.Equip.OnServerInvoke = equip
 	local function watch(player: Player)
-		trove:Connect(player.CharacterAdded, function()
-			apply(player)
+		local own = Trove.new()
+		playerTroves[player] = own
+		own:Connect(player.CharacterAdded, function(character: Model)
+			-- The Humanoid may not exist yet when CharacterAdded fires.
+			own:Add(task.spawn(function()
+				if character:WaitForChild("Humanoid", 5) then
+					apply(player)
+				end
+			end))
 		end)
 		apply(player)
 	end
 	trove:Connect(services.DataService.PlayerLoaded, watch)
+	-- Not in the trove: DataService fires PlayerReleasing for everyone during shutdown, after us.
+	services.DataService.PlayerReleasing:Connect(function(player: Player)
+		local own = playerTroves[player]
+		playerTroves[player] = nil
+		if own then
+			own:Destroy()
+		end
+	end)
 	for _, player in Players:GetPlayers() do
 		if services.DataService:GetData(player) then
 			watch(player)
@@ -66,6 +83,10 @@ end
 function InventoryService.Destroy(_self: any)
 	Packets.Equip.OnServerInvoke = nil
 	trove:Clean()
+	for _, own in playerTroves do
+		own:Destroy()
+	end
+	table.clear(playerTroves)
 end
 
 return InventoryService

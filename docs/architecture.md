@@ -39,6 +39,12 @@ The starter ships small, working features that cross every layer. Copy them as p
 | Starter quests (onboarding) | `TutorialService:Reached(player, milestone)` pays each quest once (Coin, DailyRewardService, `ShopOpened`, ShopService, InventoryService) | `Screens/Tutorial.luau` (checklist top-left, arrow to the quest's Hud button, beam to the nearest coin; chat moved bottom-left in `AppController`) | `Tutorial` (completed id set), `Config/Tutorial.luau` (text, reward, icon, target), `Utils/TutorialSteps.luau` (shared pure) | `ui/Tutorial.model.json` |
 | Regional policy | `ComplianceService` (`PaidRandomItemsRestricted`, `PolicyLoaded` attributes) | Shop hides `Random` items | `ShopCatalog` `Random` | none |
 | Translation | `Utils/Locale.luau` (`Format(player?, key, args, fallback)`) | static GUI text auto-translates; `Locale.Prepare` in `AppController` | none | `localization/Strings.csv` |
+| Playtime gifts | `PlaytimeService` (`SessionStart`, `GiftsClaimed` attributes) | Hud `GiftButton` countdown | `GameConfig.PlaytimeGifts`, `Utils/PlaytimeGifts.luau` (shared pure), `ClaimPlaytimeGift` | `ui/Hud.model.json` |
+| Premium bonus | coin payout in `Coin.luau` via `CoinReward.Bonus` | Rewards `PremiumRow` (Premium prompt) | `GameConfig.PremiumBonus` | `ui/Rewards.model.json` |
+| Live moderation | `Services/AdminService/` (`Moderation.luau` pure), admins in `src/server/Config/Admins.luau` | chat `/kick`, `/ban`, `/unban`, `/announce` | none | none |
+| Error reporting | `Services/ErrorReportService/` (`Errors.luau` pure), `TelemetryService:Error` | `AppController` forwards client errors | `ReportError` packet | none |
+| Soft shutdown | `ShutdownService` (BindToClose, reserved holding server) | none | none | none |
+| Display settings | `SettingsService` (0/1 toggles) | `SettingsController` (LowGraphics, ReduceMotion via `Effects.Reduced`), Settings toggle rows | `Settings.LowGraphics`, `Settings.ReduceMotion` | `ui/Settings.model.json` |
 | Screen fitting | none | `UIController/DeviceScale.luau` resizes every `DeviceScale` UIScale | none | `DesignWidth`/`DesignHeight` attributes from `build_ui.py` |
 | Studio test commands | `Services/DebugService/` | chat | none | none |
 | Analytics | `TelemetryService` (onboarding funnel, Shop funnel, coin economy, custom events) | Shop sends `ShopOpened` | none | none |
@@ -52,13 +58,16 @@ The starter ships small, working features that cross every layer. Copy them as p
 | Daily reward | `DebugService` (`/daily`, `/reset`), Hud `DailyButton`, `Daily` in `PlayerData` if unused, and the `DailyReward` require and asserts in `tests/run.luau` |
 | Settings and sound | Hud `SettingsButton`; every `SoundController:PlaySfx` call (Hud, Shop, Settings, DailyReward) and the `SoundController` dependency of `UIController`; `Settings`/`CleanSetting` in `PlayerData` and their asserts in `tests/run.luau` |
 | Notifications | `NotificationService` users (`DailyRewardService`, `DebugService`) and every `context.Notify` call |
-| Studio test commands | The `Commands` require and asserts in `tests/run.luau` |
+| Studio test commands | Nothing else: `Utils/ChatCommands.luau` stays for AdminService |
 | Inventory | Hud `InventoryButton`, `Equipped` in `PlayerData`, `Equip` packet, `Equipping` asserts in `tests/run.luau`; `/reset` in `DebugService` |
 | Promo codes and community rewards | Hud `RewardsButton`, `Redeemed` in `PlayerData`, `RedeemCode`/`ClaimGroupReward` packets, `CommunityService` in `ComponentService` Dependencies and the friend bonus in `Coin.luau`, `Redeeming`/`CoinReward` asserts in `tests/run.luau` |
 | Global leaderboard | `world/Leaderboard.model.json`, `Components/Leaderboard.luau` in `ComponentController`, `GameConfig.Leaderboard`, `Ranking` asserts |
 | Badges | `AchievementService` calls and Dependencies in `ShopService` and `DailyRewardService` |
 | Starter quests | `TutorialService` calls and Dependencies in `Coin.luau` (`ComponentService`), `ShopService`, `DailyRewardService` and `InventoryService`, `Tutorial` in `PlayerData`, `TutorialSteps` asserts, the chat alignment line in `AppController` |
 | Regional policy | `ComplianceService` in `ShopService` Dependencies, the `Random` checks in `ShopService` and `Shop.luau` |
+| Playtime gifts | Hud `GiftButton` and its block in `Hud.luau`, `ClaimPlaytimeGift`, `PlaytimeGifts` asserts |
+| Premium bonus | `CoinReward.Bonus` premium argument in `Coin.luau`, Rewards `PremiumRow` |
+| Live moderation, error reporting, soft shutdown | Nothing else; each is self-contained (remove the service, its config and its registry line; `ReportError` and its `AppController` block for errors) |
 | Analytics | Every `services.TelemetryService` call (Coin, ShopService, DailyRewardService, Products) and its Dependencies entries, the `ShopOpened` packet and its call in `Shop.luau`, `tests/telemetry.luau` |
 | Coins | `Cash` stays: Shop, Daily reward, Leaderboard and Robux packs use it |
 
@@ -67,7 +76,7 @@ After deleting, run `pnpm run check`: a leftover reference fails the strict type
 Rules these examples follow, and new features must too:
 
 - The server decides every outcome. Coins come from `Touched` on the server, purchases from `ShopService`, the daily day from the server clock. Screens only display and request.
-- Pure rules (`Purchasing`, `DailyReward`, `CleanSetting`, `Commands`) have no services or instances and are tested in `tests/run.luau`.
+- Pure rules (`Purchasing`, `DailyReward`, `CleanSetting`, `ChatCommands`) have no services or instances and are tested in `tests/run.luau`.
 - Give feedback with notifications instead of per-screen message labels.
 - Prices the client shows are computed with the same shared pure module the server charges with (`DailyDeal`), so they cannot disagree except across a day boundary, where the server wins.
 - UI styling rules learned in Studio: a `UIGradient` tints its parent's own text, so gradient buttons keep their text in a child `Label`; give overlays an explicit `ZIndex` below the panel; look elements up by path when names repeat inside templates; the 🪙 emoji does not render in Roblox fonts (use 💰).
@@ -75,7 +84,7 @@ Rules these examples follow, and new features must too:
 - Sounds: ids in `Config/Sounds.luau` stay empty until found and verified with the roblox-sfx skill. Call `SoundController:PlaySfx(name)`; empty ids are silent.
 - The loading screen is the one UI built in code: ReplicatedFirst runs before StarterGui replicates. It hides when data is loaded, or after 20 seconds.
 - Screens have fixed design sizes in pixels. Each panel carries a `DeviceScale` UIScale with `DesignWidth`/`DesignHeight` attributes and `UIController/DeviceScale.luau` fits it to the screen (0.5x on phones to 1.3x on big monitors); Hud pieces follow a 960x540 reference. Animate a fitted panel toward its `Fitted` attribute, never toward 1.
-- Promo codes live in `src/server/Config/Codes.luau` so clients cannot read unreleased codes. One-time grants (codes, group reward) are recorded in `PlayerData.Redeemed` in the same frame as the coins, with no yield in between.
+- Promo codes live in `src/server/Config/Codes.luau` so clients cannot read unreleased codes. One-time grants (codes, group reward, starter quests) are recorded in the same frame as the coins, with no yield in between. When a check must yield first (the group reward asks Roblox), re-read the data after the yield and check again before granting, as `CommunityService` does; never grant on a value read before a yield.
 - Badges, game passes and the group id are inert at 0. Create them on the Creator Dashboard, paste the id, and the code path activates.
 - Paid random rewards (loot boxes) are marked `Random = true` in `ShopCatalog`; the shop hides and the server refuses them unless `ComplianceService` says the player's region allows them.
 - Static GUI text that matches a `Source` in `assets/localization/Strings.csv` is translated by Roblox automatically. Build dynamic text with `Locale.Format(player?, key, args, englishFallback)` and add the key to the CSV.

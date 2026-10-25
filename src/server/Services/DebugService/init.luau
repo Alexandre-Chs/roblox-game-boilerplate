@@ -9,7 +9,7 @@ local TextChatService = game:GetService("TextChatService")
 local DailyReward = require(ReplicatedStorage.Utils.DailyReward)
 local ShopCatalog = require(ReplicatedStorage.Config.ShopCatalog)
 local Trove = require(ReplicatedStorage.Packages.Trove)
-local Commands = require(script.Commands)
+local Commands = require(script.Parent.Parent.Utils.ChatCommands)
 
 local DebugService =
 	{ Name = "DebugService", Dependencies = { "DataService", "NotificationService", "GamePassService" } }

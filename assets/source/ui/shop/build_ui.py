@@ -214,6 +214,9 @@ hud = {"ClassName": "ScreenGui", "Properties": {"ResetOnSpawn": False, "IgnoreGu
     ]),
     image("Dock", "dock.png", u(1, -12, 0.5, 0), u(0, 198, 0, 368), anchor=(1, 0.5), z=1, slice_scale=0.4, children=[
         scaled(),
+        # Playtime gift sits on top of the dock and scales with it; Hud.luau runs its countdown.
+        button("GiftButton", "button_green.png", "05:00", u(0.5, 0, 0, -10), u(0, 186, 0, 58), anchor=(0.5, 1), z=3,
+               max_size=24, icon="icon_gift.png"),
         node("Buttons", "Frame", {"AnchorPoint": [0.5, 0.5], "Position": u(0.5, 0, 0.5, 0), "Size": u(0, 170, 0, 318),
                                   "BackgroundTransparency": 1, "ZIndex": 2}, [
             node("Layout", "UIListLayout", {"Padding": {"UDim": [0, 12]}, "SortOrder": "LayoutOrder"}),
@@ -270,9 +273,19 @@ def setting_row(name, label, icon_file, y):
     ])
 
 
-settings = modal("SETTINGS", 480, 272, [
+def toggle_row(name, label, icon_file, y):
+    return image(name, "row_plate.png", u(0, 28, 0, y), u(1, -56, 0, 72), z=2, slice_scale=0.5, children=[
+        image("Icon", icon_file, u(0, 20, 0.5, 0), u(0, 46, 0, 46), anchor=(0, 0.5), z=3),
+        text("Label", label, u(0, 76, 0, 14), u(1, -200, 1, -28), color=INK, stroke=False, align="Left", max_size=26, z=3),
+        image("Toggle", "toggle_off.png", u(1, -16, 0.5, 0), u(0, 96, 0, 48), anchor=(1, 0.5), z=4, cls="ImageButton"),
+    ])
+
+
+settings = modal("SETTINGS", 480, 452, [
     setting_row("Music", "Music", "icon_music.png", 70),
     setting_row("Effects", "Effects", "icon_speaker.png", 160),
+    toggle_row("Graphics", "Low graphics", "icon_lightning.png", 250),
+    toggle_row("Motion", "Reduce motion", "icon_sparkles.png", 340),
 ])
 
 # One tile per GameConfig.DailyRewards entry is cloned from DayTemplate at runtime.
@@ -348,7 +361,7 @@ def reward_row(name, label, icon_file, button_name, button_label, order, info=Fa
                  extra={"LayoutOrder": order})
 
 
-rewards = modal("REWARDS", 560, 440, [
+rewards = modal("REWARDS", 560, 526, [
     image("CodeRow", "input_plate.png", u(0, 28, 0, 62), u(1, -200, 0, 60), z=2, slice_scale=0.5, children=[
         image("Icon", "icon_ticket_code.png", u(0, 22, 0.5, 0), u(0, 40, 0, 40), anchor=(0, 0.5), z=3),
         node("CodeBox", "TextBox", {"Position": u(0, 74, 0, 10), "Size": u(1, -94, 1, -20), "BackgroundTransparency": 1,
@@ -363,6 +376,7 @@ rewards = modal("REWARDS", 560, 440, [
         reward_row("GroupRow", "Join our group", "icon_group.png", "Claim", "Claim", 1),
         reward_row("InviteRow", "Invite friends", "icon_invite.png", "Invite", "Invite", 2, info=True),
         reward_row("FavoriteRow", "Favorite the game", "icon_heart.png", "Favorite", "Favorite", 3),
+        reward_row("PremiumRow", "Premium: +10% coins", "icon_premium_star.png", "Premium", "Get", 4),
     ]),
 ])
 
@@ -454,6 +468,7 @@ names = {
     "ButtonGrey": "button_grey.png", "PriceTag": "price_tag.png", "TabOn": "tab_on.png", "TabOff": "tab_off.png",
     "SlotNormal": "slot_normal.png", "SlotFeatured": "slot_featured.png",
     "BannerPopular": "banner_popular.png", "BannerBestValue": "banner_best_value.png",
+    "ToggleOn": "toggle_on.png", "ToggleOff": "toggle_off.png",
     "DayTile": "day_tile.png", "DayTileToday": "day_tile_today.png", "DayTileClaimed": "day_tile_claimed.png",
     "MedalGold": "medal_gold.png", "MedalSilver": "medal_silver.png", "MedalBronze": "medal_bronze.png",
 }

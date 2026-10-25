@@ -5,29 +5,36 @@
 -- pixels) the panel resizes until it fits; without them (Hud pieces) it follows a 960x540
 -- reference (a small laptop window). Clamped between MIN (still readable on phones) and MAX
 -- (big monitors and Retina windows, where 1:1 pixels look tiny).
-local GuiService = game:GetService("GuiService")
-local Workspace = game:GetService("Workspace")
-
 local MIN = 0.5
 local MAX = 1.3
-local REFERENCE = Vector2.new(960, 540)
+local REFERENCE_X, REFERENCE_Y = 960, 540
 
 local DeviceScale = {}
+
+-- Pure fit (tested in tests/run.luau): design size in pixels, or nil for the Hud reference.
+function DeviceScale.Fit(viewportX: number, viewportY: number, width: number?, height: number?): number
+	local value = if width and height
+		then math.min(viewportX * 0.96 / width, viewportY * 0.9 / height)
+		else math.min(viewportX / REFERENCE_X, viewportY / REFERENCE_Y)
+	return math.clamp(value, MIN, MAX)
+end
 
 function DeviceScale.For(scale: UIScale, viewport: Vector2): number
 	local width = scale:GetAttribute("DesignWidth")
 	local height = scale:GetAttribute("DesignHeight")
-	local value = if type(width) == "number" and type(height) == "number"
-		then math.min(viewport.X * 0.96 / width, viewport.Y * 0.9 / height)
-		else math.min(viewport.X / REFERENCE.X, viewport.Y / REFERENCE.Y)
-	return math.clamp(value, MIN, MAX)
+	if type(width) == "number" and type(height) == "number" then
+		return DeviceScale.Fit(viewport.X, viewport.Y, width, height)
+	end
+	return DeviceScale.Fit(viewport.X, viewport.Y, nil, nil)
 end
 
 -- Rescales every DeviceScale under root now and whenever the viewport or a new one appears.
 function DeviceScale.Watch(trove: any, root: Instance)
+	local GuiService = game:GetService("GuiService")
+	local Workspace = game:GetService("Workspace")
 	local function viewport(): Vector2
 		local camera = Workspace.CurrentCamera
-		local size = if camera then camera.ViewportSize else REFERENCE
+		local size = if camera then camera.ViewportSize else Vector2.new(REFERENCE_X, REFERENCE_Y)
 		local inset = GuiService:GetGuiInset()
 		return Vector2.new(size.X, size.Y - inset.Y)
 	end
@@ -45,10 +52,13 @@ function DeviceScale.Watch(trove: any, root: Instance)
 		end
 	end
 	trove:Connect(root.DescendantAdded, apply)
+	-- Only the current camera is watched; a replaced camera's connection is dropped.
+	local cameraTrove = trove:Extend()
 	local function watchCamera()
+		cameraTrove:Clean()
 		local camera = Workspace.CurrentCamera
 		if camera then
-			trove:Connect(camera:GetPropertyChangedSignal("ViewportSize"), applyAll)
+			cameraTrove:Connect(camera:GetPropertyChangedSignal("ViewportSize"), applyAll)
 		end
 		applyAll()
 	end

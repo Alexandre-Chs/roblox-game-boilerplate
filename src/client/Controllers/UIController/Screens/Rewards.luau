@@ -1,8 +1,10 @@
 --!strict
 
 -- Promo codes and community rewards: group reward, friend invites (friends in the server
--- boost coin pickups) and a favorite prompt, also offered once per session after a while.
+-- boost coin pickups), a favorite button and Roblox Premium. The favorite prompt only opens on
+-- click: Roblox cannot tell whether the game is already a favorite, so an automatic prompt nags.
 local AvatarEditorService = game:GetService("AvatarEditorService")
+local MarketplaceService = game:GetService("MarketplaceService")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local SocialService = game:GetService("SocialService")
@@ -10,6 +12,7 @@ local GameConfig = require(ReplicatedStorage.Config.GameConfig)
 local Locale = require(ReplicatedStorage.Utils.Locale)
 local Packets = require(ReplicatedStorage.Packets)
 local Trove = require(ReplicatedStorage.Packages.Trove)
+local UiImages = require(ReplicatedStorage.Config.UiImages)
 local Find = require(script.Parent.Parent.Find)
 local Types = require(script.Parent.Parent.Types)
 
@@ -29,6 +32,8 @@ function Rewards.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	local favoriteRow: GuiObject? = Find(gui, "FavoriteRow", "GuiObject")
 	local favorite: GuiButton? = if favoriteRow then Find(favoriteRow, "Favorite", "GuiButton") else nil
 	local friendsInfo: TextLabel? = if inviteRow then Find(inviteRow, "Info", "TextLabel") else nil
+	local premiumRow: GuiObject? = Find(gui, "PremiumRow", "GuiObject")
+	local premium: ImageButton? = if premiumRow then Find(premiumRow, "Premium", "ImageButton") else nil
 	local busy = false
 
 	local function request(call: () -> (any, any))
@@ -123,9 +128,31 @@ function Rewards.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	if favorite then
 		trove:Connect(favorite.Activated, promptFavorite)
 	end
-	-- One gentle ask per session once the player has had time to enjoy the game.
-	if game.PlaceId ~= 0 then
-		trove:Add(task.delay(config.FavoritePromptAfter, promptFavorite))
+	-- Premium members get GameConfig.PremiumBonus on coins (Coin.luau); others can subscribe here.
+	if premiumRow then
+		local label = premiumRow:FindFirstChild("Label")
+		if label and label:IsA("TextLabel") then
+			label.Text = `Premium: +{math.round(GameConfig.PremiumBonus * 100)}% coins`
+		end
+	end
+	if premium then
+		local button: ImageButton = premium
+		local function update()
+			local active = player.MembershipType == Enum.MembershipType.Premium
+			button.Image = if active then UiImages.ButtonGrey else UiImages.ButtonGreen
+			local label = button:FindFirstChild("Label")
+			if label and label:IsA("TextLabel") then
+				label.Text = if active then "Active" else "Get"
+			end
+		end
+		trove:Connect(player:GetPropertyChangedSignal("MembershipType"), update)
+		update()
+		trove:Connect(button.Activated, function()
+			if player.MembershipType ~= Enum.MembershipType.Premium then
+				context.Controllers.SoundController:PlaySfx("Click")
+				pcall(MarketplaceService.PromptPremiumPurchase, MarketplaceService, player)
+			end
+		end)
 	end
 
 	return {

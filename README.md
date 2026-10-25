@@ -38,6 +38,8 @@ Le starter contient des fonctionnalités d'exemple à copier, adapter ou supprim
 - boutique illustrée (offre du jour, rareté, packs POPULAR / BEST VALUE), offres Robux inertes tant que leurs ids valent 0, inventaire avec objets équipables (effets) ;
 - récompense quotidienne sur 7 jours, quêtes de démarrage récompensées en haut à gauche, écran Récompenses (codes promo côté serveur, récompense de groupe, invitations, favori), badges inertes à 0 ;
 - notifications, Réglages (volumes sauvegardés), sons et musique vérifiés, écran de chargement illustré, interface adaptée du téléphone au grand écran, traduction en/fr/es/pt-br ;
+- cadeaux de temps de jeu, bonus Roblox Premium, réglages graphismes légers et animations réduites ;
+- modération live (`/kick`, `/ban`, `/unban`, `/announce`, admins dans `src/server/Config/Admins.luau`), remontée des erreurs dans les statistiques, mise à jour sans déconnecter les joueurs (soft shutdown) ;
 - masquage automatique des offres aléatoires payantes là où la loi les interdit (PolicyService) ;
 - statistiques (funnels, économie des pièces) dans le Creator Dashboard une fois le jeu publié ;
 - commandes de test dans le chat, uniquement dans Studio : `/cash 100`, `/reset`, `/unlock`, `/daily`, `/pass DoubleCoins`, `/notify texte`.

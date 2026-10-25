@@ -4,12 +4,18 @@ local RateLimit = require("../src/shared/Utils/RateLimit")
 local Purchasing = require("../src/server/Services/ShopService/Purchasing")
 local DailyReward = require("../src/shared/Utils/DailyReward")
 local DailyDeal = require("../src/shared/Utils/DailyDeal")
-local Commands = require("../src/server/Services/DebugService/Commands")
+local Commands = require("../src/server/Utils/ChatCommands")
 local Redeeming = require("../src/server/Services/CodesService/Redeeming")
 local Equipping = require("../src/server/Services/InventoryService/Equipping")
 local Ranking = require("../src/server/Services/LeaderboardService/Ranking")
 local CoinReward = require("../src/shared/Utils/CoinReward")
 local TutorialSteps = require("../src/shared/Utils/TutorialSteps")
+local PlaytimeGifts = require("../src/shared/Utils/PlaytimeGifts")
+local Moderation = require("../src/server/Services/AdminService/Moderation")
+local Errors = require("../src/server/Services/ErrorReportService/Errors")
+local Abbreviate = require("../src/shared/Utils/Abbreviate")
+local Locale = require("../src/shared/Utils/Locale")
+local DeviceScale = require("../src/client/Controllers/UIController/DeviceScale")
 
 assert(PlayerData.Validate(table.clone(PlayerData.Template)))
 assert(PlayerData.Validate({ Cash = 0 }))
@@ -127,7 +133,7 @@ local codes = { WELCOME = { Coins = 50, Expires = 0 }, OLD = { Coins = 5, Expire
 assert(Redeeming.Check({}, codes, "WELCOME", 1000) == "Ok")
 assert(Redeeming.Check({}, codes, "NOPE", 1000) == "Invalid")
 assert(Redeeming.Check({}, codes, nil, 1000) == "Invalid")
-assert(Redeeming.Check({}, codes, "OLD", 100) == "Expired")
+assert(Redeeming.Check({}, codes, "OLD", 100) == "Invalid")
 assert(Redeeming.Check({}, codes, "OLD", 99) == "Ok")
 assert(Redeeming.Check({ [Redeeming.Key("WELCOME")] = true }, codes, "WELCOME", 1000) == "AlreadyRedeemed")
 
@@ -148,13 +154,83 @@ local top = Ranking.Merge(
 )
 assert(#top == 2 and top[1].UserId == 2 and top[1].Value == 90 and top[2].UserId == 1)
 
--- Coin payout with friend bonus
+-- Coin payout with friend and Premium bonus
 local community = { FriendBonus = 0.1, MaxFriends = 3 }
-assert(CoinReward.Amount(1, 1, 0, community, 0) == 1)
-assert(CoinReward.Amount(1, 2, 0, community, 0.99) == 2)
-assert(CoinReward.Amount(1, 1, 1, community, 0.05) == 2)
-assert(CoinReward.Amount(1, 1, 1, community, 0.5) == 1)
-assert(CoinReward.Amount(10, 1, 9, community, 0.99) == 13)
+assert(CoinReward.Bonus(0, community, false, 0.1) == 0)
+assert(math.abs(CoinReward.Bonus(9, community, true, 0.1) - 0.4) < 1e-9)
+assert(CoinReward.Amount(1, 1, 0, 0) == 1)
+assert(CoinReward.Amount(1, 2, 0, 0.99) == 2)
+assert(CoinReward.Amount(1, 1, 0.1, 0.05) == 2)
+assert(CoinReward.Amount(1, 1, 0.1, 0.5) == 1)
+assert(CoinReward.Amount(10, 1, 0.3, 0.99) == 13)
+
+-- Playtime gifts unlock in order, once each
+local gifts = { { Minutes = 5, Coins = 25 }, { Minutes = 15, Coins = 50 } }
+local index, wait = PlaytimeGifts.Next(60, gifts, {})
+assert(index == 1 and wait == 240)
+index, wait = PlaytimeGifts.Next(400, gifts, {})
+assert(index == 1 and wait == 0)
+index, wait = PlaytimeGifts.Next(400, gifts, { [1] = true })
+assert(index == 2 and wait == 500)
+assert(PlaytimeGifts.Next(5000, gifts, { [1] = true, [2] = true }) == nil)
+
+-- Moderation
+local admins = { UserIds = { 7 }, GroupId = 10, MinRank = 200 }
+assert(Moderation.IsAdmin(7, admins, 1, 0) and Moderation.IsAdmin(1, admins, 1, 0))
+assert(Moderation.IsAdmin(9, admins, 1, 200) and not Moderation.IsAdmin(9, admins, 1, 199))
+assert(not Moderation.IsAdmin(9, { UserIds = {}, GroupId = 0, MinRank = 0 }, 1, 255))
+local roster = {
+	{ Name = "Builder", DisplayName = "Bob", UserId = 1 },
+	{ Name = "Bobby", DisplayName = "Rob", UserId = 2 },
+}
+assert(Moderation.FindTarget(roster, "bob") == roster[1])
+assert(Moderation.FindTarget(roster, "bui") == roster[1])
+assert(Moderation.FindTarget(roster, "zz") == nil and Moderation.FindTarget(roster, nil) == nil)
+local pair = { roster[2], { Name = "Bobcat", DisplayName = "C", UserId = 3 } }
+assert((Moderation.FindTarget(pair, "bobc") :: any).UserId == 3)
+assert(Moderation.FindTarget(pair, "bob") == nil)
+assert(
+	Moderation.Duration("30m") == 1800
+		and Moderation.Duration("2d") == 172800
+		and Moderation.Duration("perm") == -1
+)
+assert(
+	Moderation.Duration("0h") == nil and Moderation.Duration("x") == nil and Moderation.Duration(nil) == nil
+)
+
+-- Error grouping
+assert(
+	Errors.Key("ServerScriptService.Services.ShopService:42: attempt to index nil with 'Hat'")
+		== "ShopService:#: attempt to index nil with 'Hat'"
+)
+assert(Errors.Key('Players.Bob.PlayerScripts.X:7: bad "value 12"') == 'X:#: bad ""')
+local seen = {}
+assert(
+	Errors.Throttle(seen, "a", 0, 60)
+		and not Errors.Throttle(seen, "a", 30, 60)
+		and Errors.Throttle(seen, "a", 61, 60)
+)
+
+-- Formatting and screen fitting
+assert(
+	Abbreviate(999) == "999"
+		and Abbreviate(1000) == "1K"
+		and Abbreviate(1550) == "1.5K"
+		and Abbreviate(2e6) == "2M"
+)
+assert(Locale.Fill("Day {1}: {2} coins", { 3, 15 }) == "Day 3: 15 coins")
+assert(Locale.Fill("Hi {2}", { "a" }) == "Hi {2}")
+assert(DeviceScale.Fit(1920, 1080, nil, nil) == 1.3 and DeviceScale.Fit(480, 270, nil, nil) == 0.5)
+assert(math.abs(DeviceScale.Fit(844, 390, 900, 690) - 390 * 0.9 / 690) < 1e-9)
+assert(DeviceScale.Fit(10000, 10000, 500, 400) == 1.3)
+
+-- Leaderboard ties and short lists
+local tied = Ranking.Merge(
+	{ { UserId = 9, Name = "z", Value = 5 } },
+	{ { UserId = 3, Name = "c", Value = 5 } },
+	10
+)
+assert(#tied == 2 and tied[1].UserId == 3 and tied[2].UserId == 9)
 
 -- Starter quests: any order, each pays once
 local steps = {
@@ -170,7 +246,7 @@ assert(TutorialSteps.Current({ FirstCoin = true, OpenedShop = true, FirstPurchas
 assert(TutorialSteps.Count({ FirstCoin = true, Other = true }, steps) == 1)
 
 print(
-	"PASS player data validation, settings, daily streak, debug commands, shop rules, rate limiting, codes, equipping, leaderboard, coin bonus and starter quests"
+	"PASS player data validation, settings, daily streak, debug commands, shop rules, rate limiting, codes, equipping, leaderboard, coin bonus, starter quests, playtime gifts, moderation and error grouping"
 )
 assert(require("./purchases"))
 assert(require("./sessions"))

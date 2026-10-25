@@ -24,7 +24,8 @@ PlayerData.Template = {
 	LastSeenAt = 0,
 	Receipts = {},
 	Inventory = {},
-	Settings = { MusicVolume = 0.5, SfxVolume = 0.8 },
+	-- Volumes are 0..1; toggles (LowGraphics, ReduceMotion) are 0 or 1.
+	Settings = { MusicVolume = 0.5, SfxVolume = 0.8, LowGraphics = 0, ReduceMotion = 0 },
 	Daily = { LastClaimDay = 0, Streak = 0 },
 	Equipped = "",
 	Redeemed = {},

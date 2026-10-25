@@ -2,6 +2,7 @@
 
 -- Social rewards: a one-time coin reward for joining the Roblox group (GameConfig.Community)
 -- and a friends-in-server count (player attribute FriendsInServer) that boosts coin pickups.
+local GroupService = game:GetService("GroupService")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local GameConfig = require(ReplicatedStorage.Config.GameConfig)
@@ -73,7 +74,17 @@ local function claimGroup(player: Player): (boolean, string)
 	elseif data.Redeemed[GROUP_KEY] then
 		return false, "Group reward already claimed."
 	end
-	local ok, inGroup = pcall(player.IsInGroupAsync, player, config.GroupId)
+	-- GroupService is not cached per session (Player:IsInGroupAsync is), so a player who joins
+	-- the group while playing can claim without rejoining.
+	local ok, groups = pcall(GroupService.GetGroupsAsync, GroupService, player.UserId)
+	local inGroup = false
+	if ok and type(groups) == "table" then
+		for _, group in groups do
+			if group.Id == config.GroupId then
+				inGroup = true
+			end
+		end
+	end
 	if not ok then
 		return false, "Roblox did not answer, try again."
 	elseif not inGroup then

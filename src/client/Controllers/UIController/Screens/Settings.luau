@@ -1,15 +1,18 @@
 --!strict
 
--- Volume settings saved in the player's profile. Each row has Minus, Value and Plus.
+-- Settings saved in the player's profile. Volume rows have Minus, Value and Plus; toggle rows
+-- have one Toggle button (stored as 0 or 1, applied by SettingsController).
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local GameConfig = require(ReplicatedStorage.Config.GameConfig)
 local Packets = require(ReplicatedStorage.Packets)
 local Trove = require(ReplicatedStorage.Packages.Trove)
+local UiImages = require(ReplicatedStorage.Config.UiImages)
 local Find = require(script.Parent.Parent.Find)
 local Types = require(script.Parent.Parent.Types)
 
 -- Row name in assets/ui/Settings.model.json -> key in PlayerData.Settings.
 local ROWS: { [string]: string } = { Music = "MusicVolume", Effects = "SfxVolume" }
+local TOGGLES: { [string]: string } = { Graphics = "LowGraphics", Motion = "ReduceMotion" }
 
 local Settings = {}
 
@@ -58,6 +61,25 @@ function Settings.new(context: Types.Context, gui: ScreenGui): Types.Screen
 				change(1)
 			end)
 		end
+	end
+
+	for rowName, key in TOGGLES do
+		local row: GuiObject? = Find(gui, rowName, "GuiObject")
+		local toggle: ImageButton? = if row then Find(row, "Toggle", "ImageButton") else nil
+		if not toggle then
+			continue
+		end
+		local button: ImageButton = toggle
+		trove:Add(data:Observe({ "Settings", key }, function(value: any)
+			button.Image = if value == 1 then UiImages.ToggleOn else UiImages.ToggleOff
+		end))
+		trove:Connect(button.Activated, function()
+			local current = data:Get({ "Settings", key })
+			if type(current) == "number" then
+				Packets.SetSetting:Fire(key, if current == 1 then 0 else 1)
+				context.Controllers.SoundController:PlaySfx("Click")
+			end
+		end)
 	end
 
 	return {

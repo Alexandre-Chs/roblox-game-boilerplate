@@ -8,6 +8,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Component = require(ReplicatedStorage.Packages.Component)
 local Trove = require(ReplicatedStorage.Packages.Trove)
 local UiImages = require(ReplicatedStorage.Config.UiImages)
+local abbreviate = require(ReplicatedStorage.Utils.Abbreviate)
 
 type Board = {
 	Instance: Instance,
@@ -15,17 +16,6 @@ type Board = {
 }
 
 local MEDALS = { UiImages.MedalGold, UiImages.MedalSilver, UiImages.MedalBronze }
-
-local function abbreviate(value: number): string
-	local units: { { Size: number, Suffix: string } } =
-		{ { Size = 1e9, Suffix = "B" }, { Size = 1e6, Suffix = "M" }, { Size = 1e3, Suffix = "K" } }
-	for _, unit in units do
-		if value >= unit.Size then
-			return string.format("%.1f%s", value / unit.Size, unit.Suffix)
-		end
-	end
-	return tostring(value)
-end
 
 return function(_controllers: { [string]: any })
 	local Leaderboard = Component.new({ Tag = "Leaderboard" }) :: any

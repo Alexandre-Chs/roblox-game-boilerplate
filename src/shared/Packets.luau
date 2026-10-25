@@ -14,6 +14,12 @@ local Packets = {
 		:Response(Packet.Boolean8, Packet.String)
 		:RateLimit(3, 10),
 	ClaimGroupReward = Packet("ClaimGroupReward"):Response(Packet.Boolean8, Packet.String):RateLimit(2, 5),
+	-- Claims the next playtime gift; replies (ok, coins).
+	ClaimPlaytimeGift = Packet("ClaimPlaytimeGift")
+		:Response(Packet.Boolean8, Packet.NumberU16)
+		:RateLimit(2, 2),
+	-- Client script errors for ErrorReportService; the limit keeps a looping error from flooding.
+	ReportError = Packet("ReportError", Packet.String):RateLimit(3, 10),
 	-- Analytics only: tells the server the shop screen opened.
 	ShopOpened = Packet("ShopOpened"):RateLimit(2, 1),
 	-- Server to client only; the limit only bounds clients that fire it anyway.
