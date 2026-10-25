@@ -19,6 +19,7 @@ local Trove = require(ReplicatedStorage.Packages.Trove)
 local Effects = require(script.Parent.Parent.Effects)
 local Find = require(script.Parent.Parent.Find)
 local Types = require(script.Parent.Parent.Types)
+local UiImages = require(ReplicatedStorage.Config.UiImages)
 
 local ROBUX = "\u{E002}"
 -- 🪙 does not render in Roblox fonts; 💰 does.
@@ -33,27 +34,35 @@ local MESSAGES: { [string]: string } = {
 }
 local SOON = "Coming soon: set its id in Config/Monetization."
 
--- Card gradients per rarity (top, bottom).
-local RARITY: { [string]: { Color3 } } = {
-	Common = { Color3.new(0.55, 0.6, 0.72), Color3.new(0.32, 0.36, 0.48) },
-	Rare = { Color3.new(0.3, 0.6, 1), Color3.new(0.15, 0.3, 0.8) },
-	Epic = { Color3.new(0.75, 0.4, 1), Color3.new(0.42, 0.16, 0.78) },
-	Legendary = { Color3.new(1, 0.8, 0.25), Color3.new(0.92, 0.42, 0.08) },
+-- Rarity: label colour and slot art (rarer items get the glowing slot).
+local RARITY_COLOR: { [string]: Color3 } = {
+	Common = Color3.fromRGB(150, 160, 175),
+	Rare = Color3.fromRGB(70, 150, 255),
+	Epic = Color3.fromRGB(190, 95, 255),
+	Legendary = Color3.fromRGB(255, 190, 40),
 }
-local BUTTON: { [string]: { Color3 } } = {
-	Coins = { Color3.new(1, 0.88, 0.3), Color3.new(1, 0.62, 0.12) },
-	Robux = { Color3.new(0.42, 0.92, 0.42), Color3.new(0.13, 0.62, 0.22) },
-	Short = { Color3.new(1, 0.45, 0.45), Color3.new(0.8, 0.18, 0.24) },
-	Owned = { Color3.new(0.55, 0.58, 0.65), Color3.new(0.35, 0.37, 0.44) },
-	Tab = { Color3.new(0.3, 0.5, 1), Color3.new(0.18, 0.28, 0.75) },
-	ActiveTab = { Color3.new(1, 0.9, 0.35), Color3.new(1, 0.65, 0.15) },
+local BUTTON: { [string]: string } = {
+	Coins = UiImages.PriceTag,
+	Robux = UiImages.ButtonGreen,
+	Short = UiImages.ButtonRed,
+	Owned = UiImages.ButtonGrey,
+	Tab = UiImages.TabOff,
+	ActiveTab = UiImages.TabOn,
 }
 
-local function paint(object: Instance, colors: { Color3 })
-	local gradient = object:FindFirstChildOfClass("UIGradient")
-	if gradient then
-		gradient.Color = ColorSequence.new(colors[1], colors[2])
+-- Swaps the art of an image-based button or card (all share one SliceCenter per kind).
+local function paint(object: Instance?, image: string)
+	if not object then
+		return
+	elseif object:IsA("ImageButton") then
+		object.Image = image
+	elseif object:IsA("ImageLabel") then
+		object.Image = image
 	end
+end
+
+local function setImage(parent: Instance, name: string, image: string)
+	paint(parent:FindFirstChild(name), image)
 end
 
 local function setTexts(parent: Instance, fields: { [string]: string })
@@ -105,8 +114,8 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	local header = panel and panel:FindFirstChild("Header")
 	local balanceFrame = header and header:FindFirstChild("Balance")
 	local balance: TextLabel? = if balanceFrame then Find(balanceFrame, "Amount", "TextLabel") else nil
-	local close: TextButton? = if header then Find(header, "Close", "TextButton") else nil
-	local deal: Frame? = Find(gui, "Deal", "Frame")
+	local close: GuiButton? = if header then Find(header, "Close", "GuiButton") else nil
+	local deal: GuiObject? = Find(gui, "Deal", "GuiObject")
 	if not (panel and pages and tabs and templates and deal) then
 		warn("[Shop] Shop.model.json is missing required elements; shop disabled")
 		return {
@@ -120,7 +129,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		}
 	end
 	local templateFolder: Instance = templates
-	local dealCard: Frame = deal
+	local dealCard: GuiObject = deal
 	local pagesFrame: Frame = pages
 	local busy = false
 	local timerThread: thread? = nil
@@ -156,7 +165,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 			if page and page:IsA("GuiObject") then
 				page.Visible = tabName == name
 			end
-			if tab and tab:IsA("TextButton") then
+			if tab and tab:IsA("GuiButton") then
 				paint(tab, if tabName == name then BUTTON.ActiveTab else BUTTON.Tab)
 			end
 		end
@@ -167,7 +176,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	end
 	for _, tabName in TABS do
 		local tab = tabs:FindFirstChild(tabName)
-		if tab and tab:IsA("TextButton") then
+		if tab and tab:IsA("GuiButton") then
 			Effects.Press(trove, tab)
 			trove:Connect(tab.Activated, function()
 				controllers.SoundController:PlaySfx("Click")
@@ -206,7 +215,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		end)
 	end
 
-	local function renderBuy(button: TextButton, item: ShopCatalog.Item)
+	local function renderBuy(button: GuiButton, item: ShopCatalog.Item)
 		if owns(item.Id) then
 			setLabel(button, "Owned ✓")
 			paint(button, BUTTON.Owned)
@@ -224,7 +233,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	end
 
 	-- Robux offers ----------------------------------------------------------
-	local function robuxPrice(button: TextButton, id: number, infoType: Enum.InfoType)
+	local function robuxPrice(button: GuiButton, id: number, infoType: Enum.InfoType)
 		if id == 0 then
 			setLabel(button, "Soon")
 			return
@@ -245,9 +254,9 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		pack: Monetization.CoinPack,
 		parent: Instance,
 		order: number
-	): Frame?
+	): GuiObject?
 		local template = templateFolder:FindFirstChild("PackTemplate")
-		if not (template and template:IsA("Frame")) then
+		if not (template and template:IsA("GuiObject")) then
 			return nil
 		end
 		local card = template:Clone()
@@ -255,24 +264,21 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		card.LayoutOrder = order
 		card.Visible = true
 		local badge = card:FindFirstChild("Badge")
-		if badge and badge:IsA("TextLabel") then
+		if badge and badge:IsA("GuiObject") then
 			badge.Visible = pack.Badge ~= nil
-			badge.Text = pack.Badge or ""
+			setLabel(badge, pack.Badge or "")
 		end
-		local icon = card:FindFirstChild("Icon")
-		if icon and icon:IsA("TextLabel") then
-			icon.Text = pack.Icon
-		end
+		setImage(card, "Icon", pack.Icon)
 		local amount = card:FindFirstChild("Amount")
 		if amount and amount:IsA("TextLabel") then
-			amount.Text = `{COIN} {pack.Coins}`
+			amount.Text = `x{pack.Coins}`
 		end
 		local bonus = card:FindFirstChild("Bonus")
 		if bonus and bonus:IsA("TextLabel") then
 			bonus.Text = pack.Bonus or ""
 		end
 		local buy = card:FindFirstChild("Buy")
-		if buy and buy:IsA("TextButton") then
+		if buy and buy:IsA("GuiButton") then
 			robuxPrice(buy, pack.Id, Enum.InfoType.Product)
 			Effects.Press(trove, buy)
 			trove:Connect(buy.Activated, function()
@@ -293,21 +299,19 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		pass: Monetization.GamePass,
 		parent: Instance,
 		order: number
-	): Frame?
+	): GuiObject?
 		local template = templateFolder:FindFirstChild("PassTemplate")
-		if not (template and template:IsA("Frame")) then
+		if not (template and template:IsA("GuiObject")) then
 			return nil
 		end
 		local card = template:Clone()
 		card.Name = name
 		card.LayoutOrder = order
 		card.Visible = true
-		setTexts(
-			card,
-			{ Icon = pass.Icon, PassName = pass.Name, Description = pass.Description } :: { [string]: string }
-		)
+		setTexts(card, { PassName = pass.Name, Description = pass.Description } :: { [string]: string })
+		setImage(card, "Icon", pass.Icon)
 		local buy = card:FindFirstChild("Buy")
-		if buy and buy:IsA("TextButton") then
+		if buy and buy:IsA("GuiButton") then
 			local attribute = `Pass_{name}`
 			local function render()
 				if player:GetAttribute(attribute) == true then
@@ -340,28 +344,30 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	-- Items page ------------------------------------------------------------
 	local itemsPage = pagesFrame:FindFirstChild("Items")
 	local itemTemplate = templateFolder:FindFirstChild("ItemTemplate")
-	if itemsPage and itemTemplate and itemTemplate:IsA("Frame") then
+	if itemsPage and itemTemplate and itemTemplate:IsA("GuiObject") then
 		for _, item in ShopCatalog.Items do
 			local card = itemTemplate:Clone()
 			card.Name = item.Id
 			card.LayoutOrder = item.Order
 			card.Visible = true
-			paint(card, RARITY[item.Rarity] or RARITY.Common)
-			setTexts(
-				card,
-				{ Icon = item.Icon, ItemName = item.Name, RarityLabel = string.upper(item.Rarity) }
-			)
+			paint(card, if item.Rarity == "Legendary" then UiImages.SlotFeatured else UiImages.SlotNormal)
+			setTexts(card, { ItemName = item.Name, RarityLabel = string.upper(item.Rarity) })
+			setImage(card, "Icon", item.Icon)
+			local rarityLabel = card:FindFirstChild("RarityLabel")
+			if rarityLabel and rarityLabel:IsA("TextLabel") then
+				rarityLabel.TextColor3 = RARITY_COLOR[item.Rarity] or RARITY_COLOR.Common
+			end
 			local dealTag = card:FindFirstChild("DealTag")
 			local buy = card:FindFirstChild("Buy")
-			if buy and buy:IsA("TextButton") then
+			if buy and buy:IsA("GuiButton") then
 				Effects.Press(trove, buy)
 				trove:Connect(buy.Activated, function()
 					buyItem(item, card)
 				end)
 				table.insert(refreshers, function()
 					renderBuy(buy, item)
-					if dealTag and dealTag:IsA("TextLabel") then
-						dealTag.Text = `-{math.round(GameConfig.ShopDealDiscount * 100)}%`
+					if dealTag and dealTag:IsA("GuiObject") then
+						setLabel(dealTag, `-{math.round(GameConfig.ShopDealDiscount * 100)}%`)
 						dealTag.Visible = DailyDeal.ItemId(today(), ShopCatalog.Items) == item.Id
 							and not owns(item.Id)
 					end
@@ -411,7 +417,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		Effects.Shine(trove, shineGradient)
 	end
 	local dealBuy = dealCard:FindFirstChild("Buy")
-	if dealBuy and dealBuy:IsA("TextButton") then
+	if dealBuy and dealBuy:IsA("GuiButton") then
 		Effects.Press(trove, dealBuy)
 		trove:Connect(dealBuy.Activated, function()
 			local item = ShopCatalog.ById[DailyDeal.ItemId(today(), ShopCatalog.Items) or ""]
@@ -426,21 +432,21 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 			dealCard.Visible = false
 			return
 		end
-		setTexts(dealCard, {
-			Icon = item.Icon,
-			ItemName = item.Name,
-			OldPrice = `<s>{COIN} {item.Price}</s>`,
-			Discount = `-{math.round(GameConfig.ShopDealDiscount * 100)}%`,
-		})
-		if dealBuy and dealBuy:IsA("TextButton") then
+		setTexts(dealCard, { ItemName = item.Name, OldPrice = `<s>{COIN} {item.Price}</s>` })
+		setImage(dealCard, "Icon", item.Icon)
+		local discount = dealCard:FindFirstChild("Discount")
+		if discount then
+			setLabel(discount, `-{math.round(GameConfig.ShopDealDiscount * 100)}%`)
+		end
+		if dealBuy and dealBuy:IsA("GuiButton") then
 			renderBuy(dealBuy, item)
 		end
 	end)
 
-	-- Responsive grid: 3 columns on wide screens, 2 on phones -----------------
+	-- Responsive grid: 4 columns on wide screens, 3 on tablets, 2 on phones -----------------
 	local function layout()
-		local columns = if pagesFrame.AbsoluteSize.X >= 520 then 3 else 2
-		local width = if columns == 3 then 0.32 else 0.48
+		local x = pagesFrame.AbsoluteSize.X
+		local width = if x >= 640 then 0.235 elseif x >= 440 then 0.31 else 0.47
 		for _, pageName in { "Items", "Coins" } do
 			local page = pagesFrame:FindFirstChild(pageName)
 			local grid = page and page:FindFirstChildOfClass("UIGridLayout")
@@ -455,7 +461,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	-- Live data -------------------------------------------------------------
 	trove:Add(data:Observe({ "Cash" }, function(value: any)
 		if balance then
-			balance.Text = `{COIN} {if type(value) == "number" then value else "..."}`
+			balance.Text = if type(value) == "number" then tostring(value) else "..."
 		end
 		refreshAll()
 	end))
@@ -470,7 +476,8 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 			context.Close("Shop")
 		end)
 	end
-	local timer: TextLabel? = Find(dealCard, "Timer", "TextLabel")
+	local timerPlate = header and header:FindFirstChild("TimerPlate")
+	local timer: TextLabel? = if timerPlate then Find(timerPlate, "Timer", "TextLabel") else nil
 	local panelScale = panel:FindFirstChild("Scale")
 
 	local function stopTimer()
@@ -506,7 +513,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 				local lastDay = today()
 				while true do
 					if timer then
-						timer.Text = `Ends in {clock(DailyDeal.SecondsLeft(workspace:GetServerTimeNow()))}`
+						timer.Text = clock(DailyDeal.SecondsLeft(workspace:GetServerTimeNow()))
 					end
 					if today() ~= lastDay then
 						lastDay = today()

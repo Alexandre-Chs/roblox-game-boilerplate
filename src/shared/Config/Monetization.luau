@@ -24,16 +24,30 @@ local gamePasses: { [string]: GamePass } = {
 		Id = 0,
 		Name = "2x Coins",
 		Description = "Double every coin you pick up. Forever.",
-		Icon = "⚡",
+		Icon = "rbxassetid://112127184591549",
 		Order = 1,
 	},
 }
 
 -- Tiered packs: the badges and bonus labels anchor the bigger packs as better value.
 local coinPacks: { [string]: CoinPack } = {
-	Coins100 = { Id = 0, Coins = 100, Order = 1, Icon = "🪙" },
-	Coins550 = { Id = 0, Coins = 550, Order = 2, Icon = "💰", Badge = "POPULAR", Bonus = "+10% bonus" },
-	Coins1800 = { Id = 0, Coins = 1800, Order = 3, Icon = "💎", Badge = "BEST VALUE", Bonus = "+20% bonus" },
+	Coins100 = { Id = 0, Coins = 100, Order = 1, Icon = "rbxassetid://72238438044137" },
+	Coins550 = {
+		Id = 0,
+		Coins = 550,
+		Order = 2,
+		Icon = "rbxassetid://117225025598542",
+		Badge = "POPULAR",
+		Bonus = "+10% bonus",
+	},
+	Coins1800 = {
+		Id = 0,
+		Coins = 1800,
+		Order = 3,
+		Icon = "rbxassetid://84768476398952",
+		Badge = "BEST VALUE",
+		Bonus = "+20% bonus",
+	},
 }
 
 local Monetization: Monetization = table.freeze({

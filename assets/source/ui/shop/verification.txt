@@ -1,0 +1,34 @@
+PASS board.png: 1024x768, RGBA, alpha corners=0, magenta=0, SliceCenter=[96, 96, 928, 672]
+PASS awning.png: 1024x220, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS sign_plate.png: 640x200, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS timer_plate.png: 440x110, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS slot_normal.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=[48, 48, 208, 208]
+PASS slot_featured.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=[48, 48, 208, 208]
+PASS price_tag.png: 256x80, RGBA, alpha corners=0, magenta=0, SliceCenter=[36, 36, 220, 44]
+PASS burst_red.png: 128x128, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS burst_blue.png: 128x128, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS burst_green.png: 128x128, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS burst_purple.png: 128x128, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS button_green.png: 256x96, RGBA, alpha corners=0, magenta=0, SliceCenter=[40, 40, 216, 56]
+PASS button_yellow.png: 256x96, RGBA, alpha corners=0, magenta=0, SliceCenter=[40, 40, 216, 56]
+PASS button_red.png: 256x96, RGBA, alpha corners=0, magenta=0, SliceCenter=[40, 40, 216, 56]
+PASS button_grey.png: 256x96, RGBA, alpha corners=0, magenta=0, SliceCenter=[40, 40, 216, 56]
+PASS tab_on.png: 256x80, RGBA, alpha corners=0, magenta=0, SliceCenter=[32, 32, 224, 48]
+PASS tab_off.png: 256x80, RGBA, alpha corners=0, magenta=0, SliceCenter=[32, 32, 224, 48]
+PASS close_button.png: 128x128, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_red_hat.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_speed_boots.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_magic_wand.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_golden_crown.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_coin.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_coins_small.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_coins_medium.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_coins_large.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_lightning.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_gift.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_gear.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_cart.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_clock.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_fire.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS: 32/32 sprites; exact sizes; RGBA; transparent corners; antialiased alpha; no magenta; SliceCenter verified.
+PASS: manifest.json, prompts.json and labeled contact_sheet.png present.

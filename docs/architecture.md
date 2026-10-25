@@ -24,7 +24,7 @@ The starter ships small, working features that cross every layer. Copy them as p
 | Feature | Server | Client | Data / config | Assets |
 | --- | --- | --- | --- | --- |
 | Coins (authoritative pickup) | `Components/Coin.luau` in `ComponentService` | `Screens/Hud.luau` | `Cash`, `GameConfig.Coin` | `world/Coins.model.json` |
-| Shop (client request) | `Services/ShopService/` (`Purchasing.luau` pure) | `Screens/Shop.luau` (tabs, daily deal, rarity cards, tiered packs; motion in `UIController/Effects.luau`) | `Inventory`, `Config/ShopCatalog.luau`, `Utils/DailyDeal.luau` (shared pure), `GameConfig.ShopDealDiscount`, `BuyItem` packet | `ui/Shop.model.json` |
+| Shop (client request) | `Services/ShopService/` (`Purchasing.luau` pure) | `Screens/Shop.luau` (tabs, daily deal, rarity cards, tiered packs; motion in `UIController/Effects.luau`; art swaps via `Config/UiImages.luau`) | `Inventory`, `Config/ShopCatalog.luau`, `Utils/DailyDeal.luau` (shared pure), `GameConfig.ShopDealDiscount`, `BuyItem` packet | `ui/Shop.model.json` |
 | Robux offers | `GamePassService`, `PurchaseService/Products.luau` | Shop Robux row | `Config/Monetization.luau` (ids, 0 = inert) | none |
 | Leaderboard | `LeaderstatsService` | Roblox player list | `Cash` via `DataService.Changed` | none |
 | Daily reward | `DailyRewardService` | `Screens/DailyReward.luau` | `Daily`, `Utils/DailyReward.luau` (shared pure), `GameConfig.DailyRewards`, `ClaimDaily` | `ui/DailyReward.model.json` |

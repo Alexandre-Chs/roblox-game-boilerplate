@@ -48,3 +48,19 @@ test('world models place parts with CFrame, because Rojo ignores a Vector3 Posit
     walk(JSON.parse(readFileSync(`assets/world/${name}`, 'utf8')), name);
   }
 });
+test('every image id used by UI models and config comes from an art kit id map', () => {
+  const known = new Set();
+  for (const kit of readdirSync('assets/source/ui', { withFileTypes: true }).filter((d) => d.isDirectory())) {
+    const map = `assets/source/ui/${kit.name}/roblox-ids.json`;
+    if (existsSync(map)) Object.values(JSON.parse(readFileSync(map, 'utf8'))).forEach((id) => known.add(id));
+  }
+  const files = [
+    ...readdirSync('assets/ui').filter((f) => f.endsWith('.json')).map((f) => `assets/ui/${f}`),
+    'src/shared/Config/UiImages.luau', 'src/shared/Config/ShopCatalog.luau', 'src/shared/Config/Monetization.luau',
+  ];
+  for (const file of files) {
+    for (const id of readFileSync(file, 'utf8').match(/rbxassetid:\/\/\d+/g) ?? []) {
+      assert.ok(known.has(id), `${file} uses ${id}, which no assets/source/ui/*/roblox-ids.json records`);
+    }
+  }
+});

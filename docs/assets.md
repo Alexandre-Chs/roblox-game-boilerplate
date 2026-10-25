@@ -11,6 +11,17 @@
 
 Import/generate assets using connected tools or the selected art skill. Inspect third-party model scripts before integrating. Record tool/model provenance and commercial usage rights. Test scale, pivot, orientation, collisions and mobile performance in Studio. UI needs desktop and narrow mobile screenshots, readable text and usable touch targets.
 
+## Illustrated UI kits
+
+The shop and Hud use an image kit in `assets/source/ui/shop/`. To make or extend a kit:
+
+1. Generate the images with an image model (the shop kit was produced by a delegated Codex agent): PNG with real alpha, no text baked in (prices, timers and labels stay TextLabels), exact sizes, stretchable pieces designed for 9-slice. Keep `manifest.json` (size, purpose, `sliceCenter`, generator) and a `contact_sheet.png` next to them.
+2. Upload with the Studio MCP: serve the folder over `http://localhost` (for example `python3 -m http.server`) and call `upload_image` with the URLs. Save the returned ids in `roblox-ids.json`. New ids can report `AssetFetchStatus.Failure` in Edit for a few minutes while moderation runs; check them in Play.
+3. Edit layout in `build_ui.py` and run `.venv/bin/python assets/source/ui/shop/build_ui.py`. It writes `assets/ui/Shop.model.json`, `assets/ui/Hud.model.json` and `src/shared/Config/UiImages.luau`; never hand-edit those outputs.
+4. Add each image to `assets/catalog.json` with its source, licence and Roblox id. `pnpm run check` fails if a UI model or config uses an image id that no kit records.
+
+Layout rules learned in Studio: 9-slice pieces need `ScaleType = Slice` with the manifest's `SliceCenter` and a `SliceScale` around 0.5 for 256-px art; a square icon inside a wide button uses `SizeConstraint = RelativeYY` with X and Y scale set; card templates are image elements, so screens look them up as `GuiObject`, not `Frame`.
+
 ## Studio boundary
 
 MCP can inspect, capture, playtest, import or temporarily adjust an object. Commit the final properties/models back into mapped files so the next Rojo build reproduces them. Stop play mode before editing the authoring scene. Never edit another open Studio project accidentally: identify the target window/place first.

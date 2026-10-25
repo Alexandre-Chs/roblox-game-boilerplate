@@ -1,0 +1,340 @@
+[
+  {
+    "file": "board.png",
+    "width": 1024,
+    "height": 768,
+    "purpose": "Wooden market-stall back wall",
+    "sliceCenter": [
+      96,
+      96,
+      928,
+      672
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. SliceCenter uses requested pixel margins; borders remain inside edge bands. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "awning.png",
+    "width": 1024,
+    "height": 220,
+    "purpose": "Green striped scalloped stall awning",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "sign_plate.png",
+    "width": 640,
+    "height": 200,
+    "purpose": "Blank shop title sign with tropical leaves",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "timer_plate.png",
+    "width": 440,
+    "height": 110,
+    "purpose": "Blank countdown plate with clock at left",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Unnumbered clock dial; geometric hands/ticks only. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "slot_normal.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Standard item card background",
+    "sliceCenter": [
+      48,
+      48,
+      208,
+      208
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. SliceCenter uses requested pixel margins; borders remain inside edge bands. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "slot_featured.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Featured item card background",
+    "sliceCenter": [
+      48,
+      48,
+      208,
+      208
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. SliceCenter uses requested pixel margins; borders remain inside edge bands. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "price_tag.png",
+    "width": 256,
+    "height": 80,
+    "purpose": "Blank orange price pill",
+    "sliceCenter": [
+      36,
+      36,
+      220,
+      44
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. SliceCenter uses requested pixel margins; borders remain inside edge bands. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "burst_red.png",
+    "width": 128,
+    "height": 128,
+    "purpose": "Blank red sale seal",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "burst_blue.png",
+    "width": 128,
+    "height": 128,
+    "purpose": "Blank blue sale seal",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "burst_green.png",
+    "width": 128,
+    "height": 128,
+    "purpose": "Blank green sale seal",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "burst_purple.png",
+    "width": 128,
+    "height": 128,
+    "purpose": "Blank purple sale seal",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "button_green.png",
+    "width": 256,
+    "height": 96,
+    "purpose": "Blank green action button",
+    "sliceCenter": [
+      40,
+      40,
+      216,
+      56
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. SliceCenter uses requested pixel margins; borders remain inside edge bands. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "button_yellow.png",
+    "width": 256,
+    "height": 96,
+    "purpose": "Blank yellow action button",
+    "sliceCenter": [
+      40,
+      40,
+      216,
+      56
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. SliceCenter uses requested pixel margins; borders remain inside edge bands. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "button_red.png",
+    "width": 256,
+    "height": 96,
+    "purpose": "Blank red action button",
+    "sliceCenter": [
+      40,
+      40,
+      216,
+      56
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. SliceCenter uses requested pixel margins; borders remain inside edge bands. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "button_grey.png",
+    "width": 256,
+    "height": 96,
+    "purpose": "Blank grey action button",
+    "sliceCenter": [
+      40,
+      40,
+      216,
+      56
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. SliceCenter uses requested pixel margins; borders remain inside edge bands. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "tab_on.png",
+    "width": 256,
+    "height": 80,
+    "purpose": "Selected category tab",
+    "sliceCenter": [
+      32,
+      32,
+      224,
+      48
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. SliceCenter uses requested pixel margins; borders remain inside edge bands. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "tab_off.png",
+    "width": 256,
+    "height": 80,
+    "purpose": "Unselected category tab",
+    "sliceCenter": [
+      32,
+      32,
+      224,
+      48
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. SliceCenter uses requested pixel margins; borders remain inside edge bands. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "close_button.png",
+    "width": 128,
+    "height": 128,
+    "purpose": "Round red close button with white X",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. White geometric X is intentional. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_red_hat.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Red top hat",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_speed_boots.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Winged speed sneakers",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_magic_wand.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Sparkling magic wand",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_golden_crown.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Jeweled golden crown",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_coin.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Single unmarked gold coin",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_coins_small.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Small cloth bag of gold coins",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_coins_medium.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Pile of gold coins",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_coins_large.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Open treasure chest with coins and gems",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_lightning.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Glowing yellow lightning bolt",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_gift.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Wrapped gift box",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_gear.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Settings gear",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_cart.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Shopping cart",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_clock.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Alarm clock",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Unnumbered clock dial; geometric hands/ticks only. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_fire.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Flame",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  }
+]

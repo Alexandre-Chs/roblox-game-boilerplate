@@ -20,7 +20,7 @@ function Hud.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	local label: TextLabel? = Find(gui, "Cash", "TextLabel")
 
 	-- The Shop button breathes and shows a SALE badge until the shop is opened once.
-	local shopButton: TextButton? = Find(gui, "ShopButton", "TextButton")
+	local shopButton: GuiButton? = Find(gui, "ShopButton", "GuiButton")
 	local saleBadge = shopButton and shopButton:FindFirstChild("Badge")
 	local pulse: Tween? = if shopButton then Effects.Pulse(trove, shopButton, 1.08) else nil
 	local function stopSale()
@@ -40,7 +40,7 @@ function Hud.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	end
 
 	for buttonName, screenName in BUTTONS do
-		local button: TextButton? = Find(gui, buttonName, "TextButton")
+		local button: GuiButton? = Find(gui, buttonName, "GuiButton")
 		if button then
 			trove:Connect(button.Activated, function()
 				controllers.SoundController:PlaySfx("Click")
@@ -60,12 +60,12 @@ function Hud.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	trove:Add(controllers.DataController:Observe({ "Cash" }, function(cash: any)
 		if type(cash) ~= "number" then
 			if label then
-				label.Text = "💰 ..."
+				label.Text = "..."
 			end
 			return
 		end
 		if label then
-			label.Text = `💰 {cash}`
+			label.Text = tostring(cash)
 		end
 		if previous and cash > previous then
 			controllers.SoundController:PlaySfx("Coin")
