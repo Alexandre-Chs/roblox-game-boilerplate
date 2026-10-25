@@ -20,7 +20,7 @@ Code setup does not install Blender, Python art libraries or external generation
 
 Blender 4.x is used by upstream mesh/animation workflows. Hugging Face, Cloudflare and Roblox Open Cloud are optional providers, not mandatory accounts. Prefer connected image/mesh tools when they meet the request. Check current availability, quotas and commercial licences before calling external services. Kaggle generation remains disabled as upstream requires.
 
-The import includes author-specific recovery and Windows scripts. Inspect them before use; use the connected official Studio MCP rather than launching duplicate servers or killing Studio. A missing provider is a reported limitation, not grounds to invent an asset ID or claim success.
+The import includes author-specific scripts written on Windows. `place_state.py` and `preflight.py` work on macOS; `recover_mcp.py` and `capture_frames.ps1` target the Windows third-party MCP server and exit or do not apply here. Use the connected official Studio MCP rather than launching duplicate servers or killing Studio. A missing provider is a reported limitation, not grounds to invent an asset ID or claim success.
 
 ## Completion
 

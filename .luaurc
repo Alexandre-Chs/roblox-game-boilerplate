@@ -1,5 +1,5 @@
 {
   "languageMode": "strict",
   "lint": { "*": true },
-  "lintErrors": false
+  "lintErrors": true
 }

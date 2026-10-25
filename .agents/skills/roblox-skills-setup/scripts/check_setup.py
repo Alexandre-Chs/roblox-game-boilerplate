@@ -28,9 +28,9 @@ SKILLS = [
 TOOLS = {
     "python": ("everything", "https://www.python.org/downloads/ (3.11 or newer)"),
     "rojo": ("roblox-code, create-roblox-game", "https://rojo.space (or install with rokit/aftman)"),
-    "wally": ("roblox-code (packages such as Knit)", "https://wally.run"),
+    "wally": ("roblox-code (Wally packages)", "https://wally.run"),
     "lune": ("roblox-code (headless tests)", "https://lune-org.github.io/docs"),
-    "selene": ("roblox-code (lint)", "https://github.com/Kampfkarren/selene"),
+    "luau-lsp": ("roblox-code (type check and lint)", "https://github.com/JohnnyMorganz/luau-lsp"),
     "stylua": ("roblox-code (format)", "https://github.com/JohnnyMorganz/StyLua"),
     "blender": ("roblox-3d-model, roblox-animation", "https://www.blender.org/download/ (4.x)"),
     "node": ("roblox-3d-model hard-surface route only", "https://nodejs.org (optional)"),

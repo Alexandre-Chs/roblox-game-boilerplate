@@ -16,8 +16,8 @@ Never write a key or token here; record only the NAME of the environment variabl
 - Blender, only needed for the mesh, animation and render stages. Full path to the
   executable, or leave empty if it is on PATH (scripts also read the `BLENDER`
   environment variable):
-- Rojo, Wally, Selene, StyLua and Lune must be on PATH (a toolchain manager such
-  as Rokit or Aftman installs them). Note how you installed them:
+- Rojo, Wally, luau-lsp, StyLua and Lune are pinned in rokit.toml and installed by
+  `pnpm run setup` (Rokit). Note anything unusual about your install:
 
 ## Roblox Studio MCP
 

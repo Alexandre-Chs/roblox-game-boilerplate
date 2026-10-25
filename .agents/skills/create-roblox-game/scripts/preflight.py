@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import pathlib
 import os
 import shutil
 import subprocess
@@ -48,10 +49,13 @@ STAGE_SKILLS = [
 
 
 def check_cmd(name: str, args: list[str]) -> tuple[bool, str]:
-    if not shutil.which(name):
-        return False, "not on PATH"
+    # pnpm scripts put Rokit's bin first; do the same here so a shell without it agrees.
+    rokit_bin = str(pathlib.Path.home() / ".rokit" / "bin")
+    exe = shutil.which(name, path=rokit_bin + os.pathsep + os.environ.get("PATH", ""))
+    if not exe:
+        return False, "not on PATH (run pnpm run setup)"
     try:
-        p = subprocess.run([name] + args, capture_output=True, text=True, timeout=60)
+        p = subprocess.run([exe] + args, capture_output=True, text=True, timeout=60)
     except Exception as exc:  # noqa: BLE001 - any failure is the same answer here
         return False, str(exc)[:60]
     out = ((p.stdout or "") + (p.stderr or "")).strip().splitlines()
@@ -163,7 +167,7 @@ def main() -> int:
     rows.append(("tools", "python", ok, True, detail))
     ok, detail = check_cmd("rojo", ["--version"])
     rows.append(("tools", "rojo", ok, True, detail))
-    for tool in ("wally", "selene", "stylua", "lune"):
+    for tool in ("wally", "luau-lsp", "stylua", "lune"):
         ok, detail = check_cmd(tool, ["--version"])
         rows.append(("tools", tool, ok, True, detail))
     ok, detail = check_cmd("git", ["--version"])

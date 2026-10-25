@@ -99,6 +99,11 @@ def report(procs: list[dict]) -> None:
 
 
 def main() -> int:
+    if sys.platform != "win32":
+        print("recover_mcp.py only knows the Windows third-party robloxstudio-mcp server.")
+        print("This starter uses Studio's built-in MCP: reconnect it from Studio (Assistant > MCP settings)")
+        print("and restart the agent session. Nothing to repair from here.")
+        return 2
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--fix", action="store_true",
                     help="kill every server so the client respawns exactly one")

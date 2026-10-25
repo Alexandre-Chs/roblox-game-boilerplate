@@ -2,4 +2,4 @@
 
 Copy this file to `LOCAL.md` and fill it in. `LOCAL.md` is yours and is never shared.
 
-This skill needs no machine-specific settings. It needs `aftman` (or rojo, wally, selene, stylua and lune individually) on your PATH; `scripts/new_project.py` pins the versions in the scaffold.
+This skill needs no machine-specific settings. `pnpm run setup` installs the pinned toolchain (rojo, wally, luau-lsp, stylua, lune) through Rokit; `pnpm run check` is the only gate.

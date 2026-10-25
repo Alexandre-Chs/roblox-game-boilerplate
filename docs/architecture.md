@@ -300,6 +300,7 @@ Replica ([MadStudioRoblox/Replica](https://github.com/MadStudioRoblox/Replica)) 
 ### Player data
 
 - Only `DataService` touches ProfileStore. Other services call `GetData`, `Set`, `AdjustCash`, `GetReplica`, `RequestSave` and `WaitForSave`.
+- Saving is automatic: ProfileStore autosaves every session periodically and on release. Do not call `RequestSave` after ordinary changes (cash, inventory, progress); DataStore budgets are per key and frequent forced saves get throttled. `RequestSave` is for rare moments that must hit disk soon (end of a round, a trade), and `WaitForSave` is reserved for purchases.
 - Each loaded player's profile data is wrapped in a `PlayerData` replica that replicates to that player only. The replica's `Data` is the profile's data table, so a change made through the replica is saved as well as replicated.
 - Change data that clients show only through the replica: `DataService:Set(player, { "Cash" }, 10)`, `DataService:AdjustCash(player, 10)`, or `DataService:GetReplica(player)` for `SetValues`, `TableInsert` and `TableRemove`. Assigning to the data table directly saves but never reaches the client. Only server bookkeeping (`SchemaVersion`, `LastSeenAt`, `Receipts`) and final writes in `PlayerReleasing` are written directly; clients must not read those fields.
 - Replicated data cannot contain arrays with gaps or keys that are not strings or numbers.

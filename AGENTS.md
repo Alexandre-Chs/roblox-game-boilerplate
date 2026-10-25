@@ -5,6 +5,7 @@
 - Discover project skills in `.agents/skills`; Claude reads the same files through `.claude/skills`. Read `docs/skills.md` before executing imported tools. Load only skills relevant to the task.
 - Use strict Luau for house code. Services own authoritative rules; controllers own presentation. Validate client requests and rate-limit them on the server. Keep private data in server modules.
 - Follow existing naming and registration patterns. Reuse Trove for cleanup. Put pure rules in modules that can be tested without Studio.
+- Use the `pnpm run` commands, never bare `rojo`/`wally`/`stylua` from the shell: the pinned toolchain lives in `~/.rokit/bin` and a Homebrew `rojo` of another version may shadow it. Development happens on macOS; CI runs on Linux.
 - Run `pnpm check` for code changes, and an MCP playtest for engine-dependent behavior. Report checks actually run and remaining runtime gaps. A Rojo build is not a syntax/type or gameplay test.
 - Never edit generated Packages, ServerPackages, sourcemap or vendored dependencies casually. Update their pinned source intentionally, preserve licences and rerun checks.
 - Save progress with Git. Keep secrets, LOCAL.md, generated work and machine paths out of commits. One agent writes to a Studio instance at a time; parallel agents produce files in disjoint areas.

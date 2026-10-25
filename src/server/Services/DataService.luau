@@ -155,10 +155,8 @@ function DataService.AdjustCash(_self: any, player: Player, amount: number): boo
 	if nextBalance < 0 or nextBalance > 9007199254740991 then
 		return false
 	end
-	if not DataService:Set(player, { "Cash" }, nextBalance) then
-		return false
-	end
-	return DataService:RequestSave(player)
+	-- Autosave persists this; forcing a save per adjustment would exhaust the DataStore budget.
+	return DataService:Set(player, { "Cash" }, nextBalance)
 end
 
 function DataService.Destroy(_self: any)

@@ -90,11 +90,33 @@ $found | ForEach-Object { Write-Output $_ }
 """
 
 
+# macOS: System Events lists every window of every Studio process. Needs the
+# terminal/agent app to be allowed under Privacy > Accessibility; otherwise the
+# call errors and we report that instead of guessing.
+TITLE_OSA = r"""
+tell application "System Events"
+  set out to {}
+  repeat with p in (every process whose name contains "RobloxStudio")
+    repeat with w in (every window of p)
+      set end of out to (name of w)
+    end repeat
+  end repeat
+end tell
+set AppleScript's text item delimiters to linefeed
+return out as text
+"""
+
+
 def titles() -> list[str]:
-    out = subprocess.run(
-        ["powershell", "-NoProfile", "-NonInteractive", "-Command", TITLE_PS],
-        capture_output=True, text=True, timeout=90,
-    )
+    if sys.platform == "win32":
+        cmd = ["powershell", "-NoProfile", "-NonInteractive", "-Command", TITLE_PS]
+    elif sys.platform == "darwin":
+        cmd = ["osascript", "-e", TITLE_OSA]
+    else:
+        raise RuntimeError("Studio window titles can only be read on Windows or macOS")
+    out = subprocess.run(cmd, capture_output=True, text=True, timeout=90)
+    if out.returncode != 0:
+        raise RuntimeError((out.stderr or "").strip() or f"{cmd[0]} failed")
     return [t.strip() for t in (out.stdout or "").splitlines() if t.strip()]
 
 
@@ -121,7 +143,10 @@ def resolve_place_id(cli_value: str | None) -> int:
 
 def state(place_id: int = 0) -> tuple[bool, str, list[dict]]:
     """(ok, one-line detail, per-window states). Shared with preflight.py."""
-    found = titles()
+    try:
+        found = titles()
+    except (RuntimeError, OSError, subprocess.TimeoutExpired) as problem:
+        return False, f"cannot read Studio window titles ({problem}); confirm the place is saved yourself", []
     if not found:
         return True, "Studio not running (nothing to check yet)", []
     states = [parse(t, place_id) for t in found]
@@ -151,7 +176,7 @@ def main() -> int:
         return 0 if ok else 1
 
     if not states:
-        print("Studio is not running.")
+        print(detail if not ok else "Studio is not running.")
         return 1
 
     if len(states) > 1:
