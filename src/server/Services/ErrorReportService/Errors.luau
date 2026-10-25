@@ -11,7 +11,8 @@ function Errors.Key(message: string): string
 	text = string.gsub(text, "%d+", "#")
 	text = string.gsub(text, "%s+", " ")
 	text = string.gsub(text, "^%s*(.-)%s*$", "%1")
-	return string.sub(text, 1, 80)
+	-- Short keys: the dashboard groups many distinct custom field values into "Other".
+	return string.sub(text, 1, 60)
 end
 
 -- Allows each key at most once per window seconds. Returns whether to report it now.

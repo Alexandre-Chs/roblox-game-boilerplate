@@ -160,7 +160,7 @@ Roblox Premium members get `GameConfig.PremiumBonus` (+10%) on coins, and Roblox
 
 ## Live moderation
 
-- **Who:** `src/server/Config/Admins.luau` (`UserIds`, or `GroupId` + `MinRank` read from `GroupService` roles), plus the place owner. In Studio everyone is admin.
+- **Who:** `src/server/Config/Admins.luau` (`UserIds`, or `GroupId` + `MinRank` read from `GroupService` roles), plus the place owner (rank 255 in the owning group for group games). In Studio everyone is admin. A failed group lookup is retried on the next command instead of locking the admin out.
 - **Commands** (live servers too, hidden from autocomplete, checked on the server each time):
 
 | Command | Effect |
@@ -179,7 +179,7 @@ Roblox Premium members get `GameConfig.PremiumBonus` (+10%) on coins, and Roblox
 
 ## Soft shutdown
 
-When Roblox shuts servers down for an update, `ShutdownService` shows "Updating the game" and teleports everyone to a temporary reserved server, which sends them back to a fresh public server after 8 seconds, instead of disconnecting them. Data is saved by the normal leave path. Studio, empty servers and private or reserved servers (VIP servers, matches) close normally. Live only: test by publishing an update to the test universe while connected.
+When Roblox shuts servers down for an update, `ShutdownService` shows "Updating the game" and teleports everyone (if teleports are disabled, as in moderation shutdowns, the server just closes) to a temporary reserved server, which sends them back to a fresh public server after 8 seconds, instead of disconnecting them. Data is saved by the normal leave path. Studio, empty servers and private or reserved servers (VIP servers, matches) close normally. Live only: test by publishing an update to the test universe while connected.
 
 ## Studio test commands
 

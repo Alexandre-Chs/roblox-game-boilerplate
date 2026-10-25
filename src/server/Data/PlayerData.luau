@@ -60,6 +60,9 @@ local function volume(value: any): boolean
 	return type(value) == "number" and value >= 0 and value <= 1
 end
 
+-- Settings stored as 0 (off) or 1 (on) rather than a 0..1 volume.
+PlayerData.Toggles = table.freeze({ LowGraphics = true, ReduceMotion = true })
+
 -- Server-side check for a setting sent by a client. Returns the value to store, or nil to reject.
 function PlayerData.CleanSetting(name: any, value: any): number?
 	if type(name) ~= "string" or PlayerData.Template.Settings[name] == nil or type(value) ~= "number" then
@@ -67,6 +70,9 @@ function PlayerData.CleanSetting(name: any, value: any): number?
 	end
 	if value ~= value then
 		return nil
+	end
+	if PlayerData.Toggles[name] then
+		return if value >= 0.5 then 1 else 0
 	end
 	return math.clamp(math.round(value * 100) / 100, 0, 1)
 end

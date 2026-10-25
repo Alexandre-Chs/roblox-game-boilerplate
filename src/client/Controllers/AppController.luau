@@ -34,14 +34,24 @@ function AppController.Start(self: State)
 	-- The starter quests sit top-left, so the chat window moves to the bottom-left.
 	TextChatService.ChatWindowConfiguration.VerticalAlignment = Enum.VerticalAlignment.Bottom
 	-- Forward client script errors to ErrorReportService, each distinct message once a minute.
+	-- Keyed without numbers so a looping error with a changing value counts once; capped size.
 	local reported: { [string]: number } = {}
+	local count = 0
 	if self._trove then
 		self._trove:Connect(ScriptContext.Error, function(message: string)
-			local last = reported[message]
+			local key = string.gsub(message, "%d+", "#")
+			local last = reported[key]
 			if last and os.clock() - last < 60 then
 				return
 			end
-			reported[message] = os.clock()
+			if not last then
+				count += 1
+				if count > 100 then
+					table.clear(reported)
+					count = 1
+				end
+			end
+			reported[key] = os.clock()
 			Packets.ReportError:Fire(string.sub(message, 1, 200))
 		end)
 	end

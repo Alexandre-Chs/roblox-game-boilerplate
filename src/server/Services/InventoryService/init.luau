@@ -54,13 +54,24 @@ function InventoryService.Start(_self: any)
 	local function watch(player: Player)
 		local own = Trove.new()
 		playerTroves[player] = own
+		-- The Humanoid may not exist yet when CharacterAdded fires. One wait per player at a time:
+		-- adding a thread per respawn to the trove would grow it all session.
+		local pending: thread? = nil
+		own:Add(function()
+			if pending then
+				task.cancel(pending)
+			end
+		end)
 		own:Connect(player.CharacterAdded, function(character: Model)
-			-- The Humanoid may not exist yet when CharacterAdded fires.
-			own:Add(task.spawn(function()
+			if pending then
+				task.cancel(pending)
+			end
+			pending = task.spawn(function()
 				if character:WaitForChild("Humanoid", 5) then
 					apply(player)
 				end
-			end))
+				pending = nil
+			end)
 		end)
 		apply(player)
 	end

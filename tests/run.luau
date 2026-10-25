@@ -111,6 +111,12 @@ assert(Commands.Parse("hello") == nil and Commands.Parse("/") == nil)
 assert(Commands.Amount("-5") == -5 and Commands.Amount("1.5") == nil and Commands.Amount("1e12") == nil)
 assert(Commands.Amount(nil) == nil and Commands.Amount("abc") == nil)
 
+-- Display toggles are stored as 0 or 1
+assert(
+	PlayerData.CleanSetting("LowGraphics", 0.37) == 0 and PlayerData.CleanSetting("ReduceMotion", 0.9) == 1
+)
+assert(PlayerData.CleanSetting("MusicVolume", 0.37) == 0.37 and PlayerData.CleanSetting("Nope", 1) == nil)
+
 -- New player data fields
 assert(PlayerData.Validate({
 	Equipped = "RedHat",

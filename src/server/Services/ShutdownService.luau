@@ -24,11 +24,12 @@ local function isHoldingServer(): boolean
 	return game.PrivateServerId ~= "" and game.PrivateServerOwnerId == 0
 end
 
-local function teleport(players: { Player }, options: TeleportOptions?)
+local function teleport(players: { Player }, options: TeleportOptions?): boolean
 	local ok, problem = pcall(TeleportService.TeleportAsync, TeleportService, game.PlaceId, players, options)
 	if not ok then
 		warn(`[ShutdownService] Teleport failed: {problem}`)
 	end
+	return ok
 end
 
 local function onClose()
@@ -43,7 +44,10 @@ local function onClose()
 	local options = Instance.new("TeleportOptions")
 	options.ShouldReserveServer = true
 	options:SetTeleportData({ SoftShutdown = true })
-	teleport(players, options)
+	-- Teleports are disabled during some shutdowns (moderation); then close at once.
+	if not teleport(players, options) then
+		return
+	end
 	-- BindToClose allows 30 seconds; keep the server alive while teleports finish.
 	local deadline = os.clock() + 25
 	while #Players:GetPlayers() > 0 and os.clock() < deadline do
@@ -65,7 +69,12 @@ function ShutdownService.Start(_self: any)
 		if type(data) ~= "table" or (data :: any).SoftShutdown ~= true then
 			return
 		end
-		Packets.Notify:FireClient(player, MESSAGE)
+		-- Delayed: at PlayerAdded the client screens do not exist yet and the toast would be lost.
+		task.delay(3, function()
+			if player.Parent == Players then
+				Packets.Notify:FireClient(player, MESSAGE)
+			end
+		end)
 		task.delay(HOLD_SECONDS, function()
 			if player.Parent == Players then
 				teleport({ player }, nil)

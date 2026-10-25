@@ -28,10 +28,13 @@ local function rankOf(player: Player): number
 		return cached
 	end
 	local rank = 0
+	local cacheable = true
 	if Admins.GroupId ~= 0 then
 		-- The highest rank among the player's roles in the group; 0 when not a member or on failure.
 		local ok, result: any =
 			pcall(GroupService.GetRolesInGroupAsync, GroupService, player.UserId, Admins.GroupId)
+		-- A failed lookup is not cached, so a group admin is not locked out until they rejoin.
+		cacheable = ok
 		if ok and type(result) == "table" and result.IsMember then
 			for _, role in result.Roles or {} do
 				if type(role.Rank) == "number" then
@@ -40,13 +43,27 @@ local function rankOf(player: Player): number
 			end
 		end
 	end
-	ranks[player] = rank
+	if cacheable then
+		ranks[player] = rank
+	end
 	return rank
 end
 
 local function isAdmin(player: Player): boolean
 	if RunService:IsStudio() then
 		return true
+	end
+	if game.CreatorType == Enum.CreatorType.Group then
+		-- Group games: the group owner (rank 255 in the owning group) is always an admin.
+		local ok, result: any =
+			pcall(GroupService.GetRolesInGroupAsync, GroupService, player.UserId, game.CreatorId)
+		if ok and type(result) == "table" and result.IsMember then
+			for _, role in result.Roles or {} do
+				if role.Rank == 255 then
+					return true
+				end
+			end
+		end
 	end
 	local ownerId = if game.CreatorType == Enum.CreatorType.User then game.CreatorId else 0
 	return Moderation.IsAdmin(player.UserId, Admins, ownerId, rankOf(player))

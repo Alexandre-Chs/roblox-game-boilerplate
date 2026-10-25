@@ -54,9 +54,11 @@ local function save(player: Player)
 	local value = statOf(player)
 	local activeStore = store
 	if activeStore and value and saved[player.UserId] ~= value then
-		saved[player.UserId] = value
 		local ok, problem = pcall(activeStore.SetAsync, activeStore, tostring(player.UserId), value)
-		if not ok then
+		if ok then
+			-- Recorded only on success, so a failed write is retried at the next refresh.
+			saved[player.UserId] = value
+		else
 			failed("Save", problem)
 		end
 	end
@@ -108,7 +110,10 @@ function LeaderboardService.Start(_self: any)
 	-- Not in the trove: DataService fires PlayerReleasing for everyone during shutdown, after our
 	-- Destroy, and that final save must still happen (docs/architecture.md, Player data).
 	services.DataService.PlayerReleasing:Connect(function(player: Player)
-		task.spawn(save, player)
+		task.spawn(function()
+			save(player)
+			saved[player.UserId] = nil
+		end)
 	end)
 	local loop = task.spawn(function()
 		while true do

@@ -4,7 +4,8 @@
 -- sent by AppController) and logs each distinct error at most once a minute per side through
 -- TelemetryService:Error (Creator Dashboard custom event "ScriptError"). In Studio it prints them.
 -- Roblox's own Creator Dashboard Error Report also lists errors; this adds grouping by message
--- and client errors tied to a player.
+-- and client errors tied to a player. Analytics keeps a limited number of distinct custom field
+-- values and buckets the rest as "Other", so read rare errors in the Error Report instead.
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ScriptContext = game:GetService("ScriptContext")

@@ -145,7 +145,12 @@ function Rewards.new(context: Types.Context, gui: ScreenGui): Types.Screen
 				label.Text = if active then "Active" else "Get"
 			end
 		end
-		trove:Connect(player:GetPropertyChangedSignal("MembershipType"), update)
+		-- Fires after a Premium purchase made during the session.
+		trove:Connect(Players.PlayerMembershipChanged, function(changed: Player)
+			if changed == player then
+				update()
+			end
+		end)
 		update()
 		trove:Connect(button.Activated, function()
 			if player.MembershipType ~= Enum.MembershipType.Premium then
