@@ -31,6 +31,15 @@ The starter ships small, working features that cross every layer. Copy them as p
 | Settings and sound | `SettingsService` | `Screens/Settings.luau`, `SoundController` | `Settings`, `PlayerData.CleanSetting`, `Config/Sounds.luau`, `SetSetting` | `ui/Settings.model.json` |
 | Notifications | `NotificationService:Send(player, text)` | `Screens/Notifications.luau`, `UIController:Notify` / `context.Notify` | `Notify` packet | `ui/Notifications.model.json` |
 | Loading screen | none | `src/first/Loading.client.luau` (ReplicatedFirst) | `ClientReady` attribute set by `AppController` | built in code |
+| Inventory (equip + effects) | `Services/InventoryService/` (`Equipping.luau` pure) | `Screens/Inventory.luau`, Hud `InventoryButton` | `Equipped`, `ShopCatalog` `Effect`, `GameConfig.WalkSpeed`, `Equip` packet | `ui/Inventory.model.json` |
+| Promo codes | `Services/CodesService/` (`Redeeming.luau` pure), codes in `src/server/Config/Codes.luau` (server-only) | `Screens/Rewards.luau` code box | `Redeemed` (`Code_<CODE>` keys), `RedeemCode` packet | `ui/Rewards.model.json` |
+| Community rewards | `CommunityService` (group reward, `FriendsInServer` attribute) | `Screens/Rewards.luau` rows (group, invite, favorite), coin bonus in `Coin.luau` via `Utils/CoinReward.luau` | `Redeemed.Social_Group`, `GameConfig.Community`, `ClaimGroupReward` packet | `ui/Rewards.model.json` |
+| Global leaderboard | `Services/LeaderboardService/` (`Ranking.luau` pure, OrderedDataStore) | `Components/Leaderboard.luau` (tag `Leaderboard`) | `GameConfig.Leaderboard`, ReplicatedStorage attribute `Leaderboard` (JSON) | `world/Leaderboard.model.json` |
+| Badges | `AchievementService:Award(player, name)` (Welcome, FirstPurchase from ShopService, Streak7 from DailyRewardService) | none | `Config/Badges.luau` (ids, 0 = inert) | none |
+| Tutorial | `TutorialService:Reached(player, milestone)` (Coin, ShopService, `ShopOpened`) | `Screens/Tutorial.luau` (banner, arrow, beam to the nearest coin) | `Tutorial`, `Config/Tutorial.luau`, `Utils/TutorialSteps.luau` (shared pure) | `ui/Tutorial.model.json` |
+| Regional policy | `ComplianceService` (`PaidRandomItemsRestricted`, `PolicyLoaded` attributes) | Shop hides `Random` items | `ShopCatalog` `Random` | none |
+| Translation | `Utils/Locale.luau` (`Format(player?, key, args, fallback)`) | static GUI text auto-translates; `Locale.Prepare` in `AppController` | none | `localization/Strings.csv` |
+| Screen fitting | none | `UIController/DeviceScale.luau` resizes every `DeviceScale` UIScale | none | `DesignWidth`/`DesignHeight` attributes from `build_ui.py` |
 | Studio test commands | `Services/DebugService/` | chat | none | none |
 | Analytics | `TelemetryService` (onboarding funnel, Shop funnel, coin economy, custom events) | Shop sends `ShopOpened` | none | none |
 
@@ -44,6 +53,12 @@ The starter ships small, working features that cross every layer. Copy them as p
 | Settings and sound | Hud `SettingsButton`; every `SoundController:PlaySfx` call (Hud, Shop, Settings, DailyReward) and the `SoundController` dependency of `UIController`; `Settings`/`CleanSetting` in `PlayerData` and their asserts in `tests/run.luau` |
 | Notifications | `NotificationService` users (`DailyRewardService`, `DebugService`) and every `context.Notify` call |
 | Studio test commands | The `Commands` require and asserts in `tests/run.luau` |
+| Inventory | Hud `InventoryButton`, `Equipped` in `PlayerData`, `Equip` packet, `Equipping` asserts in `tests/run.luau`; `/reset` in `DebugService` |
+| Promo codes and community rewards | Hud `RewardsButton`, `Redeemed` in `PlayerData`, `RedeemCode`/`ClaimGroupReward` packets, `CommunityService` in `ComponentService` Dependencies and the friend bonus in `Coin.luau`, `Redeeming`/`CoinReward` asserts in `tests/run.luau` |
+| Global leaderboard | `world/Leaderboard.model.json`, `Components/Leaderboard.luau` in `ComponentController`, `GameConfig.Leaderboard`, `Ranking` asserts |
+| Badges | `AchievementService` calls and Dependencies in `ShopService` and `DailyRewardService` |
+| Tutorial | `TutorialService` calls and Dependencies in `Coin.luau` (`ComponentService`) and `ShopService`, `Tutorial` in `PlayerData`, `TutorialSteps` asserts |
+| Regional policy | `ComplianceService` in `ShopService` Dependencies, the `Random` checks in `ShopService` and `Shop.luau` |
 | Analytics | Every `services.TelemetryService` call (Coin, ShopService, DailyRewardService, Products) and its Dependencies entries, the `ShopOpened` packet and its call in `Shop.luau`, `tests/telemetry.luau` |
 | Coins | `Cash` stays: Shop, Daily reward, Leaderboard and Robux packs use it |
 
@@ -59,6 +74,11 @@ Rules these examples follow, and new features must too:
 - Robux: create the pass or product on the Creator Dashboard, paste its id in `Config/Monetization.luau`. An id of 0 keeps the offer inert and the shop says so. Developer products only change profile data (see Purchases). Game pass ownership is cached as the `Pass_<Name>` player attribute; read it with `GamePassService:Owns(player, name)`.
 - Sounds: ids in `Config/Sounds.luau` stay empty until found and verified with the roblox-sfx skill. Call `SoundController:PlaySfx(name)`; empty ids are silent.
 - The loading screen is the one UI built in code: ReplicatedFirst runs before StarterGui replicates. It hides when data is loaded, or after 20 seconds.
+- Screens have fixed design sizes in pixels. Each panel carries a `DeviceScale` UIScale with `DesignWidth`/`DesignHeight` attributes and `UIController/DeviceScale.luau` fits it to the screen (0.5x on phones to 1.3x on big monitors); Hud pieces follow a 960x540 reference. Animate a fitted panel toward its `Fitted` attribute, never toward 1.
+- Promo codes live in `src/server/Config/Codes.luau` so clients cannot read unreleased codes. One-time grants (codes, group reward) are recorded in `PlayerData.Redeemed` in the same frame as the coins, with no yield in between.
+- Badges, game passes and the group id are inert at 0. Create them on the Creator Dashboard, paste the id, and the code path activates.
+- Paid random rewards (loot boxes) are marked `Random = true` in `ShopCatalog`; the shop hides and the server refuses them unless `ComplianceService` says the player's region allows them.
+- Static GUI text that matches a `Source` in `assets/localization/Strings.csv` is translated by Roblox automatically. Build dynamic text with `Locale.Format(player?, key, args, englishFallback)` and add the key to the CSV.
 
 ### Analytics
 
@@ -80,7 +100,7 @@ Log every change of the currency through `:Economy`, or the economy charts drift
 | Command | Effect |
 | --- | --- |
 | `/cash <n>` | Add (or remove, if negative) coins |
-| `/reset` | Reset coins, inventory and daily streak |
+| `/reset` | Reset coins, inventory, equipped item, redeemed codes, daily streak and tutorial |
 | `/unlock` | Own every shop item |
 | `/daily` | Make the daily reward claimable again, continuing the streak |
 | `/pass <Name>` | Toggle a game pass from `Monetization.GamePasses`, for this session only |

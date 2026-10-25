@@ -13,14 +13,14 @@ Import/generate assets using connected tools or the selected art skill. Inspect 
 
 ## Illustrated UI kits
 
-Every screen (Shop, Hud and its dock, Settings, DailyReward, Notifications, the loading screen) uses the image kit in `assets/source/ui/shop/`; `assets/source/ui/promo/` adds discount tags, POPULAR / BEST VALUE / LIMITED banners, VIP and premium badges and premium icons. Open each kit's `contact_sheet.png` to pick art. To make or extend a kit:
+Every screen (Shop, Hud and its dock, Settings, DailyReward, Notifications, the loading screen) uses the image kit in `assets/source/ui/shop/`; `assets/source/ui/promo/` adds discount tags, POPULAR / BEST VALUE / LIMITED banners, VIP and premium badges and premium icons. `assets/source/ui/social/` holds the inventory, rewards, tutorial and leaderboard art (group, invite, heart, trophy, medals, input field, hint banner, board). Open each kit's `contact_sheet.png` to pick art. To make or extend a kit:
 
 1. Generate the images with an image model (the shop kit was produced by a delegated Codex agent): PNG with real alpha, no text baked in (prices, timers and labels stay TextLabels), exact sizes, stretchable pieces designed for 9-slice. Keep `manifest.json` (size, purpose, `sliceCenter`, generator) and a `contact_sheet.png` next to them.
 2. Upload with the Studio MCP: serve the folder over `http://localhost` (for example `python3 -m http.server`) and call `upload_image` with the URLs. Save the returned ids in `roblox-ids.json`. New ids can report `AssetFetchStatus.Failure` in Edit for a few minutes while moderation runs; check them in Play.
 3. Edit layout in `build_ui.py` and run `.venv/bin/python assets/source/ui/shop/build_ui.py`. It reads every kit's ids and writes `assets/ui/*.model.json`, `src/shared/Config/UiImages.luau` and `src/first/LoadingImages.luau`; never hand-edit those outputs.
 4. Add each image to `assets/catalog.json` with its source, licence and Roblox id. `pnpm run check` fails if a UI model or config uses an image id that no kit records.
 
-Layout rules learned in Studio: 9-slice pieces need `ScaleType = Slice` with the manifest's `SliceCenter` and a `SliceScale` around 0.5 for 256-px art; a square icon inside a wide button uses `SizeConstraint = RelativeYY` with X and Y scale set; card templates are image elements, so screens look them up as `GuiObject`, not `Frame`.
+Layout rules learned in Studio: in `.model.json` files Rojo only reads lowercase `"attributes"` (a capitalised key is dropped silently; a test guards it); give panels fixed pixel sizes plus a `DeviceScale` UIScale instead of scale sizes with `UISizeConstraint`; banner art with ornate ends keeps its ratio (`ScaleType = Fit`), it is never 9-sliced; 9-slice pieces need `ScaleType = Slice` with the manifest's `SliceCenter` and a `SliceScale` around 0.5 for 256-px art; a square icon inside a wide button uses `SizeConstraint = RelativeYY` with X and Y scale set; card templates are image elements, so screens look them up as `GuiObject`, not `Frame`.
 
 ## Studio boundary
 

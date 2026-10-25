@@ -37,10 +37,10 @@ def node(name, cls, props=None, children=None):
 
 def scaled(width=None, height=None):
     """UIScale the UIController fits to the screen (DeviceScale.luau). With a design size the
-    element shrinks until it fits; without, it follows a 1280x720 reference."""
+    element shrinks until it fits; without, it follows a 960x540 reference."""
     d = node("DeviceScale", "UIScale", {"Scale": 1})
     if width:
-        d["Attributes"] = {"DesignWidth": width, "DesignHeight": height}
+        d["attributes"] = {"DesignWidth": width, "DesignHeight": height}
     return d
 
 
@@ -333,7 +333,7 @@ inventory = modal("INVENTORY", 640, 420, [
 
 
 # Rewards: promo code box, then one row per community reward.
-def reward_row(name, label, icon_file, button_name, button_label, y, info=False):
+def reward_row(name, label, icon_file, button_name, button_label, order, info=False):
     kids = [
         image("Icon", icon_file, u(0, 12, 0.5, 0), u(0, 52, 0, 52), anchor=(0, 0.5), z=3),
         text("Label", label, u(0, 74, 0, 12 if info else 0), u(1, -230, 0, 30 if info else 76), color=INK, stroke=False,
@@ -344,7 +344,8 @@ def reward_row(name, label, icon_file, button_name, button_label, y, info=False)
     if info:
         kids.append(text("Info", "", u(0, 74, 0, 42), u(1, -230, 0, 22), color=[0.25, 0.5, 0.15], stroke=False, align="Left",
                          max_size=18, z=3))
-    return image(name, "row_plate.png", u(0, 28, 0, y), u(1, -56, 0, 76), z=2, slice_scale=0.5, children=kids)
+    return image(name, "row_plate.png", u(0, 0, 0, 0), u(1, 0, 0, 76), z=2, slice_scale=0.5, children=kids,
+                 extra={"LayoutOrder": order})
 
 
 rewards = modal("REWARDS", 560, 440, [
@@ -356,9 +357,13 @@ rewards = modal("REWARDS", 560, 440, [
                                     "TextXAlignment": "Left", "ZIndex": 3}, [maxtext(24)]),
     ]),
     button("Redeem", "button_yellow.png", "Redeem", u(1, -28, 0, 62), u(0, 150, 0, 60), anchor=(1, 0), z=4, max_size=24),
-    reward_row("GroupRow", "Join our group", "icon_group.png", "Claim", "Claim", 146),
-    reward_row("InviteRow", "Invite friends", "icon_invite.png", "Invite", "Invite", 232, info=True),
-    reward_row("FavoriteRow", "Favorite the game", "icon_heart.png", "Favorite", "Favorite", 318),
+    # Rows stack, so a hidden row (no group configured) leaves no gap.
+    node("Rows", "Frame", {"Position": u(0, 28, 0, 146), "Size": u(1, -56, 1, -166), "BackgroundTransparency": 1, "ZIndex": 2}, [
+        node("Layout", "UIListLayout", {"Padding": {"UDim": [0, 10]}, "SortOrder": "LayoutOrder"}),
+        reward_row("GroupRow", "Join our group", "icon_group.png", "Claim", "Claim", 1),
+        reward_row("InviteRow", "Invite friends", "icon_invite.png", "Invite", "Invite", 2, info=True),
+        reward_row("FavoriteRow", "Favorite the game", "icon_heart.png", "Favorite", "Favorite", 3),
+    ]),
 ])
 
 # Tutorial hint: banner under the cash pill and an arrow the screen moves next to its target.
@@ -378,35 +383,36 @@ tutorial = {"ClassName": "ScreenGui", "Properties": {"ResetOnSpawn": False, "Ign
 
 # World leaderboard: a standing board near the spawn; Components/Leaderboard.luau fills it.
 def board_row():
-    return image("RowTemplate", "row_rank.png", u(0, 0, 0, 0), u(1, 0, 0, 70), z=3, slice_scale=0.5,
+    return image("RowTemplate", "row_rank.png", u(0, 0, 0, 0), u(1, 0, 0, 48), z=3, slice_scale=0.4,
                  extra={"Visible": False}, children=[
-        image("Medal", "medal_gold.png", u(0, 12, 0.5, 0), u(0, 58, 0, 58), anchor=(0, 0.5), z=4),
-        text("Rank", "4", u(0, 12, 0, 10), u(0, 58, 1, -20), color=INK, stroke=False, max_size=34, z=4),
-        text("PlayerName", "Player", u(0, 86, 0, 12), u(0.62, -86, 1, -24), color=INK, stroke=False, align="Left",
-             max_size=32, z=4),
-        image("CoinIcon", "icon_coin.png", u(1, -150, 0.5, 0), u(0, 40, 0, 40), anchor=(0, 0.5), z=4),
-        text("Value", "0", u(1, -106, 0, 12), u(0, 94, 1, -24), color=[0.85, 0.5, 0.05], stroke=False, align="Left",
-             max_size=32, z=4),
+        image("Medal", "medal_gold.png", u(0, 8, 0.5, 0), u(0, 42, 0, 42), anchor=(0, 0.5), z=4),
+        text("Rank", "4", u(0, 8, 0, 6), u(0, 42, 1, -12), color=INK, stroke=False, max_size=28, z=4),
+        text("PlayerName", "Player", u(0, 60, 0, 8), u(0.62, -60, 1, -16), color=INK, stroke=False, align="Left",
+             max_size=28, z=4),
+        image("CoinIcon", "icon_coin.png", u(1, -118, 0.5, 0), u(0, 32, 0, 32), anchor=(0, 0.5), z=4),
+        text("Value", "0", u(1, -82, 0, 8), u(0, 74, 1, -16), color=[0.75, 0.4, 0.02], stroke=False, align="Left",
+             max_size=28, z=4),
     ])
 
 
+# 14 x 20.5 studs at 36 px/stud = 504 x 738 px: a header and ten 48 px rows.
 leaderboard = {"ClassName": "Model", "Children": [{
     "Name": "Board", "ClassName": "Part",
-    "Properties": {"Anchored": True, "CanCollide": True, "Size": [14, 18, 0.6], "Color": [0.45, 0.27, 0.13],
+    "Properties": {"Anchored": True, "CanCollide": True, "Size": [14, 20.5, 0.6], "Color": [0.45, 0.27, 0.13],
                    "Material": "Wood", "Tags": ["Leaderboard"],
-                   "CFrame": {"CFrame": {"position": [0, 9, -30],
-                                         "orientation": [[-1, 0, 0], [0, 1, 0], [0, 0, -1]]}}},
+                   "CFrame": {"CFrame": {"position": [-22, 10.25, -22],
+                                         "orientation": [[-0.7071, 0, -0.7071], [0, 1, 0], [0.7071, 0, -0.7071]]}}},
     "Children": [{"Name": "Display", "ClassName": "SurfaceGui",
-                  "Properties": {"Face": "Front", "SizingMode": "PixelsPerStud", "PixelsPerStud": 50, "LightInfluence": 0,
+                  "Properties": {"Face": "Front", "SizingMode": "PixelsPerStud", "PixelsPerStud": 36, "LightInfluence": 0,
                                  "ZIndexBehavior": "Sibling"},
-                  "Children": [image("Board", "leaderboard_board.png", u(0, 0, 0, 0), u(1, 0, 1, 0), z=1, slice_scale=0.9,
+                  "Children": [image("Board", "leaderboard_board.png", u(0, 0, 0, 0), u(1, 0, 1, 0), z=1, slice_scale=0.6,
                                      children=[
-        image("Trophy", "icon_trophy.png", u(0.5, 0, 0, 20), u(0, 120, 0, 120), anchor=(0.5, 0), z=3),
-        text("Title", "TOP PLAYERS", u(0.5, 0, 0, 140), u(0.8, 0, 0, 70), anchor=(0.5, 0), color=(1, 0.84, 0.25),
-             max_size=64, z=3),
-        node("List", "Frame", {"Position": u(0, 60, 0, 230), "Size": u(1, -120, 1, -290), "BackgroundTransparency": 1,
+        image("Trophy", "icon_trophy.png", u(0.5, 0, 0, 18), u(0, 86, 0, 86), anchor=(0.5, 0), z=3),
+        text("Title", "TOP PLAYERS", u(0.5, 0, 0, 108), u(0.8, 0, 0, 52), anchor=(0.5, 0), color=INK, stroke=False,
+             max_size=48, z=3),
+        node("List", "Frame", {"Position": u(0, 34, 0, 170), "Size": u(1, -68, 1, -200), "BackgroundTransparency": 1,
                                "ZIndex": 2}, [
-            node("Layout", "UIListLayout", {"Padding": {"UDim": [0, 6]}, "SortOrder": "LayoutOrder"}),
+            node("Layout", "UIListLayout", {"Padding": {"UDim": [0, 4]}, "SortOrder": "LayoutOrder"}),
             board_row(),
         ]),
     ])]}],

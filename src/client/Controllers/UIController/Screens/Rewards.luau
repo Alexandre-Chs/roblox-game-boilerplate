@@ -80,8 +80,13 @@ function Rewards.new(context: Types.Context, gui: ScreenGui): Types.Screen
 			end)
 		end)
 	end
-	if groupRow then
-		groupRow.Visible = config.GroupId ~= 0
+	if groupRow and config.GroupId == 0 then
+		-- No group configured: drop the row and shorten the panel by its height.
+		groupRow.Visible = false
+		local panel = gui:FindFirstChild("Panel")
+		if panel and panel:IsA("GuiObject") then
+			panel.Size -= UDim2.fromOffset(0, groupRow.Size.Y.Offset + 10)
+		end
 	end
 	if claim then
 		trove:Connect(claim.Activated, function()

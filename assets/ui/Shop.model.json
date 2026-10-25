@@ -76,7 +76,7 @@
           "Properties": {
             "Scale": 1
           },
-          "Attributes": {
+          "attributes": {
             "DesignWidth": 860,
             "DesignHeight": 660
           }

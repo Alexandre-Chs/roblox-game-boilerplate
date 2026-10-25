@@ -48,6 +48,18 @@ test('world models place parts with CFrame, because Rojo ignores a Vector3 Posit
     walk(JSON.parse(readFileSync(`assets/world/${name}`, 'utf8')), name);
   }
 });
+test('UI models write attributes with the lowercase key Rojo reads', () => {
+  // Rojo silently drops a capitalised "Attributes" key in .model.json files.
+  function walk(node, file) {
+    assert.ok(!('Attributes' in node), `${file}: ${node.Name ?? node.ClassName} uses "Attributes"; Rojo only reads "attributes"`);
+    (node.Children ?? []).forEach((child) => walk(child, file));
+  }
+  for (const dir of ['assets/ui', 'assets/world']) {
+    for (const name of readdirSync(dir).filter((f) => f.endsWith('.model.json'))) {
+      walk(JSON.parse(readFileSync(`${dir}/${name}`, 'utf8')), name);
+    }
+  }
+});
 test('every image id used by UI models and config comes from an art kit id map', () => {
   const known = new Set();
   for (const kit of readdirSync('assets/source/ui', { withFileTypes: true }).filter((d) => d.isDirectory())) {
