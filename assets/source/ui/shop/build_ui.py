@@ -262,8 +262,8 @@ def square(name, file, icon_file, pos):
 
 def setting_row(name, label, icon_file, y):
     return image(name, "row_plate.png", u(0, 28, 0, y), u(1, -56, 0, 72), z=2, slice_scale=0.5, children=[
-        image("Icon", icon_file, u(0, 12, 0.5, 0), u(0, 48, 0, 48), anchor=(0, 0.5), z=3),
-        text("Label", label, u(0, 68, 0, 14), u(0.4, -68, 1, -28), color=INK, stroke=False, align="Left", max_size=26, z=3),
+        image("Icon", icon_file, u(0, 20, 0.5, 0), u(0, 46, 0, 46), anchor=(0, 0.5), z=3),
+        text("Label", label, u(0, 76, 0, 14), u(0.4, -76, 1, -28), color=INK, stroke=False, align="Left", max_size=26, z=3),
         square("Minus", "button_square_red.png", "icon_minus.png", u(1, -176, 0.5, 0)),
         text("Value", "...", u(1, -126, 0, 14), u(0, 64, 1, -28), color=INK, stroke=False, max_size=24, z=3),
         square("Plus", "button_square_green.png", "icon_plus.png", u(1, -58, 0.5, 0)),
@@ -335,14 +335,14 @@ inventory = modal("INVENTORY", 640, 420, [
 # Rewards: promo code box, then one row per community reward.
 def reward_row(name, label, icon_file, button_name, button_label, order, info=False):
     kids = [
-        image("Icon", icon_file, u(0, 12, 0.5, 0), u(0, 52, 0, 52), anchor=(0, 0.5), z=3),
-        text("Label", label, u(0, 74, 0, 12 if info else 0), u(1, -230, 0, 30 if info else 76), color=INK, stroke=False,
-             align="Left", max_size=24, z=3, extra=None if info else {"Size": u(1, -230, 1, 0)}),
-        button(button_name, "button_green.png", button_label, u(1, -12, 0.5, 0), u(0, 136, 0, 50), anchor=(1, 0.5), z=4,
+        image("Icon", icon_file, u(0, 20, 0.5, 0), u(0, 50, 0, 50), anchor=(0, 0.5), z=3),
+        text("Label", label, u(0, 82, 0, 12 if info else 0), u(1, -238, 0, 30 if info else 76), color=INK, stroke=False,
+             align="Left", max_size=24, z=3, extra=None if info else {"Size": u(1, -238, 1, 0)}),
+        button(button_name, "button_green.png", button_label, u(1, -16, 0.5, 0), u(0, 136, 0, 50), anchor=(1, 0.5), z=4,
                max_size=22),
     ]
     if info:
-        kids.append(text("Info", "", u(0, 74, 0, 42), u(1, -230, 0, 22), color=[0.25, 0.5, 0.15], stroke=False, align="Left",
+        kids.append(text("Info", "", u(0, 82, 0, 42), u(1, -238, 0, 22), color=[0.25, 0.5, 0.15], stroke=False, align="Left",
                          max_size=18, z=3))
     return image(name, "row_plate.png", u(0, 0, 0, 0), u(1, 0, 0, 76), z=2, slice_scale=0.5, children=kids,
                  extra={"LayoutOrder": order})
@@ -350,8 +350,8 @@ def reward_row(name, label, icon_file, button_name, button_label, order, info=Fa
 
 rewards = modal("REWARDS", 560, 440, [
     image("CodeRow", "input_plate.png", u(0, 28, 0, 62), u(1, -200, 0, 60), z=2, slice_scale=0.5, children=[
-        image("Icon", "icon_ticket_code.png", u(0, 10, 0.5, 0), u(0, 44, 0, 44), anchor=(0, 0.5), z=3),
-        node("CodeBox", "TextBox", {"Position": u(0, 60, 0, 8), "Size": u(1, -72, 1, -16), "BackgroundTransparency": 1,
+        image("Icon", "icon_ticket_code.png", u(0, 22, 0.5, 0), u(0, 40, 0, 40), anchor=(0, 0.5), z=3),
+        node("CodeBox", "TextBox", {"Position": u(0, 74, 0, 10), "Size": u(1, -94, 1, -20), "BackgroundTransparency": 1,
                                     "Text": "", "PlaceholderText": "Enter a code", "PlaceholderColor3": [0.55, 0.42, 0.32],
                                     "TextColor3": INK, "FontFace": FRED, "TextScaled": True, "ClearTextOnFocus": False,
                                     "TextXAlignment": "Left", "ZIndex": 3}, [maxtext(24)]),
