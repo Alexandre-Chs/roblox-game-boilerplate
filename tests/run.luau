@@ -3,6 +3,7 @@ local PlayerData = require("../src/server/Data/PlayerData")
 local RateLimit = require("../src/shared/Utils/RateLimit")
 local Purchasing = require("../src/server/Services/ShopService/Purchasing")
 local DailyReward = require("../src/shared/Utils/DailyReward")
+local DailyDeal = require("../src/shared/Utils/DailyDeal")
 local Commands = require("../src/server/Services/DebugService/Commands")
 
 assert(PlayerData.Validate(table.clone(PlayerData.Template)))
@@ -28,12 +29,37 @@ assert(not PlayerData.Validate({ Inventory = { RedHat = 1 } }))
 assert(not PlayerData.Validate({ Inventory = { [1] = true } }))
 
 local catalog = { Hat = { Price = 5 } }
-assert(Purchasing.Check({ Cash = 5, Inventory = {} }, catalog, "Hat") == "Ok")
-assert(Purchasing.Check({ Cash = 4, Inventory = {} }, catalog, "Hat") == "NotEnoughCash")
-assert(Purchasing.Check({ Cash = 9, Inventory = { Hat = true } }, catalog, "Hat") == "AlreadyOwned")
-assert(Purchasing.Check({ Cash = 9, Inventory = {} }, catalog, "Nope") == "UnknownItem")
-assert(Purchasing.Check({ Cash = 9, Inventory = {} }, catalog, 42) == "UnknownItem")
-assert(Purchasing.Check({ Cash = 9, Inventory = {} }, catalog, "__index") == "UnknownItem")
+local function full(item)
+	return item.Price
+end
+local function halved(item)
+	return item.Price // 2
+end
+assert(Purchasing.Check({ Cash = 5, Inventory = {} }, catalog, "Hat", full) == "Ok")
+assert(Purchasing.Check({ Cash = 4, Inventory = {} }, catalog, "Hat", full) == "NotEnoughCash")
+assert(
+	Purchasing.Check({ Cash = 2, Inventory = {} }, catalog, "Hat", halved) == "Ok",
+	"the deal price is what is checked"
+)
+assert(Purchasing.Check({ Cash = 9, Inventory = { Hat = true } }, catalog, "Hat", full) == "AlreadyOwned")
+assert(Purchasing.Check({ Cash = 9, Inventory = {} }, catalog, "Nope", full) == "UnknownItem")
+assert(Purchasing.Check({ Cash = 9, Inventory = {} }, catalog, 42, full) == "UnknownItem")
+assert(Purchasing.Check({ Cash = 9, Inventory = {} }, catalog, "__index", full) == "UnknownItem")
+
+-- Daily deal: one item per day, rotating in Order, discounted, never free
+local dealItems = { { Id = "B", Order = 2, Price = 10 }, { Id = "A", Order = 1, Price = 3 } }
+assert(
+	DailyDeal.ItemId(0, dealItems) == "A"
+		and DailyDeal.ItemId(1, dealItems) == "B"
+		and DailyDeal.ItemId(2, dealItems) == "A"
+)
+assert(DailyDeal.ItemId(5, {}) == nil)
+assert(
+	DailyDeal.Price(dealItems[1], 1, dealItems, 0.3) == 7
+		and DailyDeal.Price(dealItems[1], 0, dealItems, 0.3) == 10
+)
+assert(DailyDeal.Price({ Id = "A", Price = 1 }, 0, dealItems, 0.9) == 1)
+assert(DailyDeal.SecondsLeft(86400 * 5) == 86400 and DailyDeal.SecondsLeft(86400 * 5 + 86399) == 1)
 -- Private bookkeeping never reaches the replica; nested tables stay shared with the profile.
 local profileData = table.clone(PlayerData.Template)
 profileData.Inventory = {}

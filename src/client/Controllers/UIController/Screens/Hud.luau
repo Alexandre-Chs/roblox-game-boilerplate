@@ -4,6 +4,7 @@
 -- Pairs with assets/ui/Hud.model.json.
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Trove = require(ReplicatedStorage.Packages.Trove)
+local Effects = require(script.Parent.Parent.Effects)
 local Find = require(script.Parent.Parent.Find)
 local Types = require(script.Parent.Parent.Types)
 
@@ -18,11 +19,34 @@ function Hud.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	local controllers = context.Controllers
 	local label: TextLabel? = Find(gui, "Cash", "TextLabel")
 
+	-- The Shop button breathes and shows a SALE badge until the shop is opened once.
+	local shopButton: TextButton? = Find(gui, "ShopButton", "TextButton")
+	local saleBadge = shopButton and shopButton:FindFirstChild("Badge")
+	local pulse: Tween? = if shopButton then Effects.Pulse(trove, shopButton, 1.08) else nil
+	local function stopSale()
+		if pulse then
+			pulse:Cancel()
+			pulse = nil
+			if shopButton then
+				local scale = shopButton:FindFirstChild("PulseScale")
+				if scale and scale:IsA("UIScale") then
+					scale.Scale = 1
+				end
+			end
+		end
+		if saleBadge and saleBadge:IsA("GuiObject") then
+			saleBadge.Visible = false
+		end
+	end
+
 	for buttonName, screenName in BUTTONS do
 		local button: TextButton? = Find(gui, buttonName, "TextButton")
 		if button then
 			trove:Connect(button.Activated, function()
 				controllers.SoundController:PlaySfx("Click")
+				if screenName == "Shop" then
+					stopSale()
+				end
 				if controllers.UIController:IsOpen(screenName) then
 					context.Close(screenName)
 				else
@@ -36,15 +60,18 @@ function Hud.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	trove:Add(controllers.DataController:Observe({ "Cash" }, function(cash: any)
 		if type(cash) ~= "number" then
 			if label then
-				label.Text = "Coins: ..."
+				label.Text = "💰 ..."
 			end
 			return
 		end
 		if label then
-			label.Text = `Coins: {cash}`
+			label.Text = `💰 {cash}`
 		end
 		if previous and cash > previous then
 			controllers.SoundController:PlaySfx("Coin")
+			if label then
+				Effects.Pop(label, 1.2)
+			end
 		end
 		previous = cash
 	end))

@@ -6,7 +6,8 @@ Local tests cover pure modules. Engine-dependent behavior requires Studio; Lune 
 
 ## First Studio smoke test
 
-1. Build, open build/game.rbxlx in a separate Studio window, and connect Rojo on localhost:34873.
+1. Build, open build/starter.rbxlx in a separate Studio window, and connect Rojo on localhost:34873. The file name is distinct on purpose: other projects also build a `game.rbxlx`, and opening the wrong one lets Rojo inject this starter into another game.
+   Before anything else, confirm the window holds this starter: in Edit, `workspace.StarterMap` and `ServerScriptService.Services.TelemetryService` exist and `workspace` has no unrelated top-level content. Stop if it does not.
 2. Identify that window with `list_roblox_studios` and `set_active_studio`. Start Play with `start_stop_play`, wait a few seconds, then read `get_console_output`. A healthy start prints, in any order:
 
    ```text
@@ -22,8 +23,9 @@ Local tests cover pure modules. Engine-dependent behavior requires Studio; Lune 
    - The loading screen fades out, then the daily reward window opens by itself. Claim it: a notification shows the coins and the counter rises.
    - Walk into a gold coin with `character_navigation`: the counter rises by one and the coin reappears after ten seconds.
    - Open the player list: `Coins` matches the counter.
-   - Type `/cash 20` in chat, open Shop and buy the Red Hat: `Owned`, counter minus three, a notification. Buying again says `You already own this.`
-   - Click the Robux buttons: with ids at 0, a notification says the offer is not on sale yet.
+   - The Hud Shop button pulses with a SALE badge; opening the shop stops it. Deals shows today's discounted item with a live countdown, the two biggest coin packs and the pass.
+   - Items: an item you cannot afford shows `Need 💰 N` in red; clicking it notifies and switches to the Coins tab. Type `/cash 20`, buy the Red Hat: `Owned ✓`, counter minus three, a notification. Buying again says `You already own this.` The deal item is charged at the discounted price.
+   - Robux buttons show `Soon` while ids are 0 and clicking them notifies; with real ids they show the Roblox price.
    - `/pass DoubleCoins`, then pick up a coin: plus two.
    - Settings: press minus on Music; the value drops by 10%. Stop and replay: with mock data it resets, which is expected.
    - `/daily`, reopen Daily: day 2 is claimable.

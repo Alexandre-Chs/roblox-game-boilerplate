@@ -38,3 +38,13 @@ test('publish refuses before any network call when misconfigured', () => {
     assert.match(result.stderr, ready ? (target === 'prod' ? /confirm-prod/ : /ROBLOX_API_KEY/) : /places\.json/);
   }
 });
+test('world models place parts with CFrame, because Rojo ignores a Vector3 Position', () => {
+  function walk(node, file) {
+    const position = node.Properties?.Position;
+    assert.ok(!Array.isArray(position), `${file}: ${node.Name ?? node.ClassName} uses Position; use "CFrame": { "CFrame": { "position": [...], "orientation": [...] } }`);
+    (node.Children ?? []).forEach((child) => walk(child, file));
+  }
+  for (const name of readdirSync('assets/world').filter((f) => f.endsWith('.model.json'))) {
+    walk(JSON.parse(readFileSync(`assets/world/${name}`, 'utf8')), name);
+  }
+});

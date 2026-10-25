@@ -7,8 +7,9 @@ local Purchasing = {}
 
 function Purchasing.Check(
 	data: { Cash: number, Inventory: { [string]: boolean } },
-	catalog: { [string]: any }, -- id -> item with a numeric Price (ShopCatalog.ById)
-	itemId: any
+	catalog: { [string]: any }, -- id -> item (ShopCatalog.ById)
+	itemId: any,
+	priceOf: (item: any) -> number -- the price charged today (DailyDeal.Price)
 ): Result
 	local item = if type(itemId) == "string" then catalog[itemId] else nil
 	if not item then
@@ -17,7 +18,7 @@ function Purchasing.Check(
 	if data.Inventory[itemId] then
 		return "AlreadyOwned"
 	end
-	if data.Cash < item.Price then
+	if data.Cash < priceOf(item) then
 		return "NotEnoughCash"
 	end
 	return "Ok"

@@ -15,7 +15,8 @@ local function attribute(name: string): string
 end
 
 local function refresh(player: Player)
-	for name, id in Monetization.GamePasses do
+	for name, pass in Monetization.GamePasses do
+		local id = pass.Id
 		if id ~= 0 then
 			-- Retry with backoff: a throttled check must not cost a paying player their pass.
 			for attempt = 1, 4 do
@@ -57,8 +58,8 @@ function GamePassService.Start(_self: any)
 				if not purchased then
 					return
 				end
-				for name, id in Monetization.GamePasses do
-					if id == passId then
+				for name, pass in Monetization.GamePasses do
+					if pass.Id == passId then
 						player:SetAttribute(attribute(name), true)
 					end
 				end

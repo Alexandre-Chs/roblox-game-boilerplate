@@ -24,7 +24,7 @@ The starter ships small, working features that cross every layer. Copy them as p
 | Feature | Server | Client | Data / config | Assets |
 | --- | --- | --- | --- | --- |
 | Coins (authoritative pickup) | `Components/Coin.luau` in `ComponentService` | `Screens/Hud.luau` | `Cash`, `GameConfig.Coin` | `world/Coins.model.json` |
-| Shop (client request) | `Services/ShopService/` (`Purchasing.luau` pure) | `Screens/Shop.luau` | `Inventory`, `Config/ShopCatalog.luau`, `BuyItem` packet | `ui/Shop.model.json` |
+| Shop (client request) | `Services/ShopService/` (`Purchasing.luau` pure) | `Screens/Shop.luau` (tabs, daily deal, rarity cards, tiered packs; motion in `UIController/Effects.luau`) | `Inventory`, `Config/ShopCatalog.luau`, `Utils/DailyDeal.luau` (shared pure), `GameConfig.ShopDealDiscount`, `BuyItem` packet | `ui/Shop.model.json` |
 | Robux offers | `GamePassService`, `PurchaseService/Products.luau` | Shop Robux row | `Config/Monetization.luau` (ids, 0 = inert) | none |
 | Leaderboard | `LeaderstatsService` | Roblox player list | `Cash` via `DataService.Changed` | none |
 | Daily reward | `DailyRewardService` | `Screens/DailyReward.luau` | `Daily`, `Utils/DailyReward.luau` (shared pure), `GameConfig.DailyRewards`, `ClaimDaily` | `ui/DailyReward.model.json` |
@@ -54,6 +54,8 @@ Rules these examples follow, and new features must too:
 - The server decides every outcome. Coins come from `Touched` on the server, purchases from `ShopService`, the daily day from the server clock. Screens only display and request.
 - Pure rules (`Purchasing`, `DailyReward`, `CleanSetting`, `Commands`) have no services or instances and are tested in `tests/run.luau`.
 - Give feedback with notifications instead of per-screen message labels.
+- Prices the client shows are computed with the same shared pure module the server charges with (`DailyDeal`), so they cannot disagree except across a day boundary, where the server wins.
+- UI styling rules learned in Studio: a `UIGradient` tints its parent's own text, so gradient buttons keep their text in a child `Label`; give overlays an explicit `ZIndex` below the panel; look elements up by path when names repeat inside templates; the 🪙 emoji does not render in Roblox fonts (use 💰).
 - Robux: create the pass or product on the Creator Dashboard, paste its id in `Config/Monetization.luau`. An id of 0 keeps the offer inert and the shop says so. Developer products only change profile data (see Purchases). Game pass ownership is cached as the `Pass_<Name>` player attribute; read it with `GamePassService:Owns(player, name)`.
 - Sounds: ids in `Config/Sounds.luau` stay empty until found and verified with the roblox-sfx skill. Call `SoundController:PlaySfx(name)`; empty ids are silent.
 - The loading screen is the one UI built in code: ReplicatedFirst runs before StarterGui replicates. It hides when data is loaded, or after 20 seconds.

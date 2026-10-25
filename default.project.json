@@ -57,6 +57,13 @@
         "ClockTime": 15,
         "Brightness": 2
       }
+    },
+    "TextChatService": {
+      "$className": "TextChatService",
+      "$ignoreUnknownInstances": true,
+      "$properties": {
+        "ChatVersion": "TextChatService"
+      }
     }
   }
 }

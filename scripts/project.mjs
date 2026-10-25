@@ -16,7 +16,7 @@ function sourcemap() {
 }
 function build() {
   mkdirSync('build', { recursive: true });
-  run('rojo', ['build', 'default.project.json', '--output', 'build/game.rbxlx']);
+  run('rojo', ['build', 'default.project.json', '--output', 'build/starter.rbxlx']);
 }
 function typecheck() {
   if (!existsSync('globalTypes.d.luau')) throw new Error('Run pnpm run setup first.');
@@ -40,7 +40,7 @@ async function publish(target, flags) {
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'x-api-key': key, 'Content-Type': 'application/xml' },
-    body: readFileSync('build/game.rbxlx'),
+    body: readFileSync('build/starter.rbxlx'),
     signal: AbortSignal.timeout(120000),
   });
   const text = await response.text();

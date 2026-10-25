@@ -3,9 +3,37 @@
   "Properties": {
     "ResetOnSpawn": false,
     "Enabled": false,
+    "IgnoreGuiInset": true,
+    "DisplayOrder": 10,
     "ZIndexBehavior": "Sibling"
   },
   "Children": [
+    {
+      "Name": "Dim",
+      "ClassName": "Frame",
+      "Properties": {
+        "Size": {
+          "UDim2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "BackgroundColor3": [
+          0,
+          0,
+          0
+        ],
+        "BackgroundTransparency": 0.45,
+        "Active": true,
+        "ZIndex": 0
+      }
+    },
     {
       "Name": "Panel",
       "ClassName": "Frame",
@@ -29,20 +57,22 @@
         "Size": {
           "UDim2": [
             [
-              0.9,
+              0.94,
               0
             ],
             [
-              0.75,
+              0.86,
               0
             ]
           ]
         },
         "BackgroundColor3": [
-          0.1,
-          0.1,
-          0.12
-        ]
+          1,
+          1,
+          1
+        ],
+        "Active": true,
+        "ZIndex": 2
       },
       "Children": [
         {
@@ -52,8 +82,51 @@
             "CornerRadius": {
               "UDim": [
                 0,
-                14
+                20
               ]
+            }
+          }
+        },
+        {
+          "Name": "Stroke",
+          "ClassName": "UIStroke",
+          "Properties": {
+            "Thickness": 4,
+            "Color": [
+              0.04,
+              0.06,
+              0.17
+            ],
+            "ApplyStrokeMode": "Border",
+            "LineJoinMode": "Round"
+          }
+        },
+        {
+          "Name": "Gradient",
+          "ClassName": "UIGradient",
+          "Properties": {
+            "Rotation": 90,
+            "Color": {
+              "ColorSequence": {
+                "keypoints": [
+                  {
+                    "time": 0,
+                    "color": [
+                      0.2,
+                      0.26,
+                      0.62
+                    ]
+                  },
+                  {
+                    "time": 1,
+                    "color": [
+                      0.09,
+                      0.1,
+                      0.3
+                    ]
+                  }
+                ]
+              }
             }
           }
         },
@@ -62,247 +135,139 @@
           "ClassName": "UISizeConstraint",
           "Properties": {
             "MaxSize": [
-              420,
-              480
+              780,
+              560
             ]
           }
         },
         {
-          "Name": "Title",
-          "ClassName": "TextLabel",
+          "Name": "Scale",
+          "ClassName": "UIScale",
           "Properties": {
-            "AnchorPoint": [
-              0,
-              0
-            ],
-            "Position": {
-              "UDim2": [
-                [
-                  0,
-                  16
-                ],
-                [
-                  0,
-                  10
-                ]
-              ]
-            },
-            "Size": {
-              "UDim2": [
-                [
-                  1,
-                  -80
-                ],
-                [
-                  0,
-                  36
-                ]
-              ]
-            },
-            "BackgroundTransparency": 1,
-            "TextColor3": [
-              1,
-              0.85,
-              0.2
-            ],
-            "TextScaled": true,
-            "Text": "Shop",
-            "FontFace": {
-              "Font": {
-                "family": "rbxasset://fonts/families/GothamSSm.json",
-                "weight": "Bold",
-                "style": "Normal"
-              }
-            },
-            "TextXAlignment": "Left"
-          },
-          "Children": [
-            {
-              "Name": "Padding",
-              "ClassName": "UIPadding",
-              "Properties": {
-                "PaddingTop": {
-                  "UDim": [
-                    0,
-                    4
-                  ]
-                },
-                "PaddingBottom": {
-                  "UDim": [
-                    0,
-                    4
-                  ]
-                }
-              }
-            }
-          ]
+            "Scale": 1
+          }
         },
         {
-          "Name": "Close",
-          "ClassName": "TextButton",
+          "Name": "Header",
+          "ClassName": "Frame",
           "Properties": {
-            "AnchorPoint": [
-              1,
-              0
-            ],
-            "Position": {
-              "UDim2": [
-                [
-                  1,
-                  -10
-                ],
-                [
-                  0,
-                  8
-                ]
-              ]
-            },
-            "Size": {
-              "UDim2": [
-                [
-                  0,
-                  44
-                ],
-                [
-                  0,
-                  44
-                ]
-              ]
-            },
-            "BackgroundColor3": [
-              0.75,
-              0.25,
-              0.25
-            ],
-            "TextColor3": [
-              1,
-              1,
-              1
-            ],
-            "Text": "X",
-            "TextScaled": true,
-            "FontFace": {
-              "Font": {
-                "family": "rbxasset://fonts/families/GothamSSm.json",
-                "weight": "Bold",
-                "style": "Normal"
-              }
-            }
-          },
-          "Children": [
-            {
-              "Name": "Corner",
-              "ClassName": "UICorner",
-              "Properties": {
-                "CornerRadius": {
-                  "UDim": [
-                    0,
-                    8
-                  ]
-                }
-              }
-            },
-            {
-              "Name": "Padding",
-              "ClassName": "UIPadding",
-              "Properties": {
-                "PaddingTop": {
-                  "UDim": [
-                    0,
-                    6
-                  ]
-                },
-                "PaddingBottom": {
-                  "UDim": [
-                    0,
-                    6
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "Name": "List",
-          "ClassName": "ScrollingFrame",
-          "Properties": {
-            "Position": {
-              "UDim2": [
-                [
-                  0,
-                  12
-                ],
-                [
-                  0,
-                  60
-                ]
-              ]
-            },
             "Size": {
               "UDim2": [
                 [
                   1,
-                  -24
-                ],
-                [
-                  1,
-                  -128
-                ]
-              ]
-            },
-            "BackgroundTransparency": 1,
-            "BorderSizePixel": 0,
-            "CanvasSize": {
-              "UDim2": [
-                [
-                  0,
                   0
                 ],
                 [
                   0,
-                  0
+                  64
                 ]
               ]
             },
-            "AutomaticCanvasSize": "Y",
-            "ScrollBarThickness": 6
+            "BackgroundTransparency": 1
           },
           "Children": [
             {
-              "Name": "Layout",
-              "ClassName": "UIListLayout",
+              "Name": "Title",
+              "ClassName": "TextLabel",
               "Properties": {
-                "Padding": {
-                  "UDim": [
-                    0,
-                    8
+                "AnchorPoint": [
+                  0,
+                  0
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0,
+                      20
+                    ],
+                    [
+                      0,
+                      8
+                    ]
                   ]
                 },
-                "SortOrder": "LayoutOrder"
-              }
-            },
-            {
-              "Name": "ItemTemplate",
-              "ClassName": "Frame",
-              "Properties": {
                 "Size": {
                   "UDim2": [
                     [
-                      1,
+                      0.3,
                       0
                     ],
                     [
                       0,
-                      56
+                      50
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "Text": "SHOP",
+                "TextColor3": [
+                  1,
+                  0.88,
+                  0.25
+                ],
+                "TextScaled": true,
+                "FontFace": {
+                  "Font": {
+                    "family": "rbxasset://fonts/families/FredokaOne.json",
+                    "weight": "Regular",
+                    "style": "Normal"
+                  }
+                },
+                "TextXAlignment": "Left",
+                "TextStrokeTransparency": 0,
+                "TextStrokeColor3": [
+                  0.04,
+                  0.06,
+                  0.17
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "MaxText",
+                  "ClassName": "UITextSizeConstraint",
+                  "Properties": {
+                    "MaxTextSize": 44
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Balance",
+              "ClassName": "Frame",
+              "Properties": {
+                "AnchorPoint": [
+                  1,
+                  0
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      1,
+                      -74
+                    ],
+                    [
+                      0,
+                      14
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0,
+                      150
+                    ],
+                    [
+                      0,
+                      38
                     ]
                   ]
                 },
                 "BackgroundColor3": [
-                  0.18,
-                  0.18,
-                  0.22
-                ],
-                "Visible": false
+                  0.05,
+                  0.07,
+                  0.2
+                ]
               },
               "Children": [
                 {
@@ -311,14 +276,28 @@
                   "Properties": {
                     "CornerRadius": {
                       "UDim": [
-                        0,
-                        8
+                        0.5,
+                        0
                       ]
                     }
                   }
                 },
                 {
-                  "Name": "ItemName",
+                  "Name": "Stroke",
+                  "ClassName": "UIStroke",
+                  "Properties": {
+                    "Thickness": 2,
+                    "Color": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ApplyStrokeMode": "Border",
+                    "LineJoinMode": "Round"
+                  }
+                },
+                {
+                  "Name": "Amount",
                   "ClassName": "TextLabel",
                   "Properties": {
                     "AnchorPoint": [
@@ -329,7 +308,7 @@
                       "UDim2": [
                         [
                           0,
-                          12
+                          10
                         ],
                         [
                           0,
@@ -340,8 +319,8 @@
                     "Size": {
                       "UDim2": [
                         [
-                          0.55,
-                          -12
+                          1,
+                          -20
                         ],
                         [
                           1,
@@ -350,124 +329,198 @@
                       ]
                     },
                     "BackgroundTransparency": 1,
+                    "Text": "💰 0",
                     "TextColor3": [
                       1,
-                      1,
-                      1
+                      0.9,
+                      0.3
                     ],
                     "TextScaled": true,
-                    "Text": "Item",
                     "FontFace": {
                       "Font": {
-                        "family": "rbxasset://fonts/families/GothamSSm.json",
-                        "weight": "Bold",
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
                         "style": "Normal"
                       }
                     },
-                    "TextXAlignment": "Left"
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 0,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ]
                   },
                   "Children": [
                     {
-                      "Name": "Padding",
-                      "ClassName": "UIPadding",
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
                       "Properties": {
-                        "PaddingTop": {
-                          "UDim": [
-                            0,
-                            4
-                          ]
-                        },
-                        "PaddingBottom": {
-                          "UDim": [
-                            0,
-                            4
-                          ]
-                        }
+                        "MaxTextSize": 26
                       }
                     }
                   ]
+                }
+              ]
+            },
+            {
+              "Name": "Close",
+              "ClassName": "TextButton",
+              "Properties": {
+                "AnchorPoint": [
+                  1,
+                  0
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      1,
+                      -14
+                    ],
+                    [
+                      0,
+                      10
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0,
+                      46
+                    ],
+                    [
+                      0,
+                      46
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "Text": "",
+                "AutoButtonColor": false
+              },
+              "Children": [
+                {
+                  "Name": "Corner",
+                  "ClassName": "UICorner",
+                  "Properties": {
+                    "CornerRadius": {
+                      "UDim": [
+                        0.5,
+                        0
+                      ]
+                    }
+                  }
                 },
                 {
-                  "Name": "Buy",
-                  "ClassName": "TextButton",
+                  "Name": "Stroke",
+                  "ClassName": "UIStroke",
+                  "Properties": {
+                    "Thickness": 3,
+                    "Color": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ApplyStrokeMode": "Border",
+                    "LineJoinMode": "Round"
+                  }
+                },
+                {
+                  "Name": "Gradient",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              1,
+                              0.4,
+                              0.42
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.82,
+                              0.16,
+                              0.22
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "Name": "Label",
+                  "ClassName": "TextLabel",
                   "Properties": {
                     "AnchorPoint": [
-                      1,
-                      0.5
+                      0,
+                      0
                     ],
                     "Position": {
                       "UDim2": [
                         [
-                          1,
-                          -8
+                          0,
+                          0
                         ],
                         [
-                          0.5,
-                          0
+                          0,
+                          8
                         ]
                       ]
                     },
                     "Size": {
                       "UDim2": [
                         [
-                          0.4,
+                          1,
                           0
                         ],
                         [
-                          0,
-                          44
+                          1,
+                          -16
                         ]
                       ]
                     },
-                    "BackgroundColor3": [
-                      0.2,
-                      0.7,
-                      0.35
-                    ],
+                    "BackgroundTransparency": 1,
+                    "Text": "X",
                     "TextColor3": [
                       1,
                       1,
                       1
                     ],
-                    "Text": "Buy",
                     "TextScaled": true,
                     "FontFace": {
                       "Font": {
-                        "family": "rbxasset://fonts/families/GothamSSm.json",
-                        "weight": "Bold",
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
                         "style": "Normal"
                       }
-                    }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 0,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 2
                   },
                   "Children": [
                     {
-                      "Name": "Corner",
-                      "ClassName": "UICorner",
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
                       "Properties": {
-                        "CornerRadius": {
-                          "UDim": [
-                            0,
-                            8
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "Name": "Padding",
-                      "ClassName": "UIPadding",
-                      "Properties": {
-                        "PaddingTop": {
-                          "UDim": [
-                            0,
-                            6
-                          ]
-                        },
-                        "PaddingBottom": {
-                          "UDim": [
-                            0,
-                            6
-                          ]
-                        }
+                        "MaxTextSize": 28
                       }
                     }
                   ]
@@ -477,22 +530,18 @@
           ]
         },
         {
-          "Name": "Robux",
+          "Name": "Tabs",
           "ClassName": "Frame",
           "Properties": {
-            "AnchorPoint": [
-              0.5,
-              1
-            ],
             "Position": {
               "UDim2": [
                 [
-                  0.5,
-                  0
+                  0,
+                  14
                 ],
                 [
-                  1,
-                  -12
+                  0,
+                  70
                 ]
               ]
             },
@@ -500,11 +549,11 @@
               "UDim2": [
                 [
                   1,
-                  -24
+                  -28
                 ],
                 [
                   0,
-                  48
+                  44
                 ]
               ]
             },
@@ -526,7 +575,7 @@
               }
             },
             {
-              "Name": "DoubleCoins",
+              "Name": "Featured",
               "ClassName": "TextButton",
               "Properties": {
                 "AnchorPoint": [
@@ -548,8 +597,8 @@
                 "Size": {
                   "UDim2": [
                     [
-                      0.5,
-                      -4
+                      0.25,
+                      -6
                     ],
                     [
                       1,
@@ -558,24 +607,13 @@
                   ]
                 },
                 "BackgroundColor3": [
-                  0.55,
-                  0.35,
-                  0.9
-                ],
-                "TextColor3": [
                   1,
                   1,
                   1
                 ],
-                "Text": "2x Coins (Robux)",
-                "TextScaled": true,
-                "FontFace": {
-                  "Font": {
-                    "family": "rbxasset://fonts/families/GothamSSm.json",
-                    "weight": "Bold",
-                    "style": "Normal"
-                  }
-                },
+                "Text": "",
+                "AutoButtonColor": false,
+                "ZIndex": 4,
                 "LayoutOrder": 1
               },
               "Children": [
@@ -586,33 +624,124 @@
                     "CornerRadius": {
                       "UDim": [
                         0,
-                        8
+                        12
                       ]
                     }
                   }
                 },
                 {
-                  "Name": "Padding",
-                  "ClassName": "UIPadding",
+                  "Name": "Stroke",
+                  "ClassName": "UIStroke",
                   "Properties": {
-                    "PaddingTop": {
-                      "UDim": [
-                        0,
-                        6
-                      ]
-                    },
-                    "PaddingBottom": {
-                      "UDim": [
-                        0,
-                        6
-                      ]
+                    "Thickness": 3,
+                    "Color": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ApplyStrokeMode": "Border",
+                    "LineJoinMode": "Round"
+                  }
+                },
+                {
+                  "Name": "Gradient",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.3,
+                              0.5,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.18,
+                              0.28,
+                              0.75
+                            ]
+                          }
+                        ]
+                      }
                     }
                   }
+                },
+                {
+                  "Name": "Label",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          6
+                        ],
+                        [
+                          0,
+                          5
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          -12
+                        ],
+                        [
+                          1,
+                          -10
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "⭐ Deals",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 0,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 5
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 20
+                      }
+                    }
+                  ]
                 }
               ]
             },
             {
-              "Name": "Coins100",
+              "Name": "Items",
               "ClassName": "TextButton",
               "Properties": {
                 "AnchorPoint": [
@@ -634,8 +763,8 @@
                 "Size": {
                   "UDim2": [
                     [
-                      0.5,
-                      -4
+                      0.25,
+                      -6
                     ],
                     [
                       1,
@@ -644,24 +773,13 @@
                   ]
                 },
                 "BackgroundColor3": [
-                  0.55,
-                  0.35,
-                  0.9
-                ],
-                "TextColor3": [
                   1,
                   1,
                   1
                 ],
-                "Text": "+100 coins (Robux)",
-                "TextScaled": true,
-                "FontFace": {
-                  "Font": {
-                    "family": "rbxasset://fonts/families/GothamSSm.json",
-                    "weight": "Bold",
-                    "style": "Normal"
-                  }
-                },
+                "Text": "",
+                "AutoButtonColor": false,
+                "ZIndex": 4,
                 "LayoutOrder": 2
               },
               "Children": [
@@ -672,9 +790,1561 @@
                     "CornerRadius": {
                       "UDim": [
                         0,
-                        8
+                        12
                       ]
                     }
+                  }
+                },
+                {
+                  "Name": "Stroke",
+                  "ClassName": "UIStroke",
+                  "Properties": {
+                    "Thickness": 3,
+                    "Color": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ApplyStrokeMode": "Border",
+                    "LineJoinMode": "Round"
+                  }
+                },
+                {
+                  "Name": "Gradient",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.3,
+                              0.5,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.18,
+                              0.28,
+                              0.75
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "Name": "Label",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          6
+                        ],
+                        [
+                          0,
+                          5
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          -12
+                        ],
+                        [
+                          1,
+                          -10
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "🎒 Items",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 0,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 5
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 20
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Name": "Coins",
+              "ClassName": "TextButton",
+              "Properties": {
+                "AnchorPoint": [
+                  0,
+                  0
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.25,
+                      -6
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "Text": "",
+                "AutoButtonColor": false,
+                "ZIndex": 4,
+                "LayoutOrder": 3
+              },
+              "Children": [
+                {
+                  "Name": "Corner",
+                  "ClassName": "UICorner",
+                  "Properties": {
+                    "CornerRadius": {
+                      "UDim": [
+                        0,
+                        12
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Stroke",
+                  "ClassName": "UIStroke",
+                  "Properties": {
+                    "Thickness": 3,
+                    "Color": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ApplyStrokeMode": "Border",
+                    "LineJoinMode": "Round"
+                  }
+                },
+                {
+                  "Name": "Gradient",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.3,
+                              0.5,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.18,
+                              0.28,
+                              0.75
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "Name": "Label",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          6
+                        ],
+                        [
+                          0,
+                          5
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          -12
+                        ],
+                        [
+                          1,
+                          -10
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "💰 Coins",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 0,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 5
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 20
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Name": "Passes",
+              "ClassName": "TextButton",
+              "Properties": {
+                "AnchorPoint": [
+                  0,
+                  0
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.25,
+                      -6
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "Text": "",
+                "AutoButtonColor": false,
+                "ZIndex": 4,
+                "LayoutOrder": 4
+              },
+              "Children": [
+                {
+                  "Name": "Corner",
+                  "ClassName": "UICorner",
+                  "Properties": {
+                    "CornerRadius": {
+                      "UDim": [
+                        0,
+                        12
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Stroke",
+                  "ClassName": "UIStroke",
+                  "Properties": {
+                    "Thickness": 3,
+                    "Color": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ApplyStrokeMode": "Border",
+                    "LineJoinMode": "Round"
+                  }
+                },
+                {
+                  "Name": "Gradient",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.3,
+                              0.5,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.18,
+                              0.28,
+                              0.75
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "Name": "Label",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          6
+                        ],
+                        [
+                          0,
+                          5
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          -12
+                        ],
+                        [
+                          1,
+                          -10
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "⚡ Passes",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 0,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 5
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 20
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "Pages",
+          "ClassName": "Frame",
+          "Properties": {
+            "Position": {
+              "UDim2": [
+                [
+                  0,
+                  14
+                ],
+                [
+                  0,
+                  120
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  1,
+                  -28
+                ],
+                [
+                  1,
+                  -132
+                ]
+              ]
+            },
+            "BackgroundTransparency": 1,
+            "ClipsDescendants": true
+          },
+          "Children": [
+            {
+              "Name": "Featured",
+              "ClassName": "ScrollingFrame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "BorderSizePixel": 0,
+                "CanvasSize": {
+                  "UDim2": [
+                    [
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                },
+                "AutomaticCanvasSize": "Y",
+                "ScrollingDirection": "Y",
+                "ScrollBarThickness": 6,
+                "ScrollBarImageColor3": [
+                  1,
+                  0.85,
+                  0.23
+                ],
+                "Visible": true
+              },
+              "Children": [
+                {
+                  "Name": "Layout",
+                  "ClassName": "UIListLayout",
+                  "Properties": {
+                    "Padding": {
+                      "UDim": [
+                        0,
+                        14
+                      ]
+                    },
+                    "SortOrder": "LayoutOrder"
+                  }
+                },
+                {
+                  "Name": "Padding",
+                  "ClassName": "UIPadding",
+                  "Properties": {
+                    "PaddingTop": {
+                      "UDim": [
+                        0,
+                        14
+                      ]
+                    },
+                    "PaddingBottom": {
+                      "UDim": [
+                        0,
+                        10
+                      ]
+                    },
+                    "PaddingLeft": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    },
+                    "PaddingRight": {
+                      "UDim": [
+                        0,
+                        10
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Deal",
+                  "ClassName": "Frame",
+                  "Properties": {
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          180
+                        ]
+                      ]
+                    },
+                    "BackgroundColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "Visible": true,
+                    "LayoutOrder": 1,
+                    "ClipsDescendants": false
+                  },
+                  "Children": [
+                    {
+                      "Name": "Corner",
+                      "ClassName": "UICorner",
+                      "Properties": {
+                        "CornerRadius": {
+                          "UDim": [
+                            0,
+                            16
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "Name": "Stroke",
+                      "ClassName": "UIStroke",
+                      "Properties": {
+                        "Thickness": 3,
+                        "Color": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ApplyStrokeMode": "Border",
+                        "LineJoinMode": "Round"
+                      }
+                    },
+                    {
+                      "Name": "Rarity",
+                      "ClassName": "UIGradient",
+                      "Properties": {
+                        "Rotation": 90,
+                        "Color": {
+                          "ColorSequence": {
+                            "keypoints": [
+                              {
+                                "time": 0,
+                                "color": [
+                                  1,
+                                  0.45,
+                                  0.25
+                                ]
+                              },
+                              {
+                                "time": 1,
+                                "color": [
+                                  0.78,
+                                  0.12,
+                                  0.35
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "Name": "Shine",
+                      "ClassName": "Frame",
+                      "Properties": {
+                        "Size": {
+                          "UDim2": [
+                            [
+                              1,
+                              0
+                            ],
+                            [
+                              1,
+                              0
+                            ]
+                          ]
+                        },
+                        "BackgroundColor3": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "ZIndex": 2
+                      },
+                      "Children": [
+                        {
+                          "Name": "Corner",
+                          "ClassName": "UICorner",
+                          "Properties": {
+                            "CornerRadius": {
+                              "UDim": [
+                                0,
+                                16
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "Name": "Gradient",
+                          "ClassName": "UIGradient",
+                          "Properties": {
+                            "Rotation": 20,
+                            "Transparency": {
+                              "NumberSequence": {
+                                "keypoints": [
+                                  {
+                                    "time": 0,
+                                    "value": 1,
+                                    "envelope": 0
+                                  },
+                                  {
+                                    "time": 0.42,
+                                    "value": 1,
+                                    "envelope": 0
+                                  },
+                                  {
+                                    "time": 0.5,
+                                    "value": 0.55,
+                                    "envelope": 0
+                                  },
+                                  {
+                                    "time": 0.58,
+                                    "value": 1,
+                                    "envelope": 0
+                                  },
+                                  {
+                                    "time": 1,
+                                    "value": 1,
+                                    "envelope": 0
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Name": "Ribbon",
+                      "ClassName": "TextLabel",
+                      "Properties": {
+                        "AnchorPoint": [
+                          0,
+                          0
+                        ],
+                        "Position": {
+                          "UDim2": [
+                            [
+                              0,
+                              12
+                            ],
+                            [
+                              0,
+                              -12
+                            ]
+                          ]
+                        },
+                        "Size": {
+                          "UDim2": [
+                            [
+                              0,
+                              150
+                            ],
+                            [
+                              0,
+                              30
+                            ]
+                          ]
+                        },
+                        "BackgroundColor3": [
+                          0.95,
+                          0.15,
+                          0.3
+                        ],
+                        "Text": "🔥 DAILY DEAL",
+                        "TextColor3": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "TextScaled": true,
+                        "FontFace": {
+                          "Font": {
+                            "family": "rbxasset://fonts/families/FredokaOne.json",
+                            "weight": "Regular",
+                            "style": "Normal"
+                          }
+                        },
+                        "Rotation": -4,
+                        "ZIndex": 6,
+                        "TextStrokeTransparency": 0.3,
+                        "TextStrokeColor3": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "Visible": true
+                      },
+                      "Children": [
+                        {
+                          "Name": "Corner",
+                          "ClassName": "UICorner",
+                          "Properties": {
+                            "CornerRadius": {
+                              "UDim": [
+                                0.5,
+                                0
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "Name": "Stroke",
+                          "ClassName": "UIStroke",
+                          "Properties": {
+                            "Thickness": 2,
+                            "Color": [
+                              0.04,
+                              0.06,
+                              0.17
+                            ],
+                            "ApplyStrokeMode": "Border",
+                            "LineJoinMode": "Round"
+                          }
+                        },
+                        {
+                          "Name": "MaxText",
+                          "ClassName": "UITextSizeConstraint",
+                          "Properties": {
+                            "MaxTextSize": 20
+                          }
+                        },
+                        {
+                          "Name": "Padding",
+                          "ClassName": "UIPadding",
+                          "Properties": {
+                            "PaddingLeft": {
+                              "UDim": [
+                                0,
+                                8
+                              ]
+                            },
+                            "PaddingRight": {
+                              "UDim": [
+                                0,
+                                8
+                              ]
+                            },
+                            "PaddingTop": {
+                              "UDim": [
+                                0,
+                                2
+                              ]
+                            },
+                            "PaddingBottom": {
+                              "UDim": [
+                                0,
+                                2
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Name": "Icon",
+                      "ClassName": "TextLabel",
+                      "Properties": {
+                        "AnchorPoint": [
+                          0,
+                          0.5
+                        ],
+                        "Position": {
+                          "UDim2": [
+                            [
+                              0,
+                              18
+                            ],
+                            [
+                              0.5,
+                              6
+                            ]
+                          ]
+                        },
+                        "Size": {
+                          "UDim2": [
+                            [
+                              0,
+                              120
+                            ],
+                            [
+                              0,
+                              120
+                            ]
+                          ]
+                        },
+                        "BackgroundTransparency": 1,
+                        "Text": "🎩",
+                        "TextColor3": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "TextScaled": true,
+                        "FontFace": {
+                          "Font": {
+                            "family": "rbxasset://fonts/families/FredokaOne.json",
+                            "weight": "Regular",
+                            "style": "Normal"
+                          }
+                        },
+                        "TextXAlignment": "Center",
+                        "TextStrokeTransparency": 1,
+                        "TextStrokeColor3": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ZIndex": 3
+                      }
+                    },
+                    {
+                      "Name": "ItemName",
+                      "ClassName": "TextLabel",
+                      "Properties": {
+                        "AnchorPoint": [
+                          0,
+                          0
+                        ],
+                        "Position": {
+                          "UDim2": [
+                            [
+                              0,
+                              150
+                            ],
+                            [
+                              0,
+                              26
+                            ]
+                          ]
+                        },
+                        "Size": {
+                          "UDim2": [
+                            [
+                              0.62,
+                              -160
+                            ],
+                            [
+                              0,
+                              40
+                            ]
+                          ]
+                        },
+                        "BackgroundTransparency": 1,
+                        "Text": "Item",
+                        "TextColor3": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "TextScaled": true,
+                        "FontFace": {
+                          "Font": {
+                            "family": "rbxasset://fonts/families/FredokaOne.json",
+                            "weight": "Regular",
+                            "style": "Normal"
+                          }
+                        },
+                        "TextXAlignment": "Left",
+                        "TextStrokeTransparency": 0,
+                        "TextStrokeColor3": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ZIndex": 3
+                      },
+                      "Children": [
+                        {
+                          "Name": "MaxText",
+                          "ClassName": "UITextSizeConstraint",
+                          "Properties": {
+                            "MaxTextSize": 36
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Name": "OldPrice",
+                      "ClassName": "TextLabel",
+                      "Properties": {
+                        "AnchorPoint": [
+                          0,
+                          0
+                        ],
+                        "Position": {
+                          "UDim2": [
+                            [
+                              0,
+                              150
+                            ],
+                            [
+                              0,
+                              70
+                            ]
+                          ]
+                        },
+                        "Size": {
+                          "UDim2": [
+                            [
+                              0,
+                              110
+                            ],
+                            [
+                              0,
+                              30
+                            ]
+                          ]
+                        },
+                        "BackgroundTransparency": 1,
+                        "Text": "",
+                        "TextColor3": [
+                          1,
+                          0.85,
+                          0.85
+                        ],
+                        "TextScaled": true,
+                        "FontFace": {
+                          "Font": {
+                            "family": "rbxasset://fonts/families/FredokaOne.json",
+                            "weight": "Regular",
+                            "style": "Normal"
+                          }
+                        },
+                        "TextXAlignment": "Left",
+                        "TextStrokeTransparency": 0.4,
+                        "TextStrokeColor3": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "RichText": true,
+                        "ZIndex": 3
+                      },
+                      "Children": [
+                        {
+                          "Name": "MaxText",
+                          "ClassName": "UITextSizeConstraint",
+                          "Properties": {
+                            "MaxTextSize": 24
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Name": "Discount",
+                      "ClassName": "TextLabel",
+                      "Properties": {
+                        "AnchorPoint": [
+                          0,
+                          0
+                        ],
+                        "Position": {
+                          "UDim2": [
+                            [
+                              0,
+                              262
+                            ],
+                            [
+                              0,
+                              70
+                            ]
+                          ]
+                        },
+                        "Size": {
+                          "UDim2": [
+                            [
+                              0,
+                              70
+                            ],
+                            [
+                              0,
+                              30
+                            ]
+                          ]
+                        },
+                        "BackgroundColor3": [
+                          1,
+                          0.9,
+                          0.2
+                        ],
+                        "Text": "-30%",
+                        "TextColor3": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "TextScaled": true,
+                        "FontFace": {
+                          "Font": {
+                            "family": "rbxasset://fonts/families/FredokaOne.json",
+                            "weight": "Regular",
+                            "style": "Normal"
+                          }
+                        },
+                        "Rotation": 0,
+                        "ZIndex": 6,
+                        "TextStrokeTransparency": 0.3,
+                        "TextStrokeColor3": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "Visible": true
+                      },
+                      "Children": [
+                        {
+                          "Name": "Corner",
+                          "ClassName": "UICorner",
+                          "Properties": {
+                            "CornerRadius": {
+                              "UDim": [
+                                0.5,
+                                0
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "Name": "Stroke",
+                          "ClassName": "UIStroke",
+                          "Properties": {
+                            "Thickness": 2,
+                            "Color": [
+                              0.04,
+                              0.06,
+                              0.17
+                            ],
+                            "ApplyStrokeMode": "Border",
+                            "LineJoinMode": "Round"
+                          }
+                        },
+                        {
+                          "Name": "MaxText",
+                          "ClassName": "UITextSizeConstraint",
+                          "Properties": {
+                            "MaxTextSize": 22
+                          }
+                        },
+                        {
+                          "Name": "Padding",
+                          "ClassName": "UIPadding",
+                          "Properties": {
+                            "PaddingLeft": {
+                              "UDim": [
+                                0,
+                                8
+                              ]
+                            },
+                            "PaddingRight": {
+                              "UDim": [
+                                0,
+                                8
+                              ]
+                            },
+                            "PaddingTop": {
+                              "UDim": [
+                                0,
+                                2
+                              ]
+                            },
+                            "PaddingBottom": {
+                              "UDim": [
+                                0,
+                                2
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Name": "Timer",
+                      "ClassName": "TextLabel",
+                      "Properties": {
+                        "AnchorPoint": [
+                          0,
+                          0
+                        ],
+                        "Position": {
+                          "UDim2": [
+                            [
+                              0,
+                              150
+                            ],
+                            [
+                              1,
+                              -46
+                            ]
+                          ]
+                        },
+                        "Size": {
+                          "UDim2": [
+                            [
+                              0.62,
+                              -160
+                            ],
+                            [
+                              0,
+                              28
+                            ]
+                          ]
+                        },
+                        "BackgroundTransparency": 1,
+                        "Text": "Ends in 00:00:00",
+                        "TextColor3": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "TextScaled": true,
+                        "FontFace": {
+                          "Font": {
+                            "family": "rbxasset://fonts/families/BuilderSans.json",
+                            "weight": "Bold",
+                            "style": "Normal"
+                          }
+                        },
+                        "TextXAlignment": "Left",
+                        "TextStrokeTransparency": 0,
+                        "TextStrokeColor3": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ZIndex": 3
+                      },
+                      "Children": [
+                        {
+                          "Name": "MaxText",
+                          "ClassName": "UITextSizeConstraint",
+                          "Properties": {
+                            "MaxTextSize": 22
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Name": "Buy",
+                      "ClassName": "TextButton",
+                      "Properties": {
+                        "AnchorPoint": [
+                          1,
+                          0.5
+                        ],
+                        "Position": {
+                          "UDim2": [
+                            [
+                              1,
+                              -18
+                            ],
+                            [
+                              0.5,
+                              6
+                            ]
+                          ]
+                        },
+                        "Size": {
+                          "UDim2": [
+                            [
+                              0.34,
+                              0
+                            ],
+                            [
+                              0,
+                              64
+                            ]
+                          ]
+                        },
+                        "BackgroundColor3": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "Text": "",
+                        "AutoButtonColor": false,
+                        "ZIndex": 4
+                      },
+                      "Children": [
+                        {
+                          "Name": "Corner",
+                          "ClassName": "UICorner",
+                          "Properties": {
+                            "CornerRadius": {
+                              "UDim": [
+                                0,
+                                12
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "Name": "Stroke",
+                          "ClassName": "UIStroke",
+                          "Properties": {
+                            "Thickness": 3,
+                            "Color": [
+                              0.04,
+                              0.06,
+                              0.17
+                            ],
+                            "ApplyStrokeMode": "Border",
+                            "LineJoinMode": "Round"
+                          }
+                        },
+                        {
+                          "Name": "Gradient",
+                          "ClassName": "UIGradient",
+                          "Properties": {
+                            "Rotation": 90,
+                            "Color": {
+                              "ColorSequence": {
+                                "keypoints": [
+                                  {
+                                    "time": 0,
+                                    "color": [
+                                      1,
+                                      0.88,
+                                      0.3
+                                    ]
+                                  },
+                                  {
+                                    "time": 1,
+                                    "color": [
+                                      1,
+                                      0.62,
+                                      0.12
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "Name": "Label",
+                          "ClassName": "TextLabel",
+                          "Properties": {
+                            "AnchorPoint": [
+                              0,
+                              0
+                            ],
+                            "Position": {
+                              "UDim2": [
+                                [
+                                  0,
+                                  6
+                                ],
+                                [
+                                  0,
+                                  5
+                                ]
+                              ]
+                            },
+                            "Size": {
+                              "UDim2": [
+                                [
+                                  1,
+                                  -12
+                                ],
+                                [
+                                  1,
+                                  -10
+                                ]
+                              ]
+                            },
+                            "BackgroundTransparency": 1,
+                            "Text": "Buy",
+                            "TextColor3": [
+                              1,
+                              1,
+                              1
+                            ],
+                            "TextScaled": true,
+                            "FontFace": {
+                              "Font": {
+                                "family": "rbxasset://fonts/families/FredokaOne.json",
+                                "weight": "Regular",
+                                "style": "Normal"
+                              }
+                            },
+                            "TextXAlignment": "Center",
+                            "TextStrokeTransparency": 0,
+                            "TextStrokeColor3": [
+                              0.04,
+                              0.06,
+                              0.17
+                            ],
+                            "ZIndex": 5
+                          },
+                          "Children": [
+                            {
+                              "Name": "MaxText",
+                              "ClassName": "UITextSizeConstraint",
+                              "Properties": {
+                                "MaxTextSize": 30
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Name": "Picks",
+                  "ClassName": "Frame",
+                  "Properties": {
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          220
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "LayoutOrder": 2
+                  },
+                  "Children": [
+                    {
+                      "Name": "Grid",
+                      "ClassName": "UIGridLayout",
+                      "Properties": {
+                        "CellSize": {
+                          "UDim2": [
+                            [
+                              0.49,
+                              0
+                            ],
+                            [
+                              0,
+                              220
+                            ]
+                          ]
+                        },
+                        "CellPadding": {
+                          "UDim2": [
+                            [
+                              0.02,
+                              0
+                            ],
+                            [
+                              0,
+                              10
+                            ]
+                          ]
+                        },
+                        "SortOrder": "LayoutOrder"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Name": "PassPick",
+                  "ClassName": "Frame",
+                  "Properties": {
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          110
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "LayoutOrder": 3
+                  },
+                  "Children": [
+                    {
+                      "Name": "Layout",
+                      "ClassName": "UIListLayout",
+                      "Properties": {
+                        "SortOrder": "LayoutOrder"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Name": "Items",
+              "ClassName": "ScrollingFrame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "BorderSizePixel": 0,
+                "CanvasSize": {
+                  "UDim2": [
+                    [
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                },
+                "AutomaticCanvasSize": "Y",
+                "ScrollingDirection": "Y",
+                "ScrollBarThickness": 6,
+                "ScrollBarImageColor3": [
+                  1,
+                  0.85,
+                  0.23
+                ],
+                "Visible": false
+              },
+              "Children": [
+                {
+                  "Name": "Grid",
+                  "ClassName": "UIGridLayout",
+                  "Properties": {
+                    "CellSize": {
+                      "UDim2": [
+                        [
+                          0.32,
+                          0
+                        ],
+                        [
+                          0,
+                          200
+                        ]
+                      ]
+                    },
+                    "CellPadding": {
+                      "UDim2": [
+                        [
+                          0,
+                          10
+                        ],
+                        [
+                          0,
+                          10
+                        ]
+                      ]
+                    },
+                    "SortOrder": "LayoutOrder",
+                    "HorizontalAlignment": "Center"
                   }
                 },
                 {
@@ -690,10 +2360,1781 @@
                     "PaddingBottom": {
                       "UDim": [
                         0,
-                        6
+                        10
+                      ]
+                    },
+                    "PaddingLeft": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    },
+                    "PaddingRight": {
+                      "UDim": [
+                        0,
+                        10
                       ]
                     }
                   }
+                }
+              ]
+            },
+            {
+              "Name": "Coins",
+              "ClassName": "ScrollingFrame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "BorderSizePixel": 0,
+                "CanvasSize": {
+                  "UDim2": [
+                    [
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                },
+                "AutomaticCanvasSize": "Y",
+                "ScrollingDirection": "Y",
+                "ScrollBarThickness": 6,
+                "ScrollBarImageColor3": [
+                  1,
+                  0.85,
+                  0.23
+                ],
+                "Visible": false
+              },
+              "Children": [
+                {
+                  "Name": "Grid",
+                  "ClassName": "UIGridLayout",
+                  "Properties": {
+                    "CellSize": {
+                      "UDim2": [
+                        [
+                          0.32,
+                          0
+                        ],
+                        [
+                          0,
+                          220
+                        ]
+                      ]
+                    },
+                    "CellPadding": {
+                      "UDim2": [
+                        [
+                          0,
+                          10
+                        ],
+                        [
+                          0,
+                          10
+                        ]
+                      ]
+                    },
+                    "SortOrder": "LayoutOrder",
+                    "HorizontalAlignment": "Center"
+                  }
+                },
+                {
+                  "Name": "Padding",
+                  "ClassName": "UIPadding",
+                  "Properties": {
+                    "PaddingTop": {
+                      "UDim": [
+                        0,
+                        6
+                      ]
+                    },
+                    "PaddingBottom": {
+                      "UDim": [
+                        0,
+                        10
+                      ]
+                    },
+                    "PaddingLeft": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    },
+                    "PaddingRight": {
+                      "UDim": [
+                        0,
+                        10
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Passes",
+              "ClassName": "ScrollingFrame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "BorderSizePixel": 0,
+                "CanvasSize": {
+                  "UDim2": [
+                    [
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                },
+                "AutomaticCanvasSize": "Y",
+                "ScrollingDirection": "Y",
+                "ScrollBarThickness": 6,
+                "ScrollBarImageColor3": [
+                  1,
+                  0.85,
+                  0.23
+                ],
+                "Visible": false
+              },
+              "Children": [
+                {
+                  "Name": "Layout",
+                  "ClassName": "UIListLayout",
+                  "Properties": {
+                    "Padding": {
+                      "UDim": [
+                        0,
+                        10
+                      ]
+                    },
+                    "SortOrder": "LayoutOrder"
+                  }
+                },
+                {
+                  "Name": "Padding",
+                  "ClassName": "UIPadding",
+                  "Properties": {
+                    "PaddingTop": {
+                      "UDim": [
+                        0,
+                        6
+                      ]
+                    },
+                    "PaddingBottom": {
+                      "UDim": [
+                        0,
+                        10
+                      ]
+                    },
+                    "PaddingLeft": {
+                      "UDim": [
+                        0,
+                        4
+                      ]
+                    },
+                    "PaddingRight": {
+                      "UDim": [
+                        0,
+                        10
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "Templates",
+          "ClassName": "Folder",
+          "Properties": {},
+          "Children": [
+            {
+              "Name": "ItemTemplate",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      0,
+                      160
+                    ],
+                    [
+                      0,
+                      200
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "Visible": false
+              },
+              "Children": [
+                {
+                  "Name": "Corner",
+                  "ClassName": "UICorner",
+                  "Properties": {
+                    "CornerRadius": {
+                      "UDim": [
+                        0,
+                        16
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Stroke",
+                  "ClassName": "UIStroke",
+                  "Properties": {
+                    "Thickness": 3,
+                    "Color": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ApplyStrokeMode": "Border",
+                    "LineJoinMode": "Round"
+                  }
+                },
+                {
+                  "Name": "Rarity",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.55,
+                              0.6,
+                              0.72
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.32,
+                              0.36,
+                              0.48
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "Name": "RarityLabel",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          10
+                        ],
+                        [
+                          0,
+                          8
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          -20
+                        ],
+                        [
+                          0,
+                          18
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "COMMON",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 0,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 3
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 16
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Name": "Icon",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0.5,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0.5,
+                          0
+                        ],
+                        [
+                          0,
+                          30
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0.6,
+                          0
+                        ],
+                        [
+                          0.42,
+                          0
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "🎩",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 1,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 3
+                  }
+                },
+                {
+                  "Name": "ItemName",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          8
+                        ],
+                        [
+                          0.6,
+                          0
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          -16
+                        ],
+                        [
+                          0,
+                          26
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "Item",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 0,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 3
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 22
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Name": "DealTag",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      1,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          1,
+                          -6
+                        ],
+                        [
+                          0,
+                          -8
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0,
+                          56
+                        ],
+                        [
+                          0,
+                          24
+                        ]
+                      ]
+                    },
+                    "BackgroundColor3": [
+                      0.95,
+                      0.15,
+                      0.3
+                    ],
+                    "Text": "-30%",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "Rotation": 8,
+                    "ZIndex": 6,
+                    "TextStrokeTransparency": 0.3,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "Visible": false
+                  },
+                  "Children": [
+                    {
+                      "Name": "Corner",
+                      "ClassName": "UICorner",
+                      "Properties": {
+                        "CornerRadius": {
+                          "UDim": [
+                            0.5,
+                            0
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "Name": "Stroke",
+                      "ClassName": "UIStroke",
+                      "Properties": {
+                        "Thickness": 2,
+                        "Color": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ApplyStrokeMode": "Border",
+                        "LineJoinMode": "Round"
+                      }
+                    },
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 18
+                      }
+                    },
+                    {
+                      "Name": "Padding",
+                      "ClassName": "UIPadding",
+                      "Properties": {
+                        "PaddingLeft": {
+                          "UDim": [
+                            0,
+                            8
+                          ]
+                        },
+                        "PaddingRight": {
+                          "UDim": [
+                            0,
+                            8
+                          ]
+                        },
+                        "PaddingTop": {
+                          "UDim": [
+                            0,
+                            2
+                          ]
+                        },
+                        "PaddingBottom": {
+                          "UDim": [
+                            0,
+                            2
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Name": "Buy",
+                  "ClassName": "TextButton",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0.5,
+                      1
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0.5,
+                          0
+                        ],
+                        [
+                          1,
+                          -10
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          -20
+                        ],
+                        [
+                          0,
+                          44
+                        ]
+                      ]
+                    },
+                    "BackgroundColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "Text": "",
+                    "AutoButtonColor": false,
+                    "ZIndex": 4
+                  },
+                  "Children": [
+                    {
+                      "Name": "Corner",
+                      "ClassName": "UICorner",
+                      "Properties": {
+                        "CornerRadius": {
+                          "UDim": [
+                            0,
+                            12
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "Name": "Stroke",
+                      "ClassName": "UIStroke",
+                      "Properties": {
+                        "Thickness": 3,
+                        "Color": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ApplyStrokeMode": "Border",
+                        "LineJoinMode": "Round"
+                      }
+                    },
+                    {
+                      "Name": "Gradient",
+                      "ClassName": "UIGradient",
+                      "Properties": {
+                        "Rotation": 90,
+                        "Color": {
+                          "ColorSequence": {
+                            "keypoints": [
+                              {
+                                "time": 0,
+                                "color": [
+                                  1,
+                                  0.88,
+                                  0.3
+                                ]
+                              },
+                              {
+                                "time": 1,
+                                "color": [
+                                  1,
+                                  0.62,
+                                  0.12
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "Name": "Label",
+                      "ClassName": "TextLabel",
+                      "Properties": {
+                        "AnchorPoint": [
+                          0,
+                          0
+                        ],
+                        "Position": {
+                          "UDim2": [
+                            [
+                              0,
+                              6
+                            ],
+                            [
+                              0,
+                              5
+                            ]
+                          ]
+                        },
+                        "Size": {
+                          "UDim2": [
+                            [
+                              1,
+                              -12
+                            ],
+                            [
+                              1,
+                              -10
+                            ]
+                          ]
+                        },
+                        "BackgroundTransparency": 1,
+                        "Text": "Buy",
+                        "TextColor3": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "TextScaled": true,
+                        "FontFace": {
+                          "Font": {
+                            "family": "rbxasset://fonts/families/FredokaOne.json",
+                            "weight": "Regular",
+                            "style": "Normal"
+                          }
+                        },
+                        "TextXAlignment": "Center",
+                        "TextStrokeTransparency": 0,
+                        "TextStrokeColor3": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ZIndex": 5
+                      },
+                      "Children": [
+                        {
+                          "Name": "MaxText",
+                          "ClassName": "UITextSizeConstraint",
+                          "Properties": {
+                            "MaxTextSize": 22
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Name": "PackTemplate",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      0,
+                      160
+                    ],
+                    [
+                      0,
+                      220
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "Visible": false
+              },
+              "Children": [
+                {
+                  "Name": "Corner",
+                  "ClassName": "UICorner",
+                  "Properties": {
+                    "CornerRadius": {
+                      "UDim": [
+                        0,
+                        16
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Stroke",
+                  "ClassName": "UIStroke",
+                  "Properties": {
+                    "Thickness": 3,
+                    "Color": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ApplyStrokeMode": "Border",
+                    "LineJoinMode": "Round"
+                  }
+                },
+                {
+                  "Name": "Rarity",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.25,
+                              0.75,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.12,
+                              0.42,
+                              0.85
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "Name": "Badge",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0.5,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0.5,
+                          0
+                        ],
+                        [
+                          0,
+                          -10
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0.8,
+                          0
+                        ],
+                        [
+                          0,
+                          26
+                        ]
+                      ]
+                    },
+                    "BackgroundColor3": [
+                      1,
+                      0.5,
+                      0.12
+                    ],
+                    "Text": "POPULAR",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "Rotation": -3,
+                    "ZIndex": 6,
+                    "TextStrokeTransparency": 0.3,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "Visible": true
+                  },
+                  "Children": [
+                    {
+                      "Name": "Corner",
+                      "ClassName": "UICorner",
+                      "Properties": {
+                        "CornerRadius": {
+                          "UDim": [
+                            0.5,
+                            0
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "Name": "Stroke",
+                      "ClassName": "UIStroke",
+                      "Properties": {
+                        "Thickness": 2,
+                        "Color": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ApplyStrokeMode": "Border",
+                        "LineJoinMode": "Round"
+                      }
+                    },
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 18
+                      }
+                    },
+                    {
+                      "Name": "Padding",
+                      "ClassName": "UIPadding",
+                      "Properties": {
+                        "PaddingLeft": {
+                          "UDim": [
+                            0,
+                            8
+                          ]
+                        },
+                        "PaddingRight": {
+                          "UDim": [
+                            0,
+                            8
+                          ]
+                        },
+                        "PaddingTop": {
+                          "UDim": [
+                            0,
+                            2
+                          ]
+                        },
+                        "PaddingBottom": {
+                          "UDim": [
+                            0,
+                            2
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Name": "Icon",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0.5,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0.5,
+                          0
+                        ],
+                        [
+                          0,
+                          24
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0.55,
+                          0
+                        ],
+                        [
+                          0.36,
+                          0
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "💰",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 1,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 3
+                  }
+                },
+                {
+                  "Name": "Amount",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          8
+                        ],
+                        [
+                          0.5,
+                          0
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          -16
+                        ],
+                        [
+                          0,
+                          34
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "100",
+                    "TextColor3": [
+                      1,
+                      0.9,
+                      0.3
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 0,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 3
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 32
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Name": "Bonus",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          8
+                        ],
+                        [
+                          0.5,
+                          34
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          -16
+                        ],
+                        [
+                          0,
+                          20
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "+10% bonus",
+                    "TextColor3": [
+                      0.75,
+                      1,
+                      0.75
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 0,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 3
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 16
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Name": "Buy",
+                  "ClassName": "TextButton",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0.5,
+                      1
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0.5,
+                          0
+                        ],
+                        [
+                          1,
+                          -10
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          -20
+                        ],
+                        [
+                          0,
+                          44
+                        ]
+                      ]
+                    },
+                    "BackgroundColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "Text": "",
+                    "AutoButtonColor": false,
+                    "ZIndex": 4
+                  },
+                  "Children": [
+                    {
+                      "Name": "Corner",
+                      "ClassName": "UICorner",
+                      "Properties": {
+                        "CornerRadius": {
+                          "UDim": [
+                            0,
+                            12
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "Name": "Stroke",
+                      "ClassName": "UIStroke",
+                      "Properties": {
+                        "Thickness": 3,
+                        "Color": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ApplyStrokeMode": "Border",
+                        "LineJoinMode": "Round"
+                      }
+                    },
+                    {
+                      "Name": "Gradient",
+                      "ClassName": "UIGradient",
+                      "Properties": {
+                        "Rotation": 90,
+                        "Color": {
+                          "ColorSequence": {
+                            "keypoints": [
+                              {
+                                "time": 0,
+                                "color": [
+                                  0.42,
+                                  0.92,
+                                  0.42
+                                ]
+                              },
+                              {
+                                "time": 1,
+                                "color": [
+                                  0.13,
+                                  0.62,
+                                  0.22
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "Name": "Label",
+                      "ClassName": "TextLabel",
+                      "Properties": {
+                        "AnchorPoint": [
+                          0,
+                          0
+                        ],
+                        "Position": {
+                          "UDim2": [
+                            [
+                              0,
+                              6
+                            ],
+                            [
+                              0,
+                              5
+                            ]
+                          ]
+                        },
+                        "Size": {
+                          "UDim2": [
+                            [
+                              1,
+                              -12
+                            ],
+                            [
+                              1,
+                              -10
+                            ]
+                          ]
+                        },
+                        "BackgroundTransparency": 1,
+                        "Text": "Soon",
+                        "TextColor3": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "TextScaled": true,
+                        "FontFace": {
+                          "Font": {
+                            "family": "rbxasset://fonts/families/FredokaOne.json",
+                            "weight": "Regular",
+                            "style": "Normal"
+                          }
+                        },
+                        "TextXAlignment": "Center",
+                        "TextStrokeTransparency": 0,
+                        "TextStrokeColor3": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ZIndex": 5
+                      },
+                      "Children": [
+                        {
+                          "Name": "MaxText",
+                          "ClassName": "UITextSizeConstraint",
+                          "Properties": {
+                            "MaxTextSize": 22
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Name": "PassTemplate",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      0,
+                      110
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "Visible": false
+              },
+              "Children": [
+                {
+                  "Name": "Corner",
+                  "ClassName": "UICorner",
+                  "Properties": {
+                    "CornerRadius": {
+                      "UDim": [
+                        0,
+                        16
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Stroke",
+                  "ClassName": "UIStroke",
+                  "Properties": {
+                    "Thickness": 3,
+                    "Color": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ApplyStrokeMode": "Border",
+                    "LineJoinMode": "Round"
+                  }
+                },
+                {
+                  "Name": "Rarity",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.75,
+                              0.4,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.42,
+                              0.16,
+                              0.78
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "Name": "Icon",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0.5
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          14
+                        ],
+                        [
+                          0.5,
+                          0
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0,
+                          80
+                        ],
+                        [
+                          0,
+                          80
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "⚡",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Center",
+                    "TextStrokeTransparency": 1,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 3
+                  }
+                },
+                {
+                  "Name": "PassName",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          104
+                        ],
+                        [
+                          0,
+                          14
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0.55,
+                          -110
+                        ],
+                        [
+                          0,
+                          34
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "2x Coins",
+                    "TextColor3": [
+                      1,
+                      0.9,
+                      0.3
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Left",
+                    "TextStrokeTransparency": 0,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "ZIndex": 3
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 30
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Name": "Description",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          104
+                        ],
+                        [
+                          0,
+                          50
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0.55,
+                          -110
+                        ],
+                        [
+                          0,
+                          44
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "Double every coin.",
+                    "TextColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/BuilderSans.json",
+                        "weight": "Bold",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Left",
+                    "TextStrokeTransparency": 0.6,
+                    "TextStrokeColor3": [
+                      0.04,
+                      0.06,
+                      0.17
+                    ],
+                    "TextWrapped": true,
+                    "ZIndex": 3,
+                    "TextYAlignment": "Top"
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 18
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Name": "Buy",
+                  "ClassName": "TextButton",
+                  "Properties": {
+                    "AnchorPoint": [
+                      1,
+                      0.5
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          1,
+                          -14
+                        ],
+                        [
+                          0.5,
+                          0
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0.32,
+                          0
+                        ],
+                        [
+                          0,
+                          52
+                        ]
+                      ]
+                    },
+                    "BackgroundColor3": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "Text": "",
+                    "AutoButtonColor": false,
+                    "ZIndex": 4
+                  },
+                  "Children": [
+                    {
+                      "Name": "Corner",
+                      "ClassName": "UICorner",
+                      "Properties": {
+                        "CornerRadius": {
+                          "UDim": [
+                            0,
+                            12
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "Name": "Stroke",
+                      "ClassName": "UIStroke",
+                      "Properties": {
+                        "Thickness": 3,
+                        "Color": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ApplyStrokeMode": "Border",
+                        "LineJoinMode": "Round"
+                      }
+                    },
+                    {
+                      "Name": "Gradient",
+                      "ClassName": "UIGradient",
+                      "Properties": {
+                        "Rotation": 90,
+                        "Color": {
+                          "ColorSequence": {
+                            "keypoints": [
+                              {
+                                "time": 0,
+                                "color": [
+                                  0.42,
+                                  0.92,
+                                  0.42
+                                ]
+                              },
+                              {
+                                "time": 1,
+                                "color": [
+                                  0.13,
+                                  0.62,
+                                  0.22
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "Name": "Label",
+                      "ClassName": "TextLabel",
+                      "Properties": {
+                        "AnchorPoint": [
+                          0,
+                          0
+                        ],
+                        "Position": {
+                          "UDim2": [
+                            [
+                              0,
+                              6
+                            ],
+                            [
+                              0,
+                              5
+                            ]
+                          ]
+                        },
+                        "Size": {
+                          "UDim2": [
+                            [
+                              1,
+                              -12
+                            ],
+                            [
+                              1,
+                              -10
+                            ]
+                          ]
+                        },
+                        "BackgroundTransparency": 1,
+                        "Text": "Soon",
+                        "TextColor3": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "TextScaled": true,
+                        "FontFace": {
+                          "Font": {
+                            "family": "rbxasset://fonts/families/FredokaOne.json",
+                            "weight": "Regular",
+                            "style": "Normal"
+                          }
+                        },
+                        "TextXAlignment": "Center",
+                        "TextStrokeTransparency": 0,
+                        "TextStrokeColor3": [
+                          0.04,
+                          0.06,
+                          0.17
+                        ],
+                        "ZIndex": 5
+                      },
+                      "Children": [
+                        {
+                          "Name": "MaxText",
+                          "ClassName": "UITextSizeConstraint",
+                          "Properties": {
+                            "MaxTextSize": 24
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
