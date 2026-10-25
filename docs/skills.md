@@ -10,7 +10,7 @@ This fork uses the starter's Lifecycle and registries, Packet for actions, Repli
 
 - Work from the repository root. `.agents/skills/<name>` always means this checkout, not the user's home directory.
 - Start/check code using `pnpm run setup`, `pnpm run dev`, `pnpm run check`. The imported Knit project generators are deliberately disabled. Start another game with a new copy of this template.
-- Only one process writes to a Studio instance. Asset workers produce files and manifests; the parent does integration. Discover the actual MCP tool names in the session instead of assuming a specific plugin prefix.
+- Only one process writes to a Studio instance. Asset workers produce files and manifests; the parent does integration. The project `.mcp.json` registers the built-in server as `Roblox_Studio` (tools appear as `mcp__Roblox_Studio__*` in Claude Code after a session restart and approval). Still confirm the tools in the live session, and call `list_roblox_studios` / `set_active_studio` to target the right window before any write.
 - Use the user's selected model. Imported role descriptions do not authorize model changes, spending or publication.
 - `LOCAL.md` is optional machine-specific configuration, ignored by Git. Record paths and environment variable names only; never secret values. Preserve existing personal configuration.
 

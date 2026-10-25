@@ -21,7 +21,7 @@ Utiliser **`pnpm run setup`**, pas `pnpm setup` (commande interne de pnpm). Au p
 
 Ouvrir `build/game.rbxlx` dans Studio. Plugins → Rojo → connecter **localhost:34873**, puis accepter la synchronisation. Ce port diffère de l'obby initial (34872). Garder `pnpm run dev` actif.
 
-Dans T3, ouvrir **ce dossier**. Activer le MCP intégré à Studio pour Claude Code et Codex dans Assistant → paramètres MCP → Quick connect, puis commencer de nouvelles sessions. Vérifier que chaque agent retrouve la bonne fenêtre. Les skills sont locaux au dépôt ; aucune installation globale n'est nécessaire. Pour Claude, `.claude/skills` pointe vers `.agents/skills`. Sous Windows, Git doit préserver les liens symboliques (mode développeur).
+Dans T3, ouvrir **ce dossier**. Activer le MCP intégré à Studio dans Assistant → paramètres MCP. Claude Code le charge depuis `.mcp.json` (binaire `StudioMCP` de l'installation macOS standard) : approuver le serveur `Roblox_Studio` au premier lancement. Codex se connecte via Quick connect. Commencer ensuite de nouvelles sessions. Vérifier que chaque agent retrouve la bonne fenêtre. Les skills sont locaux au dépôt ; aucune installation globale n'est nécessaire. Pour Claude, `.claude/skills` pointe vers `.agents/skills`. Sous Windows, Git doit préserver les liens symboliques (mode développeur).
 
 ## Commandes
 

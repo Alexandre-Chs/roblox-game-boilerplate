@@ -11,7 +11,7 @@ Local macOS checks completed:
 - Imported UI generator produced PNG, model JSON and Luau for its sample coin HUD.
 - Imported minimal-map generator produced its plan and report. Report is WARN (no props and some movement constants uncalibrated), not a gameplay certification.
 
-Second pass (2026-10-25, Claude Fable 5.1): `pnpm run check` green with `lintErrors` now on; GitHub Actions run of the pushed commit green; `check_setup.py`, `preflight.py` and `place_state.py` run on macOS (Studio closed) and find the Rokit toolchain. `AdjustCash` no longer forces a save per call.
+Second pass (2026-10-25, Claude Fable 5.1): `pnpm run check` green with `lintErrors` now on; GitHub Actions run of the pushed commit green; `check_setup.py`, `preflight.py` and `place_state.py` run on macOS (Studio closed) and find the Rokit toolchain. `AdjustCash` no longer forces a save per call. Project `.mcp.json` added; a stdio probe of StudioMCP completed initialize, listed 28 tools and answered `list_roblox_studios` (empty, Studio closed). No playtest yet.
 
 Not verified: live Studio/MCP in this agent session, multiplayer, real persistence, real purchases, Blender animation/mesh exports, external image/3D generation or Open Cloud uploads. The shipped providers need their own optional setup. CI is configured but its remote result is separate from local verification.
 
