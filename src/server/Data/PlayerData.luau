@@ -5,6 +5,7 @@ export type Data = {
 	Cash: number,
 	LastSeenAt: number,
 	Receipts: { [string]: number },
+	Inventory: { [string]: boolean },
 }
 
 local PlayerData = {}
@@ -14,6 +15,7 @@ PlayerData.Template = {
 	Cash = 0,
 	LastSeenAt = 0,
 	Receipts = {},
+	Inventory = {},
 } :: Data
 
 local function natural(value: any): boolean
@@ -39,6 +41,16 @@ function PlayerData.Validate(data: any): boolean
 		end
 		for purchaseId, grantedAt in data.Receipts do
 			if type(purchaseId) ~= "string" or #purchaseId == 0 or not natural(grantedAt) then
+				return false
+			end
+		end
+	end
+	if data.Inventory ~= nil then
+		if type(data.Inventory) ~= "table" then
+			return false
+		end
+		for itemId, owned in data.Inventory do
+			if type(itemId) ~= "string" or owned ~= true then
 				return false
 			end
 		end

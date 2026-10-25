@@ -15,6 +15,8 @@ Second pass (2026-10-25, Claude Fable 5.1): `pnpm run check` green with `lintErr
 
 Third pass (2026-10-25, Claude Opus 5.5): added DataSessions tests with a fake ProfileStore, the Coin/Hud example feature, Studio smoke markers, `places.json` and a guarded `pnpm run publish`. `pnpm run check` green; the build contains the coins with their tags. The publish refusal paths are tested; an actual upload has not been run (no key, no test experience). The coin pickup and Hud have not been played in Studio.
 
+Placeholder shop (2026-10-25): catalog, `BuyItem` packet, ShopService, `Inventory` data field and Shop screen added. Purchase rules and inventory validation are covered by Lune tests; the screen and server round trip have not been played in Studio.
+
 Not verified: live Studio/MCP in this agent session, multiplayer, real persistence, real purchases, Blender animation/mesh exports, external image/3D generation or Open Cloud uploads. The shipped providers need their own optional setup. CI is configured but its remote result is separate from local verification.
 
 Receipt pruning inherited from upstream was removed because it forgot old purchase IDs and could allow replay grants. Receipt history now grows with purchases; move to a durable receipt ledger before profile size becomes a constraint. These changes are not an exhaustive security audit of upstream packages or imported scripts.

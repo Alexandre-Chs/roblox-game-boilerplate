@@ -7,6 +7,7 @@ local Types = require(script.Types)
 
 local modules: { [string]: Types.ScreenModule } = {
 	Hud = require(script.Screens.Hud),
+	Shop = require(script.Screens.Shop),
 }
 
 local UIController = { Name = "UIController" }

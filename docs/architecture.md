@@ -31,6 +31,19 @@ The starter ships one small feature that crosses every layer, as the pattern to 
 
 The server decides the reward from `Touched`; the client only displays `Cash`. To start a game without it, delete those files and their two registry lines. Keep the Hud pattern if the game shows any player data.
 
+A placeholder **shop** builds on it, as the pattern for any client request:
+
+| Layer | File |
+| --- | --- |
+| Catalog (shared, client-visible) | `src/shared/Config/ShopCatalog.luau` |
+| Request | `BuyItem` in `src/shared/Packets.luau`, rate limited, returns `(ok, reason)` |
+| Pure rules, tested | `src/server/Services/ShopService/Purchasing.luau` |
+| Authoritative service | `src/server/Services/ShopService/init.luau`: validates, then `AdjustCash` and `Set({ "Inventory", id })` without yielding |
+| Saved data | `Inventory: { [string]: true }` in `PlayerData` |
+| Modal screen | `Screens/Shop.luau` + `assets/ui/Shop.model.json`, opened by the Hud `ShopButton` |
+
+Replace the items in `ShopCatalog` with the game's own; the screen builds one row per item from `ItemTemplate`. What owning an item does (equip, boost) belongs in the system that uses it, reading `Inventory`. To sell coins for Robux, add a developer product grant in `PurchaseService/Products.luau` that calls `AdjustCash`; never sell Robux items through `BuyItem`.
+
 ## Systems
 
 A system is a service (server) or controller (client): a ModuleScript table run by `src/shared/Lifecycle.luau`.

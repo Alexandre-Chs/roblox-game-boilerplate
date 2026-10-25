@@ -15,6 +15,17 @@ function Hud.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		warn(`[Hud] {gui:GetFullName()} needs a TextLabel named Cash`)
 	end
 
+	local shopButton = gui:FindFirstChild("ShopButton", true)
+	if shopButton and shopButton:IsA("TextButton") then
+		trove:Connect(shopButton.Activated, function()
+			if context.Controllers.UIController:IsOpen("Shop") then
+				context.Close("Shop")
+			else
+				context.Open("Shop")
+			end
+		end)
+	end
+
 	trove:Add(context.Controllers.DataController:Observe({ "Cash" }, function(cash: any)
 		if label then
 			label.Text = if type(cash) == "number" then `Coins: {cash}` else "Coins: ..."

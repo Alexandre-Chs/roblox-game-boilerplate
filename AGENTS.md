@@ -10,5 +10,5 @@
 - Never edit generated Packages, ServerPackages, sourcemap or vendored dependencies casually. Update their pinned source intentionally, preserve licences and rerun checks.
 - Save progress with Git. Keep secrets, LOCAL.md, generated work and machine paths out of commits. One agent writes to a Studio instance at a time; parallel agents produce files in disjoint areas.
 - Use a separate test universe for persistent-data and purchase validation (docs/release.md). Run `pnpm run publish` or paid asset generation only on explicit user authorization for that target.
-- Copy the example feature (Coin + Hud, docs/architecture.md) when adding a feature; remove it when the game does not need it.
+- Copy the example features (Coin + Hud, Shop; docs/architecture.md) when adding a feature; remove it when the game does not need it.
 - PR titles/descriptions are English. User-facing replies are concise and follow the user's language.
