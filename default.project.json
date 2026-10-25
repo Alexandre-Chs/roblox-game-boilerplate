@@ -64,6 +64,11 @@
       "$properties": {
         "ChatVersion": "TextChatService"
       }
+    },
+    "LocalizationService": {
+      "$className": "LocalizationService",
+      "$ignoreUnknownInstances": true,
+      "$path": "assets/localization"
     }
   }
 }

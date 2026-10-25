@@ -5,6 +5,7 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Component = require(ReplicatedStorage.Packages.Component)
+local CoinReward = require(ReplicatedStorage.Utils.CoinReward)
 local GameConfig = require(ReplicatedStorage.Config.GameConfig)
 local Trove = require(ReplicatedStorage.Packages.Trove)
 
@@ -46,7 +47,14 @@ return function(services: { [string]: any })
 				return
 			end
 			local multiplier = if services.GamePassService:Owns(player, "DoubleCoins") then 2 else 1
-			local amount = GameConfig.Coin.Value * multiplier
+			local friends = services.CommunityService:FriendsInServer(player)
+			local amount = CoinReward.Amount(
+				GameConfig.Coin.Value,
+				multiplier,
+				friends,
+				GameConfig.Community,
+				math.random()
+			)
 			if not services.DataService:AdjustCash(player, amount) then
 				return
 			end
@@ -58,6 +66,7 @@ return function(services: { [string]: any })
 				"Coin"
 			)
 			services.TelemetryService:Onboarding(player, "FirstCoin")
+			services.TutorialService:Reached(player, "FirstCoin")
 			self._collected = true
 			setVisible(part, false)
 			-- A plain field, not trove:Add: adding a thread per pickup would grow the Trove forever.

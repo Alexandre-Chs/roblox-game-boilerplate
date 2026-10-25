@@ -1,0 +1,28 @@
+PASS icon_group.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_invite.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_heart.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_trophy.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_backpack.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_globe.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_ticket_code.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_badge_medal.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_speech.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_equipped.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS medal_gold.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS medal_silver.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS medal_bronze.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS arrow_pointer.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS input_plate.png: stretch center minimum alpha=252/255 (required >=248)
+PASS input_plate.png: 512x96, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=[40, 32, 472, 64]
+PASS leaderboard_board.png: stretch center minimum alpha=249/255 (required >=248)
+PASS leaderboard_board.png: 768x1024, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=[96, 160, 672, 928]
+PASS row_rank.png: stretch center minimum alpha=253/255 (required >=248)
+PASS row_rank.png: 512x80, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=[40, 24, 472, 56]
+PASS hint_banner.png: stretch center minimum alpha=251/255 (required >=248)
+PASS hint_banner.png: 640x120, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=[64, 40, 576, 80]
+PASS: 18/18 sprites; exact sizes; RGBA; transparent corners and gutters; antialiased alpha; no magenta; SliceCenter verified.
+PASS: manifest.json, exact per-asset prompts.json and labeled contact_sheet.png present.
+VISUAL (manual review): all 18 sprites inspected; no text, numerals, logos, baked backgrounds or clipped edges; nine-slice frame details inside fixed bands.
+REDONE: row_rank.png (grain across stretch center); leaderboard_board.png (header/frame outside fixed bands; later opacity variants rejected; retained center alpha249..254/255).
+NOT RUN: Roblox upload, Studio and engine/UI playtest; source-file delivery only.
+NOT RUN: pnpm run check; it regenerates sourcemap.json outside the authorized output folder. No Luau or runtime UI files changed.

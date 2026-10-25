@@ -3,6 +3,7 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local GameConfig = require(ReplicatedStorage.Config.GameConfig)
+local Locale = require(ReplicatedStorage.Utils.Locale)
 local Packets = require(ReplicatedStorage.Packets)
 local Trove = require(ReplicatedStorage.Packages.Trove)
 type TroveInstance = typeof(Trove.new())
@@ -27,6 +28,7 @@ end
 -- The printed lines are the Studio smoke test markers listed in docs/testing.md.
 function AppController.Start(self: State)
 	print(`[{GameConfig.Name}] Client controllers ready`)
+	Locale.Prepare(Players.LocalPlayer)
 	local dataController = registry.DataController
 	local function loaded()
 		print(`[{GameConfig.Name}] Player data loaded`)

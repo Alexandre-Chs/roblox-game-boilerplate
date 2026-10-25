@@ -11,7 +11,7 @@ import pathlib
 
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
-KITS = [HERE, HERE.parent / "promo"]
+KITS = [HERE, HERE.parent / "promo", HERE.parent / "social"]
 IDS = {k: v for kit in KITS for k, v in json.loads((kit / "roblox-ids.json").read_text()).items()}
 SLICE = {e["file"]: e["sliceCenter"] for kit in KITS for e in json.loads((kit / "manifest.json").read_text())}
 
@@ -32,6 +32,15 @@ def node(name, cls, props=None, children=None):
     d = {"Name": name, "ClassName": cls, "Properties": props or {}}
     if children:
         d["Children"] = children
+    return d
+
+
+def scaled(width=None, height=None):
+    """UIScale the UIController fits to the screen (DeviceScale.luau). With a design size the
+    element shrinks until it fits; without, it follows a 1280x720 reference."""
+    d = node("DeviceScale", "UIScale", {"Scale": 1})
+    if width:
+        d["Attributes"] = {"DesignWidth": width, "DesignHeight": height}
     return d
 
 
@@ -159,10 +168,9 @@ def tab(name, label, order):
     return button(name, "tab_off.png", label, u(0, 0, 0, 0), u(0.25, -8, 1, 0), z=7, max_size=20, order=order)
 
 
-panel = node("Panel", "Frame", {"AnchorPoint": [0.5, 0.5], "Position": u(0.5, 0, 0.53, 0), "Size": u(0.96, 0, 0.88, 0),
+panel = node("Panel", "Frame", {"AnchorPoint": [0.5, 0.5], "Position": u(0.5, 0, 0.5, 20), "Size": u(0, 860, 0, 620),
                                 "BackgroundTransparency": 1, "ZIndex": 2}, [
-    node("MaxSize", "UISizeConstraint", {"MaxSize": [860, 620]}),
-    node("Scale", "UIScale", {"Scale": 1}),
+    scaled(860, 660),
     image("Board", "board.png", u(0, 0, 0, 60), u(1, 0, 1, -60), z=1, slice_scale=0.42),
     image("Awning", "awning.png", u(0.5, 0, 0, 40), u(1, 24, 0, 96), anchor=(0.5, 0), z=4, extra={"ScaleType": "Stretch"}),
     node("Header", "Frame", {"Size": u(1, 0, 0, 170), "BackgroundTransparency": 1, "ZIndex": 5}, [
@@ -204,20 +212,26 @@ hud = {"ClassName": "ScreenGui", "Properties": {"ResetOnSpawn": False, "IgnoreGu
         image("CoinIcon", "icon_coin.png", u(0, -14, 0.5, 0), u(0, 58, 0, 58), anchor=(0, 0.5), z=3),
         text("Cash", "...", u(0, 46, 0, 7), u(1, -58, 1, -14), max_size=28, z=3),
     ]),
-    image("Dock", "dock.png", u(1, -16, 0.5, 0), u(0, 198, 0, 232), anchor=(1, 0.5), z=1, slice_scale=0.4),
-    node("Buttons", "Frame", {"AnchorPoint": [1, 0.5], "Position": u(1, -30, 0.5, 0), "Size": u(0, 170, 0, 186), "BackgroundTransparency": 1, "ZIndex": 2}, [
-        node("Layout", "UIListLayout", {"Padding": {"UDim": [0, 12]}, "SortOrder": "LayoutOrder"}),
-        button("ShopButton", "button_yellow.png", "Shop", u(0, 0, 0, 0), u(1, 0, 0, 54), z=3, max_size=22, order=1, icon="icon_cart.png"),
-        button("DailyButton", "button_green.png", "Daily", u(0, 0, 0, 0), u(1, 0, 0, 54), z=3, max_size=22, order=2, icon="icon_gift.png"),
-        button("SettingsButton", "button_grey.png", "Settings", u(0, 0, 0, 0), u(1, 0, 0, 54), z=3, max_size=22, order=3, icon="icon_gear.png"),
+    image("Dock", "dock.png", u(1, -12, 0.5, 0), u(0, 198, 0, 368), anchor=(1, 0.5), z=1, slice_scale=0.4, children=[
+        scaled(),
+        node("Buttons", "Frame", {"AnchorPoint": [0.5, 0.5], "Position": u(0.5, 0, 0.5, 0), "Size": u(0, 170, 0, 318),
+                                  "BackgroundTransparency": 1, "ZIndex": 2}, [
+            node("Layout", "UIListLayout", {"Padding": {"UDim": [0, 12]}, "SortOrder": "LayoutOrder"}),
+            button("ShopButton", "button_yellow.png", "Shop", u(0, 0, 0, 0), u(1, 0, 0, 54), z=3, max_size=22, order=1, icon="icon_cart.png"),
+            button("InventoryButton", "button_yellow.png", "Inventory", u(0, 0, 0, 0), u(1, 0, 0, 54), z=3, max_size=20, order=2,
+                   icon="icon_backpack.png"),
+            button("DailyButton", "button_green.png", "Daily", u(0, 0, 0, 0), u(1, 0, 0, 54), z=3, max_size=22, order=3, icon="icon_gift.png"),
+            button("RewardsButton", "button_green.png", "Rewards", u(0, 0, 0, 0), u(1, 0, 0, 54), z=3, max_size=22, order=4,
+                   icon="icon_ticket_code.png"),
+            button("SettingsButton", "button_grey.png", "Settings", u(0, 0, 0, 0), u(1, 0, 0, 54), z=3, max_size=22, order=5, icon="icon_gear.png"),
+        ]),
     ]),
 ]}
+hud["Children"][0]["Children"].insert(0, scaled())
 # SALE seal on the Shop button.
-for child in hud["Children"]:
-    if child["Name"] == "Buttons":
-        for b in child["Children"]:
-            if b["Name"] == "ShopButton":
-                b["Children"].append(burst("Badge", "burst_red.png", "SALE", u(1, 14, 0, -18), u(0, 50, 0, 50), anchor=(1, 0), z=6))
+for b in hud["Children"][1]["Children"][1]["Children"]:
+    if b["Name"] == "ShopButton":
+        b["Children"].append(burst("Badge", "burst_red.png", "SALE", u(1, 14, 0, -18), u(0, 50, 0, 50), anchor=(1, 0), z=6))
 
 
 # Modals ----------------------------------------------------------------------
@@ -229,9 +243,9 @@ def modal(title, width, height, children):
             "Children": [
                 node("Dim", "Frame", {"Size": u(1, 0, 1, 0), "BackgroundColor3": [0, 0, 0], "BackgroundTransparency": 0.45,
                                       "Active": True, "ZIndex": 0}),
-                image("Panel", "panel.png", u(0.5, 0, 0.5, 20), u(0.92, 0, 0.75, 0), anchor=(0.5, 0.5), z=1, slice_scale=0.4,
+                image("Panel", "panel.png", u(0.5, 0, 0.5, 20), u(0, width, 0, height), anchor=(0.5, 0.5), z=1, slice_scale=0.4,
                       children=[
-                          node("MaxSize", "UISizeConstraint", {"MaxSize": [width, height]}),
+                          scaled(width + 40, height + 70),
                           image("Ribbon", "title_ribbon.png", u(0.5, 0, 0, -44), u(0, 340, 0, 85), anchor=(0.5, 0), z=4,
                                 children=[text("Title", title, u(0.5, 0, 0.42, 0), u(0.62, 0, 0.5, 0), anchor=(0.5, 0.5),
                                                max_size=34, z=5)]),
@@ -284,8 +298,8 @@ daily = modal("DAILY REWARD", 640, 350, [
 
 notifications = {"ClassName": "ScreenGui", "Properties": {"ResetOnSpawn": False, "DisplayOrder": 20, "ZIndexBehavior": "Sibling"},
                  "Children": [node("Stack", "Frame", {"AnchorPoint": [0.5, 1], "Position": u(0.5, 0, 1, -24),
-                                                      "Size": u(0.9, 0, 0, 260), "BackgroundTransparency": 1}, [
-    node("MaxWidth", "UISizeConstraint", {"MaxSize": [440, 260]}),
+                                                      "Size": u(0, 440, 0, 260), "BackgroundTransparency": 1}, [
+    scaled(),
     node("Layout", "UIListLayout", {"Padding": {"UDim": [0, 8]}, "SortOrder": "LayoutOrder", "HorizontalAlignment": "Center",
                                     "VerticalAlignment": "Bottom"}),
     image("Toast", "toast_plate.png", u(0, 0, 0, 0), u(1, 0, 0, 56), z=2, slice_scale=0.5, extra={"Visible": False}, children=[
@@ -294,6 +308,109 @@ notifications = {"ClassName": "ScreenGui", "Properties": {"ResetOnSpawn": False,
              extra={"TextWrapped": True}),
     ]),
 ])]}
+
+# Inventory: owned items, one card each, cloned from ItemTemplate by Screens/Inventory.luau.
+inventory_item = image("ItemTemplate", "slot_normal.png", u(0, 0, 0, 0), u(0, 132, 0, 176), z=3, slice_scale=0.5,
+                       extra={"Visible": False}, children=[
+    image("Icon", "icon_red_hat.png", u(0.5, 0, 0, 14), u(0, 78, 0, 78), anchor=(0.5, 0), z=4),
+    text("ItemName", "Item", u(0, 8, 0, 96), u(1, -16, 0, 22), color=INK, stroke=False, max_size=20, z=5),
+    button("Equip", "button_green.png", "Equip", u(0.5, 0, 1, -10), u(0.86, 0, 0, 40), anchor=(0.5, 1), z=6, max_size=20),
+    image("EquippedMark", "icon_equipped.png", u(1, 8, 0, -8), u(0, 38, 0, 38), anchor=(1, 0), z=7, extra={"Visible": False}),
+])
+inventory = modal("INVENTORY", 640, 420, [
+    node("Grid", "ScrollingFrame", {"Position": u(0, 24, 0, 60), "Size": u(1, -48, 1, -84), "BackgroundTransparency": 1,
+                                    "BorderSizePixel": 0, "CanvasSize": u(0, 0, 0, 0), "AutomaticCanvasSize": "Y",
+                                    "ScrollingDirection": "Y", "ScrollBarThickness": 8, "ScrollBarImageColor3": [0.75, 0.45, 0.2],
+                                    "ZIndex": 2}, [
+        node("Layout", "UIGridLayout", {"CellSize": u(0, 132, 0, 176), "CellPadding": u(0, 12, 0, 16), "SortOrder": "LayoutOrder",
+                                        "HorizontalAlignment": "Center"}),
+        node("Padding", "UIPadding", {"PaddingTop": {"UDim": [0, 12]}, "PaddingBottom": {"UDim": [0, 12]}}),
+    ]),
+    text("Empty", "Buy items in the shop to fill your inventory!", u(0, 40, 0.5, -20), u(1, -80, 0, 40), color=INK,
+         stroke=False, max_size=26, z=3, extra={"TextWrapped": True}),
+    node("Templates", "Folder", {}, [inventory_item]),
+])
+
+
+# Rewards: promo code box, then one row per community reward.
+def reward_row(name, label, icon_file, button_name, button_label, y, info=False):
+    kids = [
+        image("Icon", icon_file, u(0, 12, 0.5, 0), u(0, 52, 0, 52), anchor=(0, 0.5), z=3),
+        text("Label", label, u(0, 74, 0, 12 if info else 0), u(1, -230, 0, 30 if info else 76), color=INK, stroke=False,
+             align="Left", max_size=24, z=3, extra=None if info else {"Size": u(1, -230, 1, 0)}),
+        button(button_name, "button_green.png", button_label, u(1, -12, 0.5, 0), u(0, 136, 0, 50), anchor=(1, 0.5), z=4,
+               max_size=22),
+    ]
+    if info:
+        kids.append(text("Info", "", u(0, 74, 0, 42), u(1, -230, 0, 22), color=[0.25, 0.5, 0.15], stroke=False, align="Left",
+                         max_size=18, z=3))
+    return image(name, "row_plate.png", u(0, 28, 0, y), u(1, -56, 0, 76), z=2, slice_scale=0.5, children=kids)
+
+
+rewards = modal("REWARDS", 560, 440, [
+    image("CodeRow", "input_plate.png", u(0, 28, 0, 62), u(1, -200, 0, 60), z=2, slice_scale=0.5, children=[
+        image("Icon", "icon_ticket_code.png", u(0, 10, 0.5, 0), u(0, 44, 0, 44), anchor=(0, 0.5), z=3),
+        node("CodeBox", "TextBox", {"Position": u(0, 60, 0, 8), "Size": u(1, -72, 1, -16), "BackgroundTransparency": 1,
+                                    "Text": "", "PlaceholderText": "Enter a code", "PlaceholderColor3": [0.55, 0.42, 0.32],
+                                    "TextColor3": INK, "FontFace": FRED, "TextScaled": True, "ClearTextOnFocus": False,
+                                    "TextXAlignment": "Left", "ZIndex": 3}, [maxtext(24)]),
+    ]),
+    button("Redeem", "button_yellow.png", "Redeem", u(1, -28, 0, 62), u(0, 150, 0, 60), anchor=(1, 0), z=4, max_size=24),
+    reward_row("GroupRow", "Join our group", "icon_group.png", "Claim", "Claim", 146),
+    reward_row("InviteRow", "Invite friends", "icon_invite.png", "Invite", "Invite", 232, info=True),
+    reward_row("FavoriteRow", "Favorite the game", "icon_heart.png", "Favorite", "Favorite", 318),
+])
+
+# Tutorial hint: banner under the cash pill and an arrow the screen moves next to its target.
+tutorial = {"ClassName": "ScreenGui", "Properties": {"ResetOnSpawn": False, "IgnoreGuiInset": False, "DisplayOrder": 5,
+                                                     "ZIndexBehavior": "Sibling"}, "Children": [
+    image("Hint", "hint_banner.png", u(0.5, 0, 0, 74), u(0, 420, 0, 76), anchor=(0.5, 0), z=2, slice_scale=0.5,
+          extra={"Visible": False}, children=[
+        scaled(),
+        image("Icon", "icon_speech.png", u(0, 14, 0.5, 0), u(0, 46, 0, 46), anchor=(0, 0.5), z=3),
+        text("Label", "Collect a coin!", u(0, 70, 0, 14), u(1, -90, 1, -28), color=INK, stroke=False, align="Left",
+             max_size=28, z=3),
+    ]),
+    image("Arrow", "arrow_pointer.png", u(0, 0, 0, 0), u(0, 64, 0, 64), anchor=(1, 0.5), z=3,
+          extra={"Visible": False, "Rotation": -90}),
+]}
+
+
+# World leaderboard: a standing board near the spawn; Components/Leaderboard.luau fills it.
+def board_row():
+    return image("RowTemplate", "row_rank.png", u(0, 0, 0, 0), u(1, 0, 0, 70), z=3, slice_scale=0.5,
+                 extra={"Visible": False}, children=[
+        image("Medal", "medal_gold.png", u(0, 12, 0.5, 0), u(0, 58, 0, 58), anchor=(0, 0.5), z=4),
+        text("Rank", "4", u(0, 12, 0, 10), u(0, 58, 1, -20), color=INK, stroke=False, max_size=34, z=4),
+        text("PlayerName", "Player", u(0, 86, 0, 12), u(0.62, -86, 1, -24), color=INK, stroke=False, align="Left",
+             max_size=32, z=4),
+        image("CoinIcon", "icon_coin.png", u(1, -150, 0.5, 0), u(0, 40, 0, 40), anchor=(0, 0.5), z=4),
+        text("Value", "0", u(1, -106, 0, 12), u(0, 94, 1, -24), color=[0.85, 0.5, 0.05], stroke=False, align="Left",
+             max_size=32, z=4),
+    ])
+
+
+leaderboard = {"ClassName": "Model", "Children": [{
+    "Name": "Board", "ClassName": "Part",
+    "Properties": {"Anchored": True, "CanCollide": True, "Size": [14, 18, 0.6], "Color": [0.45, 0.27, 0.13],
+                   "Material": "Wood", "Tags": ["Leaderboard"],
+                   "CFrame": {"CFrame": {"position": [0, 9, -30],
+                                         "orientation": [[-1, 0, 0], [0, 1, 0], [0, 0, -1]]}}},
+    "Children": [{"Name": "Display", "ClassName": "SurfaceGui",
+                  "Properties": {"Face": "Front", "SizingMode": "PixelsPerStud", "PixelsPerStud": 50, "LightInfluence": 0,
+                                 "ZIndexBehavior": "Sibling"},
+                  "Children": [image("Board", "leaderboard_board.png", u(0, 0, 0, 0), u(1, 0, 1, 0), z=1, slice_scale=0.9,
+                                     children=[
+        image("Trophy", "icon_trophy.png", u(0.5, 0, 0, 20), u(0, 120, 0, 120), anchor=(0.5, 0), z=3),
+        text("Title", "TOP PLAYERS", u(0.5, 0, 0, 140), u(0.8, 0, 0, 70), anchor=(0.5, 0), color=(1, 0.84, 0.25),
+             max_size=64, z=3),
+        node("List", "Frame", {"Position": u(0, 60, 0, 230), "Size": u(1, -120, 1, -290), "BackgroundTransparency": 1,
+                               "ZIndex": 2}, [
+            node("Layout", "UIListLayout", {"Padding": {"UDim": [0, 6]}, "SortOrder": "LayoutOrder"}),
+            board_row(),
+        ]),
+    ])]}],
+}]}
 
 
 def write(path, data):
@@ -305,6 +422,10 @@ write("assets/ui/Hud.model.json", hud)
 write("assets/ui/Settings.model.json", settings)
 write("assets/ui/DailyReward.model.json", daily)
 write("assets/ui/Notifications.model.json", notifications)
+write("assets/ui/Inventory.model.json", inventory)
+write("assets/ui/Rewards.model.json", rewards)
+write("assets/ui/Tutorial.model.json", tutorial)
+write("assets/world/Leaderboard.model.json", leaderboard)
 
 names = {
     "ButtonGreen": "button_green.png", "ButtonYellow": "button_yellow.png", "ButtonRed": "button_red.png",
@@ -312,6 +433,7 @@ names = {
     "SlotNormal": "slot_normal.png", "SlotFeatured": "slot_featured.png",
     "BannerPopular": "banner_popular.png", "BannerBestValue": "banner_best_value.png",
     "DayTile": "day_tile.png", "DayTileToday": "day_tile_today.png", "DayTileClaimed": "day_tile_claimed.png",
+    "MedalGold": "medal_gold.png", "MedalSilver": "medal_silver.png", "MedalBronze": "medal_bronze.png",
 }
 lines = ["--!strict", "", "-- Generated by assets/source/ui/shop/build_ui.py from roblox-ids.json. Do not edit by hand.",
          "-- Images the shop swaps at runtime; buttons share one SliceCenter, slots share another.", "return table.freeze({"]
@@ -326,4 +448,4 @@ lines = ["--!strict", "", "-- Generated by assets/source/ui/shop/build_ui.py fro
 lines += [f'\t{key} = "{IDS[file]}",' for key, file in loading.items()]
 lines += [f'\tBarSlice = Rect.new({", ".join(map(str, SLICE["progress_track.png"]))}),', "})", ""]
 (ROOT / "src/first/LoadingImages.luau").write_text("\n".join(lines))
-print("built Shop, Hud, Settings, DailyReward, Notifications, UiImages and LoadingImages")
+print("built every ScreenGui, the world leaderboard, UiImages and LoadingImages")

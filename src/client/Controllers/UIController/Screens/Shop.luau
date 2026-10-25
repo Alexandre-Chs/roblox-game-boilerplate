@@ -31,6 +31,7 @@ local MESSAGES: { [string]: string } = {
 	AlreadyOwned = "You already own this.",
 	UnknownItem = "This item is not for sale.",
 	NotLoaded = "Still loading, try again.",
+	Unavailable = "This offer is not available in your region.",
 }
 local SOON = "Coming soon: set its id in Config/Monetization."
 
@@ -208,6 +209,8 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 			if ok == true then
 				controllers.SoundController:PlaySfx("Purchase")
 				Effects.Pop(card, 1.03)
+			else
+				controllers.SoundController:PlaySfx("Error")
 			end
 			context.Notify(
 				if ok == nil then "No answer, try again." else MESSAGES[reason] or tostring(reason)
@@ -353,7 +356,19 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 			local card = itemTemplate:Clone()
 			card.Name = item.Id
 			card.LayoutOrder = item.Order
-			card.Visible = true
+			-- Paid random offers stay hidden until ComplianceService says they are allowed here.
+			local function updateVisible()
+				card.Visible = not item.Random
+					or (
+						player:GetAttribute("PolicyLoaded") == true
+						and player:GetAttribute("PaidRandomItemsRestricted") ~= true
+					)
+			end
+			updateVisible()
+			if item.Random then
+				trove:Connect(player:GetAttributeChangedSignal("PaidRandomItemsRestricted"), updateVisible)
+				trove:Connect(player:GetAttributeChangedSignal("PolicyLoaded"), updateVisible)
+			end
 			paint(card, if item.Rarity == "Legendary" then UiImages.SlotFeatured else UiImages.SlotNormal)
 			setTexts(card, { ItemName = item.Name, RarityLabel = string.upper(item.Rarity) })
 			setImage(card, "Icon", item.Icon)
@@ -482,7 +497,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	end
 	local timerPlate = header and header:FindFirstChild("TimerPlate")
 	local timer: TextLabel? = if timerPlate then Find(timerPlate, "Timer", "TextLabel") else nil
-	local panelScale = panel:FindFirstChild("Scale")
+	local panelScale = panel:FindFirstChild("DeviceScale")
 
 	local function stopTimer()
 		if timerThread then
@@ -505,11 +520,14 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 				Effects.Fade(dim, 0.45)
 			end
 			if panelScale and panelScale:IsA("UIScale") then
-				panelScale.Scale = 0.96
+				-- DeviceScale holds the size that fits this screen; ease into it from slightly smaller.
+				local attribute = panelScale:GetAttribute("Fitted")
+				local fitted = if type(attribute) == "number" then attribute else 1
+				panelScale.Scale = fitted * 0.96
 				TweenService:Create(
 					panelScale,
 					TweenInfo.new(0.2, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
-					{ Scale = 1 }
+					{ Scale = fitted }
 				):Play()
 			end
 			stopTimer()

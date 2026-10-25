@@ -1,0 +1,184 @@
+[
+  {
+    "file": "icon_group.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Social group",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "icon_invite.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Invite friends",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "icon_heart.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Favorite",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "icon_trophy.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Leaderboard trophy",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "icon_backpack.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Inventory backpack",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "icon_globe.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Language selector",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "icon_ticket_code.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Promo code ticket",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "icon_badge_medal.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Achievement ribbon medal",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "icon_speech.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Tutorial hint speech icon",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "icon_equipped.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Equipped status marker",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "medal_gold.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Gold rank medal",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "medal_silver.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Silver rank medal",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "medal_bronze.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Bronze rank medal",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "arrow_pointer.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Downward tutorial pointer",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "input_plate.png",
+    "width": 512,
+    "height": 96,
+    "purpose": "Inset cream text input",
+    "sliceCenter": [
+      40,
+      32,
+      472,
+      64
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  },
+  {
+    "file": "leaderboard_board.png",
+    "width": 768,
+    "height": 1024,
+    "purpose": "Standing wooden leaderboard",
+    "sliceCenter": [
+      96,
+      160,
+      672,
+      928
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks. Regenerated to confine header, frame and feet to fixed nine-slice margin bands. Near-opaque generated center alpha249..254/255 preserved; not flattened. Two later opacity-only variants rejected for introducing translucent center artifacts or frame intrusion. Retained clean-margin regeneration with plain low-detail vertical plank divisions."
+  },
+  {
+    "file": "row_rank.png",
+    "width": 512,
+    "height": 80,
+    "purpose": "Leaderboard rank row",
+    "sliceCenter": [
+      40,
+      24,
+      472,
+      56
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks. Regenerated to remove woodgrain crossing stretch center."
+  },
+  {
+    "file": "hint_banner.png",
+    "width": 640,
+    "height": 120,
+    "purpose": "Cream tutorial hint banner",
+    "sliceCenter": [
+      64,
+      40,
+      576,
+      80
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art using built-in image_gen.imagegen; underlying model ID not exposed. Shop/promo references inspected for style only. No third-party asset licence asserted. Resized from generated source with original alpha preserved. Framing ignores generated alpha <=8/255; Lanczos resize, transparent gutter added; resampled alpha <=2/255 cleared to transparent black. No text, letters, numerals, logos or currency marks."
+  }
+]

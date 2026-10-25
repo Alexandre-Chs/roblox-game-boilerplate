@@ -1,0 +1,141 @@
+--!strict
+
+-- Promo codes and community rewards: group reward, friend invites (friends in the server
+-- boost coin pickups) and a favorite prompt, also offered once per session after a while.
+local AvatarEditorService = game:GetService("AvatarEditorService")
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local SocialService = game:GetService("SocialService")
+local GameConfig = require(ReplicatedStorage.Config.GameConfig)
+local Locale = require(ReplicatedStorage.Utils.Locale)
+local Packets = require(ReplicatedStorage.Packets)
+local Trove = require(ReplicatedStorage.Packages.Trove)
+local Find = require(script.Parent.Parent.Find)
+local Types = require(script.Parent.Parent.Types)
+
+local Rewards = {}
+
+function Rewards.new(context: Types.Context, gui: ScreenGui): Types.Screen
+	local trove = Trove.new()
+	local player = Players.LocalPlayer
+	local config = GameConfig.Community
+	local close: GuiButton? = Find(gui, "Close", "GuiButton")
+	local codeBox: TextBox? = Find(gui, "CodeBox", "TextBox")
+	local redeem: GuiButton? = Find(gui, "Redeem", "GuiButton")
+	local groupRow: GuiObject? = Find(gui, "GroupRow", "GuiObject")
+	local claim: GuiButton? = if groupRow then Find(groupRow, "Claim", "GuiButton") else nil
+	local inviteRow: GuiObject? = Find(gui, "InviteRow", "GuiObject")
+	local invite: GuiButton? = if inviteRow then Find(inviteRow, "Invite", "GuiButton") else nil
+	local favoriteRow: GuiObject? = Find(gui, "FavoriteRow", "GuiObject")
+	local favorite: GuiButton? = if favoriteRow then Find(favoriteRow, "Favorite", "GuiButton") else nil
+	local friendsInfo: TextLabel? = if inviteRow then Find(inviteRow, "Info", "TextLabel") else nil
+	local busy = false
+
+	local function request(call: () -> (any, any))
+		if busy then
+			return
+		end
+		busy = true
+		context.Controllers.SoundController:PlaySfx("Click")
+		task.spawn(function()
+			local ok, message = call()
+			busy = false
+			if ok == nil then
+				context.Notify("No answer, try again.")
+			else
+				context.Notify(message)
+				context.Controllers.SoundController:PlaySfx(if ok then "Reward" else "Error")
+			end
+		end)
+	end
+
+	local function promptFavorite()
+		if game.PlaceId == 0 then
+			context.Notify("Publish the game to enable favorites.")
+			return
+		end
+		pcall(
+			AvatarEditorService.PromptSetFavorite,
+			AvatarEditorService,
+			game.PlaceId,
+			Enum.AvatarItemType.Asset,
+			true
+		)
+	end
+
+	if close then
+		trove:Connect(close.Activated, function()
+			context.Close("Rewards")
+		end)
+	end
+	if redeem and codeBox then
+		local box: TextBox = codeBox
+		trove:Connect(redeem.Activated, function()
+			request(function()
+				local ok, message = Packets.RedeemCode:Fire(box.Text)
+				if ok then
+					box.Text = ""
+				end
+				return ok, message
+			end)
+		end)
+	end
+	if groupRow then
+		groupRow.Visible = config.GroupId ~= 0
+	end
+	if claim then
+		trove:Connect(claim.Activated, function()
+			request(function()
+				return Packets.ClaimGroupReward:Fire()
+			end)
+		end)
+	end
+	if invite then
+		trove:Connect(invite.Activated, function()
+			context.Controllers.SoundController:PlaySfx("Click")
+			task.spawn(function()
+				local ok, canInvite = pcall(SocialService.CanSendGameInviteAsync, SocialService, player)
+				if ok and canInvite then
+					SocialService:PromptGameInvite(player)
+				else
+					context.Notify("Invites are not available right now.")
+				end
+			end)
+		end)
+	end
+	if friendsInfo then
+		local label: TextLabel = friendsInfo
+		local function update()
+			local count = player:GetAttribute("FriendsInServer")
+			local friends = math.min(if type(count) == "number" then count else 0, config.MaxFriends)
+			local bonus = math.round(friends * config.FriendBonus * 100)
+			label.Text =
+				Locale.Format(nil, "FriendsBonus", { friends, bonus }, "Friends here: {1} (+{2}% coins)")
+		end
+		trove:Connect(player:GetAttributeChangedSignal("FriendsInServer"), update)
+		update()
+	end
+	if favorite then
+		trove:Connect(favorite.Activated, promptFavorite)
+	end
+	-- One gentle ask per session once the player has had time to enjoy the game.
+	if game.PlaceId ~= 0 then
+		trove:Add(task.delay(config.FavoritePromptAfter, promptFavorite))
+	end
+
+	return {
+		Modal = true,
+		StartsOpen = false,
+		Open = function(_self: Types.Screen)
+			gui.Enabled = true
+		end,
+		Close = function(_self: Types.Screen)
+			gui.Enabled = false
+		end,
+		Destroy = function(_self: Types.Screen)
+			trove:Destroy()
+		end,
+	}
+end
+
+return Rewards

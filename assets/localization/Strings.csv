@@ -1,0 +1,42 @@
+Key,Source,Context,Example,en,fr,es,pt-br
+,SHOP,,,SHOP,BOUTIQUE,TIENDA,LOJA
+,Shop,,,Shop,Boutique,Tienda,Loja
+,Deals,,,Deals,Promos,Ofertas,Ofertas
+,Items,,,Items,Objets,Objetos,Itens
+,Coins,,,Coins,Pièces,Monedas,Moedas
+,Passes,,,Passes,Passes,Pases,Passes
+,DAILY DEAL,,,DAILY DEAL,OFFRE DU JOUR,OFERTA DEL DÍA,OFERTA DO DIA
+,POPULAR,,,POPULAR,POPULAIRE,POPULAR,POPULAR
+,BEST VALUE,,,BEST VALUE,MEILLEURE OFFRE,MEJOR VALOR,MELHOR VALOR
+,Buy,,,Buy,Acheter,Comprar,Comprar
+,Soon,,,Soon,Bientôt,Pronto,Em breve
+,Daily,,,Daily,Quotidien,Diario,Diário
+,DAILY REWARD,,,DAILY REWARD,RÉCOMPENSE DU JOUR,RECOMPENSA DIARIA,RECOMPENSA DIÁRIA
+,Claim,,,Claim,Récupérer,Reclamar,Resgatar
+,Come back tomorrow for your next reward.,,,Come back tomorrow for your next reward.,Reviens demain pour ta prochaine récompense.,Vuelve mañana por tu próxima recompensa.,Volte amanhã para a próxima recompensa.
+,Settings,,,Settings,Réglages,Ajustes,Configurações
+,SETTINGS,,,SETTINGS,RÉGLAGES,AJUSTES,CONFIGURAÇÕES
+,Music,,,Music,Musique,Música,Música
+,Effects,,,Effects,Effets,Efectos,Efeitos
+,Inventory,,,Inventory,Inventaire,Inventario,Inventário
+,INVENTORY,,,INVENTORY,INVENTAIRE,INVENTARIO,INVENTÁRIO
+,Equip,,,Equip,Équiper,Equipar,Equipar
+,Equipped,,,Equipped,Équipé,Equipado,Equipado
+,Buy items in the shop to fill your inventory!,,,Buy items in the shop to fill your inventory!,Achète des objets à la boutique pour remplir ton inventaire !,¡Compra objetos en la tienda para llenar tu inventario!,Compre itens na loja para encher seu inventário!
+,Rewards,,,Rewards,Cadeaux,Premios,Prêmios
+,REWARDS,,,REWARDS,CADEAUX,PREMIOS,PRÊMIOS
+,Enter a code,,,Enter a code,Entre un code,Escribe un código,Digite um código
+,Redeem,,,Redeem,Valider,Canjear,Resgatar
+,Join our group,,,Join our group,Rejoins notre groupe,Únete a nuestro grupo,Entre no nosso grupo
+,Invite friends,,,Invite friends,Invite tes amis,Invita amigos,Convide amigos
+,Invite,,,Invite,Inviter,Invitar,Convidar
+,Favorite the game,,,Favorite the game,Mets le jeu en favori,Marca el juego como favorito,Favorite o jogo
+,Favorite,,,Favorite,Favori,Favorito,Favoritar
+,Collect a coin!,,,Collect a coin!,Ramasse une pièce !,¡Recoge una moneda!,Pegue uma moeda!
+,Open the shop,,,Open the shop,Ouvre la boutique,Abre la tienda,Abra a loja
+,Buy your first item,,,Buy your first item,Achète ton premier objet,Compra tu primer objeto,Compre seu primeiro item
+,TOP PLAYERS,,,TOP PLAYERS,MEILLEURS JOUEURS,MEJORES JUGADORES,MELHORES JOGADORES
+,Loading...,,,Loading...,Chargement...,Cargando...,Carregando...
+DailyPreview,Day {1}: {2} coins,,,Day {1}: {2} coins,Jour {1} : {2} pièces,Día {1}: {2} monedas,Dia {1}: {2} moedas
+DayLabel,Day {1},,,Day {1},Jour {1},Día {1},Dia {1}
+FriendsBonus,Friends here: {1} (+{2}% coins),,,Friends here: {1} (+{2}% coins),Amis ici : {1} (+{2} % de pièces),Amigos aquí: {1} (+{2}% monedas),Amigos aqui: {1} (+{2}% moedas)

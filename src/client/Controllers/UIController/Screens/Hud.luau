@@ -9,8 +9,13 @@ local Find = require(script.Parent.Parent.Find)
 local Types = require(script.Parent.Parent.Types)
 
 -- Button name in the Hud model -> modal screen it toggles.
-local BUTTONS: { [string]: string } =
-	{ ShopButton = "Shop", DailyButton = "DailyReward", SettingsButton = "Settings" }
+local BUTTONS: { [string]: string } = {
+	ShopButton = "Shop",
+	InventoryButton = "Inventory",
+	DailyButton = "DailyReward",
+	RewardsButton = "Rewards",
+	SettingsButton = "Settings",
+}
 
 local Hud = {}
 

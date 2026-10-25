@@ -17,4 +17,7 @@ return table.freeze({
 	DayTile = "rbxassetid://124901110166865",
 	DayTileToday = "rbxassetid://129186743629629",
 	DayTileClaimed = "rbxassetid://108238598749497",
+	MedalGold = "rbxassetid://94600356078691",
+	MedalSilver = "rbxassetid://122899171035444",
+	MedalBronze = "rbxassetid://136198469629708",
 })

@@ -3,6 +3,8 @@
 -- Placeholder items for the starter shop. Replace with the game's real catalog.
 -- Prices are in Cash; the server is the only place a purchase is decided.
 -- Icon: an "rbxassetid://..." image (art sources and ids in assets/source/ui/shop).
+-- Effect: applied by InventoryService while the item is equipped.
+-- Random: true for paid random rewards; hidden and refused where PolicyService restricts them.
 export type Rarity = "Common" | "Rare" | "Epic" | "Legendary"
 export type Item = {
 	Id: string,
@@ -11,6 +13,8 @@ export type Item = {
 	Order: number,
 	Icon: string,
 	Rarity: Rarity,
+	Effect: { WalkSpeed: number? }?,
+	Random: boolean?,
 }
 
 local items: { Item } = {
@@ -29,6 +33,7 @@ local items: { Item } = {
 		Order = 2,
 		Icon = "rbxassetid://138682529289158",
 		Rarity = "Rare",
+		Effect = { WalkSpeed = 24 },
 	},
 	{
 		Id = "MagicWand",

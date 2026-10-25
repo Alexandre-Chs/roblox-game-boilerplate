@@ -4,7 +4,9 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Packets = require(ReplicatedStorage.Packets)
 local Signal = require(ReplicatedStorage.Packages.Signal)
+local Trove = require(ReplicatedStorage.Packages.Trove)
 local WaitFor = require(ReplicatedStorage.Packages.WaitFor)
+local DeviceScale = require(script.DeviceScale)
 local Types = require(script.Types)
 
 local modules: { [string]: Types.ScreenModule } = {
@@ -13,6 +15,9 @@ local modules: { [string]: Types.ScreenModule } = {
 	Notifications = require(script.Screens.Notifications),
 	Settings = require(script.Screens.Settings),
 	DailyReward = require(script.Screens.DailyReward),
+	Inventory = require(script.Screens.Inventory),
+	Rewards = require(script.Screens.Rewards),
+	Tutorial = require(script.Screens.Tutorial),
 }
 
 local UIController = {
@@ -27,6 +32,7 @@ local screens: { [string]: Types.Screen } = {}
 local opened: { [string]: boolean } = {}
 local pending: { any } = {}
 local destroyed = false
+local trove = Trove.new()
 
 function UIController.Init(_self: any, controllers: { [string]: any })
 	registry = controllers
@@ -45,6 +51,9 @@ function UIController.Open(_self: any, name: string)
 		end
 	end
 	opened[name] = true
+	if screen.Modal then
+		registry.SoundController:PlaySfx("Open")
+	end
 	screen:Open()
 end
 
@@ -78,6 +87,9 @@ function UIController.Start(_self: any)
 			UIController:Notify(text)
 		end,
 	}
+	trove:Add(task.spawn(function()
+		DeviceScale.Watch(trove, Players.LocalPlayer:WaitForChild("PlayerGui"))
+	end))
 	notifyConnection = Packets.Notify.OnClientEvent:Connect(function(text: string)
 		UIController:Notify(text)
 	end) :: any
@@ -115,6 +127,7 @@ end
 
 function UIController.Destroy(_self: any)
 	destroyed = true
+	trove:Clean()
 	if notifyConnection then
 		notifyConnection:Disconnect()
 		notifyConnection = nil

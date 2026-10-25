@@ -5,6 +5,11 @@ local Purchasing = require("../src/server/Services/ShopService/Purchasing")
 local DailyReward = require("../src/shared/Utils/DailyReward")
 local DailyDeal = require("../src/shared/Utils/DailyDeal")
 local Commands = require("../src/server/Services/DebugService/Commands")
+local Redeeming = require("../src/server/Services/CodesService/Redeeming")
+local Equipping = require("../src/server/Services/InventoryService/Equipping")
+local Ranking = require("../src/server/Services/LeaderboardService/Ranking")
+local CoinReward = require("../src/shared/Utils/CoinReward")
+local TutorialSteps = require("../src/shared/Utils/TutorialSteps")
 
 assert(PlayerData.Validate(table.clone(PlayerData.Template)))
 assert(PlayerData.Validate({ Cash = 0 }))
@@ -99,7 +104,64 @@ assert(name == "cash" and args[1] == "100" and #args == 1)
 assert(Commands.Parse("hello") == nil and Commands.Parse("/") == nil)
 assert(Commands.Amount("-5") == -5 and Commands.Amount("1.5") == nil and Commands.Amount("1e12") == nil)
 assert(Commands.Amount(nil) == nil and Commands.Amount("abc") == nil)
-print("PASS player data validation, settings, daily streak, debug commands, shop rules and rate limiting")
+
+-- New player data fields
+assert(PlayerData.Validate({ Equipped = "RedHat", Redeemed = { Code_WELCOME = true }, Tutorial = 2 }))
+assert(not PlayerData.Validate({ Equipped = 5 }))
+assert(not PlayerData.Validate({ Redeemed = { Code_X = 1 } }))
+assert(not PlayerData.Validate({ Tutorial = -1 }))
+
+-- Promo codes
+assert(Redeeming.Normalize("  welcome ") == "WELCOME")
+assert(
+	Redeeming.Normalize("bad code") == nil
+		and Redeeming.Normalize("") == nil
+		and Redeeming.Normalize(5) == nil
+)
+local codes = { WELCOME = { Coins = 50, Expires = 0 }, OLD = { Coins = 5, Expires = 100 } }
+assert(Redeeming.Check({}, codes, "WELCOME", 1000) == "Ok")
+assert(Redeeming.Check({}, codes, "NOPE", 1000) == "Invalid")
+assert(Redeeming.Check({}, codes, nil, 1000) == "Invalid")
+assert(Redeeming.Check({}, codes, "OLD", 100) == "Expired")
+assert(Redeeming.Check({}, codes, "OLD", 99) == "Ok")
+assert(Redeeming.Check({ [Redeeming.Key("WELCOME")] = true }, codes, "WELCOME", 1000) == "AlreadyRedeemed")
+
+-- Equipping
+local owned = { Inventory = { RedHat = true } }
+local shop = { RedHat = {}, SpeedBoots = {} }
+assert(Equipping.Check(owned, shop, "RedHat") == "Ok")
+assert(Equipping.Check(owned, shop, "") == "Ok")
+assert(Equipping.Check(owned, shop, "SpeedBoots") == "NotOwned")
+assert(Equipping.Check(owned, shop, "Nope") == "UnknownItem")
+assert(Equipping.Check(owned, shop, 3) == "UnknownItem")
+
+-- Leaderboard merge: live values win, highest first, ties by UserId, capped
+local top = Ranking.Merge(
+	{ { UserId = 1, Name = "a", Value = 50 }, { UserId = 2, Name = "b", Value = 40 } },
+	{ { UserId = 2, Name = "b", Value = 90 }, { UserId = 3, Name = "c", Value = 50 } },
+	2
+)
+assert(#top == 2 and top[1].UserId == 2 and top[1].Value == 90 and top[2].UserId == 1)
+
+-- Coin payout with friend bonus
+local community = { FriendBonus = 0.1, MaxFriends = 3 }
+assert(CoinReward.Amount(1, 1, 0, community, 0) == 1)
+assert(CoinReward.Amount(1, 2, 0, community, 0.99) == 2)
+assert(CoinReward.Amount(1, 1, 1, community, 0.05) == 2)
+assert(CoinReward.Amount(1, 1, 1, community, 0.5) == 1)
+assert(CoinReward.Amount(10, 1, 9, community, 0.99) == 13)
+
+-- Tutorial progression
+local steps = { { Id = "FirstCoin" }, { Id = "OpenedShop" }, { Id = "FirstPurchase" } }
+assert(TutorialSteps.Advance(0, steps, "FirstCoin") == 1)
+assert(TutorialSteps.Advance(1, steps, "FirstPurchase") == 3)
+assert(TutorialSteps.Advance(3, steps, "FirstCoin") == 3)
+assert(TutorialSteps.Advance(1, steps, "Unknown") == 1)
+assert(TutorialSteps.Current(3, steps) == nil and TutorialSteps.Current(0, steps) == steps[1])
+
+print(
+	"PASS player data validation, settings, daily streak, debug commands, shop rules, rate limiting, codes, equipping, leaderboard, coin bonus and tutorial"
+)
 assert(require("./purchases"))
 assert(require("./sessions"))
 assert(require("./lifecycle"))

@@ -7,6 +7,13 @@ local Packets = {
 	BuyItem = Packet("BuyItem", Packet.String):Response(Packet.Boolean8, Packet.String):RateLimit(5, 1),
 	ClaimDaily = Packet("ClaimDaily"):Response(Packet.Boolean8, Packet.NumberU16):RateLimit(2, 1),
 	SetSetting = Packet("SetSetting", Packet.String, Packet.NumberF32):RateLimit(10, 1),
+	-- "" unequips. Replies (ok, reason).
+	Equip = Packet("Equip", Packet.String):Response(Packet.Boolean8, Packet.String):RateLimit(5, 1),
+	-- Replies (ok, message to show). Tight limit: codes must not be brute-forced.
+	RedeemCode = Packet("RedeemCode", Packet.String)
+		:Response(Packet.Boolean8, Packet.String)
+		:RateLimit(3, 10),
+	ClaimGroupReward = Packet("ClaimGroupReward"):Response(Packet.Boolean8, Packet.String):RateLimit(2, 5),
 	-- Analytics only: tells the server the shop screen opened.
 	ShopOpened = Packet("ShopOpened"):RateLimit(2, 1),
 	-- Server to client only; the limit only bounds clients that fire it anyway.

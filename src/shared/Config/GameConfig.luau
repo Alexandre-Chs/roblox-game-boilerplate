@@ -13,4 +13,22 @@ return table.freeze({
 	ShopDealDiscount = 0.3,
 	-- Volume change per Settings button press. Defaults live in PlayerData.Template.Settings.
 	SettingsStep = 0.1,
+	-- Global top list (LeaderboardService): the PlayerData number ranked and how often it refreshes.
+	Leaderboard = table.freeze({
+		Stat = "Cash",
+		Size = 10,
+		RefreshSeconds = 60,
+	}),
+	-- Community rewards (CommunityService). GroupId 0 hides the group reward.
+	Community = table.freeze({
+		GroupId = 0,
+		GroupReward = 100,
+		-- Extra coin share per friend in the same server, capped at MaxFriends.
+		FriendBonus = 0.1,
+		MaxFriends = 3,
+		-- Seconds of play before the client asks once per session to favorite the game.
+		FavoritePromptAfter = 300,
+	}),
+	-- Default character speed; equipped items may raise it (ShopCatalog Effect.WalkSpeed).
+	WalkSpeed = 16,
 })

@@ -782,6 +782,231 @@
       "creator": "Codex (OpenAI) on request of the project owner",
       "robloxAssetId": "rbxassetid://137696123722449",
       "use": "Golden faceted premium star"
+    },
+    {
+      "name": "sfx_music",
+      "kind": "audio",
+      "source": "Roblox Creator Store audio 'Seaside Smile' by DistrokidOfficial, used by id (not uploaded)",
+      "licence": "Free Creator Store audio, usable in Roblox experiences under the Roblox Terms of Use",
+      "creator": "DistrokidOfficial",
+      "robloxAssetId": "rbxassetid://120416151765277",
+      "use": "Background music loop (133.8 s measured)"
+    },
+    {
+      "name": "sfx_click",
+      "kind": "audio",
+      "source": "Roblox Creator Store audio 'ui-simple-button-click' by AmbientSorcery, used by id (not uploaded)",
+      "licence": "Free Creator Store audio, usable in Roblox experiences under the Roblox Terms of Use",
+      "creator": "AmbientSorcery",
+      "robloxAssetId": "rbxassetid://88442833509532",
+      "use": "Button click (0.03 s)"
+    },
+    {
+      "name": "sfx_coin",
+      "kind": "audio",
+      "source": "Roblox Creator Store audio 'retro coin pickup sound effect powerup' by Greengem353, used by id (not uploaded)",
+      "licence": "Free Creator Store audio, usable in Roblox experiences under the Roblox Terms of Use",
+      "creator": "Greengem353",
+      "robloxAssetId": "rbxassetid://93529351909119",
+      "use": "Coin pickup (0.48 s)"
+    },
+    {
+      "name": "sfx_purchase",
+      "kind": "audio",
+      "source": "Roblox Creator Store audio 'Cash Register' by CoderSays, used by id (not uploaded)",
+      "licence": "Free Creator Store audio, usable in Roblox experiences under the Roblox Terms of Use",
+      "creator": "CoderSays",
+      "robloxAssetId": "rbxassetid://134810204798705",
+      "use": "Purchase (2.09 s)"
+    },
+    {
+      "name": "sfx_reward",
+      "kind": "audio",
+      "source": "Roblox Creator Store audio 'Through the Roof (sting)' by APMOfficial, used by id (not uploaded)",
+      "licence": "Free Creator Store audio, usable in Roblox experiences under the Roblox Terms of Use",
+      "creator": "APMOfficial",
+      "robloxAssetId": "rbxassetid://1840076509",
+      "use": "Reward sting (2.26 s)"
+    },
+    {
+      "name": "sfx_error",
+      "kind": "audio",
+      "source": "Roblox Creator Store audio 'ui-simple-negative-error' by AmbientSorcery, used by id (not uploaded)",
+      "licence": "Free Creator Store audio, usable in Roblox experiences under the Roblox Terms of Use",
+      "creator": "AmbientSorcery",
+      "robloxAssetId": "rbxassetid://87519554692663",
+      "use": "Refusal / error (0.31 s)"
+    },
+    {
+      "name": "sfx_open",
+      "kind": "audio",
+      "source": "Roblox Creator Store audio 'Whoosh Rising Swish Airy Various Pitches 2 (SFX)' by ProSoundEffects, used by id (not uploaded)",
+      "licence": "Free Creator Store audio, usable in Roblox experiences under the Roblox Terms of Use",
+      "creator": "ProSoundEffects",
+      "robloxAssetId": "rbxassetid://9120733724",
+      "use": "Window open (1.45 s)"
+    },
+    {
+      "name": "social_arrow_pointer",
+      "kind": "image",
+      "source": "assets/source/ui/social/arrow_pointer.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://114882433993740",
+      "use": "Downward tutorial pointer"
+    },
+    {
+      "name": "social_medal_silver",
+      "kind": "image",
+      "source": "assets/source/ui/social/medal_silver.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://122899171035444",
+      "use": "Silver rank medal"
+    },
+    {
+      "name": "social_icon_backpack",
+      "kind": "image",
+      "source": "assets/source/ui/social/icon_backpack.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://101111661935537",
+      "use": "Inventory backpack"
+    },
+    {
+      "name": "social_row_rank",
+      "kind": "image",
+      "source": "assets/source/ui/social/row_rank.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://140551402854332",
+      "use": "Leaderboard rank row"
+    },
+    {
+      "name": "social_icon_equipped",
+      "kind": "image",
+      "source": "assets/source/ui/social/icon_equipped.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://78276871686842",
+      "use": "Equipped status marker"
+    },
+    {
+      "name": "social_icon_ticket_code",
+      "kind": "image",
+      "source": "assets/source/ui/social/icon_ticket_code.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://83770733266098",
+      "use": "Promo code ticket"
+    },
+    {
+      "name": "social_icon_badge_medal",
+      "kind": "image",
+      "source": "assets/source/ui/social/icon_badge_medal.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://124984464689991",
+      "use": "Achievement ribbon medal"
+    },
+    {
+      "name": "social_icon_heart",
+      "kind": "image",
+      "source": "assets/source/ui/social/icon_heart.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://82417434643898",
+      "use": "Favorite"
+    },
+    {
+      "name": "social_input_plate",
+      "kind": "image",
+      "source": "assets/source/ui/social/input_plate.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://105408790078827",
+      "use": "Inset cream text input"
+    },
+    {
+      "name": "social_icon_group",
+      "kind": "image",
+      "source": "assets/source/ui/social/icon_group.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://93208375150175",
+      "use": "Social group"
+    },
+    {
+      "name": "social_icon_globe",
+      "kind": "image",
+      "source": "assets/source/ui/social/icon_globe.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://105370236893227",
+      "use": "Language selector"
+    },
+    {
+      "name": "social_hint_banner",
+      "kind": "image",
+      "source": "assets/source/ui/social/hint_banner.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://104149237935399",
+      "use": "Cream tutorial hint banner"
+    },
+    {
+      "name": "social_icon_trophy",
+      "kind": "image",
+      "source": "assets/source/ui/social/icon_trophy.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://94615416335470",
+      "use": "Leaderboard trophy"
+    },
+    {
+      "name": "social_leaderboard_board",
+      "kind": "image",
+      "source": "assets/source/ui/social/leaderboard_board.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://134800282612271",
+      "use": "Standing wooden leaderboard"
+    },
+    {
+      "name": "social_medal_bronze",
+      "kind": "image",
+      "source": "assets/source/ui/social/medal_bronze.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://136198469629708",
+      "use": "Bronze rank medal"
+    },
+    {
+      "name": "social_icon_invite",
+      "kind": "image",
+      "source": "assets/source/ui/social/icon_invite.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://131437276079341",
+      "use": "Invite friends"
+    },
+    {
+      "name": "social_medal_gold",
+      "kind": "image",
+      "source": "assets/source/ui/social/medal_gold.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://94600356078691",
+      "use": "Gold rank medal"
+    },
+    {
+      "name": "social_icon_speech",
+      "kind": "image",
+      "source": "assets/source/ui/social/icon_speech.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://139422963886678",
+      "use": "Tutorial hint speech icon"
     }
   ]
 }

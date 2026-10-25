@@ -29,8 +29,8 @@
         "Size": {
           "UDim2": [
             [
-              0.9,
-              0
+              0,
+              440
             ],
             [
               0,
@@ -42,13 +42,10 @@
       },
       "Children": [
         {
-          "Name": "MaxWidth",
-          "ClassName": "UISizeConstraint",
+          "Name": "DeviceScale",
+          "ClassName": "UIScale",
           "Properties": {
-            "MaxSize": [
-              440,
-              260
-            ]
+            "Scale": 1
           }
         },
         {

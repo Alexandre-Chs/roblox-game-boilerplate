@@ -33,7 +33,10 @@ local handlers: { [string]: (player: Player, args: { string }) -> string } = {
 		dataService:Set(player, { "Cash" }, 0)
 		dataService:Set(player, { "Inventory" }, {})
 		dataService:Set(player, { "Daily" }, { LastClaimDay = 0, Streak = 0 })
-		return "Cash, inventory and daily streak reset"
+		dataService:Set(player, { "Equipped" }, "")
+		dataService:Set(player, { "Redeemed" }, {})
+		dataService:Set(player, { "Tutorial" }, 0)
+		return "Cash, inventory, equipped item, codes, daily streak and tutorial reset"
 	end,
 	unlock = function(player)
 		for _, item in ShopCatalog.Items do

@@ -5,6 +5,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local DailyReward = require(ReplicatedStorage.Utils.DailyReward)
 local GameConfig = require(ReplicatedStorage.Config.GameConfig)
+local Locale = require(ReplicatedStorage.Utils.Locale)
 local Packets = require(ReplicatedStorage.Packets)
 local Trove = require(ReplicatedStorage.Packages.Trove)
 local UiImages = require(ReplicatedStorage.Config.UiImages)
@@ -28,7 +29,8 @@ function Screen.new(context: Types.Context, gui: ScreenGui): Types.Screen
 			tile.Name = `Day{day}`
 			tile.LayoutOrder = day
 			tile.Visible = true
-			local fields: { [string]: string } = { Day = `Day {day}`, Amount = tostring(amount) }
+			local fields: { [string]: string } =
+				{ Day = Locale.Format(nil, "DayLabel", { day }, "Day {1}"), Amount = tostring(amount) }
 			for field, value in fields do
 				local label = tile:FindFirstChild(field)
 				if label and label:IsA("TextLabel") then
@@ -74,7 +76,7 @@ function Screen.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		end
 		if info then
 			info.Text = if claimable
-				then `Day {streak}: {reward} coins`
+				then Locale.Format(nil, "DailyPreview", { streak, reward }, "Day {1}: {2} coins")
 				else "Come back tomorrow for your next reward."
 		end
 		if claim then

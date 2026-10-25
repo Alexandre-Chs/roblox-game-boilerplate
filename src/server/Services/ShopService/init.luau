@@ -7,7 +7,16 @@ local GameConfig = require(ReplicatedStorage.Config.GameConfig)
 local ShopCatalog = require(ReplicatedStorage.Config.ShopCatalog)
 local Purchasing = require(script.Purchasing)
 
-local ShopService = { Name = "ShopService", Dependencies = { "DataService", "TelemetryService" } }
+local ShopService = {
+	Name = "ShopService",
+	Dependencies = {
+		"DataService",
+		"TelemetryService",
+		"AchievementService",
+		"TutorialService",
+		"ComplianceService",
+	},
+}
 local services: { [string]: any } = {}
 
 local function buy(player: Player, itemId: any): (boolean, string)
@@ -20,6 +29,10 @@ local function buy(player: Player, itemId: any): (boolean, string)
 	local day = DailyDeal.Today(os.time())
 	local function priceOf(item: any): number
 		return DailyDeal.Price(item, day, ShopCatalog.Items, GameConfig.ShopDealDiscount)
+	end
+	local item = ShopCatalog.ById[itemId]
+	if item and item.Random and not services.ComplianceService:RandomItemsAllowed(player) then
+		return false, "Unavailable"
 	end
 	local result = Purchasing.Check(data, ShopCatalog.ById, itemId, priceOf)
 	if result ~= "Ok" then
@@ -35,6 +48,8 @@ local function buy(player: Player, itemId: any): (boolean, string)
 	telemetry:Economy(player, "Sink", price, Enum.AnalyticsEconomyTransactionType.Shop, itemId)
 	telemetry:ShopStep(player, "Purchased", itemId)
 	telemetry:Onboarding(player, "FirstPurchase")
+	services.AchievementService:Award(player, "FirstPurchase")
+	services.TutorialService:Reached(player, "FirstPurchase")
 	return true, "Ok"
 end
 

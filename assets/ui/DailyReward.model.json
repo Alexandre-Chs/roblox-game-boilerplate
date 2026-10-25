@@ -57,12 +57,12 @@
         "Size": {
           "UDim2": [
             [
-              0.92,
-              0
+              0,
+              640
             ],
             [
-              0.75,
-              0
+              0,
+              350
             ]
           ]
         },
@@ -86,13 +86,14 @@
       },
       "Children": [
         {
-          "Name": "MaxSize",
-          "ClassName": "UISizeConstraint",
+          "Name": "DeviceScale",
+          "ClassName": "UIScale",
           "Properties": {
-            "MaxSize": [
-              640,
-              350
-            ]
+            "Scale": 1
+          },
+          "Attributes": {
+            "DesignWidth": 680,
+            "DesignHeight": 420
           }
         },
         {
