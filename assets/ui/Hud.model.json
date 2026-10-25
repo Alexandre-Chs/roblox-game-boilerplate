@@ -164,6 +164,57 @@
       ]
     },
     {
+      "Name": "Dock",
+      "ClassName": "ImageLabel",
+      "Properties": {
+        "AnchorPoint": [
+          1,
+          0.5
+        ],
+        "Position": {
+          "UDim2": [
+            [
+              1,
+              -16
+            ],
+            [
+              0.5,
+              0
+            ]
+          ]
+        },
+        "Size": {
+          "UDim2": [
+            [
+              0,
+              198
+            ],
+            [
+              0,
+              232
+            ]
+          ]
+        },
+        "BackgroundTransparency": 1,
+        "Image": "rbxassetid://122215845931719",
+        "ZIndex": 1,
+        "ScaleType": "Slice",
+        "SliceCenter": {
+          "Rect": [
+            [
+              64,
+              64
+            ],
+            [
+              192,
+              448
+            ]
+          ]
+        },
+        "SliceScale": 0.4
+      }
+    },
+    {
       "Name": "Buttons",
       "ClassName": "Frame",
       "Properties": {
@@ -187,15 +238,16 @@
           "UDim2": [
             [
               0,
-              150
+              170
             ],
             [
               0,
-              190
+              186
             ]
           ]
         },
-        "BackgroundTransparency": 1
+        "BackgroundTransparency": 1,
+        "ZIndex": 2
       },
       "Children": [
         {
@@ -276,22 +328,22 @@
                   "UDim2": [
                     [
                       0,
-                      2
+                      10
                     ],
                     [
                       0.5,
-                      0
+                      -2
                     ]
                   ]
                 },
                 "Size": {
                   "UDim2": [
                     [
-                      1.1,
+                      0.72,
                       0
                     ],
                     [
-                      1.1,
+                      0.72,
                       0
                     ]
                   ]
@@ -315,11 +367,11 @@
                   "UDim2": [
                     [
                       0,
-                      58
+                      56
                     ],
                     [
                       0,
-                      6
+                      8
                     ]
                   ]
                 },
@@ -331,7 +383,7 @@
                     ],
                     [
                       1,
-                      -14
+                      -18
                     ]
                   ]
                 },
@@ -350,7 +402,7 @@
                     "style": "Normal"
                   }
                 },
-                "TextXAlignment": "Center",
+                "TextXAlignment": "Left",
                 "ZIndex": 4,
                 "TextStrokeTransparency": 0,
                 "TextStrokeColor3": [
@@ -364,7 +416,7 @@
                   "Name": "MaxText",
                   "ClassName": "UITextSizeConstraint",
                   "Properties": {
-                    "MaxTextSize": 26
+                    "MaxTextSize": 22
                   }
                 }
               ]
@@ -544,22 +596,22 @@
                   "UDim2": [
                     [
                       0,
-                      2
+                      10
                     ],
                     [
                       0.5,
-                      0
+                      -2
                     ]
                   ]
                 },
                 "Size": {
                   "UDim2": [
                     [
-                      1.1,
+                      0.72,
                       0
                     ],
                     [
-                      1.1,
+                      0.72,
                       0
                     ]
                   ]
@@ -583,11 +635,11 @@
                   "UDim2": [
                     [
                       0,
-                      58
+                      56
                     ],
                     [
                       0,
-                      6
+                      8
                     ]
                   ]
                 },
@@ -599,7 +651,7 @@
                     ],
                     [
                       1,
-                      -14
+                      -18
                     ]
                   ]
                 },
@@ -618,7 +670,7 @@
                     "style": "Normal"
                   }
                 },
-                "TextXAlignment": "Center",
+                "TextXAlignment": "Left",
                 "ZIndex": 4,
                 "TextStrokeTransparency": 0,
                 "TextStrokeColor3": [
@@ -632,7 +684,7 @@
                   "Name": "MaxText",
                   "ClassName": "UITextSizeConstraint",
                   "Properties": {
-                    "MaxTextSize": 26
+                    "MaxTextSize": 22
                   }
                 }
               ]
@@ -704,22 +756,22 @@
                   "UDim2": [
                     [
                       0,
-                      2
+                      10
                     ],
                     [
                       0.5,
-                      0
+                      -2
                     ]
                   ]
                 },
                 "Size": {
                   "UDim2": [
                     [
-                      1.1,
+                      0.72,
                       0
                     ],
                     [
-                      1.1,
+                      0.72,
                       0
                     ]
                   ]
@@ -743,11 +795,11 @@
                   "UDim2": [
                     [
                       0,
-                      58
+                      56
                     ],
                     [
                       0,
-                      6
+                      8
                     ]
                   ]
                 },
@@ -759,7 +811,7 @@
                     ],
                     [
                       1,
-                      -14
+                      -18
                     ]
                   ]
                 },
@@ -778,7 +830,7 @@
                     "style": "Normal"
                   }
                 },
-                "TextXAlignment": "Center",
+                "TextXAlignment": "Left",
                 "ZIndex": 4,
                 "TextStrokeTransparency": 0,
                 "TextStrokeColor3": [

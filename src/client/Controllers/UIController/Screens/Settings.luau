@@ -16,7 +16,7 @@ local Settings = {}
 function Settings.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	local trove = Trove.new()
 	local data = context.Controllers.DataController
-	local close: TextButton? = Find(gui, "Close", "TextButton")
+	local close: GuiButton? = Find(gui, "Close", "GuiButton")
 	if close then
 		trove:Connect(close.Activated, function()
 			context.Close("Settings")
@@ -24,13 +24,13 @@ function Settings.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	end
 
 	for rowName, key in ROWS do
-		local row: Frame? = Find(gui, rowName, "Frame")
+		local row: GuiObject? = Find(gui, rowName, "GuiObject")
 		if not row then
 			continue
 		end
 		local value: TextLabel? = Find(row, "Value", "TextLabel")
-		local minus: TextButton? = Find(row, "Minus", "TextButton")
-		local plus: TextButton? = Find(row, "Plus", "TextButton")
+		local minus: GuiButton? = Find(row, "Minus", "GuiButton")
+		local plus: GuiButton? = Find(row, "Plus", "GuiButton")
 		trove:Add(data:Observe({ "Settings", key }, function(volume: any)
 			if value then
 				value.Text = if type(volume) == "number" then `{math.round(volume * 100)}%` else "..."

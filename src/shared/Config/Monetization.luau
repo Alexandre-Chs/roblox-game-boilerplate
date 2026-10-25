@@ -24,7 +24,7 @@ local gamePasses: { [string]: GamePass } = {
 		Id = 0,
 		Name = "2x Coins",
 		Description = "Double every coin you pick up. Forever.",
-		Icon = "rbxassetid://112127184591549",
+		Icon = "rbxassetid://112941121204301",
 		Order = 1,
 	},
 }

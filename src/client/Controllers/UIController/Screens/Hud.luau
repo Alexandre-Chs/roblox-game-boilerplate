@@ -19,21 +19,10 @@ function Hud.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	local controllers = context.Controllers
 	local label: TextLabel? = Find(gui, "Cash", "TextLabel")
 
-	-- The Shop button breathes and shows a SALE badge until the shop is opened once.
+	-- The Shop button shows a SALE badge until the shop is opened once.
 	local shopButton: GuiButton? = Find(gui, "ShopButton", "GuiButton")
 	local saleBadge = shopButton and shopButton:FindFirstChild("Badge")
-	local pulse: Tween? = if shopButton then Effects.Pulse(trove, shopButton, 1.08) else nil
 	local function stopSale()
-		if pulse then
-			pulse:Cancel()
-			pulse = nil
-			if shopButton then
-				local scale = shopButton:FindFirstChild("PulseScale")
-				if scale and scale:IsA("UIScale") then
-					scale.Scale = 1
-				end
-			end
-		end
 		if saleBadge and saleBadge:IsA("GuiObject") then
 			saleBadge.Visible = false
 		end
@@ -70,7 +59,7 @@ function Hud.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		if previous and cash > previous then
 			controllers.SoundController:PlaySfx("Coin")
 			if label then
-				Effects.Pop(label, 1.2)
+				Effects.Pop(label, 1.06)
 			end
 		end
 		previous = cash

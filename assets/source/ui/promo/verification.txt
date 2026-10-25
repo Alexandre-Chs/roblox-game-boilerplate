@@ -1,0 +1,30 @@
+PASS discount_tag.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS sale_ribbon_corner.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS banner_best_value.png: 512x128, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=[64, 32, 448, 96]
+PASS banner_popular.png: 512x128, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=[64, 32, 448, 96]
+PASS banner_limited.png: 512x128, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=[64, 32, 448, 96]
+PASS badge_premium.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS badge_vip.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS badge_new.png: 192x192, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS strike_line.png: 256x48, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_gem.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_gem_pile.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_vip_crown.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_premium_star.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_double_coins.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_luck_clover.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_magnet.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_rocket.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_shield.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_hourglass.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_starter_pack.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_treasure_chest_open.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_golden_ticket.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_piggy_bank.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_infinity.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS icon_sparkles.png: 256x256, RGBA, alpha corners=0, gutter>0, magenta=0, SliceCenter=None
+PASS: 25/25 sprites; exact sizes; RGBA; transparent corners and gutters; antialiased alpha; no magenta; SliceCenter verified.
+PASS: manifest.json, exact per-asset prompts.json and labeled contact_sheet.png present.
+VISUAL: all 25 sprites inspected; no text, numerals, currency marks, baked backgrounds or clipped edges observed.
+REDONE: badge_new.png (dark center smudge); banner_limited.png (hourglass exceeded left slice band).
+NOT RUN: Roblox upload, Studio and engine/UI playtest; source-file delivery only.

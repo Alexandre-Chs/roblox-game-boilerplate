@@ -30,5 +30,35 @@ PASS icon_gear.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
 PASS icon_cart.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
 PASS icon_clock.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
 PASS icon_fire.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
-PASS: 32/32 sprites; exact sizes; RGBA; transparent corners; antialiased alpha; no magenta; SliceCenter verified.
+PASS panel.png: 768x768, RGBA, alpha corners=0, magenta=0, SliceCenter=[96, 96, 672, 672]
+PASS title_ribbon.png: 640x160, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS row_plate.png: 512x112, RGBA, alpha corners=0, magenta=0, SliceCenter=[40, 40, 472, 72]
+PASS button_square_green.png: 128x128, RGBA, alpha corners=0, magenta=0, SliceCenter=[40, 40, 88, 88]
+PASS button_square_red.png: 128x128, RGBA, alpha corners=0, magenta=0, SliceCenter=[40, 40, 88, 88]
+PASS toggle_on.png: 192x96, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS toggle_off.png: 192x96, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS slider_track.png: 512x48, RGBA, alpha corners=0, magenta=0, SliceCenter=[20, 20, 492, 28]
+PASS slider_fill.png: 512x48, RGBA, alpha corners=0, magenta=0, SliceCenter=[20, 20, 492, 28]
+PASS slider_knob.png: 96x96, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS day_tile.png: 192x224, RGBA, alpha corners=0, magenta=0, SliceCenter=[40, 40, 152, 184]
+PASS day_tile_today.png: 192x224, RGBA, alpha corners=0, magenta=0, SliceCenter=[40, 40, 152, 184]
+PASS day_tile_claimed.png: 192x224, RGBA, alpha corners=0, magenta=0, SliceCenter=[40, 40, 152, 184]
+PASS toast_plate.png: 512x96, RGBA, alpha corners=0, magenta=0, SliceCenter=[40, 40, 472, 56]
+PASS dock.png: 256x512, RGBA, alpha corners=0, magenta=0, SliceCenter=[64, 64, 192, 448]
+PASS loading_bg.png: 1024x576, RGBA, opaque backdrop, magenta=0, SliceCenter=None
+PASS progress_track.png: 512x48, RGBA, alpha corners=0, magenta=0, SliceCenter=[20, 20, 492, 28]
+PASS progress_fill.png: 512x48, RGBA, alpha corners=0, magenta=0, SliceCenter=[20, 20, 492, 28]
+PASS icon_music.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_speaker.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_speaker_mute.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_minus.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_plus.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_check.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_lock.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_chest.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_calendar.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_bell.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_home.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS icon_close_x.png: 256x256, RGBA, alpha corners=0, magenta=0, SliceCenter=None
+PASS: 62/62 sprites; exact sizes; RGBA; transparent corners and antialiased alpha (except opaque loading_bg); no magenta; SliceCenter verified.
 PASS: manifest.json, prompts.json and labeled contact_sheet.png present.

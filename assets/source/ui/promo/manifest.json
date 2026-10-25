@@ -1,0 +1,242 @@
+[
+  {
+    "file": "discount_tag.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Blank tilted hanging red-orange sale price tag",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "sale_ribbon_corner.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Blank diagonal top-right card corner ribbon",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "banner_best_value.png",
+    "width": 512,
+    "height": 128,
+    "purpose": "Blank green best-value banner with end stars",
+    "sliceCenter": [
+      64,
+      32,
+      448,
+      96
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Side ornaments and bevels outside plain stretch center; requested SliceCenter in pixels. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "banner_popular.png",
+    "width": 512,
+    "height": 128,
+    "purpose": "Blank orange-red popular banner with end flames",
+    "sliceCenter": [
+      64,
+      32,
+      448,
+      96
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Side ornaments and bevels outside plain stretch center; requested SliceCenter in pixels. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "banner_limited.png",
+    "width": 512,
+    "height": 128,
+    "purpose": "Blank purple limited banner with left hourglass",
+    "sliceCenter": [
+      64,
+      32,
+      448,
+      96
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Side ornaments and bevels outside plain stretch center; requested SliceCenter in pixels. Regenerated to keep tiny hourglass within left slice band; final center visually inspected. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "badge_premium.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Gold shield with gems and blank center",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "badge_vip.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Black and gold hexagonal badge with crown and blank center",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "badge_new.png",
+    "width": 192,
+    "height": 192,
+    "purpose": "Cyan irregular starburst sticker with blank center",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Regenerated to remove dark center smudge; final blank cyan center visually inspected. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "strike_line.png",
+    "width": 256,
+    "height": 48,
+    "purpose": "Red painted strike-through price stroke",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_gem.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Single cyan faceted premium gemstone",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_gem_pile.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Pile of cyan, blue and purple gems",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_vip_crown.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Premium platinum-gold crown with blue and purple gems",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_premium_star.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Golden faceted premium star",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_double_coins.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Two overlapping unmarked gold coins and sparkle",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_luck_clover.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Glossy four-leaf lucky clover",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_magnet.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Red horseshoe magnet with silver tips",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_rocket.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Red and cream rocket with golden flame",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_shield.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Blue protective shield with gold rim",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_hourglass.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Gold hourglass with warm sand",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_starter_pack.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Gift box with unmarked gold coins",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_treasure_chest_open.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Open glowing chest of coins and gems",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_golden_ticket.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Blank golden admission ticket",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_piggy_bank.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Pink piggy bank with gold coin",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_infinity.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Golden infinity loop",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  },
+  {
+    "file": "icon_sparkles.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "Cluster of three golden four-point sparkles",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; resized from generated source with preserved alpha. No third-party asset licence asserted. No text. Built-in tool does not expose underlying model ID. Framing ignores stray generated alpha <=8/255; visible art alpha preserved during Lanczos resize. Near-invisible alpha <=2/255 from resampling is cleared to transparent black; antialiased visible edges retained."
+  }
+]

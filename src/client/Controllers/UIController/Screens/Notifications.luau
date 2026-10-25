@@ -15,14 +15,14 @@ local Notifications = {}
 function Notifications.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	local trove = Trove.new()
 	local stack: Frame? = Find(gui, "Stack", "Frame")
-	local template: TextLabel? = Find(gui, "Toast", "TextLabel")
-	local shown: { TextLabel } = {}
+	local template: GuiObject? = Find(gui, "Toast", "GuiObject")
+	local shown: { GuiObject } = {}
 	-- Live timers only; each removes itself, so nothing accumulates (unlike trove:Add per toast).
 	local timers: { [thread]: true } = {}
 	local order = 0
 
 	if stack and template then
-		local toastTemplate: TextLabel = template
+		local toastTemplate: GuiObject = template
 		toastTemplate.Visible = false
 		trove:Connect(context.Controllers.UIController.Notified, function(text: string)
 			if #shown >= MAX_VISIBLE then
@@ -34,7 +34,10 @@ function Notifications.new(context: Types.Context, gui: ScreenGui): Types.Screen
 			order += 1
 			local toast = toastTemplate:Clone()
 			toast.Name = "Toast"
-			toast.Text = text
+			local label = toast:FindFirstChild("Label")
+			if label and label:IsA("TextLabel") then
+				label.Text = text
+			end
 			toast.LayoutOrder = order
 			toast.Visible = true
 			toast.Parent = stack

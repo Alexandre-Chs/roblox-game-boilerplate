@@ -171,7 +171,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		end
 		local page = pagesFrame:FindFirstChild(name)
 		if page and page:IsA("GuiObject") then
-			Effects.Pop(page, 0.96)
+			Effects.Pop(page, 0.98)
 		end
 	end
 	for _, tabName in TABS do
@@ -207,7 +207,7 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 			busy = false
 			if ok == true then
 				controllers.SoundController:PlaySfx("Purchase")
-				Effects.Pop(card, 1.15)
+				Effects.Pop(card, 1.03)
 			end
 			context.Notify(
 				if ok == nil then "No answer, try again." else MESSAGES[reason] or tostring(reason)
@@ -267,6 +267,10 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		if badge and badge:IsA("GuiObject") then
 			badge.Visible = pack.Badge ~= nil
 			setLabel(badge, pack.Badge or "")
+			paint(
+				badge,
+				if pack.Badge == "BEST VALUE" then UiImages.BannerBestValue else UiImages.BannerPopular
+			)
 		end
 		setImage(card, "Icon", pack.Icon)
 		local amount = card:FindFirstChild("Amount")
@@ -501,10 +505,10 @@ function Shop.new(context: Types.Context, gui: ScreenGui): Types.Screen
 				Effects.Fade(dim, 0.45)
 			end
 			if panelScale and panelScale:IsA("UIScale") then
-				panelScale.Scale = 0.8
+				panelScale.Scale = 0.96
 				TweenService:Create(
 					panelScale,
-					TweenInfo.new(0.32, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+					TweenInfo.new(0.2, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
 					{ Scale = 1 }
 				):Play()
 			end

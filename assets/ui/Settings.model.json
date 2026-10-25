@@ -3,12 +3,40 @@
   "Properties": {
     "ResetOnSpawn": false,
     "Enabled": false,
+    "IgnoreGuiInset": true,
+    "DisplayOrder": 10,
     "ZIndexBehavior": "Sibling"
   },
   "Children": [
     {
-      "Name": "Panel",
+      "Name": "Dim",
       "ClassName": "Frame",
+      "Properties": {
+        "Size": {
+          "UDim2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "BackgroundColor3": [
+          0,
+          0,
+          0
+        ],
+        "BackgroundTransparency": 0.45,
+        "Active": true,
+        "ZIndex": 0
+      }
+    },
+    {
+      "Name": "Panel",
+      "ClassName": "ImageLabel",
       "Properties": {
         "AnchorPoint": [
           0.5,
@@ -22,54 +50,199 @@
             ],
             [
               0.5,
-              0
+              20
             ]
           ]
         },
         "Size": {
           "UDim2": [
             [
-              0.9,
+              0.92,
               0
             ],
             [
-              0.5,
+              0.75,
               0
             ]
           ]
         },
-        "BackgroundColor3": [
-          0.1,
-          0.1,
-          0.12
-        ]
+        "BackgroundTransparency": 1,
+        "Image": "rbxassetid://127691151415667",
+        "ZIndex": 1,
+        "ScaleType": "Slice",
+        "SliceCenter": {
+          "Rect": [
+            [
+              96,
+              96
+            ],
+            [
+              672,
+              672
+            ]
+          ]
+        },
+        "SliceScale": 0.4
       },
       "Children": [
-        {
-          "Name": "Corner",
-          "ClassName": "UICorner",
-          "Properties": {
-            "CornerRadius": {
-              "UDim": [
-                0,
-                14
-              ]
-            }
-          }
-        },
         {
           "Name": "MaxSize",
           "ClassName": "UISizeConstraint",
           "Properties": {
             "MaxSize": [
-              420,
-              210
+              480,
+              272
             ]
           }
         },
         {
-          "Name": "Title",
-          "ClassName": "TextLabel",
+          "Name": "Ribbon",
+          "ClassName": "ImageLabel",
+          "Properties": {
+            "AnchorPoint": [
+              0.5,
+              0
+            ],
+            "Position": {
+              "UDim2": [
+                [
+                  0.5,
+                  0
+                ],
+                [
+                  0,
+                  -44
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  0,
+                  340
+                ],
+                [
+                  0,
+                  85
+                ]
+              ]
+            },
+            "BackgroundTransparency": 1,
+            "Image": "rbxassetid://82973326717612",
+            "ZIndex": 4,
+            "ScaleType": "Fit"
+          },
+          "Children": [
+            {
+              "Name": "Title",
+              "ClassName": "TextLabel",
+              "Properties": {
+                "AnchorPoint": [
+                  0.5,
+                  0.5
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.5,
+                      0
+                    ],
+                    [
+                      0.42,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.62,
+                      0
+                    ],
+                    [
+                      0.5,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "Text": "SETTINGS",
+                "TextColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "TextScaled": true,
+                "FontFace": {
+                  "Font": {
+                    "family": "rbxasset://fonts/families/FredokaOne.json",
+                    "weight": "Regular",
+                    "style": "Normal"
+                  }
+                },
+                "TextXAlignment": "Center",
+                "ZIndex": 5,
+                "TextStrokeTransparency": 0,
+                "TextStrokeColor3": [
+                  0.29,
+                  0.13,
+                  0.05
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "MaxText",
+                  "ClassName": "UITextSizeConstraint",
+                  "Properties": {
+                    "MaxTextSize": 34
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "Close",
+          "ClassName": "ImageButton",
+          "Properties": {
+            "AnchorPoint": [
+              1,
+              0
+            ],
+            "Position": {
+              "UDim2": [
+                [
+                  1,
+                  14
+                ],
+                [
+                  0,
+                  -14
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  0,
+                  54
+                ],
+                [
+                  0,
+                  54
+                ]
+              ]
+            },
+            "BackgroundTransparency": 1,
+            "Image": "rbxassetid://136521515587305",
+            "ZIndex": 6,
+            "ScaleType": "Fit",
+            "AutoButtonColor": false
+          }
+        },
+        {
+          "Name": "Music",
+          "ClassName": "ImageLabel",
           "Properties": {
             "AnchorPoint": [
               0,
@@ -79,11 +252,11 @@
               "UDim2": [
                 [
                   0,
-                  16
+                  28
                 ],
                 [
                   0,
-                  10
+                  70
                 ]
               ]
             },
@@ -91,182 +264,69 @@
               "UDim2": [
                 [
                   1,
-                  -80
+                  -56
                 ],
                 [
                   0,
-                  36
+                  72
                 ]
               ]
             },
             "BackgroundTransparency": 1,
-            "TextColor3": [
-              1,
-              0.85,
-              0.2
-            ],
-            "TextScaled": true,
-            "Text": "Settings",
-            "FontFace": {
-              "Font": {
-                "family": "rbxasset://fonts/families/GothamSSm.json",
-                "weight": "Bold",
-                "style": "Normal"
-              }
+            "Image": "rbxassetid://75076650497158",
+            "ZIndex": 2,
+            "ScaleType": "Slice",
+            "SliceCenter": {
+              "Rect": [
+                [
+                  40,
+                  40
+                ],
+                [
+                  472,
+                  72
+                ]
+              ]
             },
-            "TextXAlignment": "Left"
+            "SliceScale": 0.5
           },
           "Children": [
             {
-              "Name": "Padding",
-              "ClassName": "UIPadding",
+              "Name": "Icon",
+              "ClassName": "ImageLabel",
               "Properties": {
-                "PaddingTop": {
-                  "UDim": [
-                    0,
-                    4
+                "AnchorPoint": [
+                  0,
+                  0.5
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0,
+                      12
+                    ],
+                    [
+                      0.5,
+                      0
+                    ]
                   ]
                 },
-                "PaddingBottom": {
-                  "UDim": [
-                    0,
-                    4
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "Name": "Close",
-          "ClassName": "TextButton",
-          "Properties": {
-            "AnchorPoint": [
-              1,
-              0
-            ],
-            "Position": {
-              "UDim2": [
-                [
-                  1,
-                  -10
-                ],
-                [
-                  0,
-                  8
-                ]
-              ]
-            },
-            "Size": {
-              "UDim2": [
-                [
-                  0,
-                  44
-                ],
-                [
-                  0,
-                  44
-                ]
-              ]
-            },
-            "BackgroundColor3": [
-              0.75,
-              0.25,
-              0.25
-            ],
-            "TextColor3": [
-              1,
-              1,
-              1
-            ],
-            "Text": "X",
-            "TextScaled": true,
-            "FontFace": {
-              "Font": {
-                "family": "rbxasset://fonts/families/GothamSSm.json",
-                "weight": "Bold",
-                "style": "Normal"
-              }
-            }
-          },
-          "Children": [
-            {
-              "Name": "Corner",
-              "ClassName": "UICorner",
-              "Properties": {
-                "CornerRadius": {
-                  "UDim": [
-                    0,
-                    8
-                  ]
-                }
-              }
-            },
-            {
-              "Name": "Padding",
-              "ClassName": "UIPadding",
-              "Properties": {
-                "PaddingTop": {
-                  "UDim": [
-                    0,
-                    6
+                "Size": {
+                  "UDim2": [
+                    [
+                      0,
+                      48
+                    ],
+                    [
+                      0,
+                      48
+                    ]
                   ]
                 },
-                "PaddingBottom": {
-                  "UDim": [
-                    0,
-                    6
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "Name": "Music",
-          "ClassName": "Frame",
-          "Properties": {
-            "Position": {
-              "UDim2": [
-                [
-                  0,
-                  12
-                ],
-                [
-                  0,
-                  64
-                ]
-              ]
-            },
-            "Size": {
-              "UDim2": [
-                [
-                  1,
-                  -24
-                ],
-                [
-                  0,
-                  52
-                ]
-              ]
-            },
-            "BackgroundColor3": [
-              0.18,
-              0.18,
-              0.22
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Corner",
-              "ClassName": "UICorner",
-              "Properties": {
-                "CornerRadius": {
-                  "UDim": [
-                    0,
-                    8
-                  ]
-                }
+                "BackgroundTransparency": 1,
+                "Image": "rbxassetid://112272228568523",
+                "ZIndex": 3,
+                "ScaleType": "Fit"
               }
             },
             {
@@ -281,11 +341,11 @@
                   "UDim2": [
                     [
                       0,
-                      12
+                      68
                     ],
                     [
                       0,
-                      0
+                      14
                     ]
                   ]
                 },
@@ -293,55 +353,51 @@
                   "UDim2": [
                     [
                       0.4,
-                      -12
+                      -68
                     ],
                     [
                       1,
-                      0
+                      -28
                     ]
                   ]
                 },
                 "BackgroundTransparency": 1,
+                "Text": "Music",
                 "TextColor3": [
-                  1,
-                  1,
-                  1
+                  0.38,
+                  0.19,
+                  0.08
                 ],
                 "TextScaled": true,
-                "Text": "Music",
                 "FontFace": {
                   "Font": {
-                    "family": "rbxasset://fonts/families/GothamSSm.json",
-                    "weight": "Bold",
+                    "family": "rbxasset://fonts/families/FredokaOne.json",
+                    "weight": "Regular",
                     "style": "Normal"
                   }
                 },
-                "TextXAlignment": "Left"
+                "TextXAlignment": "Left",
+                "ZIndex": 3,
+                "TextStrokeTransparency": 1,
+                "TextStrokeColor3": [
+                  0.29,
+                  0.13,
+                  0.05
+                ]
               },
               "Children": [
                 {
-                  "Name": "Padding",
-                  "ClassName": "UIPadding",
+                  "Name": "MaxText",
+                  "ClassName": "UITextSizeConstraint",
                   "Properties": {
-                    "PaddingTop": {
-                      "UDim": [
-                        0,
-                        4
-                      ]
-                    },
-                    "PaddingBottom": {
-                      "UDim": [
-                        0,
-                        4
-                      ]
-                    }
+                    "MaxTextSize": 26
                   }
                 }
               ]
             },
             {
               "Name": "Minus",
-              "ClassName": "TextButton",
+              "ClassName": "ImageButton",
               "Properties": {
                 "AnchorPoint": [
                   0,
@@ -350,8 +406,8 @@
                 "Position": {
                   "UDim2": [
                     [
-                      0.45,
-                      0
+                      1,
+                      -176
                     ],
                     [
                       0.5,
@@ -363,63 +419,70 @@
                   "UDim2": [
                     [
                       0,
-                      44
+                      46
                     ],
                     [
                       0,
-                      44
+                      46
                     ]
                   ]
                 },
-                "BackgroundColor3": [
-                  0.35,
-                  0.35,
-                  0.4
-                ],
-                "TextColor3": [
-                  1,
-                  1,
-                  1
-                ],
-                "Text": "-",
-                "TextScaled": true,
-                "FontFace": {
-                  "Font": {
-                    "family": "rbxasset://fonts/families/GothamSSm.json",
-                    "weight": "Bold",
-                    "style": "Normal"
-                  }
-                }
+                "BackgroundTransparency": 1,
+                "Image": "rbxassetid://108127373588549",
+                "ZIndex": 4,
+                "ScaleType": "Slice",
+                "SliceCenter": {
+                  "Rect": [
+                    [
+                      40,
+                      40
+                    ],
+                    [
+                      88,
+                      88
+                    ]
+                  ]
+                },
+                "SliceScale": 0.4,
+                "AutoButtonColor": false
               },
               "Children": [
                 {
-                  "Name": "Corner",
-                  "ClassName": "UICorner",
+                  "Name": "Icon",
+                  "ClassName": "ImageLabel",
                   "Properties": {
-                    "CornerRadius": {
-                      "UDim": [
-                        0,
-                        8
-                      ]
-                    }
-                  }
-                },
-                {
-                  "Name": "Padding",
-                  "ClassName": "UIPadding",
-                  "Properties": {
-                    "PaddingTop": {
-                      "UDim": [
-                        0,
-                        6
+                    "AnchorPoint": [
+                      0.5,
+                      0.5
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0.5,
+                          0
+                        ],
+                        [
+                          0.5,
+                          -1
+                        ]
                       ]
                     },
-                    "PaddingBottom": {
-                      "UDim": [
-                        0,
-                        6
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0.6,
+                          0
+                        ],
+                        [
+                          0.6,
+                          0
+                        ]
                       ]
-                    }
+                    },
+                    "BackgroundTransparency": 1,
+                    "Image": "rbxassetid://118710143479847",
+                    "ZIndex": 5,
+                    "ScaleType": "Fit"
                   }
                 }
               ]
@@ -435,78 +498,74 @@
                 "Position": {
                   "UDim2": [
                     [
-                      0.45,
-                      52
+                      1,
+                      -126
                     ],
                     [
                       0,
-                      0
+                      14
                     ]
                   ]
                 },
                 "Size": {
                   "UDim2": [
                     [
-                      0.25,
-                      0
+                      0,
+                      64
                     ],
                     [
                       1,
-                      0
+                      -28
                     ]
                   ]
                 },
                 "BackgroundTransparency": 1,
+                "Text": "...",
                 "TextColor3": [
-                  1,
-                  1,
-                  1
+                  0.38,
+                  0.19,
+                  0.08
                 ],
                 "TextScaled": true,
-                "Text": "...",
                 "FontFace": {
                   "Font": {
-                    "family": "rbxasset://fonts/families/GothamSSm.json",
-                    "weight": "Bold",
+                    "family": "rbxasset://fonts/families/FredokaOne.json",
+                    "weight": "Regular",
                     "style": "Normal"
                   }
                 },
-                "TextXAlignment": "Center"
+                "TextXAlignment": "Center",
+                "ZIndex": 3,
+                "TextStrokeTransparency": 1,
+                "TextStrokeColor3": [
+                  0.29,
+                  0.13,
+                  0.05
+                ]
               },
               "Children": [
                 {
-                  "Name": "Padding",
-                  "ClassName": "UIPadding",
+                  "Name": "MaxText",
+                  "ClassName": "UITextSizeConstraint",
                   "Properties": {
-                    "PaddingTop": {
-                      "UDim": [
-                        0,
-                        4
-                      ]
-                    },
-                    "PaddingBottom": {
-                      "UDim": [
-                        0,
-                        4
-                      ]
-                    }
+                    "MaxTextSize": 24
                   }
                 }
               ]
             },
             {
               "Name": "Plus",
-              "ClassName": "TextButton",
+              "ClassName": "ImageButton",
               "Properties": {
                 "AnchorPoint": [
-                  1,
+                  0,
                   0.5
                 ],
                 "Position": {
                   "UDim2": [
                     [
                       1,
-                      -8
+                      -58
                     ],
                     [
                       0.5,
@@ -518,63 +577,70 @@
                   "UDim2": [
                     [
                       0,
-                      44
+                      46
                     ],
                     [
                       0,
-                      44
+                      46
                     ]
                   ]
                 },
-                "BackgroundColor3": [
-                  0.35,
-                  0.35,
-                  0.4
-                ],
-                "TextColor3": [
-                  1,
-                  1,
-                  1
-                ],
-                "Text": "+",
-                "TextScaled": true,
-                "FontFace": {
-                  "Font": {
-                    "family": "rbxasset://fonts/families/GothamSSm.json",
-                    "weight": "Bold",
-                    "style": "Normal"
-                  }
-                }
+                "BackgroundTransparency": 1,
+                "Image": "rbxassetid://77699164777628",
+                "ZIndex": 4,
+                "ScaleType": "Slice",
+                "SliceCenter": {
+                  "Rect": [
+                    [
+                      40,
+                      40
+                    ],
+                    [
+                      88,
+                      88
+                    ]
+                  ]
+                },
+                "SliceScale": 0.4,
+                "AutoButtonColor": false
               },
               "Children": [
                 {
-                  "Name": "Corner",
-                  "ClassName": "UICorner",
+                  "Name": "Icon",
+                  "ClassName": "ImageLabel",
                   "Properties": {
-                    "CornerRadius": {
-                      "UDim": [
-                        0,
-                        8
-                      ]
-                    }
-                  }
-                },
-                {
-                  "Name": "Padding",
-                  "ClassName": "UIPadding",
-                  "Properties": {
-                    "PaddingTop": {
-                      "UDim": [
-                        0,
-                        6
+                    "AnchorPoint": [
+                      0.5,
+                      0.5
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0.5,
+                          0
+                        ],
+                        [
+                          0.5,
+                          -1
+                        ]
                       ]
                     },
-                    "PaddingBottom": {
-                      "UDim": [
-                        0,
-                        6
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0.6,
+                          0
+                        ],
+                        [
+                          0.6,
+                          0
+                        ]
                       ]
-                    }
+                    },
+                    "BackgroundTransparency": 1,
+                    "Image": "rbxassetid://136224798607000",
+                    "ZIndex": 5,
+                    "ScaleType": "Fit"
                   }
                 }
               ]
@@ -583,17 +649,21 @@
         },
         {
           "Name": "Effects",
-          "ClassName": "Frame",
+          "ClassName": "ImageLabel",
           "Properties": {
+            "AnchorPoint": [
+              0,
+              0
+            ],
             "Position": {
               "UDim2": [
                 [
                   0,
-                  12
+                  28
                 ],
                 [
                   0,
-                  126
+                  160
                 ]
               ]
             },
@@ -601,31 +671,69 @@
               "UDim2": [
                 [
                   1,
-                  -24
+                  -56
                 ],
                 [
                   0,
-                  52
+                  72
                 ]
               ]
             },
-            "BackgroundColor3": [
-              0.18,
-              0.18,
-              0.22
-            ]
+            "BackgroundTransparency": 1,
+            "Image": "rbxassetid://75076650497158",
+            "ZIndex": 2,
+            "ScaleType": "Slice",
+            "SliceCenter": {
+              "Rect": [
+                [
+                  40,
+                  40
+                ],
+                [
+                  472,
+                  72
+                ]
+              ]
+            },
+            "SliceScale": 0.5
           },
           "Children": [
             {
-              "Name": "Corner",
-              "ClassName": "UICorner",
+              "Name": "Icon",
+              "ClassName": "ImageLabel",
               "Properties": {
-                "CornerRadius": {
-                  "UDim": [
-                    0,
-                    8
+                "AnchorPoint": [
+                  0,
+                  0.5
+                ],
+                "Position": {
+                  "UDim2": [
+                    [
+                      0,
+                      12
+                    ],
+                    [
+                      0.5,
+                      0
+                    ]
                   ]
-                }
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0,
+                      48
+                    ],
+                    [
+                      0,
+                      48
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "Image": "rbxassetid://72237628493315",
+                "ZIndex": 3,
+                "ScaleType": "Fit"
               }
             },
             {
@@ -640,11 +748,11 @@
                   "UDim2": [
                     [
                       0,
-                      12
+                      68
                     ],
                     [
                       0,
-                      0
+                      14
                     ]
                   ]
                 },
@@ -652,55 +760,51 @@
                   "UDim2": [
                     [
                       0.4,
-                      -12
+                      -68
                     ],
                     [
                       1,
-                      0
+                      -28
                     ]
                   ]
                 },
                 "BackgroundTransparency": 1,
+                "Text": "Effects",
                 "TextColor3": [
-                  1,
-                  1,
-                  1
+                  0.38,
+                  0.19,
+                  0.08
                 ],
                 "TextScaled": true,
-                "Text": "Effects",
                 "FontFace": {
                   "Font": {
-                    "family": "rbxasset://fonts/families/GothamSSm.json",
-                    "weight": "Bold",
+                    "family": "rbxasset://fonts/families/FredokaOne.json",
+                    "weight": "Regular",
                     "style": "Normal"
                   }
                 },
-                "TextXAlignment": "Left"
+                "TextXAlignment": "Left",
+                "ZIndex": 3,
+                "TextStrokeTransparency": 1,
+                "TextStrokeColor3": [
+                  0.29,
+                  0.13,
+                  0.05
+                ]
               },
               "Children": [
                 {
-                  "Name": "Padding",
-                  "ClassName": "UIPadding",
+                  "Name": "MaxText",
+                  "ClassName": "UITextSizeConstraint",
                   "Properties": {
-                    "PaddingTop": {
-                      "UDim": [
-                        0,
-                        4
-                      ]
-                    },
-                    "PaddingBottom": {
-                      "UDim": [
-                        0,
-                        4
-                      ]
-                    }
+                    "MaxTextSize": 26
                   }
                 }
               ]
             },
             {
               "Name": "Minus",
-              "ClassName": "TextButton",
+              "ClassName": "ImageButton",
               "Properties": {
                 "AnchorPoint": [
                   0,
@@ -709,8 +813,8 @@
                 "Position": {
                   "UDim2": [
                     [
-                      0.45,
-                      0
+                      1,
+                      -176
                     ],
                     [
                       0.5,
@@ -722,63 +826,70 @@
                   "UDim2": [
                     [
                       0,
-                      44
+                      46
                     ],
                     [
                       0,
-                      44
+                      46
                     ]
                   ]
                 },
-                "BackgroundColor3": [
-                  0.35,
-                  0.35,
-                  0.4
-                ],
-                "TextColor3": [
-                  1,
-                  1,
-                  1
-                ],
-                "Text": "-",
-                "TextScaled": true,
-                "FontFace": {
-                  "Font": {
-                    "family": "rbxasset://fonts/families/GothamSSm.json",
-                    "weight": "Bold",
-                    "style": "Normal"
-                  }
-                }
+                "BackgroundTransparency": 1,
+                "Image": "rbxassetid://108127373588549",
+                "ZIndex": 4,
+                "ScaleType": "Slice",
+                "SliceCenter": {
+                  "Rect": [
+                    [
+                      40,
+                      40
+                    ],
+                    [
+                      88,
+                      88
+                    ]
+                  ]
+                },
+                "SliceScale": 0.4,
+                "AutoButtonColor": false
               },
               "Children": [
                 {
-                  "Name": "Corner",
-                  "ClassName": "UICorner",
+                  "Name": "Icon",
+                  "ClassName": "ImageLabel",
                   "Properties": {
-                    "CornerRadius": {
-                      "UDim": [
-                        0,
-                        8
-                      ]
-                    }
-                  }
-                },
-                {
-                  "Name": "Padding",
-                  "ClassName": "UIPadding",
-                  "Properties": {
-                    "PaddingTop": {
-                      "UDim": [
-                        0,
-                        6
+                    "AnchorPoint": [
+                      0.5,
+                      0.5
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0.5,
+                          0
+                        ],
+                        [
+                          0.5,
+                          -1
+                        ]
                       ]
                     },
-                    "PaddingBottom": {
-                      "UDim": [
-                        0,
-                        6
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0.6,
+                          0
+                        ],
+                        [
+                          0.6,
+                          0
+                        ]
                       ]
-                    }
+                    },
+                    "BackgroundTransparency": 1,
+                    "Image": "rbxassetid://118710143479847",
+                    "ZIndex": 5,
+                    "ScaleType": "Fit"
                   }
                 }
               ]
@@ -794,78 +905,74 @@
                 "Position": {
                   "UDim2": [
                     [
-                      0.45,
-                      52
+                      1,
+                      -126
                     ],
                     [
                       0,
-                      0
+                      14
                     ]
                   ]
                 },
                 "Size": {
                   "UDim2": [
                     [
-                      0.25,
-                      0
+                      0,
+                      64
                     ],
                     [
                       1,
-                      0
+                      -28
                     ]
                   ]
                 },
                 "BackgroundTransparency": 1,
+                "Text": "...",
                 "TextColor3": [
-                  1,
-                  1,
-                  1
+                  0.38,
+                  0.19,
+                  0.08
                 ],
                 "TextScaled": true,
-                "Text": "...",
                 "FontFace": {
                   "Font": {
-                    "family": "rbxasset://fonts/families/GothamSSm.json",
-                    "weight": "Bold",
+                    "family": "rbxasset://fonts/families/FredokaOne.json",
+                    "weight": "Regular",
                     "style": "Normal"
                   }
                 },
-                "TextXAlignment": "Center"
+                "TextXAlignment": "Center",
+                "ZIndex": 3,
+                "TextStrokeTransparency": 1,
+                "TextStrokeColor3": [
+                  0.29,
+                  0.13,
+                  0.05
+                ]
               },
               "Children": [
                 {
-                  "Name": "Padding",
-                  "ClassName": "UIPadding",
+                  "Name": "MaxText",
+                  "ClassName": "UITextSizeConstraint",
                   "Properties": {
-                    "PaddingTop": {
-                      "UDim": [
-                        0,
-                        4
-                      ]
-                    },
-                    "PaddingBottom": {
-                      "UDim": [
-                        0,
-                        4
-                      ]
-                    }
+                    "MaxTextSize": 24
                   }
                 }
               ]
             },
             {
               "Name": "Plus",
-              "ClassName": "TextButton",
+              "ClassName": "ImageButton",
               "Properties": {
                 "AnchorPoint": [
-                  1,
+                  0,
                   0.5
                 ],
                 "Position": {
                   "UDim2": [
                     [
                       1,
-                      -8
+                      -58
                     ],
                     [
                       0.5,
@@ -877,63 +984,70 @@
                   "UDim2": [
                     [
                       0,
-                      44
+                      46
                     ],
                     [
                       0,
-                      44
+                      46
                     ]
                   ]
                 },
-                "BackgroundColor3": [
-                  0.35,
-                  0.35,
-                  0.4
-                ],
-                "TextColor3": [
-                  1,
-                  1,
-                  1
-                ],
-                "Text": "+",
-                "TextScaled": true,
-                "FontFace": {
-                  "Font": {
-                    "family": "rbxasset://fonts/families/GothamSSm.json",
-                    "weight": "Bold",
-                    "style": "Normal"
-                  }
-                }
+                "BackgroundTransparency": 1,
+                "Image": "rbxassetid://77699164777628",
+                "ZIndex": 4,
+                "ScaleType": "Slice",
+                "SliceCenter": {
+                  "Rect": [
+                    [
+                      40,
+                      40
+                    ],
+                    [
+                      88,
+                      88
+                    ]
+                  ]
+                },
+                "SliceScale": 0.4,
+                "AutoButtonColor": false
               },
               "Children": [
                 {
-                  "Name": "Corner",
-                  "ClassName": "UICorner",
+                  "Name": "Icon",
+                  "ClassName": "ImageLabel",
                   "Properties": {
-                    "CornerRadius": {
-                      "UDim": [
-                        0,
-                        8
-                      ]
-                    }
-                  }
-                },
-                {
-                  "Name": "Padding",
-                  "ClassName": "UIPadding",
-                  "Properties": {
-                    "PaddingTop": {
-                      "UDim": [
-                        0,
-                        6
+                    "AnchorPoint": [
+                      0.5,
+                      0.5
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0.5,
+                          0
+                        ],
+                        [
+                          0.5,
+                          -1
+                        ]
                       ]
                     },
-                    "PaddingBottom": {
-                      "UDim": [
-                        0,
-                        6
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0.6,
+                          0
+                        ],
+                        [
+                          0.6,
+                          0
+                        ]
                       ]
-                    }
+                    },
+                    "BackgroundTransparency": 1,
+                    "Image": "rbxassetid://136224798607000",
+                    "ZIndex": 5,
+                    "ScaleType": "Fit"
                   }
                 }
               ]

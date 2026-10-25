@@ -336,5 +336,340 @@
     "sliceCenter": null,
     "generator": "image_gen.imagegen",
     "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source. Approx. 8% transparent icon margin. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "panel.png",
+    "width": 768,
+    "height": 768,
+    "purpose": "Generic cream modal panel",
+    "sliceCenter": [
+      96,
+      96,
+      672,
+      672
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; cropped and resized with bicubic resampling to avoid near-transparent color ringing, preserving alpha. Simple glossy wood frame inside96px margin bands and low-detail opaque cream gradient center. Regenerated for plain center, compact fixed corners and opaque interior. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "title_ribbon.png",
+    "width": 640,
+    "height": 160,
+    "purpose": "Blank screen-title ribbon",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "row_plate.png",
+    "width": 512,
+    "height": 112,
+    "purpose": "Inset settings-row plate",
+    "sliceCenter": [
+      40,
+      40,
+      472,
+      72
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving alpha. Transparent padding cropped before resizing. Underlying model ID is not exposed by the built-in tool. Frame and corner detail confined to requested margin bands; blank cream stretchable center. Regenerated after visual and nine-slice inspection: Nine-slice inspection showed corner/end detail crossing fixed margin bands."
+  },
+  {
+    "file": "button_square_green.png",
+    "width": 128,
+    "height": 128,
+    "purpose": "Blank small green square button",
+    "sliceCenter": [
+      40,
+      40,
+      88,
+      88
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool. Frame/corner details stay in requested margin bands; center stays low-detail for nine-slice."
+  },
+  {
+    "file": "button_square_red.png",
+    "width": 128,
+    "height": 128,
+    "purpose": "Blank small red square button",
+    "sliceCenter": [
+      40,
+      40,
+      88,
+      88
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool. Frame/corner details stay in requested margin bands; center stays low-detail for nine-slice."
+  },
+  {
+    "file": "toggle_on.png",
+    "width": 192,
+    "height": 96,
+    "purpose": "Enabled toggle, knob right",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "toggle_off.png",
+    "width": 192,
+    "height": 96,
+    "purpose": "Disabled toggle, knob left",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "slider_track.png",
+    "width": 512,
+    "height": 48,
+    "purpose": "Neutral slider track",
+    "sliceCenter": [
+      20,
+      20,
+      492,
+      28
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool. Frame/corner details stay in requested margin bands; center stays low-detail for nine-slice. Regenerated after visual inspection: Broad brown halo; insufficient clean transparency/opaque artwork."
+  },
+  {
+    "file": "slider_fill.png",
+    "width": 512,
+    "height": 48,
+    "purpose": "Green slider fill",
+    "sliceCenter": [
+      20,
+      20,
+      492,
+      28
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool. Frame/corner details stay in requested margin bands; center stays low-detail for nine-slice."
+  },
+  {
+    "file": "slider_knob.png",
+    "width": 96,
+    "height": 96,
+    "purpose": "Round slider thumb",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "day_tile.png",
+    "width": 192,
+    "height": 224,
+    "purpose": "Unclaimed daily-reward tile",
+    "sliceCenter": [
+      40,
+      40,
+      152,
+      184
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool. Frame/corner details stay in requested margin bands; center stays low-detail for nine-slice."
+  },
+  {
+    "file": "day_tile_today.png",
+    "width": 192,
+    "height": 224,
+    "purpose": "Current daily-reward tile, gold frame",
+    "sliceCenter": [
+      40,
+      40,
+      152,
+      184
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool. Frame/corner details stay in requested margin bands; center stays low-detail for nine-slice. Regenerated after visual inspection: Frame remained orange wood; glow had stray specks."
+  },
+  {
+    "file": "day_tile_claimed.png",
+    "width": 192,
+    "height": 224,
+    "purpose": "Claimed daily-reward tile, corner check",
+    "sliceCenter": [
+      40,
+      40,
+      152,
+      184
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool. Frame/corner details stay in requested margin bands; center stays low-detail for nine-slice. Green check badge is confined to upper-right fixed corner. Regenerated after visual inspection: Claimed state not visibly dimmed. Badge regenerated again to fit wholly inside fixed 40px corner after resizing."
+  },
+  {
+    "file": "toast_plate.png",
+    "width": 512,
+    "height": 96,
+    "purpose": "Compact notification toast plate",
+    "sliceCenter": [
+      40,
+      40,
+      472,
+      56
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving alpha. Transparent padding cropped before resizing. Underlying model ID is not exposed by the built-in tool. Frame and corner detail confined to requested margin bands; blank cream stretchable center. Regenerated after visual and nine-slice inspection: Broad brown halo; insufficient clean transparency/opaque artwork. Nine-slice inspection showed corner/end detail crossing fixed margin bands. End curvature still too broad for 40px fixed side margins."
+  },
+  {
+    "file": "dock.png",
+    "width": 256,
+    "height": 512,
+    "purpose": "Vertical wooden rail for three HUD buttons",
+    "sliceCenter": [
+      64,
+      64,
+      192,
+      448
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool. Frame/corner details stay in requested margin bands; center stays low-detail for nine-slice. Regenerated after visual inspection: Grain too visible in stretchable center."
+  },
+  {
+    "file": "loading_bg.png",
+    "width": 1024,
+    "height": 576,
+    "purpose": "Low-detail tropical loading backdrop",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. Opaque RGBA loading backdrop; no text; resized from generated source with Lanczos. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "progress_track.png",
+    "width": 512,
+    "height": 48,
+    "purpose": "Loading progress track",
+    "sliceCenter": [
+      20,
+      20,
+      492,
+      28
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool. Frame/corner details stay in requested margin bands; center stays low-detail for nine-slice. Regenerated after visual inspection: Broad brown halo; insufficient clean transparency/opaque artwork."
+  },
+  {
+    "file": "progress_fill.png",
+    "width": 512,
+    "height": 48,
+    "purpose": "Orange-gold loading progress fill",
+    "sliceCenter": [
+      20,
+      20,
+      492,
+      28
+    ],
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool. Frame/corner details stay in requested margin bands; center stays low-detail for nine-slice. Regenerated after visual inspection: Broad brown halo; insufficient clean transparency/opaque artwork."
+  },
+  {
+    "file": "icon_music.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: music",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_speaker.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: speaker",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_speaker_mute.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: speaker mute",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_minus.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: minus",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_plus.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: plus",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_check.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: check",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_lock.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: lock",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_chest.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: chest",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_calendar.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: calendar",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_bell.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: bell",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_home.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: home",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
+  },
+  {
+    "file": "icon_close_x.png",
+    "width": 256,
+    "height": 256,
+    "purpose": "UI icon: close x",
+    "sliceCenter": null,
+    "generator": "image_gen.imagegen",
+    "notes": "AI-generated original art; no third-party asset licence asserted. RGBA; no text; resized from generated source with Lanczos, preserving generated alpha. Transparent padding cropped before resizing; icons preserve aspect with a 20px gutter. Underlying model ID is not exposed by the built-in tool."
   }
 ]

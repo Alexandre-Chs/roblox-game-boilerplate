@@ -12,4 +12,9 @@ return table.freeze({
 	TabOff = "rbxassetid://105335088448686",
 	SlotNormal = "rbxassetid://118767497616065",
 	SlotFeatured = "rbxassetid://94586024140234",
+	BannerPopular = "rbxassetid://128031421057286",
+	BannerBestValue = "rbxassetid://89677280976949",
+	DayTile = "rbxassetid://124901110166865",
+	DayTileToday = "rbxassetid://129186743629629",
+	DayTileClaimed = "rbxassetid://108238598749497",
 })

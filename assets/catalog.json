@@ -287,6 +287,501 @@
       "creator": "Codex (OpenAI) on request of the project owner",
       "robloxAssetId": "rbxassetid://110842586389518",
       "use": "Blank countdown plate with clock at left"
+    },
+    {
+      "name": "row_plate",
+      "kind": "image",
+      "source": "assets/source/ui/shop/row_plate.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://75076650497158",
+      "use": "Inset settings-row plate"
+    },
+    {
+      "name": "icon_lock",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_lock.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://86236986735847",
+      "use": "UI icon: lock"
+    },
+    {
+      "name": "button_square_green",
+      "kind": "image",
+      "source": "assets/source/ui/shop/button_square_green.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://77699164777628",
+      "use": "Blank small green square button"
+    },
+    {
+      "name": "day_tile_today",
+      "kind": "image",
+      "source": "assets/source/ui/shop/day_tile_today.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://129186743629629",
+      "use": "Current daily-reward tile, gold frame"
+    },
+    {
+      "name": "icon_speaker_mute",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_speaker_mute.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://136808277225622",
+      "use": "UI icon: speaker mute"
+    },
+    {
+      "name": "toggle_off",
+      "kind": "image",
+      "source": "assets/source/ui/shop/toggle_off.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://82040988826533",
+      "use": "Disabled toggle, knob left"
+    },
+    {
+      "name": "loading_bg",
+      "kind": "image",
+      "source": "assets/source/ui/shop/loading_bg.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://111674752818548",
+      "use": "Low-detail tropical loading backdrop"
+    },
+    {
+      "name": "icon_chest",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_chest.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://81555460974121",
+      "use": "UI icon: chest"
+    },
+    {
+      "name": "icon_close_x",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_close_x.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://136174117156079",
+      "use": "UI icon: close x"
+    },
+    {
+      "name": "slider_track",
+      "kind": "image",
+      "source": "assets/source/ui/shop/slider_track.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://109224264655150",
+      "use": "Neutral slider track"
+    },
+    {
+      "name": "toggle_on",
+      "kind": "image",
+      "source": "assets/source/ui/shop/toggle_on.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://132316012180739",
+      "use": "Enabled toggle, knob right"
+    },
+    {
+      "name": "button_square_red",
+      "kind": "image",
+      "source": "assets/source/ui/shop/button_square_red.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://108127373588549",
+      "use": "Blank small red square button"
+    },
+    {
+      "name": "day_tile",
+      "kind": "image",
+      "source": "assets/source/ui/shop/day_tile.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://124901110166865",
+      "use": "Unclaimed daily-reward tile"
+    },
+    {
+      "name": "icon_check",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_check.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://128817449846956",
+      "use": "UI icon: check"
+    },
+    {
+      "name": "slider_fill",
+      "kind": "image",
+      "source": "assets/source/ui/shop/slider_fill.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://74805331150668",
+      "use": "Green slider fill"
+    },
+    {
+      "name": "icon_bell",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_bell.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://113723750434306",
+      "use": "UI icon: bell"
+    },
+    {
+      "name": "icon_minus",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_minus.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://118710143479847",
+      "use": "UI icon: minus"
+    },
+    {
+      "name": "panel",
+      "kind": "image",
+      "source": "assets/source/ui/shop/panel.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://127691151415667",
+      "use": "Generic cream modal panel"
+    },
+    {
+      "name": "icon_home",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_home.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://130919284750862",
+      "use": "UI icon: home"
+    },
+    {
+      "name": "icon_calendar",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_calendar.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://133729320112384",
+      "use": "UI icon: calendar"
+    },
+    {
+      "name": "icon_speaker",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_speaker.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://72237628493315",
+      "use": "UI icon: speaker"
+    },
+    {
+      "name": "icon_plus",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_plus.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://136224798607000",
+      "use": "UI icon: plus"
+    },
+    {
+      "name": "dock",
+      "kind": "image",
+      "source": "assets/source/ui/shop/dock.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://122215845931719",
+      "use": "Vertical wooden rail for three HUD buttons"
+    },
+    {
+      "name": "icon_music",
+      "kind": "image",
+      "source": "assets/source/ui/shop/icon_music.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://112272228568523",
+      "use": "UI icon: music"
+    },
+    {
+      "name": "progress_fill",
+      "kind": "image",
+      "source": "assets/source/ui/shop/progress_fill.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://96438139895431",
+      "use": "Orange-gold loading progress fill"
+    },
+    {
+      "name": "slider_knob",
+      "kind": "image",
+      "source": "assets/source/ui/shop/slider_knob.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://71298592326799",
+      "use": "Round slider thumb"
+    },
+    {
+      "name": "title_ribbon",
+      "kind": "image",
+      "source": "assets/source/ui/shop/title_ribbon.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://82973326717612",
+      "use": "Blank screen-title ribbon"
+    },
+    {
+      "name": "progress_track",
+      "kind": "image",
+      "source": "assets/source/ui/shop/progress_track.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://81235729773195",
+      "use": "Loading progress track"
+    },
+    {
+      "name": "day_tile_claimed",
+      "kind": "image",
+      "source": "assets/source/ui/shop/day_tile_claimed.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://108238598749497",
+      "use": "Claimed daily-reward tile, corner check"
+    },
+    {
+      "name": "toast_plate",
+      "kind": "image",
+      "source": "assets/source/ui/shop/toast_plate.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://86247899252974",
+      "use": "Compact notification toast plate"
+    },
+    {
+      "name": "promo_icon_treasure_chest_open",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_treasure_chest_open.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://118006858653415",
+      "use": "Open glowing chest of coins and gems"
+    },
+    {
+      "name": "promo_icon_hourglass",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_hourglass.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://82801459321782",
+      "use": "Gold hourglass with warm sand"
+    },
+    {
+      "name": "promo_banner_limited",
+      "kind": "image",
+      "source": "assets/source/ui/promo/banner_limited.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://77493614500847",
+      "use": "Blank purple limited banner with left hourglass"
+    },
+    {
+      "name": "promo_icon_rocket",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_rocket.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://129340501090901",
+      "use": "Red and cream rocket with golden flame"
+    },
+    {
+      "name": "promo_icon_gem_pile",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_gem_pile.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://129025021372272",
+      "use": "Pile of cyan, blue and purple gems"
+    },
+    {
+      "name": "promo_badge_new",
+      "kind": "image",
+      "source": "assets/source/ui/promo/badge_new.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://110310059560672",
+      "use": "Cyan irregular starburst sticker with blank center"
+    },
+    {
+      "name": "promo_strike_line",
+      "kind": "image",
+      "source": "assets/source/ui/promo/strike_line.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://139682367307070",
+      "use": "Red painted strike-through price stroke"
+    },
+    {
+      "name": "promo_icon_sparkles",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_sparkles.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://108256322106209",
+      "use": "Cluster of three golden four-point sparkles"
+    },
+    {
+      "name": "promo_icon_piggy_bank",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_piggy_bank.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://122766466728485",
+      "use": "Pink piggy bank with gold coin"
+    },
+    {
+      "name": "promo_badge_premium",
+      "kind": "image",
+      "source": "assets/source/ui/promo/badge_premium.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://112815239214419",
+      "use": "Gold shield with gems and blank center"
+    },
+    {
+      "name": "promo_icon_luck_clover",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_luck_clover.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://100765889107027",
+      "use": "Glossy four-leaf lucky clover"
+    },
+    {
+      "name": "promo_icon_infinity",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_infinity.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://123532592539624",
+      "use": "Golden infinity loop"
+    },
+    {
+      "name": "promo_sale_ribbon_corner",
+      "kind": "image",
+      "source": "assets/source/ui/promo/sale_ribbon_corner.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://118390273854050",
+      "use": "Blank diagonal top-right card corner ribbon"
+    },
+    {
+      "name": "promo_banner_popular",
+      "kind": "image",
+      "source": "assets/source/ui/promo/banner_popular.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://128031421057286",
+      "use": "Blank orange-red popular banner with end flames"
+    },
+    {
+      "name": "promo_badge_vip",
+      "kind": "image",
+      "source": "assets/source/ui/promo/badge_vip.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://93556334614726",
+      "use": "Black and gold hexagonal badge with crown and blank center"
+    },
+    {
+      "name": "promo_icon_shield",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_shield.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://101947276154007",
+      "use": "Blue protective shield with gold rim"
+    },
+    {
+      "name": "promo_discount_tag",
+      "kind": "image",
+      "source": "assets/source/ui/promo/discount_tag.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://131240165869195",
+      "use": "Blank tilted hanging red-orange sale price tag"
+    },
+    {
+      "name": "promo_icon_double_coins",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_double_coins.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://112941121204301",
+      "use": "Two overlapping unmarked gold coins and sparkle"
+    },
+    {
+      "name": "promo_banner_best_value",
+      "kind": "image",
+      "source": "assets/source/ui/promo/banner_best_value.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://89677280976949",
+      "use": "Blank green best-value banner with end stars"
+    },
+    {
+      "name": "promo_icon_magnet",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_magnet.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://74929736057298",
+      "use": "Red horseshoe magnet with silver tips"
+    },
+    {
+      "name": "promo_icon_starter_pack",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_starter_pack.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://80572230347339",
+      "use": "Gift box with unmarked gold coins"
+    },
+    {
+      "name": "promo_icon_gem",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_gem.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://121039223637993",
+      "use": "Single cyan faceted premium gemstone"
+    },
+    {
+      "name": "promo_icon_golden_ticket",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_golden_ticket.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://127900354962168",
+      "use": "Blank golden admission ticket"
+    },
+    {
+      "name": "promo_icon_vip_crown",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_vip_crown.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://100908880230960",
+      "use": "Premium platinum-gold crown with blue and purple gems"
+    },
+    {
+      "name": "promo_icon_premium_star",
+      "kind": "image",
+      "source": "assets/source/ui/promo/icon_premium_star.png",
+      "licence": "Generated for this project with OpenAI image generation via Codex (gpt-6.1-sol, image_gen); usable commercially under OpenAI terms",
+      "creator": "Codex (OpenAI) on request of the project owner",
+      "robloxAssetId": "rbxassetid://137696123722449",
+      "use": "Golden faceted premium star"
     }
   ]
 }

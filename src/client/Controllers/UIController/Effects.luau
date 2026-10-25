@@ -1,6 +1,6 @@
 --!strict
 
--- Reusable UI motion for screens: press feedback, pops, shines and pulses.
+-- Reusable UI motion for screens: press feedback, pops and shines.
 -- Every looping tween is added to the caller's Trove so it stops with the screen.
 local TweenService = game:GetService("TweenService")
 
@@ -22,28 +22,24 @@ local function tween(object: Instance, seconds: number, goal: { [string]: any },
 	TweenService:Create(object, info, goal):Play()
 end
 
--- Grows on hover, squashes on press. Works with mouse and touch.
+-- Dips slightly while pressed. No hover effect, no overshoot. Works with mouse and touch.
 function Effects.Press(trove: any, button: GuiButton)
 	local scale = scaleOf(button, "PressScale")
-	trove:Connect(button.MouseEnter, function()
-		tween(scale, 0.12, { Scale = 1.06 })
-	end)
-	trove:Connect(button.MouseLeave, function()
-		tween(scale, 0.12, { Scale = 1 })
-	end)
 	trove:Connect(button.MouseButton1Down, function()
-		tween(scale, 0.08, { Scale = 0.92 })
+		tween(scale, 0.06, { Scale = 0.97 })
 	end)
-	trove:Connect(button.MouseButton1Up, function()
-		tween(scale, 0.18, { Scale = 1 }, Enum.EasingStyle.Back)
-	end)
+	local function release()
+		tween(scale, 0.1, { Scale = 1 })
+	end
+	trove:Connect(button.MouseButton1Up, release)
+	trove:Connect(button.MouseLeave, release)
 end
 
--- Springs an element in from a smaller size. Use on frames, not on buttons using Press.
+-- Eases an element to full size from a nearby scale, without overshoot.
 function Effects.Pop(object: GuiObject, from: number?)
 	local scale = scaleOf(object, "PopScale")
-	scale.Scale = from or 0.85
-	tween(scale, 0.3, { Scale = 1 }, Enum.EasingStyle.Back)
+	scale.Scale = from or 0.97
+	tween(scale, 0.18, { Scale = 1 }, Enum.EasingStyle.Quint)
 end
 
 -- Sweeps a light band across a UIGradient forever (Offset -1 -> 1, then a pause).
@@ -52,15 +48,6 @@ function Effects.Shine(trove: any, gradient: UIGradient)
 	local info = TweenInfo.new(1.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, false, 1.8)
 	local shine = trove:Add(TweenService:Create(gradient, info, { Offset = Vector2.new(1, 0) }))
 	shine:Play()
-end
-
--- Breathes a UIScale between 1 and amount forever. Returns the tween so callers can stop it.
-function Effects.Pulse(trove: any, object: GuiObject, amount: number): Tween
-	local scale = scaleOf(object, "PulseScale")
-	local info = TweenInfo.new(0.7, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true)
-	local pulse = trove:Add(TweenService:Create(scale, info, { Scale = amount }))
-	pulse:Play()
-	return pulse
 end
 
 -- Fades a frame's background to a target transparency.
