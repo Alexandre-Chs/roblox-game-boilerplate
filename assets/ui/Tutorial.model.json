@@ -8,22 +8,22 @@
   },
   "Children": [
     {
-      "Name": "Hint",
+      "Name": "Quests",
       "ClassName": "ImageLabel",
       "Properties": {
         "AnchorPoint": [
-          0.5,
+          0,
           0
         ],
         "Position": {
           "UDim2": [
             [
-              0.5,
-              0
+              0,
+              12
             ],
             [
               0,
-              100
+              60
             ]
           ]
         },
@@ -31,31 +31,31 @@
           "UDim2": [
             [
               0,
-              440
+              350
             ],
             [
               0,
-              84
+              310
             ]
           ]
         },
         "BackgroundTransparency": 1,
-        "Image": "rbxassetid://104149237935399",
-        "ZIndex": 2,
+        "Image": "rbxassetid://127691151415667",
+        "ZIndex": 1,
         "ScaleType": "Slice",
         "SliceCenter": {
           "Rect": [
             [
-              64,
-              40
+              96,
+              96
             ],
             [
-              576,
-              80
+              672,
+              672
             ]
           ]
         },
-        "SliceScale": 0.5,
+        "SliceScale": 0.25,
         "Visible": false
       },
       "Children": [
@@ -67,45 +67,7 @@
           }
         },
         {
-          "Name": "Icon",
-          "ClassName": "ImageLabel",
-          "Properties": {
-            "AnchorPoint": [
-              0,
-              0.5
-            ],
-            "Position": {
-              "UDim2": [
-                [
-                  0,
-                  -6
-                ],
-                [
-                  0.5,
-                  -4
-                ]
-              ]
-            },
-            "Size": {
-              "UDim2": [
-                [
-                  0,
-                  70
-                ],
-                [
-                  0,
-                  70
-                ]
-              ]
-            },
-            "BackgroundTransparency": 1,
-            "Image": "rbxassetid://139143238004862",
-            "ZIndex": 3,
-            "ScaleType": "Fit"
-          }
-        },
-        {
-          "Name": "Label",
+          "Name": "Title",
           "ClassName": "TextLabel",
           "Properties": {
             "AnchorPoint": [
@@ -116,11 +78,11 @@
               "UDim2": [
                 [
                   0,
-                  74
+                  26
                 ],
                 [
                   0,
-                  16
+                  22
                 ]
               ]
             },
@@ -128,16 +90,16 @@
               "UDim2": [
                 [
                   1,
-                  -98
+                  -110
                 ],
                 [
-                  1,
-                  -36
+                  0,
+                  26
                 ]
               ]
             },
             "BackgroundTransparency": 1,
-            "Text": "Collect a coin!",
+            "Text": "STARTER QUESTS",
             "TextColor3": [
               0.38,
               0.19,
@@ -165,8 +127,449 @@
               "Name": "MaxText",
               "ClassName": "UITextSizeConstraint",
               "Properties": {
-                "MaxTextSize": 34
+                "MaxTextSize": 24
               }
+            }
+          ]
+        },
+        {
+          "Name": "Progress",
+          "ClassName": "TextLabel",
+          "Properties": {
+            "AnchorPoint": [
+              1,
+              0
+            ],
+            "Position": {
+              "UDim2": [
+                [
+                  1,
+                  -26
+                ],
+                [
+                  0,
+                  22
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  0,
+                  70
+                ],
+                [
+                  0,
+                  26
+                ]
+              ]
+            },
+            "BackgroundTransparency": 1,
+            "Text": "0/5",
+            "TextColor3": [
+              0.25,
+              0.5,
+              0.15
+            ],
+            "TextScaled": true,
+            "FontFace": {
+              "Font": {
+                "family": "rbxasset://fonts/families/FredokaOne.json",
+                "weight": "Regular",
+                "style": "Normal"
+              }
+            },
+            "TextXAlignment": "Right",
+            "ZIndex": 3,
+            "TextStrokeTransparency": 1,
+            "TextStrokeColor3": [
+              0.29,
+              0.13,
+              0.05
+            ]
+          },
+          "Children": [
+            {
+              "Name": "MaxText",
+              "ClassName": "UITextSizeConstraint",
+              "Properties": {
+                "MaxTextSize": 22
+              }
+            }
+          ]
+        },
+        {
+          "Name": "List",
+          "ClassName": "Frame",
+          "Properties": {
+            "Position": {
+              "UDim2": [
+                [
+                  0,
+                  18
+                ],
+                [
+                  0,
+                  58
+                ]
+              ]
+            },
+            "Size": {
+              "UDim2": [
+                [
+                  1,
+                  -36
+                ],
+                [
+                  1,
+                  -76
+                ]
+              ]
+            },
+            "BackgroundTransparency": 1,
+            "ZIndex": 2
+          },
+          "Children": [
+            {
+              "Name": "Layout",
+              "ClassName": "UIListLayout",
+              "Properties": {
+                "Padding": {
+                  "UDim": [
+                    0,
+                    2
+                  ]
+                },
+                "SortOrder": "LayoutOrder"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Templates",
+          "ClassName": "Folder",
+          "Properties": {},
+          "Children": [
+            {
+              "Name": "RowTemplate",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      0,
+                      44
+                    ]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "Visible": false
+              },
+              "Children": [
+                {
+                  "Name": "Highlight",
+                  "ClassName": "ImageLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          0
+                        ],
+                        [
+                          0,
+                          0
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          1,
+                          0
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Image": "rbxassetid://75076650497158",
+                    "ZIndex": 2,
+                    "ScaleType": "Slice",
+                    "SliceCenter": {
+                      "Rect": [
+                        [
+                          40,
+                          40
+                        ],
+                        [
+                          472,
+                          72
+                        ]
+                      ]
+                    },
+                    "SliceScale": 0.4,
+                    "Visible": false
+                  }
+                },
+                {
+                  "Name": "Icon",
+                  "ClassName": "ImageLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0.5
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          10
+                        ],
+                        [
+                          0.5,
+                          0
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0,
+                          32
+                        ],
+                        [
+                          0,
+                          32
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Image": "rbxassetid://139143238004862",
+                    "ZIndex": 3,
+                    "ScaleType": "Fit"
+                  }
+                },
+                {
+                  "Name": "Label",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          50
+                        ],
+                        [
+                          0,
+                          8
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          -120
+                        ],
+                        [
+                          1,
+                          -16
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "Quest",
+                    "TextColor3": [
+                      0.38,
+                      0.19,
+                      0.08
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Left",
+                    "ZIndex": 3,
+                    "TextStrokeTransparency": 1,
+                    "TextStrokeColor3": [
+                      0.29,
+                      0.13,
+                      0.05
+                    ]
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 22
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Name": "CoinIcon",
+                  "ClassName": "ImageLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0.5
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          1,
+                          -66
+                        ],
+                        [
+                          0.5,
+                          0
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0,
+                          22
+                        ],
+                        [
+                          0,
+                          22
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Image": "rbxassetid://139143238004862",
+                    "ZIndex": 3,
+                    "ScaleType": "Fit"
+                  }
+                },
+                {
+                  "Name": "Reward",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      0,
+                      0
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          1,
+                          -42
+                        ],
+                        [
+                          0,
+                          10
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0,
+                          36
+                        ],
+                        [
+                          1,
+                          -20
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Text": "+10",
+                    "TextColor3": [
+                      0.75,
+                      0.4,
+                      0.02
+                    ],
+                    "TextScaled": true,
+                    "FontFace": {
+                      "Font": {
+                        "family": "rbxasset://fonts/families/FredokaOne.json",
+                        "weight": "Regular",
+                        "style": "Normal"
+                      }
+                    },
+                    "TextXAlignment": "Left",
+                    "ZIndex": 3,
+                    "TextStrokeTransparency": 1,
+                    "TextStrokeColor3": [
+                      0.29,
+                      0.13,
+                      0.05
+                    ]
+                  },
+                  "Children": [
+                    {
+                      "Name": "MaxText",
+                      "ClassName": "UITextSizeConstraint",
+                      "Properties": {
+                        "MaxTextSize": 20
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Name": "Done",
+                  "ClassName": "ImageLabel",
+                  "Properties": {
+                    "AnchorPoint": [
+                      1,
+                      0.5
+                    ],
+                    "Position": {
+                      "UDim2": [
+                        [
+                          1,
+                          -10
+                        ],
+                        [
+                          0.5,
+                          0
+                        ]
+                      ]
+                    },
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0,
+                          28
+                        ],
+                        [
+                          0,
+                          28
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "Image": "rbxassetid://78276871686842",
+                    "ZIndex": 3,
+                    "ScaleType": "Fit",
+                    "Visible": false
+                  }
+                }
+              ]
             }
           ]
         }

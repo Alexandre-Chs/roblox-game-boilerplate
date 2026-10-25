@@ -366,16 +366,31 @@ rewards = modal("REWARDS", 560, 440, [
     ]),
 ])
 
-# Tutorial hint: banner under the cash pill and an arrow the screen moves next to its target.
+# Starter quests: a checklist top-left; Screens/Tutorial.luau clones one row per Config/Tutorial quest
+# and sizes the panel, and moves the arrow next to the Hud button of the current quest.
+quest_row = node("RowTemplate", "Frame", {"Size": u(1, 0, 0, 44), "BackgroundTransparency": 1, "Visible": False}, [
+    image("Highlight", "row_plate.png", u(0, 0, 0, 0), u(1, 0, 1, 0), z=2, slice_scale=0.4, extra={"Visible": False}),
+    image("Icon", "icon_coin.png", u(0, 10, 0.5, 0), u(0, 32, 0, 32), anchor=(0, 0.5), z=3),
+    text("Label", "Quest", u(0, 50, 0, 8), u(1, -120, 1, -16), color=INK, stroke=False, align="Left", max_size=22, z=3),
+    image("CoinIcon", "icon_coin.png", u(1, -66, 0.5, 0), u(0, 22, 0, 22), anchor=(0, 0.5), z=3),
+    text("Reward", "+10", u(1, -42, 0, 10), u(0, 36, 1, -20), color=[0.75, 0.4, 0.02], stroke=False, align="Left",
+         max_size=20, z=3),
+    image("Done", "icon_equipped.png", u(1, -10, 0.5, 0), u(0, 28, 0, 28), anchor=(1, 0.5), z=3, extra={"Visible": False}),
+])
 tutorial = {"ClassName": "ScreenGui", "Properties": {"ResetOnSpawn": False, "IgnoreGuiInset": False, "DisplayOrder": 5,
                                                      "ZIndexBehavior": "Sibling"}, "Children": [
-    image("Hint", "hint_banner.png", u(0.5, 0, 0, 100), u(0, 440, 0, 84), anchor=(0.5, 0), z=2, slice_scale=0.5,
-          extra={"Visible": False}, children=[
+    image("Quests", "panel.png", u(0, 12, 0, 60), u(0, 350, 0, 310), z=1, slice_scale=0.25, extra={"Visible": False},
+          children=[
         scaled(),
-        # The banner is already a speech bubble; the icon shows what the step is about.
-        image("Icon", "icon_coin.png", u(0, -6, 0.5, -4), u(0, 70, 0, 70), anchor=(0, 0.5), z=3),
-        text("Label", "Collect a coin!", u(0, 74, 0, 16), u(1, -98, 1, -36), color=INK, stroke=False, align="Left",
-             max_size=34, z=3),
+        text("Title", "STARTER QUESTS", u(0, 26, 0, 22), u(1, -110, 0, 26), color=INK, stroke=False, align="Left",
+             max_size=24, z=3),
+        text("Progress", "0/5", u(1, -26, 0, 22), u(0, 70, 0, 26), anchor=(1, 0), color=[0.25, 0.5, 0.15], stroke=False,
+             align="Right", max_size=22, z=3),
+        node("List", "Frame", {"Position": u(0, 18, 0, 58), "Size": u(1, -36, 1, -76), "BackgroundTransparency": 1,
+                               "ZIndex": 2}, [
+            node("Layout", "UIListLayout", {"Padding": {"UDim": [0, 2]}, "SortOrder": "LayoutOrder"}),
+        ]),
+        node("Templates", "Folder", {}, [quest_row]),
     ]),
     image("Arrow", "arrow_pointer.png", u(0, 0, 0, 0), u(0, 64, 0, 64), anchor=(1, 0.5), z=3,
           extra={"Visible": False, "Rotation": -90}),

@@ -36,7 +36,7 @@ The starter ships small, working features that cross every layer. Copy them as p
 | Community rewards | `CommunityService` (group reward, `FriendsInServer` attribute) | `Screens/Rewards.luau` rows (group, invite, favorite), coin bonus in `Coin.luau` via `Utils/CoinReward.luau` | `Redeemed.Social_Group`, `GameConfig.Community`, `ClaimGroupReward` packet | `ui/Rewards.model.json` |
 | Global leaderboard | `Services/LeaderboardService/` (`Ranking.luau` pure, OrderedDataStore) | `Components/Leaderboard.luau` (tag `Leaderboard`) | `GameConfig.Leaderboard`, ReplicatedStorage attribute `Leaderboard` (JSON) | `world/Leaderboard.model.json` |
 | Badges | `AchievementService:Award(player, name)` (Welcome, FirstPurchase from ShopService, Streak7 from DailyRewardService) | none | `Config/Badges.luau` (ids, 0 = inert) | none |
-| Tutorial | `TutorialService:Reached(player, milestone)` (Coin, ShopService, `ShopOpened`) | `Screens/Tutorial.luau` (banner, arrow, beam to the nearest coin) | `Tutorial`, `Config/Tutorial.luau`, `Utils/TutorialSteps.luau` (shared pure) | `ui/Tutorial.model.json` |
+| Starter quests (onboarding) | `TutorialService:Reached(player, milestone)` pays each quest once (Coin, DailyRewardService, `ShopOpened`, ShopService, InventoryService) | `Screens/Tutorial.luau` (checklist top-left, arrow to the quest's Hud button, beam to the nearest coin; chat moved bottom-left in `AppController`) | `Tutorial` (completed id set), `Config/Tutorial.luau` (text, reward, icon, target), `Utils/TutorialSteps.luau` (shared pure) | `ui/Tutorial.model.json` |
 | Regional policy | `ComplianceService` (`PaidRandomItemsRestricted`, `PolicyLoaded` attributes) | Shop hides `Random` items | `ShopCatalog` `Random` | none |
 | Translation | `Utils/Locale.luau` (`Format(player?, key, args, fallback)`) | static GUI text auto-translates; `Locale.Prepare` in `AppController` | none | `localization/Strings.csv` |
 | Screen fitting | none | `UIController/DeviceScale.luau` resizes every `DeviceScale` UIScale | none | `DesignWidth`/`DesignHeight` attributes from `build_ui.py` |
@@ -57,7 +57,7 @@ The starter ships small, working features that cross every layer. Copy them as p
 | Promo codes and community rewards | Hud `RewardsButton`, `Redeemed` in `PlayerData`, `RedeemCode`/`ClaimGroupReward` packets, `CommunityService` in `ComponentService` Dependencies and the friend bonus in `Coin.luau`, `Redeeming`/`CoinReward` asserts in `tests/run.luau` |
 | Global leaderboard | `world/Leaderboard.model.json`, `Components/Leaderboard.luau` in `ComponentController`, `GameConfig.Leaderboard`, `Ranking` asserts |
 | Badges | `AchievementService` calls and Dependencies in `ShopService` and `DailyRewardService` |
-| Tutorial | `TutorialService` calls and Dependencies in `Coin.luau` (`ComponentService`) and `ShopService`, `Tutorial` in `PlayerData`, `TutorialSteps` asserts |
+| Starter quests | `TutorialService` calls and Dependencies in `Coin.luau` (`ComponentService`), `ShopService`, `DailyRewardService` and `InventoryService`, `Tutorial` in `PlayerData`, `TutorialSteps` asserts, the chat alignment line in `AppController` |
 | Regional policy | `ComplianceService` in `ShopService` Dependencies, the `Random` checks in `ShopService` and `Shop.luau` |
 | Analytics | Every `services.TelemetryService` call (Coin, ShopService, DailyRewardService, Products) and its Dependencies entries, the `ShopOpened` packet and its call in `Shop.luau`, `tests/telemetry.luau` |
 | Coins | `Cash` stays: Shop, Daily reward, Leaderboard and Robux packs use it |
@@ -100,7 +100,7 @@ Log every change of the currency through `:Economy`, or the economy charts drift
 | Command | Effect |
 | --- | --- |
 | `/cash <n>` | Add (or remove, if negative) coins |
-| `/reset` | Reset coins, inventory, equipped item, redeemed codes, daily streak and tutorial |
+| `/reset` | Reset coins, inventory, equipped item, redeemed codes, daily streak and starter quests |
 | `/unlock` | Own every shop item |
 | `/daily` | Make the daily reward claimable again, continuing the streak |
 | `/pass <Name>` | Toggle a game pass from `Monetization.GamePasses`, for this session only |

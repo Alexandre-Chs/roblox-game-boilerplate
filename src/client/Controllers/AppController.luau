@@ -2,6 +2,7 @@
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TextChatService = game:GetService("TextChatService")
 local GameConfig = require(ReplicatedStorage.Config.GameConfig)
 local Locale = require(ReplicatedStorage.Utils.Locale)
 local Packets = require(ReplicatedStorage.Packets)
@@ -29,6 +30,8 @@ end
 function AppController.Start(self: State)
 	print(`[{GameConfig.Name}] Client controllers ready`)
 	Locale.Prepare(Players.LocalPlayer)
+	-- The starter quests sit top-left, so the chat window moves to the bottom-left.
+	TextChatService.ChatWindowConfiguration.VerticalAlignment = Enum.VerticalAlignment.Bottom
 	local dataController = registry.DataController
 	local function loaded()
 		print(`[{GameConfig.Name}] Player data loaded`)

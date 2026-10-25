@@ -10,7 +10,7 @@ local ShopCatalog = require(ReplicatedStorage.Config.ShopCatalog)
 local Trove = require(ReplicatedStorage.Packages.Trove)
 local Equipping = require(script.Equipping)
 
-local InventoryService = { Name = "InventoryService", Dependencies = { "DataService" } }
+local InventoryService = { Name = "InventoryService", Dependencies = { "DataService", "TutorialService" } }
 local services: { [string]: any } = {}
 local trove = Trove.new()
 
@@ -37,6 +37,9 @@ local function equip(player: Player, itemId: any): (boolean, string)
 	end
 	dataService:Set(player, { "Equipped" }, itemId)
 	apply(player)
+	if itemId ~= "" then
+		services.TutorialService:Reached(player, "Equipped")
+	end
 	return true, "Ok"
 end
 

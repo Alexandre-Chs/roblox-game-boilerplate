@@ -12,8 +12,8 @@ export type Data = {
 	Equipped: string,
 	-- Promo codes and one-time social rewards already granted (code or reward name -> true).
 	Redeemed: { [string]: boolean },
-	-- Index of the last tutorial step completed (Config/Tutorial); 0 for a new player.
-	Tutorial: number,
+	-- Starter quests completed (Config/Tutorial id -> true); each paid its reward once.
+	Tutorial: { [string]: boolean },
 }
 
 local PlayerData = {}
@@ -28,7 +28,7 @@ PlayerData.Template = {
 	Daily = { LastClaimDay = 0, Streak = 0 },
 	Equipped = "",
 	Redeemed = {},
-	Tutorial = 0,
+	Tutorial = {},
 } :: Data
 
 local function natural(value: any): boolean
@@ -74,7 +74,7 @@ function PlayerData.Validate(data: any): boolean
 	if type(data) ~= "table" or (data.SchemaVersion ~= nil and data.SchemaVersion ~= 1) then
 		return false
 	end
-	for _, key in { "Cash", "LastSeenAt", "Tutorial" } do
+	for _, key in { "Cash", "LastSeenAt" } do
 		if data[key] ~= nil and not natural(data[key]) then
 			return false
 		end
@@ -102,13 +102,16 @@ function PlayerData.Validate(data: any): boolean
 	if data.Equipped ~= nil and type(data.Equipped) ~= "string" then
 		return false
 	end
-	if data.Redeemed ~= nil then
-		if type(data.Redeemed) ~= "table" then
-			return false
-		end
-		for name, done in data.Redeemed do
-			if type(name) ~= "string" or done ~= true then
+	for _, key in { "Redeemed", "Tutorial" } do
+		local set = data[key]
+		if set ~= nil then
+			if type(set) ~= "table" then
 				return false
+			end
+			for name, done in set do
+				if type(name) ~= "string" or done ~= true then
+					return false
+				end
 			end
 		end
 	end

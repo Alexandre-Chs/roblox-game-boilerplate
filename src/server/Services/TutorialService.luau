@@ -1,14 +1,17 @@
 --!strict
 
--- Saves first-session tutorial progress (PlayerData.Tutorial, steps in Config/Tutorial).
--- Systems report milestones with Reached; the Tutorial screen shows the next hint.
+-- Starter quests (Config/Tutorial). Systems report milestones with Reached; the first time a
+-- quest's milestone is reached it is saved in PlayerData.Tutorial and pays its reward.
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Packets = require(ReplicatedStorage.Packets)
 local Tutorial = require(ReplicatedStorage.Config.Tutorial)
 local TutorialSteps = require(ReplicatedStorage.Utils.TutorialSteps)
 local Trove = require(ReplicatedStorage.Packages.Trove)
 
-local TutorialService = { Name = "TutorialService", Dependencies = { "DataService" } }
+local TutorialService = {
+	Name = "TutorialService",
+	Dependencies = { "DataService", "NotificationService", "TelemetryService" },
+}
 local services: { [string]: any } = {}
 local trove = Trove.new()
 
@@ -16,15 +19,23 @@ function TutorialService.Init(_self: any, registry: { [string]: any })
 	services = registry
 end
 
+-- Never yields. Unknown or already completed milestones do nothing.
 function TutorialService.Reached(_self: any, player: Player, milestone: string)
-	local data = services.DataService:GetData(player)
-	if not data then
+	local dataService = services.DataService
+	local data = dataService:GetData(player)
+	local quest = if data then TutorialSteps.Find(data.Tutorial, Tutorial, milestone) else nil
+	if not quest or not dataService:AdjustCash(player, quest.Reward) then
 		return
 	end
-	local nextStep = TutorialSteps.Advance(data.Tutorial, Tutorial, milestone)
-	if nextStep ~= data.Tutorial then
-		services.DataService:Set(player, { "Tutorial" }, nextStep)
-	end
+	dataService:Set(player, { "Tutorial", quest.Id }, true)
+	services.TelemetryService:Economy(
+		player,
+		"Source",
+		quest.Reward,
+		Enum.AnalyticsEconomyTransactionType.Onboarding,
+		`Quest_{quest.Id}`
+	)
+	services.NotificationService:Send(player, `Quest complete: +{quest.Reward} coins`)
 end
 
 function TutorialService.Start(_self: any)

@@ -1,8 +1,8 @@
 --!strict
 
--- First-session hints from Config/Tutorial, driven by the saved PlayerData.Tutorial step.
--- The banner names the goal; an arrow points at a Hud button, and for coins a beam
--- leads from the character to the nearest coin.
+-- Starter quests checklist (Config/Tutorial) from the saved PlayerData.Tutorial set. The first open
+-- quest is highlighted; an arrow points at its Hud button, and for coins a beam leads from
+-- the character to the nearest coin. The server pays each quest (TutorialService).
 local CollectionService = game:GetService("CollectionService")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -32,11 +32,40 @@ end
 function Screen.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	local trove = Trove.new()
 	local player = Players.LocalPlayer
-	local hint: GuiObject? = Find(gui, "Hint", "GuiObject")
-	local label: TextLabel? = if hint then Find(hint, "Label", "TextLabel") else nil
-	local icon: ImageLabel? = if hint then Find(hint, "Icon", "ImageLabel") else nil
+	local panel: GuiObject? = Find(gui, "Quests", "GuiObject")
+	local list: GuiObject? = Find(gui, "List", "GuiObject")
+	local template: GuiObject? = Find(gui, "RowTemplate", "GuiObject")
+	local progress: TextLabel? = Find(gui, "Progress", "TextLabel")
 	local arrow: GuiObject? = Find(gui, "Arrow", "GuiObject")
-	local step = trove:Extend()
+	local guide = trove:Extend()
+	local rows: { [string]: GuiObject } = {}
+
+	local function setText(row: Instance, name: string, text: string)
+		local label = row:FindFirstChild(name, true)
+		if label and label:IsA("TextLabel") then
+			label.Text = text
+		end
+	end
+
+	-- One row per quest, in Config/Tutorial order; the panel grows to fit them.
+	if panel and list and template then
+		template.Visible = false
+		for index, quest in Tutorial do
+			local row = template:Clone()
+			row.Name = quest.Id
+			row.LayoutOrder = index
+			row.Visible = true
+			setText(row, "Label", quest.Text)
+			setText(row, "Reward", `+{quest.Reward}`)
+			local icon = row:FindFirstChild("Icon")
+			if icon and icon:IsA("ImageLabel") then
+				icon.Image = quest.Icon
+			end
+			row.Parent = list
+			rows[quest.Id] = row
+		end
+		panel.Size = UDim2.fromOffset(panel.Size.X.Offset, 58 + #Tutorial * 46 + 18)
+	end
 
 	local function pointArrow(targetName: string)
 		local hud = player.PlayerGui:FindFirstChild("Hud")
@@ -47,7 +76,7 @@ function Screen.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		local pointer: GuiObject = arrow
 		local button: GuiObject = target
 		pointer.Visible = true
-		step:Connect(RunService.RenderStepped, function()
+		guide:Connect(RunService.RenderStepped, function()
 			-- Left of the button, pointing at it (the art points down, so it is rotated).
 			pointer.Position = UDim2.fromOffset(
 				button.AbsolutePosition.X - 6,
@@ -57,9 +86,9 @@ function Screen.new(context: Types.Context, gui: ScreenGui): Types.Screen
 	end
 
 	local function beamToCoins()
-		local attachment0 = step:Add(Instance.new("Attachment"))
-		local attachment1 = step:Add(Instance.new("Attachment"))
-		local beam = step:Add(Instance.new("Beam"))
+		local attachment0 = guide:Add(Instance.new("Attachment"))
+		local attachment1 = guide:Add(Instance.new("Attachment"))
+		local beam = guide:Add(Instance.new("Beam"))
 		beam.Attachment0 = attachment0
 		beam.Attachment1 = attachment1
 		beam.Width0, beam.Width1 = 0.6, 0.6
@@ -68,7 +97,7 @@ function Screen.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		beam.Transparency = NumberSequence.new(0.2)
 		beam.LightEmission = 0.6
 		local elapsed = 0
-		step:Connect(RunService.Heartbeat, function(dt: number)
+		guide:Connect(RunService.Heartbeat, function(dt: number)
 			elapsed += dt
 			if elapsed < 0.25 then
 				return
@@ -86,23 +115,42 @@ function Screen.new(context: Types.Context, gui: ScreenGui): Types.Screen
 		end)
 	end
 
-	local function show(completed: any)
-		step:Clean()
-		local current = TutorialSteps.Current(if type(completed) == "number" then completed else 0, Tutorial)
-		if hint then
-			hint.Visible = current ~= nil
+	local function show(value: any)
+		guide:Clean()
+		local done: { [string]: boolean } = if type(value) == "table" then value else {}
+		local current = TutorialSteps.Current(done, Tutorial)
+		if panel then
+			panel.Visible = current ~= nil
 		end
 		if arrow then
 			arrow.Visible = false
 		end
+		if progress then
+			progress.Text = `{TutorialSteps.Count(done, Tutorial)}/{#Tutorial}`
+		end
+		for id, row in rows do
+			local finished = done[id] == true
+			local highlight = row:FindFirstChild("Highlight")
+			if highlight and highlight:IsA("GuiObject") then
+				highlight.Visible = current ~= nil and current.Id == id
+			end
+			for _, name in { "CoinIcon", "Reward" } do
+				local piece = row:FindFirstChild(name)
+				if piece and piece:IsA("GuiObject") then
+					piece.Visible = not finished
+				end
+			end
+			local mark = row:FindFirstChild("Done")
+			if mark and mark:IsA("GuiObject") then
+				mark.Visible = finished
+			end
+			local label = row:FindFirstChild("Label")
+			if label and label:IsA("TextLabel") then
+				label.TextTransparency = if finished then 0.5 else 0
+			end
+		end
 		if not current then
 			return
-		end
-		if label then
-			label.Text = current.Text
-		end
-		if icon then
-			icon.Image = current.Icon
 		end
 		if current.Target then
 			pointArrow(current.Target)

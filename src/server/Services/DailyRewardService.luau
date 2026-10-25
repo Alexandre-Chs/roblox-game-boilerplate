@@ -7,7 +7,13 @@ local Packets = require(ReplicatedStorage.Packets)
 
 local DailyRewardService = {
 	Name = "DailyRewardService",
-	Dependencies = { "DataService", "NotificationService", "TelemetryService", "AchievementService" },
+	Dependencies = {
+		"DataService",
+		"NotificationService",
+		"TelemetryService",
+		"AchievementService",
+		"TutorialService",
+	},
 }
 local services: { [string]: any } = {}
 
@@ -37,6 +43,7 @@ function DailyRewardService.Claim(_self: any, player: Player): (boolean, number)
 		`DailyDay{streak}`
 	)
 	services.TelemetryService:Custom(player, "DailyStreak", streak)
+	services.TutorialService:Reached(player, "ClaimedDaily")
 	if streak >= 7 then
 		services.AchievementService:Award(player, "Streak7")
 	end

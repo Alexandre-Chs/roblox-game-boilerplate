@@ -106,10 +106,15 @@ assert(Commands.Amount("-5") == -5 and Commands.Amount("1.5") == nil and Command
 assert(Commands.Amount(nil) == nil and Commands.Amount("abc") == nil)
 
 -- New player data fields
-assert(PlayerData.Validate({ Equipped = "RedHat", Redeemed = { Code_WELCOME = true }, Tutorial = 2 }))
+assert(PlayerData.Validate({
+	Equipped = "RedHat",
+	Redeemed = { Code_WELCOME = true },
+	Tutorial = { FirstCoin = true },
+}))
 assert(not PlayerData.Validate({ Equipped = 5 }))
 assert(not PlayerData.Validate({ Redeemed = { Code_X = 1 } }))
-assert(not PlayerData.Validate({ Tutorial = -1 }))
+assert(not PlayerData.Validate({ Tutorial = 2 }))
+assert(not PlayerData.Validate({ Tutorial = { FirstCoin = 1 } }))
 
 -- Promo codes
 assert(Redeeming.Normalize("  welcome ") == "WELCOME")
@@ -151,16 +156,21 @@ assert(CoinReward.Amount(1, 1, 1, community, 0.05) == 2)
 assert(CoinReward.Amount(1, 1, 1, community, 0.5) == 1)
 assert(CoinReward.Amount(10, 1, 9, community, 0.99) == 13)
 
--- Tutorial progression
-local steps = { { Id = "FirstCoin" }, { Id = "OpenedShop" }, { Id = "FirstPurchase" } }
-assert(TutorialSteps.Advance(0, steps, "FirstCoin") == 1)
-assert(TutorialSteps.Advance(1, steps, "FirstPurchase") == 3)
-assert(TutorialSteps.Advance(3, steps, "FirstCoin") == 3)
-assert(TutorialSteps.Advance(1, steps, "Unknown") == 1)
-assert(TutorialSteps.Current(3, steps) == nil and TutorialSteps.Current(0, steps) == steps[1])
+-- Starter quests: any order, each pays once
+local steps = {
+	{ Id = "FirstCoin", Reward = 10 },
+	{ Id = "OpenedShop", Reward = 10 },
+	{ Id = "FirstPurchase", Reward = 20 },
+}
+assert(TutorialSteps.Find({}, steps, "FirstPurchase") == steps[3])
+assert(TutorialSteps.Find({ FirstPurchase = true }, steps, "FirstPurchase") == nil)
+assert(TutorialSteps.Find({}, steps, "Unknown") == nil)
+assert(TutorialSteps.Current({ FirstCoin = true }, steps) == steps[2])
+assert(TutorialSteps.Current({ FirstCoin = true, OpenedShop = true, FirstPurchase = true }, steps) == nil)
+assert(TutorialSteps.Count({ FirstCoin = true, Other = true }, steps) == 1)
 
 print(
-	"PASS player data validation, settings, daily streak, debug commands, shop rules, rate limiting, codes, equipping, leaderboard, coin bonus and tutorial"
+	"PASS player data validation, settings, daily streak, debug commands, shop rules, rate limiting, codes, equipping, leaderboard, coin bonus and starter quests"
 )
 assert(require("./purchases"))
 assert(require("./sessions"))
