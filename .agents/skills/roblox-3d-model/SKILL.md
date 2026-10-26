@@ -27,6 +27,14 @@ Read [house integration rules](../../../docs/skills.md) before executing this wo
 > `roblox-skills-setup` skill (or copy `LOCAL.template.md` to `LOCAL.md` and fill it in).
 > `LOCAL.md` holds your paths and tool locations; it is yours and is never shared.
 
+> **Fastest route, try it first: Roblox's own generator through the Studio MCP.**
+> `mcp__Roblox_Studio__generate_mesh` (text prompt, `size`, `maxTriangles` up to 20000,
+> `segmentation: "explicit"` + `partNames` for moving pieces) returns a textured, already
+> uploaded mesh in about two minutes with no key and no local GPU. It fails sometimes
+> ("Generated model download failed"): retry once, then fall back to the stages below.
+> To make the result move, follow `roblox-motion`. `generate_procedural_model` builds from
+> primitive parts instead (blockier, but editable attributes).
+
 Text prompt in, a game-ready MeshPart in Studio out. Six stages, one gate.
 
 ```

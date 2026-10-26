@@ -16,6 +16,7 @@ local Errors = require("../src/server/Services/ErrorReportService/Errors")
 local Abbreviate = require("../src/shared/Utils/Abbreviate")
 local Locale = require("../src/shared/Utils/Locale")
 local DeviceScale = require("../src/client/Controllers/UIController/DeviceScale")
+local Motion = require("../src/shared/Utils/Motion")
 
 assert(PlayerData.Validate(table.clone(PlayerData.Template)))
 assert(PlayerData.Validate({ Cash = 0 }))
@@ -254,6 +255,17 @@ assert(TutorialSteps.Count({ FirstCoin = true, Other = true }, steps) == 1)
 print(
 	"PASS player data validation, settings, daily streak, debug commands, shop rules, rate limiting, codes, equipping, leaderboard, coin bonus, starter quests, playtime gifts, moderation and error grouping"
 )
+-- Motion: the spring settles on its target without overshoot, whatever the frame rate.
+for _, dt in { 1 / 240, 1 / 60, 1 / 10, 1 } do
+	local position, velocity, peak = 0, 0, 0
+	for _ = 1, math.ceil(3 / dt) do
+		position, velocity = Motion.Spring(position, velocity, 2, 1.5, dt)
+		peak = math.max(peak, position)
+	end
+	assert(math.abs(position - 2) < 1e-3 and peak <= 2 + 1e-9)
+end
+assert(math.abs(Motion.Wave(0.25, 1, 3, 0) - 3) < 1e-9 and math.abs(Motion.Wave(0, 1, 3, 0)) < 1e-9)
+assert(math.abs(Motion.Stride(0.9, 3, 10) - 0.2) < 1e-9)
 assert(require("./purchases"))
 assert(require("./sessions"))
 assert(require("./lifecycle"))

@@ -16,6 +16,7 @@ Conventions used below: **Server** files are under `src/server`, **Client** unde
 | [Starter quests](#starter-quests) | checklist top-left, paid once each | `TutorialService`, `Screens/Tutorial.luau` | `Config/Tutorial.luau` |
 | [Rewards: codes](#promo-codes) | code box | `CodesService/`, `Screens/Rewards.luau` | `src/server/Config/Codes.luau` |
 | [Rewards: community](#community-rewards) | group reward, invite, favorite, friend bonus | `CommunityService`, `Screens/Rewards.luau` | `GameConfig.Community` |
+| [Animated models](#animated-models) | treasure chest that opens with a prompt | `Utils/Rig.luau`, `Components/Rig.luau`, `Components/Openable.luau`, client `Components/Motion.luau` | part attributes `OpenAngle`, `Wave`, `Axis` |
 | [Global leaderboard](#global-leaderboard) | wooden board near the spawn | `LeaderboardService/`, `Components/Leaderboard.luau` | `GameConfig.Leaderboard` |
 | [Player list stat](#player-list-stat) | Coins column in the player list | `LeaderstatsService` | none |
 | [Badges](#badges) | Roblox badges | `AchievementService` | `Config/Badges.luau` |
@@ -93,6 +94,14 @@ The Hud dock on the right opens Shop, Inventory, Daily, Rewards and Settings (`S
 - **Friend bonus:** `CommunityService` keeps the `FriendsInServer` player attribute up to date. Coins pay +`FriendBonus` per friend, up to `MaxFriends`. The Invite row shows the current bonus and opens the Roblox invite prompt.
 - **Favorite:** the Favorite button only. There is no automatic prompt: Roblox cannot tell whether the game is already a favorite, so one would nag (published games only).
 - **Live only:** group membership, invites and favorites need a published game.
+
+## Animated models
+
+- **What:** an AI-generated chest (`assets/world/Chest.model.json`, tags `Rig` and `Openable`) whose lid opens when a player holds E, for everyone, then closes after 3 s. No animation asset: code rotates the joints.
+- **Server:** `Components/Rig.luau` joins each part of a `Rig` model to its root with a `Motor6D` (`Utils/Rig.luau`; an `Attachment` named `Pivot` sets the hinge). `Components/Openable.luau` adds the prompt (at the `PromptPoint` attachment) and owns the model attribute `Open`; model attributes `ActionText`, `AutoClose` (0 = stays open). Reward on open: listen to `GetAttributeChangedSignal("Open")`.
+- **Client:** `Components/Motion.luau` springs each joint toward its part's `OpenAngle` while `Open` is true and adds an endless `Wave` swing (`WaveSpeed`, `WavePhase`, `Axis`). Curves are pure in `Utils/Motion.luau` (tested).
+- **Make another:** skill `roblox-motion` (generate in parts with the Studio MCP, pivots, model.json).
+- **Test:** walk to the chest beside the spawn, hold E: the lid springs open and closes after 3 s.
 
 ## Global leaderboard
 

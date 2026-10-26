@@ -12,6 +12,8 @@ local ComponentService = {
 }
 local factories: { (services: { [string]: any }) -> any } = {
 	require(script.Parent.Parent.Components.Coin),
+	require(script.Parent.Parent.Components.Rig),
+	require(script.Parent.Parent.Components.Openable),
 }
 local registry: { [string]: any } = {}
 local components: { any } = {}

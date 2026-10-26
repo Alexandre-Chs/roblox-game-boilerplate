@@ -1,0 +1,56 @@
+{
+  "ClassName": "Model",
+  "Properties": {
+    "Tags": ["Rig", "Openable"]
+  },
+  "Children": [
+    {
+      "Name": "Base",
+      "ClassName": "MeshPart",
+      "Properties": {
+        "MeshId": "rbxassetid://83148272364310",
+        "TextureID": "rbxassetid://115769764275574",
+        "Anchored": true,
+        "Size": [5.409, 2.555, 3.964],
+        "CFrame": {
+          "CFrame": {
+            "position": [10, 1.2775, -6],
+            "orientation": [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]
+          }
+        }
+      },
+      "Children": [
+        {
+          "Name": "PromptPoint",
+          "ClassName": "Attachment",
+          "Properties": { "CFrame": { "CFrame": { "position": [0, 0, -2.3], "orientation": [[1, 0, 0], [0, 1, 0], [0, 0, 1]] } } }
+        }
+      ]
+    },
+    {
+      "Name": "Lid",
+      "ClassName": "MeshPart",
+      "Properties": {
+        "MeshId": "rbxassetid://140624063764277",
+        "TextureID": "rbxassetid://115887204503218",
+        "Anchored": true,
+        "CanCollide": false,
+        "Size": [5.482, 3.114, 3.999],
+        "CFrame": {
+          "CFrame": {
+            "position": [10.0167, 2.8766, -6.0076],
+            "orientation": [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]
+          }
+        }
+      },
+      "attributes": { "OpenAngle": 110 },
+      "Children": [
+        {
+          "Name": "Pivot",
+          "ClassName": "Attachment",
+          "Properties": { "CFrame": { "CFrame": { "position": [0, -0.3216, 1.965], "orientation": [[1, 0, 0], [0, 1, 0], [0, 0, 1]] } } }
+        }
+      ]
+    }
+  ]
+}

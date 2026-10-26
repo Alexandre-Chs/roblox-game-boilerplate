@@ -4,6 +4,7 @@ local ComponentController = { Name = "ComponentController", Dependencies = {} }
 local factories: { (controllers: { [string]: any }) -> any } = {
 	require(script.Parent.Parent.Components.Spinner),
 	require(script.Parent.Parent.Components.Leaderboard),
+	require(script.Parent.Parent.Components.Motion),
 }
 local registry: { [string]: any } = {}
 local components: { any } = {}
